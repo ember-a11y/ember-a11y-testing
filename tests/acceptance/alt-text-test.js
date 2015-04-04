@@ -9,7 +9,7 @@ import startApp from '../helpers/start-app';
 
 var application;
 
-module('Acceptance: A11y', {
+module('Acceptance: alt-text', {
   beforeEach: function() {
     application = startApp();
   },
@@ -19,17 +19,8 @@ module('Acceptance: A11y', {
   }
 });
 
-test('form-labels: hasLabel passes', function(assert) {
-  visit('/');
-
-  andThen(function() {
-    var label = find('#has-label')[0];
-    assert.ok(hasLabel(label));
-  })
-});
-
-test('alt-text: hasAltText passes', function(assert) {
-  visit('/');
+test('hasAltText passes', function(assert) {
+  visit('/alt-text');
 
   andThen(function() {
     var altText = find('#alt-text')[0];
@@ -37,8 +28,8 @@ test('alt-text: hasAltText passes', function(assert) {
   });
 });
 
-test('alt-text: hasAltText passes with aria-hidden', function(assert) {
-  visit('/');
+test('hasAltText passes with aria-hidden', function(assert) {
+  visit('/alt-text');
 
   andThen(function() {
     var ariaHidden = find('#aria-hidden')[0];
@@ -46,8 +37,8 @@ test('alt-text: hasAltText passes with aria-hidden', function(assert) {
   });
 });
 
-test('alt-text: hasAltText throws error', function(assert) {
-  visit('/');
+test('hasAltText throws error', function(assert) {
+  visit('/alt-text');
 
   andThen(function() {
     var noAltText = find('#no-alt-text')[0];
@@ -57,8 +48,8 @@ test('alt-text: hasAltText throws error', function(assert) {
   });
 });
 
-test('alt-text: allImagesHaveAltText passes', function(assert) {
-  visit('/');
+test('allImagesHaveAltText passes', function(assert) {
+  visit('/alt-text');
 
   andThen(function() {
     var noAltText = find('#no-alt-text')[0];
@@ -67,8 +58,8 @@ test('alt-text: allImagesHaveAltText passes', function(assert) {
   });
 });
 
-test('alt-text: allImagesHaveAltText throws error', function(assert) {
-  visit('/');
+test('allImagesHaveAltText throws error', function(assert) {
+  visit('/alt-text');
 
   andThen(function() {
     var noAltText = find('#no-alt-text')[0];
