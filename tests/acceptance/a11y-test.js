@@ -19,6 +19,15 @@ module('Acceptance: A11y', {
   }
 });
 
+test('form-labels: hasLabel passes', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    var label = find('#has-label')[0];
+    assert.ok(hasLabel(label));
+  })
+});
+
 test('alt-text: hasAltText passes', function(assert) {
   visit('/');
 
