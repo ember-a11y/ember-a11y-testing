@@ -1,19 +1,36 @@
+/**
+ * Helpers related to verifying text alternatives to non-text based content.
+ * Reference: http://www.w3.org/TR/WCAG20/#text-equiv
+ */
+
 import A11yError from '../a11y-error';
 
+/**
+ * Checks a specific element to make sure it has alt text
+ * @param {Object} app - Not used
+ * @param {HTMLElement} el - The element to check
+ * @return {Boolean|Error}
+ */
 export function hasAltText(app, el) {
-  var altText = el && el.getAttribute('alt');
+  let altText = el && el.getAttribute('alt');
+  let ariaHidden = el && el.getAttribute('aria-hidden');
 
-  if (!altText) {
-    throw new A11yError(`${el} has no alt text`);
+  if (altText || ariaHidden === 'true') {
+    return true;
   }
 
-  return true;
+  throw new A11yError(`${el} has no alt text. Either add an alt description or
+    add the aria-hidden attribute.`);
 }
 
+/**
+ * Checks all img elements on the page to make sure they have alt text
+ * @return {Boolean|Error}
+ */
 export function allImagesHaveAltText() {
-  var images = document.querySelectorAll('img');
+  let images = document.querySelectorAll('img');
 
-  for (var i=0, l=images.length; i<l; i++) {
+  for (let i=0, l=images.length; i<l; i++) {
     hasAltText(null, images[i]);
   }
 

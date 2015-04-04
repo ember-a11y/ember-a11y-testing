@@ -28,6 +28,15 @@ test('alt-text: hasAltText passes', function(assert) {
   });
 });
 
+test('alt-text: hasAltText passes with aria-hidden', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    var ariaHidden = find('#aria-hidden')[0];
+    assert.ok(hasAltText(ariaHidden));
+  });
+});
+
 test('alt-text: hasAltText throws error', function(assert) {
   visit('/');
 
