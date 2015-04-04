@@ -35,12 +35,19 @@ export function hasLabel(app, el) {
     } else if (!label.innerHTML) {
       throw new A11yError(`the label for ${el} has no content. Please add content to make this label useful.`);
     }
-
-    // Input needs label and has one with all needed information
-    return true;
+  } else if (tagName === 'INPUT' && (el.type === 'submit' || el.type === 'button')) {
+    // Input is a submit button, there it should have a value set
+    if (!el.value) {
+      throw new A11yError(`${el} has no value and is a ${el.type} input. Please add a value to the input so it has valuable meaning.`);
+    }
+  } else if (tagName === 'BUTTON') {
+    // Element is a button, should have some inner content to describe it
+    if (!el.innerHTML) {
+      throw new A11yError(`${el} has no inner content and is a button. Please add some content to give the button textual meaning.`);
+    }
   }
 
-  // Element is not required to have a label
+  // All good!
   return true;
 }
 

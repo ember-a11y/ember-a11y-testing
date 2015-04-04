@@ -63,6 +63,58 @@ test('hasLabel fails due to no label content', function(assert) {
   });
 });
 
+/* hasLabel without having actual labels */
+
+test('hasLabel passs on button with content', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    var button = find('#button-empty')[0];
+    button.innerHTML = 'filling button';
+    assert.ok(hasLabel(button));
+  });
+});
+
+test('hasLabel fails on button with no content', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    var button = find('#button-empty')[0];
+    assert.throws(function() {
+      hasLabel(button);
+    }, /no inner content/);
+  });
+});
+
+test('hasLabel passes on submit/button with value', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    var submit = find('#submit-input')[0];
+    submit.value = 'some value';
+    assert.ok(hasLabel(submit));
+
+    submit.type = 'button';
+    assert.ok(hasLabel(submit));
+  });
+});
+
+test('hasLabel fails on submit/button with no value', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    var submit = find('#submit-input')[0];
+    assert.throws(function() {
+      hasLabel(submit);
+    }, /no value and is a submit/);
+
+    submit.type = 'button';
+    assert.throws(function() {
+      hasLabel(submit);
+    }, /no value and is a button/);
+  });
+});
+
 /* formHasAllNeededLabels */
 
 test('formHasAllNeededLabels passes', function(assert) {
