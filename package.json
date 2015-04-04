@@ -1,7 +1,7 @@
 {
   "name": "ember-a11y-testing",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "A suite of accessibility tests that can be run within the Ember testing framework",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "git@github.com:trentmwillis/ember-a11y-testing.git",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Trent Willis <trentmwillis@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
@@ -32,7 +32,10 @@
     "ember-export-application-global": "^1.0.2"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "testing",
+    "a11y",
+    "accessibility"
   ],
   "dependencies": {
     "ember-cli-babel": "^4.0.0"
