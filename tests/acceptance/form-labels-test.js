@@ -1,4 +1,4 @@
-/* global hasLabel */
+/* global hasLabel, formHasAllNeededLabels, allFormsHaveLabels */
 
 import Ember from 'ember';
 import {
@@ -18,6 +18,8 @@ module('Acceptance: form-labels', {
     Ember.run(application, 'destroy');
   }
 });
+
+/* hasLabel */
 
 test('hasLabel passes', function(assert) {
   visit('/form-labels');
@@ -58,5 +60,49 @@ test('hasLabel fails due to no label content', function(assert) {
     assert.throws(function() {
       hasLabel(label);
     }, /has no content/);
+  });
+});
+
+/* formHasAllNeededLabels */
+
+test('formHasAllNeededLabels passes', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    var form = find('#passing-form')[0];
+    assert.ok(formHasAllNeededLabels(form));
+  });
+});
+
+test('formHasAllNeededLabels fails', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    var form = find('#failing-form')[0];
+    assert.throws(function() {
+      formHasAllNeededLabels(form);
+    }, /A11yError/);
+  });
+});
+
+/* allFormsHaveLabels */
+
+test('allFormsHaveLabels passes', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    var form = find('#failing-form')[0];
+    form.parentNode.removeChild(form);
+    assert.ok(allFormsHaveLabels());
+  });
+});
+
+test('allFormsHaveLabels fails', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    assert.throws(function() {
+      allFormsHaveLabels();
+    }, /A11yError/);
   });
 });
