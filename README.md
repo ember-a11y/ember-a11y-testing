@@ -19,8 +19,8 @@ to begin working on one of the below or open an issue for a new idea to add to
 this list.
 
 - Alternatives to labels for form elements (__in progress__)
+- Elements that should have text but don't, such as icons, should have aria-hidden (__in progress__)
 - Alternative text for other elements
 - Color contrast for text on backgroundss (minimum and enhanced options)
 - Tabbing availability
 - ARIA properties for elements labeled with roles
-- Elements that don't have text, but look like they should (check aria-hidden)

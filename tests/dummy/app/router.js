@@ -8,6 +8,7 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('alt-text');
   this.route('form-labels');
+  this.route('no-read');
 });
 
 export default Router;

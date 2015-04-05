@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 import { hasAltText, allImagesHaveAltText } from './helpers/alt-text';
 import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/form-labels';
+import { checkAriaHidden, checkForHidden } from './helpers/no-read';
 
 /**
  * @TODO: add ability to customize which tests are ran
@@ -23,4 +24,8 @@ export default function registerA11yHelpers() {
   Ember.Test.registerHelper('hasLabel', hasLabel);
   Ember.Test.registerHelper('formHasAllNeededLabels', formHasAllNeededLabels);
   Ember.Test.registerHelper('allFormsHaveLabels', allFormsHaveLabels);
+
+  // no-read
+  Ember.Test.registerHelper('checkAriaHidden', checkAriaHidden);
+  Ember.Test.registerHelper('checkForHidden', checkForHidden);
 }
