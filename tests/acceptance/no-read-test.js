@@ -1,3 +1,5 @@
+/* global checkAriaHidden, checkForHidden */
+
 import Ember from 'ember';
 import {
   module,
@@ -89,7 +91,7 @@ test('checkForHidden fails', function(assert) {
     var hasAriaHidden = find('#has-aria')[0];
     hasAriaHidden.setAttribute('aria-hidden', 'false');
     assert.throws(function() {
-      checkForHidden()
+      checkForHidden();
     }, /A11yError/);
   });
 });

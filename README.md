@@ -18,9 +18,9 @@ Below is the current list of proposed tests that will be built. Please feel free
 to begin working on one of the below or open an issue for a new idea to add to
 this list.
 
-- Alternatives to labels for form elements (__in progress__)
-- Elements that should have text but don't, such as icons, should have aria-hidden (__in progress__)
+- Alternatives to labels for form elements (__in progress, mostly done__)
+- Elements that should have text but don't, such as icons, warn that they might want to have aria-hidden (__in progress, mostly done__)
+- Check ARIA properties for elements with defined roles to ensure validity (__in progress__)
 - Alternative text for other elements
 - Color contrast for text on backgroundss (minimum and enhanced options)
 - Tabbing availability
-- ARIA properties for elements labeled with roles
