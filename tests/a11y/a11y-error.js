@@ -4,7 +4,9 @@ function A11yError(message='accessibility error') {
 }
 
 A11yError.prototype = Object.create(Error.prototype);
+
 A11yError.prototype.constructor = A11yError;
+
 A11yError.prototype.toString = function() {
   return `${this.name}: ${this.message}`;
 };

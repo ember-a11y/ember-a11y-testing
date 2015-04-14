@@ -7,7 +7,7 @@ import {
 } from 'qunit';
 import startApp from '../helpers/start-app';
 
-var application;
+let application;
 
 module('Acceptance: alt-text', {
   beforeEach: function() {
@@ -23,7 +23,7 @@ test('hasAltText passes', function(assert) {
   visit('/alt-text');
 
   andThen(function() {
-    var altText = find('#alt-text')[0];
+    let altText = find('#alt-text')[0];
     assert.ok(hasAltText(altText));
   });
 });
@@ -32,7 +32,7 @@ test('hasAltText passes with aria-hidden', function(assert) {
   visit('/alt-text');
 
   andThen(function() {
-    var ariaHidden = find('#aria-hidden')[0];
+    let ariaHidden = find('#aria-hidden')[0];
     assert.ok(hasAltText(ariaHidden));
   });
 });
@@ -41,7 +41,7 @@ test('hasAltText throws error', function(assert) {
   visit('/alt-text');
 
   andThen(function() {
-    var noAltText = find('#no-alt-text')[0];
+    let noAltText = find('#no-alt-text')[0];
     assert.throws(function() {
       hasAltText(noAltText);
     }, /A11yError/);
@@ -52,7 +52,7 @@ test('allImagesHaveAltText passes', function(assert) {
   visit('/alt-text');
 
   andThen(function() {
-    var noAltText = find('#no-alt-text')[0];
+    let noAltText = find('#no-alt-text')[0];
     noAltText.setAttribute('alt', 'has alt now');
     assert.ok(allImagesHaveAltText());
   });
@@ -62,7 +62,7 @@ test('allImagesHaveAltText throws error', function(assert) {
   visit('/alt-text');
 
   andThen(function() {
-    var noAltText = find('#no-alt-text')[0];
+    let noAltText = find('#no-alt-text')[0];
     assert.throws(function() {
       allImagesHaveAltText();
     }, /A11yError/);

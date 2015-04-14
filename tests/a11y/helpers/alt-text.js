@@ -23,13 +23,13 @@ export function hasAltText(app, el) {
 }
 
 /**
- * Checks all img elements on the page to make sure they have alt text
+ * Checks all <img> elements on the page to make sure they have alt text
  * @return {Boolean|Error}
  */
 export function allImagesHaveAltText() {
   let images = document.querySelectorAll('img');
 
-  for (let i=0, l=images.length; i<l; i++) {
+  for (let i = 0, l = images.length; i < l; i++) {
     hasAltText(null, images[i]);
   }
 
