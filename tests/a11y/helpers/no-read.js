@@ -1,13 +1,13 @@
 /**
  * Helpers related to checking elements that shouldn't be read by screen-readers
  * yet are still visible on screen.
- * Reference: http://www.w3.org/TR/WCAG20/#minimize-error
+ * Reference: http://www.w3.org/TR/wai-aria/states_and_properties#aria-hidden
  */
 
 import A11yError from '../a11y-error';
 
-// Define the types of input elements that require a label
-const CHECK_FOR_HIDDEN = ['p','h1','h2','h3','h4','h5','h6','i','b','span'];
+// Define the types of html elements that we'll check for content/aria-hidden
+const CHECK_FOR_HIDDEN = ['p','h1','h2','h3','h4','h5','h6','i','b','span','a'];
 
 /**
  * Determines the visibility of an element.
@@ -28,7 +28,7 @@ function checkIsVisible(el) {
  * @param {HTMLElement} el - The element to test
  * @return {Boolean|Error}
  */
-export function checkAriaHidden(app, el) {
+export function checkAriaHidden(app, el, throwError) {
   let isVisible = checkIsVisible(el);
   let hasContent = el.innerHTML;
 
@@ -36,7 +36,12 @@ export function checkAriaHidden(app, el) {
     // Should have aria-hidden=true
     let ariaHidden = el.getAttribute('aria-hidden');
     if (ariaHidden !== 'true') {
-      throw new A11yError(`${el} has no content yet is visible, it should have aria-hidden="true" set.`);
+      let message = `${el} has no content yet is visible, it should have aria-hidden="true" set.`;
+      if (throwError) {
+        throw new A11yError(message);
+      } else {
+        console.warn(message);
+      }
     }
   }
 
@@ -49,12 +54,14 @@ export function checkAriaHidden(app, el) {
  * content and are visible.
  * @return {Boolean|Error}
  */
-export function checkForHidden() {
+export function checkForNoRead(app, throwErrors) {
+  throwErrors = throwErrors === 'throwErrors';
+
   let testingContainer = document.getElementById('ember-testing');
   let elements = testingContainer.querySelectorAll(CHECK_FOR_HIDDEN.join(','));
 
   for (let i=0, l=elements.length; i<l; i++) {
-    checkAriaHidden(null, elements[i]);
+    checkAriaHidden(null, elements[i], throwErrors);
   }
 
   return true;
