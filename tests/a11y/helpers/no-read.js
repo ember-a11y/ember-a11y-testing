@@ -36,7 +36,7 @@ export function checkAriaHidden(app, el, throwError) {
     // Should have aria-hidden=true
     let ariaHidden = el.getAttribute('aria-hidden');
     if (ariaHidden !== 'true') {
-      let message = `${el} has no content yet is visible, it should have aria-hidden="true" set.`;
+      let message = `${el} has no content yet is visible, it should probably have aria-hidden="true" set.`;
       if (throwError) {
         throw new A11yError(message);
       } else {
