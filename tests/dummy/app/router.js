@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('form-labels');
   this.route('no-read');
   this.route('a11y-test');
+  this.route('aria-properties');
 });
 
 export default Router;

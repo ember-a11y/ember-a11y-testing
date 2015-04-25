@@ -62,7 +62,6 @@ test('allImagesHaveAltText throws error', function(assert) {
   visit('/alt-text');
 
   andThen(function() {
-    let noAltText = find('#no-alt-text')[0];
     assert.throws(function() {
       allImagesHaveAltText();
     }, /A11yError/);

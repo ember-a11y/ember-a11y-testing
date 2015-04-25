@@ -3,6 +3,7 @@ import Ember from 'ember';
 import { hasAltText, allImagesHaveAltText } from './helpers/alt-text';
 import { checkAriaHidden, checkForNoRead } from './helpers/no-read';
 import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/form-labels';
+import { verifyRequiredAria, checkAriaRoles } from './helpers/aria-properties';
 
 const TEST_FUNCTIONS = [allImagesHaveAltText, checkForNoRead, allFormsHaveLabels];
 const DEFAULT_CONFIG = {
@@ -46,4 +47,8 @@ export default function registerA11yHelpers() {
   Ember.Test.registerHelper('hasLabel', hasLabel);
   Ember.Test.registerHelper('formHasAllNeededLabels', formHasAllNeededLabels);
   Ember.Test.registerHelper('allFormsHaveLabels', allFormsHaveLabels);
+
+  // aria-properties
+  Ember.Test.registerHelper('verifyRequiredAria', verifyRequiredAria);
+  Ember.Test.registerHelper('checkAriaRoles', checkAriaRoles);
 }
