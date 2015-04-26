@@ -9,6 +9,78 @@ import A11yError from '../a11y-error';
 const NEEDS_LABEL = ['text', 'checkbox', 'radio', 'file', 'password'];
 
 /**
+ * Given a tag, determine if it would need a label/alternative text element
+ * @param {String} tag - The tag to test
+ * @return {Boolean}
+ */
+function needsLabel(tag, type) {
+  return (tag === 'INPUT' && NEEDS_LABEL.indexOf(type) !== -1) ||
+          tag === 'TEXTAREA' ||
+          tag === 'SELECT';
+}
+
+/**
+ * Verify that an element has a label
+ * @param {HTMLElement} el - The element to verify has a label
+ * @return {Boolean|Error}
+ */
+function verifyLabel(el) {
+  let ariaBy = el.getAttribute('aria-describedby') || 
+               el.getAttribute('aria-labelledby');
+
+  if (ariaBy) {
+    return verifyAriaLabel(el, ariaBy);
+  } else {
+    return verifyNonAriaLabel(el);
+  }
+}
+
+/**
+ * Verify that an element has a label via the describedby or labelledby ARIA
+ * properties.
+ * @param {HTMLElement} el - The element to verify
+ * @param {String} ariaBy - The value of the aria property
+ * @return {Boolean|Error}
+ */
+function verifyAriaLabel(el, ariaBy) {
+  let ids = ariaBy.split(' ');
+
+  for (let i = 0, l = ids.length; i < l; i++) {
+    let label = document.getElementById(ids[i])
+    if (!label) {
+      throw new A11yError(`${el} is missing the element it is associated with ID ${ids[i]}`);
+    } else if (!label.innerHTML) {
+      throw new A11yError(`The label with ID ${ids[i]} has no content. You should add content to make this label useful.`);
+    }
+  }
+
+  return true;
+}
+
+/**
+ * Verify that an element has a label via it's ID.
+ * @param {HTMLElement} el - The element to verify
+ * @return {Boolean|Error}
+ */
+function verifyNonAriaLabel(el) {
+  let elementId = el.id;
+
+  if (!elementId) {
+    throw new A11yError(`${el} has no ID, describedby, or labelledby attribute. You should add one to associate it with a label.`);
+  }
+
+  let label = document.querySelector(`[for="${elementId}"]`);
+
+  if (!label) {
+    throw new A11yError(`${el} has an ID but no associated label. You should add a label and reference this element via the for attribute`);
+  } else if (!label.innerHTML) {
+    throw new A11yError(`The label for ${el} has no content. You should add content to make this label useful.`);
+  }
+
+  return true;
+}
+
+/**
  * Checks to make sure an element has the appropriate descriptive text or label
  * @param {Object} app - Not used
  * @param {HTMLElement} el - The element to test
@@ -16,34 +88,19 @@ const NEEDS_LABEL = ['text', 'checkbox', 'radio', 'file', 'password'];
  */
 export function hasLabel(app, el) {
   let tagName = el.tagName;
+  let type = el.type;
 
-  if ((tagName === 'INPUT' && NEEDS_LABEL.indexOf(el.type) !== -1) ||
-       tagName === 'TEXTAREA' ||
-       tagName === 'SELECT') {
-    // Input requires a label. First check that it has an id,
-    let elementId = el.id;
-
-    if (!elementId) {
-      throw new A11yError(`${el} has no ID. Please add an ID to associate it with a labels for attribute.`);
-    }
-
-    // Then, find the label for the input
-    let label = document.querySelector(`[for="${elementId}"]`);
-
-    if (!label) {
-      throw new A11yError(`${el} has no associated label. Please add a label and reference this element via the for attribute`);
-    } else if (!label.innerHTML) {
-      throw new A11yError(`the label for ${el} has no content. Please add content to make this label useful.`);
-    }
-  } else if (tagName === 'INPUT' && (el.type === 'submit' || el.type === 'button')) {
+  if (needsLabel(tagName, type)) {
+    return verifyLabel(el);
+  } else if (tagName === 'INPUT' && (type === 'submit' || type === 'button')) {
     // Input is a submit button, there it should have a value set
     if (!el.value) {
-      throw new A11yError(`${el} has no value and is a ${el.type} input. Please add a value to the input so it has valuable meaning.`);
+      throw new A11yError(`${el} has no value and is a ${type} input. You should add a value to the input so it has valuable meaning.`);
     }
   } else if (tagName === 'BUTTON') {
     // Element is a button, should have some inner content to describe it
     if (!el.innerHTML) {
-      throw new A11yError(`${el} has no inner content and is a button. Please add some content to give the button textual meaning.`);
+      throw new A11yError(`${el} has no inner content and is a button. You should add some content to give the button textual meaning.`);
     }
   }
 

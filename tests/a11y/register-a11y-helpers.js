@@ -9,6 +9,7 @@ const TEST_FUNCTIONS = [allImagesHaveAltText, checkForNoRead, allFormsHaveLabels
 const DEFAULT_CONFIG = {
   allImagesHaveAltText: true,
   checkForNoRead: true,
+  checkAriaRoles: true,
   allFormsHaveLabels: true
 };
 

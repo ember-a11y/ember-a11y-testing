@@ -4,6 +4,16 @@
 
   <input type="text" id="has-no-label">
 
+  <span id="describedby-test">Some text</span>
+  <input type="text" id="describedby" aria-describedby="describedby-test">
+
+  <span id="labelledby-test">Some text</span>
+  <input type="text" id="labelledby" aria-labelledby="labelledby-test">
+
+  <input type="text" id="multiple-bys" aria-labelledby="labelledby-test describedby-test">
+
+  <input type="text" id="labelledby-bad" aria-labelledby="labelledby-bad-test">
+
   <label for="has-no-label-content"></label>
   <input type="text" id="has-no-label-content">
 
@@ -20,6 +30,9 @@
 
   <label for="password">Password</label>
   <input type="password" id="password">
+
+  <span id="address-description">Address</span>
+  <input type="text" id="address" aria-describedby="address-description">
 
   <input type="submit" value="Submit">
 </form>
