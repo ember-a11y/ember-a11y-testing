@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Application from '../../app';
 import Router from '../../router';
 import config from '../../config/environment';
-import registerA11yHelpers from '../a11y/register-a11y-helpers';
+import registerA11yHelpers from './a11y/register-a11y-helpers';
 
 export default function startApp(attrs) {
   var application;
