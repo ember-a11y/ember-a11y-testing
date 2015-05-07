@@ -4,13 +4,22 @@ import { hasAltText, allImagesHaveAltText } from './helpers/alt-text';
 import { checkAriaHidden, checkForNoRead } from './helpers/no-read';
 import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/form-labels';
 import { verifyRequiredAria, checkAriaRoles } from './helpers/aria-properties';
+import { checkIds } from './helpers/id-checks';
 
-const TEST_FUNCTIONS = [allImagesHaveAltText, checkForNoRead, allFormsHaveLabels];
+const TEST_FUNCTIONS = [
+  allImagesHaveAltText,
+  checkForNoRead,
+  checkAriaRoles,
+  allFormsHaveLabels,
+  checkIds
+];
+
 const DEFAULT_CONFIG = {
   allImagesHaveAltText: true,
   checkForNoRead: true,
   checkAriaRoles: true,
-  allFormsHaveLabels: true
+  allFormsHaveLabels: true,
+  checkIds: true
 };
 
 /**
@@ -52,4 +61,7 @@ export default function registerA11yHelpers() {
   // aria-properties
   Ember.Test.registerHelper('verifyRequiredAria', verifyRequiredAria);
   Ember.Test.registerHelper('checkAriaRoles', checkAriaRoles);
+
+  // id-checks
+  Ember.Test.registerHelper('checkIds', checkIds);
 }

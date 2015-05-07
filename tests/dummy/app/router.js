@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('no-read');
   this.route('a11y-test');
   this.route('aria-properties');
+  this.route('id-checks');
 });
 
 export default Router;

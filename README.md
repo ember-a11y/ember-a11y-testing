@@ -84,6 +84,10 @@ Checks all elements with the `role` property to ensure they have all required
 ARIA properties for that role. _Upcoming: will check to ensure all ARIA
 properties applied are valid for that role._
 
+### `checkIds`
+Checks all elements to ensure they don't have multiple IDs and that their ID is
+unique.
+
 ## Todo List
 
 Below is the current list of proposed tests that will be built. Please feel free
@@ -95,4 +99,3 @@ progress__)
 - Alternative text for other elements (e.g., `object`, `embed`)
 - Color contrast for text on backgroundss (minimum and enhanced options)
 - Check adjacent links for merging
-- Ensure element IDs are unique
