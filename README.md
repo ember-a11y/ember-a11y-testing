@@ -88,6 +88,9 @@ properties applied are valid for that role._
 Checks all elements to ensure they don't have multiple IDs and that their ID is
 unique.
 
+### `checkLinks`
+Checks links to ensure they have a meaningful `href` attribute, textual content that descibes the link, and that adjacent, duplicate links are merged.
+
 ## Todo List
 
 Below is the current list of proposed tests that will be built. Please feel free
@@ -98,4 +101,3 @@ this list.
 progress__)
 - Alternative text for other elements (e.g., `object`, `embed`)
 - Color contrast for text on backgroundss (minimum and enhanced options)
-- Check adjacent links for merging

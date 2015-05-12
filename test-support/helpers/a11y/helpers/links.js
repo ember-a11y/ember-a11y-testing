@@ -24,36 +24,44 @@ function isBadHref(href) {
          href.indexOf('<!--') === 0;
 }
 
-export function checkDuplicateLinks() {
-  return loopOverLinks((link) => {
-    if (link.nextElementSibling && link.nextElementSibling.href === link.href) {
-      throw new A11yError(`${link} and ${link.nextElementSibling} should be merged together.`);
-    }
-  });
+export function checkLinkForMerge(app, link) {
+  if (link.nextElementSibling && link.nextElementSibling.href === link.href) {
+    throw new A11yError(`${link} and ${link.nextElementSibling} should be merged together since they are adjacent and point to the same link.`);
+  }
+
+  return true;
 }
 
-export function checkMeaningfulLinks() {
-  return loopOverLinks((link) => {
-    if (isBadHref(link.href)) {
-      throw new A11yError(`${link} has a non-meaningful href.`);
-    }
-  });
+export function checkLinkHref(app, link) {
+  if (isBadHref(link.href)) {
+    throw new A11yError(`${link} has a non-meaningful href, it should point to an actual link.`);
+  }
+
+  return true;
 }
 
-export function checkLinkText(app, el) {
-  if (!el.textContent) {
-    let image = el.querySelector('img');
+export function checkLinkText(app, link) {
+  if (!link.textContent) {
+    let image = link.querySelector('img');
 
     if (image) {
       if (!image.alt) {
-        throw new A11yError();
+        throw new A11yError(`${image} in ${link} should have alt text`);
       }
 
       return true;
     }
 
-    throw new A11yError(`${el} has no textual content.`);
+    throw new A11yError(`${link} has no textual content, you should add some to give the link meaning.`);
   }
 
   return true;
+}
+
+export function checkLinks() {
+  return loopOverLinks((link) => {
+    checkLinkForMerge(null, link);
+    checkLinkHref(null, link);
+    checkLinkText(null, link);
+  });
 }

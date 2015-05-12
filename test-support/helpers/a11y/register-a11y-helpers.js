@@ -5,14 +5,15 @@ import { checkAriaHidden, checkForNoRead } from './helpers/no-read';
 import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/form-labels';
 import { verifyRequiredAria, checkAriaRoles } from './helpers/aria-properties';
 import { checkIds } from './helpers/id-checks';
-import { checkDuplicateLinks, checkMeaningfulLinks, checkLinkText } from './helpers/links';
+import { checkLinkForMerge, checkLinkHref, checkLinkText, checkLinks } from './helpers/links';
 
 const TEST_FUNCTIONS = [
   allImagesHaveAltText,
   checkForNoRead,
   checkAriaRoles,
   allFormsHaveLabels,
-  checkIds
+  checkIds,
+  checkLinks
 ];
 
 const DEFAULT_CONFIG = {
@@ -20,7 +21,8 @@ const DEFAULT_CONFIG = {
   checkForNoRead: true,
   checkAriaRoles: true,
   allFormsHaveLabels: true,
-  checkIds: true
+  checkIds: true,
+  checkLinks: true
 };
 
 /**
@@ -67,7 +69,8 @@ export default function registerA11yHelpers() {
   Ember.Test.registerHelper('checkIds', checkIds);
 
   // links
-  Ember.Test.registerHelper('checkDuplicateLinks', checkDuplicateLinks);
-  Ember.Test.registerHelper('checkMeaningfulLinks', checkMeaningfulLinks);
+  Ember.Test.registerHelper('checkLinkForMerge', checkLinkForMerge);
+  Ember.Test.registerHelper('checkLinkHref', checkLinkHref);
   Ember.Test.registerHelper('checkLinkText', checkLinkText);
+  Ember.Test.registerHelper('checkLinks', checkLinks);
 }
