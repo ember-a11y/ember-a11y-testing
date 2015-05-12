@@ -39,3 +39,21 @@ export function checkMeaningfulLinks() {
     }
   });
 }
+
+export function checkLinkText(app, el) {
+  if (!el.textContent) {
+    let image = el.querySelector('img');
+
+    if (image) {
+      if (!image.alt) {
+        throw new A11yError();
+      }
+
+      return true;
+    }
+
+    throw new A11yError(`${el} has no textual content.`);
+  }
+
+  return true;
+}

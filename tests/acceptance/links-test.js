@@ -1,3 +1,5 @@
+/* global checkDuplicateLinks, checkMeaningfulLinks, checkLinkText */
+
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
@@ -77,5 +79,57 @@ test('checkMeaningfulLinks throws an error on javascript', function(assert) {
   andThen(function() {
     Ember.$('#bad-meaning-hash').remove();
     assert.throws(() => checkMeaningfulLinks(), /A11yError/);
+  });
+});
+
+/* checkLinkText */
+
+test('checkLinkText passes when link has text inside', function(assert) {
+  visit('/links');
+
+  andThen(function() {
+    let link = find('#no-duplicates .test-link')[0];
+    assert.ok(checkLinkText(link));
+  });
+});
+
+test('checkLinkText passes when link has image with alt text inside', function(assert) {
+  visit('/links');
+
+  andThen(function() {
+    let link = find('#no-duplicates .test-link')[0];
+    link.textContent = '';
+
+    let image = document.createElement('img');
+    image.alt = 'some alt';
+    link.appendChild(image);
+
+    assert.ok(checkLinkText(link));
+  });
+});
+
+test('checkLinkText throws error when link is empty', function(assert) {
+  visit('/links');
+
+  andThen(function() {
+    let link = find('#no-duplicates .test-link')[0];
+    link.textContent = '';
+
+    assert.throws(() => checkLinkText(link), /A11yError/);
+  });
+});
+
+test('checkLinkText throws error when link has image without alt text', function(assert) {
+  visit('/links');
+
+  andThen(function() {
+    let link = find('#no-duplicates .test-link')[0];
+    link.textContent = '';
+
+    let image = document.createElement('img');
+    image.alt = '';
+    link.appendChild(image);
+
+    assert.throws(() => checkLinkText(link), /A11yError/);
   });
 });
