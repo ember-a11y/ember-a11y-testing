@@ -6,17 +6,36 @@
 
 import A11yError from '../a11y-error';
 
-export function checkDuplicateLinks() {
+function loopOverLinks(callback) {
   let testingContainer = document.getElementById('ember-testing');
   let links = testingContainer.querySelectorAll('a');
 
   for (let i = 0, l = links.length; i < l; i++) {
-    let link = links[i];
-
-    if (link.nextElementSibling && link.nextElementSibling.href === link.href) {
-      throw new A11yError(`${link} and ${link.nextElementSibling} should be merged together.`);
-    }
+    callback(links[i]);
   }
 
   return true;
+}
+
+function isBadHref(href) {
+  return href === '' ||
+         href.indexOf('#') === href.length-1 ||
+         href.indexOf('javascript:') === 0 ||
+         href.indexOf('<!--') === 0;
+}
+
+export function checkDuplicateLinks() {
+  return loopOverLinks((link) => {
+    if (link.nextElementSibling && link.nextElementSibling.href === link.href) {
+      throw new A11yError(`${link} and ${link.nextElementSibling} should be merged together.`);
+    }
+  });
+}
+
+export function checkMeaningfulLinks() {
+  return loopOverLinks((link) => {
+    if (isBadHref(link.href)) {
+      throw new A11yError(`${link} has a non-meaningful href.`);
+    }
+  });
 }

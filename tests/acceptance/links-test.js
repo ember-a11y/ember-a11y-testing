@@ -48,3 +48,34 @@ test('checkDuplicateLinks throws error when duplicate links are next to each oth
     assert.throws(() => checkDuplicateLinks(), /A11yError/);
   });
 });
+
+/* checkMeaningfulLinks */
+
+test('checkMeaningfulLinks passes', function(assert) {
+  visit('/links');
+
+  andThen(function() {
+    Ember.$('#bad-meaning-js').remove();
+    Ember.$('#bad-meaning-hash').remove();
+
+    assert.ok(checkMeaningfulLinks());
+  });
+});
+
+test('checkMeaningfulLinks throws an error on having just a hash', function(assert) {
+  visit('/links');
+
+  andThen(function() {
+    Ember.$('#bad-meaning-js').remove();
+    assert.throws(() => checkMeaningfulLinks(), /A11yError/);
+  });
+});
+
+test('checkMeaningfulLinks throws an error on javascript', function(assert) {
+  visit('/links');
+
+  andThen(function() {
+    Ember.$('#bad-meaning-hash').remove();
+    assert.throws(() => checkMeaningfulLinks(), /A11yError/);
+  });
+});
