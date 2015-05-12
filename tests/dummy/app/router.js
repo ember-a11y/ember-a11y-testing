@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('a11y-test');
   this.route('aria-properties');
   this.route('id-checks');
+  this.route('links');
 });
 
 export default Router;

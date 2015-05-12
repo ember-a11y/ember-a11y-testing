@@ -1,0 +1,16 @@
+<div id="no-duplicates">
+  {{link-to "a11y test" "a11y-test" class="test-link"}}
+</div>
+
+<div id="separated-duplicates">
+  {{link-to "a11y test" "a11y-test" class="test-link"}}
+  
+  <div class="separator">
+    {{link-to "a11y test" "a11y-test" class="test-link"}}
+  </div>
+</div>
+
+<div id="duplicates">
+  {{link-to "a11y test" "a11y-test" class="test-link"}}
+  {{link-to "a11y test" "a11y-test" class="test-link"}}  
+</div>

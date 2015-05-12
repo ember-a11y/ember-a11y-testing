@@ -5,6 +5,7 @@ import { checkAriaHidden, checkForNoRead } from './helpers/no-read';
 import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/form-labels';
 import { verifyRequiredAria, checkAriaRoles } from './helpers/aria-properties';
 import { checkIds } from './helpers/id-checks';
+import { checkDuplicateLinks } from './helpers/links';
 
 const TEST_FUNCTIONS = [
   allImagesHaveAltText,
@@ -64,4 +65,7 @@ export default function registerA11yHelpers() {
 
   // id-checks
   Ember.Test.registerHelper('checkIds', checkIds);
+
+  // links
+  Ember.Test.registerHelper('checkDuplicateLinks', checkDuplicateLinks);
 }
