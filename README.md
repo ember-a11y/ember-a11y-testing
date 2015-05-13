@@ -99,5 +99,6 @@ this list.
 
 - Check ARIA properties for elements with defined roles to ensure validity (__in
 progress__)
+- Warn about actions on elements other than buttons, forms, inputs, and anchors
 - Alternative text for other elements (e.g., `object`, `embed`)
-- Color contrast for text on backgroundss (minimum and enhanced options)
+- Color contrast for text on backgrounds (minimum and enhanced options)

@@ -2,35 +2,11 @@
  * Helpers related to verifying proper ARIA properties are used on elements with
  * ARIA roles.
  * Reference: http://www.w3.org/TR/aria-in-html/#aria-role-state-and-property-quick-reference
+ *            http://www.w3.org/TR/wai-aria/appendices#quickref
  */
 
 import A11yError from '../a11y-error';
-
-// A mapping of ARIA roles and their required properties
-const REQUIRED_ARIA = {
-  checkbox: 'checked',
-  combobox: 'expanded',
-  menuitemcheckbox: 'checked',
-  menuitemradio: 'checked',
-  radio: 'checked',
-  scrollbar: [
-    'controls',
-    'orientation',
-    'valuemax',
-    'valuemin',
-    'valuenow'
-  ],
-  slider: [
-    'valuemax',
-    'valuemin',
-    'valuenow'
-  ],
-  spinbutton: [
-    'valuemax',
-    'valuemin',
-    'valuenow'
-  ]
-};
+import ARIA_MAP from './wai-aria-map';
 
 /**
  * Checks for a specific ARIA property on an element and throws an error if it
@@ -56,16 +32,13 @@ function checkAriaProp(el, prop) {
  */
 export function verifyRequiredAria(app, el) {
   let role = el.getAttribute('role');
-  let requiredProps = role && REQUIRED_ARIA[role];
+  let roleMap = role && ARIA_MAP[role];
+  let requiredProps = roleMap && roleMap.required;
 
   if (requiredProps) {
-    if (Array.isArray(requiredProps)) {
-      requiredProps.forEach(function(prop) {
-        checkAriaProp(el, prop);
-      });
-    } else {
-      checkAriaProp(el, requiredProps);
-    }
+    requiredProps.forEach(function(prop) {
+      checkAriaProp(el, prop);
+    });
   }
 
   return true;
