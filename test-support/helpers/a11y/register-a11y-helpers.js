@@ -6,6 +6,7 @@ import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/
 import { verifyRequiredAria, verifySupportedAria, checkAriaRoles } from './helpers/aria-properties';
 import { checkIds } from './helpers/id-checks';
 import { checkLinkForMerge, checkLinkHref, checkLinkText, checkLinks } from './helpers/links';
+import { checkTextContrast } from './helpers/color-contrast';
 
 const TEST_FUNCTIONS = [
   allImagesHaveAltText,
@@ -74,4 +75,7 @@ export default function registerA11yHelpers() {
   Ember.Test.registerHelper('checkLinkHref', checkLinkHref);
   Ember.Test.registerHelper('checkLinkText', checkLinkText);
   Ember.Test.registerHelper('checkLinks', checkLinks);
+
+  // color-contrast
+  Ember.Test.registerHelper('checkTextContrast', checkTextContrast);
 }

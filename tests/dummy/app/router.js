@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('aria-properties');
   this.route('id-checks');
   this.route('links');
+  this.route('color-contrast');
 });
 
 export default Router;

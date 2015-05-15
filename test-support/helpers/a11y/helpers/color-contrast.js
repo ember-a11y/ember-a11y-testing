@@ -57,8 +57,41 @@ function normalizeColor([r, g, b]) {
   return [rn, gn, bn];
 }
 
-let normalColorFG = noralizeColor(foregroundRGB);
-let normalColorBG = noralizeColor(backgroundRGB);
-let l1 = relativeLuminance(normalColorFG);
-let l2 = relativeLuminance(normalColorBG);
-let ratio = contrastRatio(l1, l2);
+/**
+ * Convert various color representations to an array of RGB values
+ * @param {String} color
+ * @return {Array}
+ */
+const toRGB = {
+  hex(color) {
+    let chunkLength = color.length === 4 ? 1 : 2;
+
+    let r = parseInt(color.substr(1, chunkLength), 16);
+    let g = parseInt(color.substr(1 + chunkLength, chunkLength), 16);
+    let b = parseInt(color.substr(1 + chunkLength * 2, chunkLength), 16);
+
+    return [r, g, b];
+  }
+}
+
+/**
+ * Checks the contrast between a text element and it's background element
+ * @param {Object} app - Not used
+ * @param {HTMLElement} text
+ * @param {HTMLElement} background (optional)
+ * @return {Number} 
+ */
+export function checkTextContrast(app, text, background=text) {
+  let foregroundRGB = toRGB.hex(text.style.color);
+  let backgroundRGB = toRGB.hex(background.style.backgroundColor);
+
+  let normalColorFG = normalizeColor(foregroundRGB);
+  let normalColorBG = normalizeColor(backgroundRGB);
+
+  let l1 = relativeLuminance(normalColorFG);
+  let l2 = relativeLuminance(normalColorBG);
+
+  let ratio = contrastRatio(l1, l2);
+  
+  return ratio;
+}
