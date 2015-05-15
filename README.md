@@ -1,4 +1,4 @@
-# Ember A11y Testing
+# Ember A11y Testing [![Build Status](https://travis-ci.org/trentmwillis/ember-a11y-testing.svg)](https://travis-ci.org/trentmwillis/ember-a11y-testing)
 
 A suite of accessibility tests that can be run within the Ember testing
 framework. The goal is to help pick up on completely avoidable accessibility
