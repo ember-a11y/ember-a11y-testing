@@ -16,6 +16,11 @@
 import A11yError from '../a11y-error';
 import { extractRGB, checkContrastThreshold } from '../utils/visual-information';
 
+const LEVEL = {
+  AA: 'AA',
+  AAA: 'AAA'
+};
+
 const RATIOS = {
   NORMAL: 4.5,
   LARGE: 3,
@@ -23,13 +28,65 @@ const RATIOS = {
   ENHANCED_LARGE: 4.5
 };
 
+function filterEmpty(node) {
+  return !!node.textContent.trim();
+}
+
+function hasBackground(element) {
+  let style = window.getComputedStyle(element);
+  return style.backgroundImage !== 'none' || style.backgroundColor !== 'rgba(0, 0, 0, 0)';
+}
+
+/**
+ * Grabs all text nodes on the page, finds their background element, and checks
+ * their contrast ratio to ensure accessibility
+ * @return {Boolean|Error} 
+ */
+export function checkAllTextContrast(app, level) {
+  if (level !== LEVEL.AA || level !== LEVEL.AAA) {
+    level = LEVEL.AA;
+  }
+
+  // Step 1: Grab all non-empty text nodes on the page
+  let nodes = [];
+  let whatToShow = NodeFilter.SHOW_TEXT;
+  let el = document.getElementById('ember-testing');
+  let treeWalker = document.createTreeWalker(el, whatToShow, filterEmpty);
+
+  while (treeWalker.nextNode()) {
+    nodes.push(treeWalker.currentNode);
+  }
+
+  // Step 2: Loop over all text nodes
+  for (let i = 0, l = nodes.length; i < l; i++) {
+    let node = nodes[i];
+
+    // Step 3: Get the text node's HTMLElement
+    let text = node.parentElement;
+    let background;
+
+    // Step 4: If the HTMLElement has no background, get the element that acts
+    // as its background
+    if (!hasBackground(text)) {
+      // Use: elementFromPoint to get background
+    } else {
+      background = text;
+    }
+
+    // Step 5: Compare the contrast of those two element
+    checkTextContrast(text, background, level);
+  }
+
+  return true;
+}
+
 /**
  * Checks the contrast between a text element and it's background element to
  * ensure it meets WCAG standards.
  * @param {Object} app - Not used
  * @param {HTMLElement} text
  * @param {HTMLElement} background (optional)
- * @return {Number} 
+ * @return {Boolean|Error} 
  */
 export function checkTextContrast(app, text, background=text, level='AA') {
   // We need to reset zoom to make sure font-sizes are caluclated appropriately
@@ -90,8 +147,8 @@ function getRatioToUse(style, level) {
   let isLarge = isLargeScaleText(style);
 
   if (isLarge) {
-    return level === 'AA' ? RATIOS.LARGE : RATIOS.ENHANCED_LARGE;
+    return level === LEVEL.AA ? RATIOS.LARGE : RATIOS.ENHANCED_LARGE;
   } else {
-    return level === 'AA' ? RATIOS.NORMAL : RATIOS.ENHANCED_NORMAL;
+    return level === LEVEL.AA ? RATIOS.NORMAL : RATIOS.ENHANCED_NORMAL;
   }
 }

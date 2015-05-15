@@ -1,4 +1,4 @@
-/* global checkTextContrast */
+/* global checkTextContrast, checkAllTextContrast */
 
 import Ember from 'ember';
 import {
@@ -137,5 +137,15 @@ test('checkTextContrast warns about using alpha values', function(assert) {
     checkTextContrast(normalText);
 
     assert.ok(warnSpy.calledOnce);
+  });
+});
+
+/* checkAllTextContrast */
+
+test('checkAllTextContrast works', function(assert) {
+  visit('/color-contrast');
+
+  andThen(function() {
+    checkAllTextContrast();
   });
 });
