@@ -83,16 +83,17 @@ text properties for all of their inputs. Currently, checks for labelling via ID
 and the `for` attribute, `aria-describedby`, and `aria-labelledby`.
 
 ### `checkAriaRoles`
-Checks all elements with the `role` property to ensure they have all required
-ARIA properties for that role. _Upcoming: will check to ensure all ARIA
-properties applied are valid for that role._
+Checks all elements with the `role` property to ensure their role is valid, they
+have all required ARIA properties for that role, and that all applied ARIA
+properties/states are supported if not required.
 
 ### `checkIds`
 Checks all elements to ensure they don't have multiple IDs and that their ID is
 unique.
 
 ### `checkLinks`
-Checks links to ensure they have a meaningful `href` attribute, textual content that descibes the link, and that adjacent, duplicate links are merged.
+Checks links to ensure they have a meaningful `href` attribute, textual content
+that descibes the link, and that adjacent, duplicate links are merged.
 
 ## Todo List
 
@@ -100,8 +101,14 @@ Below is the current list of proposed tests that will be built. Please feel free
 to begin working on one of the below or open an issue for a new idea to add to
 this list.
 
-- Check ARIA properties for elements with defined roles to ensure validity (__in
+- Color contrast for text on backgrounds (minimum and enhanced options) (__in
 progress__)
+- Verify values of aria states/properties
+- Verify relationship of ARIA roles (radiogroup - radio, list - listitem, etc.)
+- Verify element is allowed to have ARIA attribute/role
 - Warn about actions on elements other than buttons, forms, inputs, and anchors
+- Check page for language indicator
+- Check page title
+- Verify focusability and visibility (e.g., non-visible elements shouldn't be
+focusable)
 - Alternative text for other elements (e.g., `object`, `embed`)
-- Color contrast for text on backgrounds (minimum and enhanced options)
