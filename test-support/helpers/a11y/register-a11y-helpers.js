@@ -3,7 +3,7 @@ import Ember from 'ember';
 import { hasAltText, allImagesHaveAltText } from './helpers/alt-text';
 import { checkAriaHidden, checkForNoRead } from './helpers/no-read';
 import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/form-labels';
-import { verifyRequiredAria, checkAriaRoles } from './helpers/aria-properties';
+import { verifyRequiredAria, verifySupportedAria, checkAriaRoles } from './helpers/aria-properties';
 import { checkIds } from './helpers/id-checks';
 import { checkLinkForMerge, checkLinkHref, checkLinkText, checkLinks } from './helpers/links';
 
@@ -63,6 +63,7 @@ export default function registerA11yHelpers() {
 
   // aria-properties
   Ember.Test.registerHelper('verifyRequiredAria', verifyRequiredAria);
+  Ember.Test.registerHelper('verifySupportedAria', verifySupportedAria);
   Ember.Test.registerHelper('checkAriaRoles', checkAriaRoles);
 
   // id-checks

@@ -1,5 +1,25 @@
 // A map of all ARIA roles and their supported/required properties/states
-export default {
+// Reference: http://www.w3.org/TR/wai-aria/appendices#quickref
+export const GLOBAL_ARIA = [
+  'atomic',
+  'busy',
+  'controls',
+  'describedby',
+  'disabled',
+  'dropeffect',
+  'flowto',
+  'grabbed',
+  'haspopup',
+  'hidden',
+  'invalid',
+  'label',
+  'labelledby',
+  'live',
+  'owns',
+  'relevant'
+]
+
+export const ARIA_MAP = {
   alert: {
     supported: [ 'expanded' ]
   },

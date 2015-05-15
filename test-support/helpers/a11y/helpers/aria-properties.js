@@ -6,7 +6,8 @@
  */
 
 import A11yError from '../a11y-error';
-import ARIA_MAP from './wai-aria-map';
+import { ARIA_MAP, GLOBAL_ARIA } from './wai-aria-map';
+
 
 /**
  * Checks for a specific ARIA property on an element and throws an error if it
@@ -27,17 +28,64 @@ function checkAriaProp(el, prop) {
  * Checks the role of an element and verifies that it has all of its required
  * ARIA properties (if any).
  * @param {Object} app - Not used
- * @param {HTMLElement} - The element to check
+ * @param {HTMLElement} el - The element to check
  * @return {Boolean|Error}
  */
 export function verifyRequiredAria(app, el) {
   let role = el.getAttribute('role');
-  let roleMap = role && ARIA_MAP[role];
+
+  if (!role) {
+    return true;
+  }
+
+  let roleMap = ARIA_MAP[role];
   let requiredProps = roleMap && roleMap.required;
 
   if (requiredProps) {
     requiredProps.forEach(function(prop) {
       checkAriaProp(el, prop);
+    });
+  }
+
+  return true;
+}
+
+/**
+ * Checks the role of an element and verifies that all of the ARIA attributes
+ * applied to it are supported
+ * @param {Object} app - Not used
+ * @param {HTMLElement} el - The element to check
+ * @return {Boolean|Error}
+ */
+export function verifySupportedAria(app, el) {
+  let role = el.getAttribute('role');
+
+  if (!role) {
+    return true;
+  }
+
+  let ariaAttributes = Array.prototype.filter.call(el.attributes, (attribute) => attribute.name.indexOf('aria-') === 0);
+  ariaAttributes = ariaAttributes.map((attr) => attr.name.substr(5));
+
+  let roleMap = ARIA_MAP[role];
+
+  if (roleMap) {
+    let roleSpecificProperties = [];
+
+    if (roleMap.required) {
+      roleSpecificProperties.push(roleMap.required);
+    }
+
+    if (roleMap.supported) {
+      roleSpecificProperties.push(roleMap.supported);
+    }
+
+    let supportedAttributes = GLOBAL_ARIA.concat(...roleSpecificProperties);
+
+    ariaAttributes.forEach((item) => {
+      if (supportedAttributes.indexOf(item) === -1) {
+        throw new A11yError(`test`);
+      }
     });
   }
 
@@ -52,7 +100,9 @@ export function checkAriaRoles() {
   let elementsWithRoles = document.querySelectorAll('[role]');
 
   for (let i = 0, l = elementsWithRoles.length; i < l; i++) {
-    verifyRequiredAria(null, elementsWithRoles[i]);
+    let element = elementsWithRoles[i];
+    verifyRequiredAria(null, element);
+    verifySupportedAria(null, element);
   }
 
   return true;

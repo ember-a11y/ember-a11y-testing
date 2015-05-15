@@ -1,4 +1,4 @@
-/* global verifyRequiredAria, checkAriaRoles */
+/* global verifyRequiredAria, verifySupportedAria, checkAriaRoles */
 
 import Ember from 'ember';
 import {
@@ -84,6 +84,80 @@ test('verifyRequiredAria passes on multiple required properties', function(asser
     sliderRole.setAttribute('aria-valuemin', '0');
     sliderRole.setAttribute('aria-valuenow', '5');
     assert.ok(verifyRequiredAria(sliderRole));
+  });
+});
+
+/* verifySupportedAria */
+
+test('verifySupportedAria passes when element has no role', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let noRole = find('#no-role')[0];
+    assert.ok(verifySupportedAria(noRole));
+  });
+});
+
+test('verifySupportedAria passes with one supported property', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let slider = find('[role="slider"]')[0];
+    slider.setAttribute('aria-orientation', 'vertical');
+    assert.ok(verifySupportedAria(slider));
+  });
+});
+
+test('verifySupportedAria passes with a required property', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let slider = find('[role="slider"]')[0];
+    slider.setAttribute('aria-valuemin', 'vertical');
+    assert.ok(verifySupportedAria(slider));
+  });
+});
+
+test('verifySupportedAria passes with multiple supported properties', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let slider = find('[role="slider"]')[0];
+    slider.setAttribute('aria-valuemin', 'vertical'); // required
+    slider.setAttribute('aria-orientation', 'vertical'); // supported
+    assert.ok(verifySupportedAria(slider));
+  });
+});
+
+test('verifySupportedAria fails with one unsupported property', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let slider = find('[role="slider"]')[0];
+    slider.setAttribute('aria-herp', 'derp');
+    assert.throws(() => verifySupportedAria(slider), /A11yError/);
+  });
+});
+
+test('verifySupportedAria fails with multiple unsupported properties', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let slider = find('[role="slider"]')[0];
+    slider.setAttribute('aria-herp', 'derp');
+    slider.setAttribute('aria-derp', 'herp');
+    assert.throws(() => verifySupportedAria(slider), /A11yError/);
+  });
+});
+
+test('verifySupportedAria fails with a mix of supported and unsupported properties', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let slider = find('[role="slider"]')[0];
+    slider.setAttribute('aria-orientation', 'vertical');
+    slider.setAttribute('aria-derp', 'herp');
+    assert.throws(() => verifySupportedAria(slider), /A11yError/);
   });
 });
 
