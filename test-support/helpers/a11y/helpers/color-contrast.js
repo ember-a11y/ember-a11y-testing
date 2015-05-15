@@ -13,6 +13,7 @@
  * Text that is part of a logo or brand name has no minimum contrast requirement.
  */
 
+import A11yError from '../a11y-error';
 import { extractRGB, checkContrastThreshold } from '../utils/visual-information';
 
 const RATIOS = {
@@ -30,7 +31,7 @@ const RATIOS = {
  * @param {HTMLElement} background (optional)
  * @return {Number} 
  */
-export function checkTextContrast(app, text, background=text) {
+export function checkTextContrast(app, text, background=text, level='AA') {
   // We need to reset zoom to make sure font-sizes are caluclated appropriately
   document.getElementById('ember-testing').style.zoom = '100%';
 
@@ -40,12 +41,16 @@ export function checkTextContrast(app, text, background=text) {
   let foregroundRGB = extractRGB(textStyle.color);
   let backgroundRGB = extractRGB(bgStyle.backgroundColor);
 
-  let ratio = getRatioToUse(textStyle, 'AA');
+  let ratio = getRatioToUse(textStyle, level);
 
   let result = checkContrastThreshold(foregroundRGB, backgroundRGB, ratio);
 
   // Undo our zoom changes from before
   document.getElementById('ember-testing').style.zoom = null;
+
+  if (!result) {
+    throw new A11yError(`The contrast between ${text} and ${background} is lower than expected for ${level} standards`);
+  }
 
   return result;
 }

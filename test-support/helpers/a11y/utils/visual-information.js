@@ -53,7 +53,13 @@ function normalizeColor([r, g, b]) {
  * @return {Array}
  */
 export function extractRGB(color) {
-  return color.match(PARENS_REGEX)[1].split(', ');
+  let rgb = color.match(PARENS_REGEX)[1].split(', ');
+
+  if (rgb.length > 3) {
+    console.warn('Using alpha values in text or background colors can adversely affect accessibility, be careful!');
+  }
+
+  return rgb;
 }
 
 /**
