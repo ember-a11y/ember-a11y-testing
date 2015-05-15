@@ -25,6 +25,22 @@ function checkAriaProp(el, prop) {
 }
 
 /**
+ * Checks for a specific ARIA property on an element and throws an error if it
+ * is not set.
+ * @param {HTMLElement} el - The element to check
+ * @return {Object|Error}
+ */
+function getAriaRole(el) {
+  let role = el.getAttribute('role');
+
+  if (role && !ARIA_MAP[role]) {
+    throw new A11yError(`The role '${role}' is not a valid role. You should remove it.`);
+  }
+
+  return role;
+}
+
+/**
  * Checks the role of an element and verifies that it has all of its required
  * ARIA properties (if any).
  * @param {Object} app - Not used
@@ -32,7 +48,7 @@ function checkAriaProp(el, prop) {
  * @return {Boolean|Error}
  */
 export function verifyRequiredAria(app, el) {
-  let role = el.getAttribute('role');
+  let role = getAriaRole(el);
 
   if (!role) {
     return true;
@@ -58,7 +74,7 @@ export function verifyRequiredAria(app, el) {
  * @return {Boolean|Error}
  */
 export function verifySupportedAria(app, el) {
-  let role = el.getAttribute('role');
+  let role = getAriaRole(el);
 
   if (!role) {
     return true;
@@ -84,7 +100,7 @@ export function verifySupportedAria(app, el) {
 
     ariaAttributes.forEach((item) => {
       if (supportedAttributes.indexOf(item) === -1) {
-        throw new A11yError(`test`);
+        throw new A11yError(`The attribute 'aria-${item}' is not a supported ARIA property/state for '${role}'; you should remove it from ${el}`);
       }
     });
   }

@@ -1,6 +1,6 @@
 {
   "name": "ember-a11y-testing",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A suite of accessibility tests that can be run within the Ember testing framework",
   "directories": {
     "doc": "doc",

@@ -26,7 +26,7 @@ test('verifyRequiredAria passes when element has no role', function(assert) {
 
   andThen(function() {
     let noRole = find('#no-role')[0];
-    assert.throws(verifyRequiredAria(noRole));
+    assert.ok(verifyRequiredAria(noRole));
   });
 });
 
@@ -35,9 +35,7 @@ test('verifyRequiredAria throws error on one required property', function(assert
 
   andThen(function() {
     let checkboxRole = find('[role="checkbox"]')[0];
-    assert.throws(function() {
-      verifyRequiredAria(checkboxRole);
-    },/required to have the attribute 'aria-checked' when using role='checkbox'/);
+    assert.throws(() => verifyRequiredAria(checkboxRole), /required to have the attribute 'aria-checked' when using role='checkbox'/);
   });
 });
 
@@ -56,9 +54,7 @@ test('verifyRequiredAria throws error on multiple required properties all missin
 
   andThen(function() {
     let sliderRole = find('[role="slider"]')[0];
-    assert.throws(function() {
-      verifyRequiredAria(sliderRole);
-    },/required to have the attribute 'aria-valuemax' when using role='slider'/);
+    assert.throws(() => verifyRequiredAria(sliderRole), /required to have the attribute 'aria-valuemax' when using role='slider'/);
   });
 });
 
@@ -69,9 +65,7 @@ test('verifyRequiredAria throws error on multiple required properties partially 
     let sliderRole = find('[role="slider"]')[0];
     sliderRole.setAttribute('aria-valuemax', '10');
     sliderRole.setAttribute('aria-valuenow', '5');
-    assert.throws(function() {
-      verifyRequiredAria(sliderRole);
-    },/required to have the attribute 'aria-valuemin' when using role='slider'/);
+    assert.throws(() => verifyRequiredAria(sliderRole), /required to have the attribute 'aria-valuemin' when using role='slider'/);
   });
 });
 
@@ -84,6 +78,16 @@ test('verifyRequiredAria passes on multiple required properties', function(asser
     sliderRole.setAttribute('aria-valuemin', '0');
     sliderRole.setAttribute('aria-valuenow', '5');
     assert.ok(verifyRequiredAria(sliderRole));
+  });
+});
+
+test('verifyRequiredAria throws error on invalid role', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let sliderRole = find('[role="slider"]')[0];
+    sliderRole.setAttribute('role', 'herp-de-derp');
+    assert.throws(() => verifyRequiredAria(sliderRole), /not a valid role/);
   });
 });
 
@@ -135,7 +139,7 @@ test('verifySupportedAria fails with one unsupported property', function(assert)
   andThen(function() {
     let slider = find('[role="slider"]')[0];
     slider.setAttribute('aria-herp', 'derp');
-    assert.throws(() => verifySupportedAria(slider), /A11yError/);
+    assert.throws(() => verifySupportedAria(slider), /not a supported ARIA/);
   });
 });
 
@@ -146,7 +150,7 @@ test('verifySupportedAria fails with multiple unsupported properties', function(
     let slider = find('[role="slider"]')[0];
     slider.setAttribute('aria-herp', 'derp');
     slider.setAttribute('aria-derp', 'herp');
-    assert.throws(() => verifySupportedAria(slider), /A11yError/);
+    assert.throws(() => verifySupportedAria(slider), /not a supported ARIA/);
   });
 });
 
@@ -157,7 +161,17 @@ test('verifySupportedAria fails with a mix of supported and unsupported properti
     let slider = find('[role="slider"]')[0];
     slider.setAttribute('aria-orientation', 'vertical');
     slider.setAttribute('aria-derp', 'herp');
-    assert.throws(() => verifySupportedAria(slider), /A11yError/);
+    assert.throws(() => verifySupportedAria(slider), /not a supported ARIA/);
+  });
+});
+
+test('verifySupportedAria throws error on invalid role', function(assert) {
+  visit('/aria-properties');
+
+  andThen(function() {
+    let noRole = find('#no-role')[0];
+    noRole.setAttribute('role', 'herp-de-derp');
+    assert.throws(() => verifySupportedAria(noRole), /not a valid role/);
   });
 });
 
@@ -183,8 +197,6 @@ test('checkAriaRoles throws error', function(assert) {
   visit('/aria-properties');
 
   andThen(function() {
-    assert.throws(function() {
-      checkAriaRoles();
-    }, /A11yError/);
+    assert.throws(() => checkAriaRoles(), /A11yError/);
   });
 });
