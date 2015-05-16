@@ -43,9 +43,16 @@ function hasBackground(element) {
  * @return {Boolean|Error} 
  */
 export function checkAllTextContrast(app, level) {
-  if (level !== LEVEL.AA || level !== LEVEL.AAA) {
+  // Set the conformance level we plan to check
+  if (level !== LEVEL.AA && level !== LEVEL.AAA) {
     level = LEVEL.AA;
   }
+
+  let testingContainer = document.getElementById('ember-testing-container');
+  testingContainer.style.position = 'absolute';
+  testingContainer.style.top = '0';
+  testingContainer.style.left = '0';
+  testingContainer.style.border = 'none';
 
   // Step 1: Grab all non-empty text nodes on the page
   let nodes = [];
@@ -59,23 +66,38 @@ export function checkAllTextContrast(app, level) {
 
   // Step 2: Loop over all text nodes
   for (let i = 0, l = nodes.length; i < l; i++) {
+    el.style.zoom = '100%';
+
     let node = nodes[i];
 
     // Step 3: Get the text node's HTMLElement
     let text = node.parentElement;
-    let background;
 
-    // Step 4: If the HTMLElement has no background, get the element that acts
-    // as its background
-    if (!hasBackground(text)) {
-      // Use: elementFromPoint to get background
-    } else {
-      background = text;
+    // Step 4: Find the element that acts as the background for this text
+    let background = text;
+    let hiddenEls = [];
+
+    // Get the coordinates of the text
+    let coords = text.getBoundingClientRect();
+    while (!hasBackground(background)) {
+      background.style.pointerEvents = 'none';
+      hiddenEls.push(background);
+      background = document.elementFromPoint(coords.left, coords.top);
     }
 
+    // Reset any elements
+    hiddenEls.forEach((el) => el.style.pointerEvents = '');
+
     // Step 5: Compare the contrast of those two element
-    checkTextContrast(text, background, level);
+    checkTextContrast(null, text, background, level);
+  
+    el.style.zoom = '';
   }
+
+  testingContainer.style.position = '';
+  testingContainer.style.top = '';
+  testingContainer.style.left = '';
+  testingContainer.style.border = '';
 
   return true;
 }

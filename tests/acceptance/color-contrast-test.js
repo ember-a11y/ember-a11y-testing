@@ -142,10 +142,73 @@ test('checkTextContrast warns about using alpha values', function(assert) {
 
 /* checkAllTextContrast */
 
-test('checkAllTextContrast works', function(assert) {
+test('checkAllTextContrast works when text has a background color', function(assert) {
   visit('/color-contrast');
 
   andThen(function() {
-    checkAllTextContrast();
+    document.getElementById('large-scale-text').style.backgroundColor = '#000';
+    assert.throws(() => checkAllTextContrast(), /A11yError/);
+  });
+});
+
+// TODO
+// test('checkAllTextContrast works when the background is an image', function(assert) {
+//   visit('/color-contrast');
+
+//   andThen(function() {
+//     checkAllTextContrast();
+//   });
+// });
+
+test('checkAllTextContrast works when background is an ancestor', function(assert) {
+  visit('/color-contrast');
+
+  andThen(function() {
+    document.getElementById('container').style.backgroundColor = '#000';
+    assert.throws(() => checkAllTextContrast(), /A11yError/);
+  });
+});
+
+test('checkAllTextContrast works when background is not an ancestor', function(assert) {
+  visit('/color-contrast');
+
+  andThen(function() {
+    let newBG = document.createElement('div');
+    newBG.style.position = 'absolute';
+    newBG.style.top = '0';
+    newBG.style.left = '0';
+    newBG.style.right = '0';
+    newBG.style.bottom = '0';
+    newBG.style.backgroundColor = '#111';
+
+    document.getElementById('ember-testing').appendChild(newBG);
+
+    assert.throws(() => checkAllTextContrast(), /A11yError/);
+
+    document.getElementById('ember-testing').removeChild(newBG);
+  });
+});
+
+test('checkAllTextContrast works when background is obscured by another transparent element', function(assert) {
+  visit('/color-contrast');
+
+  andThen(function() {
+    assert.ok(checkAllTextContrast());
+  });
+});
+
+// test('checkAllTextContrast works when background is a pseudo-element', function(assert) {
+//   visit('/color-contrast');
+
+//   andThen(function() {
+//     checkAllTextContrast();
+//   });
+// });
+
+test('checkAllTextContrast works when there is no other element for background', function(assert) {
+  visit('/color-contrast');
+
+  andThen(function() {
+    assert.ok(checkAllTextContrast());
   });
 });
