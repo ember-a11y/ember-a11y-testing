@@ -16,11 +16,13 @@
 import A11yError from '../a11y-error';
 import { extractRGB, checkContrastThreshold } from '../utils/visual-information';
 
+// The various levels of contrast testing conformance
 const LEVEL = {
   AA: 'AA',
   AAA: 'AAA'
 };
 
+// The various contrast ratios needed for conformance
 const RATIOS = {
   NORMAL: 4.5,
   LARGE: 3,
@@ -37,6 +39,26 @@ function hasBackground(element) {
   return style.backgroundImage !== 'none' || style.backgroundColor !== 'rgba(0, 0, 0, 0)';
 }
 
+function adjustTestingContainer() {
+  let testingContainer = document.getElementById('ember-testing-container');
+  testingContainer.style.position = 'absolute';
+  testingContainer.style.top = '0';
+  testingContainer.style.left = '0';
+  testingContainer.style.border = 'none';
+  testingContainer.style.width = '100%';
+  testingContainer.style.height = '100%';
+}
+
+function resetTestingContainer() {
+  let testingContainer = document.getElementById('ember-testing-container');
+  testingContainer.style.position = '';
+  testingContainer.style.top = '';
+  testingContainer.style.left = '';
+  testingContainer.style.border = '';
+  testingContainer.style.width = '';
+  testingContainer.style.height = '';
+}
+
 /**
  * Grabs all text nodes on the page, finds their background element, and checks
  * their contrast ratio to ensure accessibility
@@ -48,17 +70,13 @@ export function checkAllTextContrast(app, level) {
     level = LEVEL.AA;
   }
 
-  let testingContainer = document.getElementById('ember-testing-container');
-  testingContainer.style.position = 'absolute';
-  testingContainer.style.top = '0';
-  testingContainer.style.left = '0';
-  testingContainer.style.border = 'none';
+  adjustTestingContainer();
 
   // Step 1: Grab all non-empty text nodes on the page
   let nodes = [];
   let whatToShow = NodeFilter.SHOW_TEXT;
-  let el = document.getElementById('ember-testing');
-  let treeWalker = document.createTreeWalker(el, whatToShow, filterEmpty);
+  let testingEl = document.getElementById('ember-testing');
+  let treeWalker = document.createTreeWalker(testingEl, whatToShow, filterEmpty);
 
   while (treeWalker.nextNode()) {
     nodes.push(treeWalker.currentNode);
@@ -66,7 +84,7 @@ export function checkAllTextContrast(app, level) {
 
   // Step 2: Loop over all text nodes
   for (let i = 0, l = nodes.length; i < l; i++) {
-    el.style.zoom = '100%';
+    testingEl.style.zoom = '100%';
 
     let node = nodes[i];
 
@@ -79,6 +97,12 @@ export function checkAllTextContrast(app, level) {
 
     // Get the coordinates of the text
     let coords = text.getBoundingClientRect();
+
+    // Scroll to those coords
+    document.getElementById('ember-testing-container').scrollTop = coords.top;
+
+    coords = text.getBoundingClientRect();
+
     while (!hasBackground(background)) {
       background.style.pointerEvents = 'none';
       hiddenEls.push(background);
@@ -88,16 +112,20 @@ export function checkAllTextContrast(app, level) {
     // Reset any elements
     hiddenEls.forEach((el) => el.style.pointerEvents = '');
 
-    // Step 5: Compare the contrast of those two element
+    if (window.getComputedStyle(background).backgroundImage !== 'none') {
+      console.warn(`${node} has a background-image for its background, be careful that the contrast ratio is still accessible`);
+      continue;
+    }
+
+    // Step 5: Compare the contrast of those two elements
     checkTextContrast(null, text, background, level);
+
+    document.getElementById('ember-testing-container').scrollTop = 0;
   
-    el.style.zoom = '';
+    testingEl.style.zoom = '';
   }
 
-  testingContainer.style.position = '';
-  testingContainer.style.top = '';
-  testingContainer.style.left = '';
-  testingContainer.style.border = '';
+  resetTestingContainer();
 
   return true;
 }

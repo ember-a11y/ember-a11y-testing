@@ -151,14 +151,18 @@ test('checkAllTextContrast works when text has a background color', function(ass
   });
 });
 
-// TODO
-// test('checkAllTextContrast works when the background is an image', function(assert) {
-//   visit('/color-contrast');
+test('checkAllTextContrast warns when the background is an image', function(assert) {
+  assert.expect(2);
 
-//   andThen(function() {
-//     checkAllTextContrast();
-//   });
-// });
+  visit('/color-contrast');
+
+  andThen(function() {
+    document.getElementById('large-scale-text').style.backgroundImage = 'url("")';
+
+    assert.ok(checkAllTextContrast());
+    assert.ok(warnSpy.calledOnce);
+  });
+});
 
 test('checkAllTextContrast works when background is an ancestor', function(assert) {
   visit('/color-contrast');
@@ -197,18 +201,20 @@ test('checkAllTextContrast works when background is obscured by another transpar
   });
 });
 
-// test('checkAllTextContrast works when background is a pseudo-element', function(assert) {
-//   visit('/color-contrast');
-
-//   andThen(function() {
-//     checkAllTextContrast();
-//   });
-// });
-
 test('checkAllTextContrast works when there is no other element for background', function(assert) {
   visit('/color-contrast');
 
   andThen(function() {
+    assert.ok(checkAllTextContrast());
+  });
+});
+
+test('checkAllTextContrast works when text element is out of the viewport', function(assert) {
+  visit('/color-contrast');
+
+  andThen(function() {
+    let normalText = document.getElementById('normal-text');
+    normalText.style.marginBottom = '3000px';
     assert.ok(checkAllTextContrast());
   });
 });

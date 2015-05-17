@@ -67,7 +67,7 @@ all tests run with a config value of `true`; they can be disabled by passing in
 
 ### `allImagesHaveAltText`
 Checks all images on the page to ensure they have `alt` text or that they have
-`aria-hidden=true`.
+`aria-hidden="true"`.
 
 ### `checkForNoRead`
 Checks text-based elements for content and visibility to determine if they might
@@ -75,7 +75,7 @@ want to add `aria-hidden="true"`. By default this only puts on a warning in the
 console as it is a suggestion, not an accessibility rule.
 
 Other config values:
-  - `"throwErrors"` - Makes the test throw errors rather than warnings
+  - `'throwErrors'` - Makes the test throw errors rather than warnings
 
 ### `allFormsHaveLabels`
 Checks all forms on the page to ensure they have proper labeling/alternative
@@ -95,20 +95,31 @@ unique.
 Checks links to ensure they have a meaningful `href` attribute, textual content
 that descibes the link, and that adjacent, duplicate links are merged.
 
+### `checkAllTextContrast`
+_Caution: experimental, so this test is disabled by default_
+
+Grabs all text nodes on the page and checks their contrast against their
+background element. If the background is an image, it throws a warning for
+caution when using images as background elements.
+
+Other config values:
+  - `'AAA'` - Runs the contrast checks at the 'AAA' level of conformance
+  - `'AA'` - Runs the contrast checks at the 'AA' level of conformance
+
+Note: this won't pick up pseudo-elements that are used as backgrounds. There is
+potential to solve this issue using `getComputedStyle`, though a solid solution
+has yet to be found.
+
 ## Todo List
 
 Below is the current list of proposed tests that will be built. Please feel free
 to begin working on one of the below or open an issue for a new idea to add to
 this list.
 
-- Color contrast for text on backgrounds (minimum and enhanced options) (__in
-progress__)
-- Verify values of aria states/properties
-- Verify relationship of ARIA roles (radiogroup - radio, list - listitem, etc.)
-- Verify element is allowed to have ARIA attribute/role
-- Warn about actions on elements other than buttons, forms, inputs, and anchors
-- Check page for language indicator
-- Check page title
-- Verify focusability and visibility (e.g., non-visible elements shouldn't be
+- [ ] Verify values of aria states/properties
+- [ ] Verify relationship of ARIA roles (radiogroup - radio, list - listitem, etc.)
+- [ ] Verify element is allowed to have ARIA attribute/role
+- [ ] Warn about actions on elements other than buttons, forms, inputs, and anchors
+- [ ] Verify focusability and visibility (e.g., non-visible elements shouldn't be
 focusable)
-- Alternative text for other elements (e.g., `object`, `embed`)
+- [ ] Alternative text for other elements (e.g., `object`, `embed`)
