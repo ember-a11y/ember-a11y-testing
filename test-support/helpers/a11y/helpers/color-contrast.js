@@ -1,16 +1,7 @@
 /**
+ * Helpers related to verifying color contrast between text and its background.
  * Reference: http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html
  *            http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast7.html
- * Normal Text ratio of 4.5:1
- * Large Scale Text ratio of 3:1
-
- *
- * Text or images of text that are part of an inactive user interface component,
- * that are pure decoration, that are not visible to anyone, or that are part of
- * a picture that contains significant other visual content, have no contrast
- * requirement.
- *
- * Text that is part of a logo or brand name has no minimum contrast requirement.
  */
 
 import A11yError from '../a11y-error';
@@ -30,15 +21,30 @@ const RATIOS = {
   ENHANCED_LARGE: 4.5
 };
 
-function filterEmpty(node) {
+/**
+ * Tests if a DOM node has any textual content
+ * @param {Node} node - The node to test
+ * @return {Boolean}
+ */
+function nodeHasText(node) {
   return !!node.textContent.trim();
 }
 
+/**
+ * Tests if an element has a background other than transparent
+ * @param {HTMLElement} element - The element to test
+ * @return {Boolean}
+ */
 function hasBackground(element) {
   let style = window.getComputedStyle(element);
   return style.backgroundImage !== 'none' || style.backgroundColor !== 'rgba(0, 0, 0, 0)';
 }
 
+/**
+ * Adjusts the ember testing container to occupy the entire window, for a more
+ * accurate representation of how the app looks when running
+ * @return {Void}
+ */
 function adjustTestingContainer() {
   let testingContainer = document.getElementById('ember-testing-container');
   testingContainer.style.position = 'absolute';
@@ -49,6 +55,10 @@ function adjustTestingContainer() {
   testingContainer.style.height = '100%';
 }
 
+/**
+ * Resets the ember testing container after adjustTestingContainer has been used
+ * @return {Void}
+ */
 function resetTestingContainer() {
   let testingContainer = document.getElementById('ember-testing-container');
   testingContainer.style.position = '';
@@ -62,6 +72,8 @@ function resetTestingContainer() {
 /**
  * Grabs all text nodes on the page, finds their background element, and checks
  * their contrast ratio to ensure accessibility
+ * @param {Object} app - Not used
+ * @param {String} level - The level of conformance to check, defaults to 'AA'
  * @return {Boolean|Error} 
  */
 export function checkAllTextContrast(app, level) {
@@ -70,19 +82,21 @@ export function checkAllTextContrast(app, level) {
     level = LEVEL.AA;
   }
 
+  // Adjust the testing container to ensure correct results
   adjustTestingContainer();
 
   // Step 1: Grab all non-empty text nodes on the page
-  let nodes = [];
   let whatToShow = NodeFilter.SHOW_TEXT;
   let testingEl = document.getElementById('ember-testing');
-  let treeWalker = document.createTreeWalker(testingEl, whatToShow, filterEmpty);
+  let treeWalker = document.createTreeWalker(testingEl, whatToShow, nodeHasText);
 
+  let nodes = [];
   while (treeWalker.nextNode()) {
     nodes.push(treeWalker.currentNode);
   }
 
   // Step 2: Loop over all text nodes
+  let testingContainer = document.getElementById('ember-testing-container');
   for (let i = 0, l = nodes.length; i < l; i++) {
     testingEl.style.zoom = '100%';
 
@@ -98,33 +112,38 @@ export function checkAllTextContrast(app, level) {
     // Get the coordinates of the text
     let coords = text.getBoundingClientRect();
 
-    // Scroll to those coords
-    document.getElementById('ember-testing-container').scrollTop = coords.top;
+    // If the element is outside the view port, scroll it into view and
+    // re-calculate the coordinates
+    if (coords.top > testingContainer.clientHeight) {
+      testingContainer.scrollTop = coords.top;
+      coords = text.getBoundingClientRect();
+    }
 
-    coords = text.getBoundingClientRect();
-
+    // Traverse through the layers of the page until we find the background
     while (!hasBackground(background)) {
       background.style.pointerEvents = 'none';
       hiddenEls.push(background);
       background = document.elementFromPoint(coords.left, coords.top);
     }
 
-    // Reset any elements
+    // Reset pointer events for any elements we disabled
     hiddenEls.forEach((el) => el.style.pointerEvents = '');
 
+    // Check if the background is a background-image
     if (window.getComputedStyle(background).backgroundImage !== 'none') {
       console.warn(`${node} has a background-image for its background, be careful that the contrast ratio is still accessible`);
       continue;
     }
 
-    // Step 5: Compare the contrast of those two elements
+    // Step 5: Compare the contrast of the text and background
     checkTextContrast(null, text, background, level);
 
-    document.getElementById('ember-testing-container').scrollTop = 0;
-  
+    // Reset everything
+    testingContainer.scrollTop = 0;
     testingEl.style.zoom = '';
   }
 
+  // Reset the testing container to avoid messing up subsequent tests
   resetTestingContainer();
 
   return true;
@@ -139,8 +158,10 @@ export function checkAllTextContrast(app, level) {
  * @return {Boolean|Error} 
  */
 export function checkTextContrast(app, text, background=text, level='AA') {
+  let testingContainer = document.getElementById('ember-testing');
+
   // We need to reset zoom to make sure font-sizes are caluclated appropriately
-  document.getElementById('ember-testing').style.zoom = '100%';
+  testingContainer.style.zoom = '100%';
 
   let textStyle = window.getComputedStyle(text);
   let bgStyle = window.getComputedStyle(background);
@@ -153,7 +174,7 @@ export function checkTextContrast(app, text, background=text, level='AA') {
   let result = checkContrastThreshold(foregroundRGB, backgroundRGB, ratio);
 
   // Undo our zoom changes from before
-  document.getElementById('ember-testing').style.zoom = null;
+  testingContainer.style.zoom = null;
 
   if (!result) {
     throw new A11yError(`The contrast between ${text} and ${background} is lower than expected for ${level} standards`);

@@ -14,7 +14,8 @@ const TEST_FUNCTIONS = [
   checkAriaRoles,
   allFormsHaveLabels,
   checkIds,
-  checkLinks
+  checkLinks,
+  checkAllTextContrast
 ];
 
 const DEFAULT_CONFIG = {
@@ -23,7 +24,8 @@ const DEFAULT_CONFIG = {
   checkAriaRoles: true,
   allFormsHaveLabels: true,
   checkIds: true,
-  checkLinks: true
+  checkLinks: true,
+  checkAllTextContrast: false
 };
 
 /**

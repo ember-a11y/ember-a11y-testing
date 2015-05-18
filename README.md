@@ -99,16 +99,16 @@ that descibes the link, and that adjacent, duplicate links are merged.
 _Caution: experimental, so this test is disabled by default_
 
 Grabs all text nodes on the page and checks their contrast against their
-background element. If the background is an image, it throws a warning for
-caution when using images as background elements.
+background element. If the background is an image (including gradients), it
+throws a warning for caution when using images as background elements.
 
 Other config values:
   - `'AAA'` - Runs the contrast checks at the 'AAA' level of conformance
   - `'AA'` - Runs the contrast checks at the 'AA' level of conformance
 
-Note: this won't pick up pseudo-elements that are used as backgrounds. There is
-potential to solve this issue using `getComputedStyle`, though a solid solution
-has yet to be found.
+Note: _this won't pick up pseudo-elements that are used as backgrounds_. There
+is potential to solve this issue using `getComputedStyle`, though a solid
+solution has yet to be found.
 
 ## Todo List
 
@@ -116,10 +116,12 @@ Below is the current list of proposed tests that will be built. Please feel free
 to begin working on one of the below or open an issue for a new idea to add to
 this list.
 
+- [ ] Warn about actions on elements other than buttons, forms, inputs, and
+anchors
 - [ ] Verify values of aria states/properties
-- [ ] Verify relationship of ARIA roles (radiogroup - radio, list - listitem, etc.)
+- [ ] Verify relationship of ARIA roles (radiogroup - radio, list - listitem,
+etc.)
 - [ ] Verify element is allowed to have ARIA attribute/role
-- [ ] Warn about actions on elements other than buttons, forms, inputs, and anchors
-- [ ] Verify focusability and visibility (e.g., non-visible elements shouldn't be
-focusable)
+- [ ] Verify focusability and visibility (e.g., non-visible elements shouldn't
+be focusable)
 - [ ] Alternative text for other elements (e.g., `object`, `embed`)
