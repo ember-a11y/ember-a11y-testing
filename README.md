@@ -67,7 +67,7 @@ all tests run with a config value of `true`; they can be disabled by passing in
 
 ### `allImagesHaveAltText`
 Checks all images on the page to ensure they have `alt` text or that they have
-`aria-hidden="true"`.
+`aria-hidden="true"`/`role="presentation"`.
 
 ### `checkForNoRead`
 Checks text-based elements for content and visibility to determine if they might
@@ -115,7 +115,7 @@ Checks all elements on the page that have actions associated with them and
 ensures that they can receive focus.
 
 Note: _this check is DOM-based, and so only elements that use the Ember
-`{{action}}` helper will be checked__.
+`{{action}}` helper will be checked_.
 
 ## Todo List
 

@@ -14,8 +14,9 @@ import A11yError from '../a11y-error';
 export function hasAltText(app, el) {
   let altText = el && el.getAttribute('alt');
   let ariaHidden = el && el.getAttribute('aria-hidden');
+  let presentation = el && el.getAttribute('role') === 'presentation';
 
-  if (altText || ariaHidden === 'true') {
+  if (altText || ariaHidden === 'true' || presentation) {
     return true;
   }
 

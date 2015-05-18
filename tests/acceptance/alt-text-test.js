@@ -37,6 +37,15 @@ test('hasAltText passes with aria-hidden', function(assert) {
   });
 });
 
+test('hasAltText passes with presentation role', function(assert) {
+  visit('/alt-text');
+
+  andThen(function() {
+    let presentationRole = find('#presentation')[0];
+    assert.ok(hasAltText(presentationRole));
+  });
+});
+
 test('hasAltText throws error', function(assert) {
   visit('/alt-text');
 
