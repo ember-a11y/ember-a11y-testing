@@ -6,7 +6,7 @@
 import A11yError from '../a11y-error';
 
 // Selectors for all focusable elements
-const FOCUSABLE_SELECTOR = [
+const FOCUS_SELECTORS = [
   'input:not([type=hidden]):not([disabled])',
   'select:not([disabled])',
   'textarea:not([disabled])',
@@ -14,11 +14,27 @@ const FOCUSABLE_SELECTOR = [
   'a[href]',
   'area[href]',
   'iframe',
-  '[tabindex]'
-].join(',');
+  '[tabindex]:not([tabindex="-1"])'
+];
 
 // Selector to find any Ember-bound actions
 const ACTION_SELECTOR = '[data-ember-action]';
+
+// Add polyfill for browsers that don't have Element.matches (including Phantom)
+if (!Element.prototype.matches) {
+  Element.prototype.matches = function(selector) {
+    let el = this;
+    let matches = (el.document || el.ownerDocument).querySelectorAll(selector);
+    let i = 0;
+    
+    while (matches[i] && matches[i] !== el) {
+      i++;
+    }
+
+    return matches[i] ? true : false;
+  };
+}
+
 
 /**
  * Determines if a given action element is focusable
@@ -27,7 +43,7 @@ const ACTION_SELECTOR = '[data-ember-action]';
  * @return {Boolean|Error}
  */
 export function actionIsFocusable(app, el) {
-  if (el.matches(FOCUSABLE_SELECTOR)) {
+  if (!FOCUS_SELECTORS.filter((selector) => el.matches(selector)).length) {
     throw new A11yError(`The action on ${el} is inaccessible, since the element does not receive focus.`);
   }
 

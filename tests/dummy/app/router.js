@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('id-checks');
   this.route('links');
   this.route('color-contrast');
+  this.route('actions');
 });
 
 export default Router;

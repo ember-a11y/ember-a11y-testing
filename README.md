@@ -110,14 +110,19 @@ Note: _this won't pick up pseudo-elements that are used as backgrounds_. There
 is potential to solve this issue using `getComputedStyle`, though a solid
 solution has yet to be found.
 
+### `allActionsFocusable`
+Checks all elements on the page that have actions associated with them and
+ensures that they can receive focus.
+
+Note: _this check is DOM-based, and so only elements that use the Ember
+`{{action}}` helper will be checked__.
+
 ## Todo List
 
 Below is the current list of proposed tests that will be built. Please feel free
 to begin working on one of the below or open an issue for a new idea to add to
 this list.
 
-- [ ] Warn about actions on elements other than buttons, forms, inputs, and
-anchors
 - [ ] Verify values of aria states/properties
 - [ ] Verify relationship of ARIA roles (radiogroup - radio, list - listitem,
 etc.)
