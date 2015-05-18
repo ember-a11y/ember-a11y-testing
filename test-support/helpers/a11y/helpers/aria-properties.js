@@ -6,7 +6,7 @@
  */
 
 import A11yError from '../a11y-error';
-import { ARIA_MAP, GLOBAL_ARIA } from './wai-aria-map';
+import { ARIA_MAP, GLOBAL_ARIA } from '../utils/wai-aria-map';
 
 
 /**
