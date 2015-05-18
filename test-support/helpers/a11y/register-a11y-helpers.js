@@ -7,6 +7,7 @@ import { verifyRequiredAria, verifySupportedAria, checkAriaRoles } from './helpe
 import { checkIds } from './helpers/id-checks';
 import { checkLinkForMerge, checkLinkHref, checkLinkText, checkLinks } from './helpers/links';
 import { checkTextContrast, checkAllTextContrast } from './helpers/color-contrast';
+import { actionIsFocusable, allActionsFocusable } from './helpers/actions';
 
 const TEST_FUNCTIONS = [
   allImagesHaveAltText,
@@ -15,7 +16,8 @@ const TEST_FUNCTIONS = [
   allFormsHaveLabels,
   checkIds,
   checkLinks,
-  checkAllTextContrast
+  checkAllTextContrast,
+  allActionsFocusable
 ];
 
 const DEFAULT_CONFIG = {
@@ -25,7 +27,8 @@ const DEFAULT_CONFIG = {
   allFormsHaveLabels: true,
   checkIds: true,
   checkLinks: true,
-  checkAllTextContrast: false
+  checkAllTextContrast: false,
+  allActionsFocusable: true
 };
 
 /**
@@ -81,4 +84,8 @@ export default function registerA11yHelpers() {
   // color-contrast
   Ember.Test.registerHelper('checkTextContrast', checkTextContrast);
   Ember.Test.registerHelper('checkAllTextContrast', checkAllTextContrast);
+
+  // actions
+  Ember.Test.registerHelper('actionIsFocusable', actionIsFocusable);
+  Ember.Test.registerHelper('allActionsFocusable', allActionsFocusable);
 }
