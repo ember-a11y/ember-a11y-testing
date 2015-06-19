@@ -12,6 +12,7 @@
     "jquery": "^1.11.1",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "qunit": "~1.17.1",
-    "axe-core": "~1.0.1"
+    "axe-core": "~1.0.1",
+    "sinonjs": "~1.14.1"
   }
 }

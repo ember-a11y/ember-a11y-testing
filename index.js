@@ -2,6 +2,12 @@
 'use strict';
 
 var path = require('path');
+var fs = require('fs');
+
+var ALLOWED_CONTENT_FOR = [
+  'test-head-footer',
+  'test-body-footer'
+];
 
 module.exports = {
   name: 'ember-axe',
@@ -16,6 +22,12 @@ module.exports = {
 
     if (app.env !== 'production') {
       app.import(path.join(app.bowerDirectory, 'axe-core/axe.js'));
+    }
+  },
+
+  contentFor: function(type) {
+    if (~ALLOWED_CONTENT_FOR.indexOf(type)) {
+      return fs.readFileSync(path.join(__dirname, 'content-for', type + '.html'));
     }
   }
 };
