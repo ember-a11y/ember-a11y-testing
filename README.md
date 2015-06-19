@@ -1,25 +1,10 @@
-# Ember-axe
+# ember-axe
 
-This README outlines the details of collaborating on this Ember addon.
+This is currently just a simple hook-up for [Deque Labs'](https://github.com/dequelabs)
+[axe-core](https://github.com/dequelabs/axe-core) accessibility testing engine.
 
-## Installation
+## Future Plans
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
-
-## Running
-
-* `ember server`
-* Visit your app at http://localhost:4200.
-
-## Running Tests
-
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+Future plans for this are to have the `a11yCheck` run automatically during
+acceptance tests and to integrate it into components for checks during
+development.
