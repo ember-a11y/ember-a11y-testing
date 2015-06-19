@@ -13,24 +13,28 @@
     afterRender: function() {
       // TODO: Include support for options argument
       axe.a11yCheck('#ember-testing-container', axe.ember.a11yCheckCallback);
+    },
+
+    moduleStart: function(details) {
+      if (~details.name.indexOf('Acceptance')) {
+        document.body.classList.add('axe-enabled');
+      } else {
+        document.body.classList.remove('axe-enabled');
+      }
+    },
+
+    qunitDone: function() {
+      document.body.classList.remove('axe-enabled');
     }
   };
 
   // At the start of each testing module, we check if it is an Acceptance test.
   // If so, we do the necessary setup to auto-run.
-  QUnit.moduleStart(function(details) {
-    if (~details.name.indexOf('Acceptance')) {
-      document.body.classList.add('axe-enabled');
-    } else {
-      document.body.classList.remove('axe-enabled');
-    }
-  });
+  QUnit.moduleStart(axe.ember.moduleStart);
 
   // At the end of all the tests, we teardown any changes we made to the testing
   // environment (mainly concerned with visual ones).
-  QUnit.done(function() {
-    document.body.classList.remove('axe-enabled');
-  });
-  
+  QUnit.done(axe.ember.qunitDone);
+
   Ember.run.backburner.options.render = { after: axe.ember.afterRender };
 </script>

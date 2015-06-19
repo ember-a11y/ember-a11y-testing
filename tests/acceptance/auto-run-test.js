@@ -19,23 +19,29 @@ module('Acceptance | auto-run', {
 });
 
 test('should run the function when visiting a new route', function(assert) {
-  let test = sandbox.spy(Ember.run.backburner.options.render, 'after');
+  let callbackStub = sandbox.stub(Ember.run.backburner.options.render, 'after');
 
   visit('/');
 
-  andThen(function() {
-    assert.ok(test.calledOnce);
+  andThen(() => {
+    assert.ok(callbackStub.calledOnce);
     assert.equal(currentPath(), 'index');
   });
 });
 
-test('should run the function when visiting a new route', function(assert) {
-  let test = sandbox.spy(Ember.run.backburner.options.render, 'after');
+test('should run the function whenever a render occurs', function(assert) {
+  let callbackStub = sandbox.stub(Ember.run.backburner.options.render, 'after');
 
   visit('/');
 
-  andThen(function() {
-    assert.ok(test.calledOnce);
+  andThen(() => {
+    assert.ok(callbackStub.calledOnce);
     assert.equal(currentPath(), 'index');
+  });
+
+  click('label');
+
+  andThen(() => {
+    assert.ok(callbackStub.calledTwice);
   });
 });
