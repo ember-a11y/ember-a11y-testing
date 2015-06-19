@@ -4,6 +4,7 @@
 var path = require('path');
 var fs = require('fs');
 
+// The different types/area for which we have content for.
 var ALLOWED_CONTENT_FOR = [
   'test-head-footer',
   'test-body-footer'
@@ -13,8 +14,8 @@ module.exports = {
   name: 'ember-axe',
 
   /**
-   * Include axe-core in non-production builds. Include the un-minified version
-   * in case of a need to debug.
+   * Includes axe-core in non-production builds. It includes the un-minified
+   * version in case of a need to debug.
    * @override
    */
   included: function(app) {
@@ -25,6 +26,11 @@ module.exports = {
     }
   },
 
+  /**
+   * Adds content for the areas specified in the array above. It appends the
+   * contents of the files with the same name to the content-for block.
+   * @override
+   */
   contentFor: function(type) {
     if (~ALLOWED_CONTENT_FOR.indexOf(type)) {
       return fs.readFileSync(path.join(__dirname, 'content-for', type + '.html'));

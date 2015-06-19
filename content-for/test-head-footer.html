@@ -1,8 +1,16 @@
 <style>
+  /* *
+   * We need to modify the testing environment a bit to ensure accurate
+   * results. This is because some browser modify styles when elements are
+   * smaller than a certain size to help with accessibility
+   */
+
+  /* We hide the QUnit content so that it doesn't modify the screen at all */
   .axe-enabled #qunit {
     display: none;
   }
 
+  /* We position the testing container to be the entire screen */
   .axe-enabled #ember-testing-container {
     position: static;
     background: transparent;
@@ -15,6 +23,7 @@
     border: none;
   }
 
+  /* Reset the zoom on the actual application so that everything is normal */
   .axe-enabled #ember-testing-container #ember-testing {
     zoom: 1;
   }

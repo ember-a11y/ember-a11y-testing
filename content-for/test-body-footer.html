@@ -1,5 +1,16 @@
 <script>
+  /**
+   * Setup all our functions as an extension to the global axe object. This
+   * ensures their availability while also avoiding a continual pollution of the
+   * global namespace.
+   */
   axe.ember = {
+    /**
+     * Processes the results of calling axe.a11yCheck. If there are any
+     * violations, it throws an error and then logs them individually.
+     * @param {Object} results
+     * @return {Void}
+     */
     a11yCheckCallback: function(results) {
       var violations = results.violations;
 
@@ -10,11 +21,23 @@
       Ember.assert('The page should have no accessibility violations.', !violations.length);
     },
 
+    /**
+     * Used as a callback for afterRender. Simply runs axe.a11yCheck and passes
+     * the results to a11yCheckCallback.
+     * @return {Void}
+     */
     afterRender: function() {
       // TODO: Include support for options argument
       axe.a11yCheck('#ember-testing-container', axe.ember.a11yCheckCallback);
     },
 
+    /**
+     * Used as a callback at the beginning of each testing module. It checks
+     * if the test is an acceptance test (based on standard Ember-CLI naming
+     * conventions), and adjust the testing display accordingly.
+     * @param {Object} details
+     * @return {Void}
+     */
     moduleStart: function(details) {
       if (~details.name.indexOf('Acceptance')) {
         document.body.classList.add('axe-enabled');
@@ -23,18 +46,18 @@
       }
     },
 
+    /**
+     * Used as a callback at the end of testing. It ensures the testing display
+     * has been reset to it's original appearance.
+     * @return {Void}
+     */
     qunitDone: function() {
       document.body.classList.remove('axe-enabled');
     }
   };
 
-  // At the start of each testing module, we check if it is an Acceptance test.
-  // If so, we do the necessary setup to auto-run.
-  QUnit.moduleStart(axe.ember.moduleStart);
-
-  // At the end of all the tests, we teardown any changes we made to the testing
-  // environment (mainly concerned with visual ones).
-  QUnit.done(axe.ember.qunitDone);
-
+  // Register the functions to their appropriate places for testing
   Ember.run.backburner.options.render = { after: axe.ember.afterRender };
+  QUnit.moduleStart(axe.ember.moduleStart);
+  QUnit.done(axe.ember.qunitDone);
 </script>
