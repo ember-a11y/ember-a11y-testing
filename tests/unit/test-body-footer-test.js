@@ -20,7 +20,6 @@ module('Unit | test-body-footer', {
 test('appropriate callback functions have been registered', function(assert) {
   assert.ok(~QUnit.config.callbacks.done.indexOf(axe.ember.qunitDone));
   assert.ok(~QUnit.config.callbacks.moduleStart.indexOf(axe.ember.moduleStart));
-  assert.ok(Ember.run.backburner.options.render.after === axe.ember.afterRender);
 });
 
 /* axe.ember.a11yCheckCallback */
@@ -56,28 +55,43 @@ test('afterRender should run a11yCheck and feed the results to callback', functi
 
 /* axe.ember.moduleStart */
 
-test('moduleStart adjusts the layout of the container for acceptance tests', function(assert) {
-  document.body.classList.remove('axe-enabled');
+test('moduleStart turns axe on for acceptance tests', function(assert) {
+  let turnAxeOnStub = sandbox.stub(axe.ember, 'turnAxeOn');
 
   axe.ember.moduleStart({ name: 'Acceptance | Some Test' });
 
-  assert.ok(document.body.classList.contains('axe-enabled'));
+  assert.ok(turnAxeOnStub.calledOnce);
 });
 
-test('moduleStart resets the layout of the container for non-acceptance tests', function(assert) {
-  document.body.classList.add('axe-enabled');
+test('moduleStart turns axe off for non-acceptance tests', function(assert) {
+  let turnAxeOffStub = sandbox.stub(axe.ember, 'turnAxeOff');
 
   axe.ember.moduleStart({ name: 'Unit | Some Test' });
 
-  assert.ok(!document.body.classList.contains('axe-enabled'));
+  assert.ok(turnAxeOffStub.calledOnce);
 });
 
 /* axe.ember.qunitDone */
 
-test('qunitDone resets the layout of the container', function(assert) {
-  document.body.classList.add('axe-enabled');
+test('qunitDone turns axe off', function(assert) {
+  let turnAxeOffStub = sandbox.stub(axe.ember, 'turnAxeOff');
 
   axe.ember.qunitDone();
 
+  assert.ok(turnAxeOffStub.calledOnce);
+});
+
+/* axe.ember.turnAxeOn */
+
+test('turnAxeOn enables axe tests on afterRender and adjusts the display', function(assert) {
+  axe.ember.turnAxeOn();
+  assert.ok(document.body.classList.contains('axe-enabled'));
+  assert.ok(Ember.run.backburner.options.render.after === axe.ember.afterRender);
+});
+
+/* axe.ember.turnAxeOff */
+test('turnAxeOff disables axe tests on afterRender and resets the display', function(assert) {
+  axe.ember.turnAxeOff();
   assert.ok(!document.body.classList.contains('axe-enabled'));
+  assert.ok(Ember.run.backburner.options.render.after === undefined);
 });

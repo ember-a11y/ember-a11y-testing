@@ -33,6 +33,10 @@ On the flip side, if you want to turn tests off, simply use:
 ember.axe.turnAxeOff();
 ```
 
+_Note:_ any tests run with Ember Axe will adjust the testing container to occupy
+the entire screen. This is to simulate the actual application environment, as
+browsers adjust styles at small sizes for accessibility reasons.
+
 ## Future Plans
 
 Moving forward, the main goal of Ember Axe is to integrate accessibility
