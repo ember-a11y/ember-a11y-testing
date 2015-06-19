@@ -13,9 +13,25 @@ Usage right now is super simple, just install the addon via:
 ember install ember-axe
 ```
 
-That's it! It will automatically begin running during tests. It also injects
-the `axe` object globally during development so you can run tests while
-developing your application as well.
+That's it! It will automatically begin running during _acceptance_ tests. It
+also injects the `axe` object globally during development so you can run tests
+while developing your application as well.
+
+### Disable/Enable Tests
+
+By default, the axe-core tests only run during acceptance tests. In order to
+enable them for other tests, simply run the following at the beginning of your
+testing module:
+
+```javascript
+ember.axe.turnAxeOn();
+```
+
+On the flip side, if you want to turn tests off, simply use:
+
+```javascript
+ember.axe.turnAxeOff();
+```
 
 ## Future Plans
 

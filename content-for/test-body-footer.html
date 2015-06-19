@@ -15,7 +15,7 @@
       var violations = results.violations;
 
       for (var i = 0, l = violations.length; i < l; i++) {
-        Ember.Logger.error('Violation #' + i, violations[i]);
+        Ember.Logger.error('Violation #' + (i + 1), violations[i]);
       }
 
       Ember.assert('The page should have no accessibility violations.', !violations.length);
@@ -40,9 +40,9 @@
      */
     moduleStart: function(details) {
       if (~details.name.indexOf('Acceptance')) {
-        document.body.classList.add('axe-enabled');
+        axe.ember.turnAxeOn();
       } else {
-        document.body.classList.remove('axe-enabled');
+        axe.ember.turnAxeOff();
       }
     },
 
@@ -52,12 +52,31 @@
      * @return {Void}
      */
     qunitDone: function() {
+      axe.ember.turnAxeOff();
+    },
+
+    /**
+     * Enables the axe-core tests to run on afterRender and modifies the visual
+     * layout of the testing.
+     * @return {Void}
+     */
+    turnAxeOn: function() {
+      Ember.run.backburner.options.render = { after: axe.ember.afterRender };
+      document.body.classList.add('axe-enabled');
+    },
+
+    /**
+     * Disables the axe-core tests to run on afterRender and restores the
+     * original visual layout of the testing.
+     * @return {Void}
+     */
+    turnAxeOff: function() {
+      Ember.run.backburner.options.render = { after: undefined };
       document.body.classList.remove('axe-enabled');
     }
   };
 
   // Register the functions to their appropriate places for testing
-  Ember.run.backburner.options.render = { after: axe.ember.afterRender };
   QUnit.moduleStart(axe.ember.moduleStart);
   QUnit.done(axe.ember.qunitDone);
 </script>
