@@ -24,13 +24,13 @@ enable them for other tests, simply run the following at the beginning of your
 testing module:
 
 ```javascript
-ember.axe.turnAxeOn();
+axe.ember.turnAxeOn();
 ```
 
 On the flip side, if you want to turn tests off, simply use:
 
 ```javascript
-ember.axe.turnAxeOff();
+axe.ember.turnAxeOff();
 ```
 
 _Note:_ any tests run with Ember Axe will adjust the testing container to occupy
