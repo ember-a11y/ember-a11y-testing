@@ -6,6 +6,7 @@ var fs = require('fs');
 
 // The different types/area for which we have content for.
 var ALLOWED_CONTENT_FOR = [
+  'head-footer',
   'test-head-footer',
   'test-body-footer'
 ];
