@@ -50,7 +50,25 @@ test('afterRender should run a11yCheck and feed the results to callback', functi
   axe.ember.afterRender();
 
   assert.ok(a11yCheckStub.calledOnce);
-  assert.ok(a11yCheckStub.calledWith('#ember-testing-container', axe.ember.a11yCheckCallback));
+  assert.ok(a11yCheckStub.calledWith('#ember-testing-container', undefined, axe.ember.a11yCheckCallback));
+});
+
+test('afterRender should run a11yCheck with options and feed the results to callback', function(assert) {
+  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck');
+
+  axe.ember.testOptions = {
+    runOnly: {
+        type: "tag",
+        values: ["wcag2a"]
+      }
+  };
+
+  axe.ember.afterRender();
+
+  assert.ok(a11yCheckStub.calledOnce);
+  assert.ok(a11yCheckStub.calledWith('#ember-testing-container', axe.ember.testOptions, axe.ember.a11yCheckCallback));
+
+  axe.ember.testOptions = undefined;
 });
 
 /* axe.ember.moduleStart */

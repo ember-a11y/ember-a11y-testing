@@ -37,6 +37,24 @@ _Note:_ any tests run with Ember Axe will adjust the testing container to occupy
 the entire screen. This is to simulate the actual application environment, as
 browsers adjust styles at small sizes for accessibility reasons.
 
+### Options
+
+You can pass specific options to be used during `a11yCheck` by setting them on a
+global `testOptions` property:
+
+```javascript
+axe.ember.testOptions = {
+  runOnly: {
+      type: "tag",
+      values: ["wcag2a"]
+    }
+};
+```
+
+You can see available options in the [axe-core repo](https://github.com/dequelabs/axe-core/blob/master/doc/API.md#b-options-parameter).
+
+_Note:_ the options will stay set, until set to something different.
+
 ## Future Plans
 
 Moving forward, the main goal of Ember Axe is to integrate accessibility

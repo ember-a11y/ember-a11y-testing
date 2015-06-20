@@ -27,8 +27,7 @@
      * @return {Void}
      */
     afterRender: function() {
-      // TODO: Include support for options argument
-      axe.a11yCheck('#ember-testing-container', axe.ember.a11yCheckCallback);
+      axe.a11yCheck('#ember-testing-container', axe.ember.testOptions, axe.ember.a11yCheckCallback);
     },
 
     /**
@@ -73,7 +72,13 @@
     turnAxeOff: function() {
       Ember.run.backburner.options.render = { after: undefined };
       document.body.classList.remove('axe-enabled');
-    }
+    },
+
+    /**
+     * An object of options to pass into axe.a11yCheck.
+     * @type {Object}
+     */
+    testOptions: undefined
   };
 
   // Register the functions to their appropriate places for testing
