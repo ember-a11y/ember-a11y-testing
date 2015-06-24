@@ -15,7 +15,7 @@ module('Unit | test-body-footer', {
   }
 });
 
-/* registration */
+/* Registration */
 
 test('appropriate callback functions have been registered', function(assert) {
   assert.ok(~QUnit.config.callbacks.done.indexOf(axe.ember.qunitDone));
