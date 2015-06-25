@@ -1,6 +1,7 @@
+/* global sinon, axe */
 import Ember from 'ember';
 import { initialize } from 'dummy/instance-initializers/axe-component';
-import { module, test } from 'qunit';
+import { module, test, skip } from 'qunit';
 
 let application;
 let sandbox;
@@ -8,7 +9,9 @@ let sandbox;
 module('Unit | Instance Initializer | axe-component', {
   beforeEach() {
     Ember.run(() => {
-      application = Ember.Application.create();
+      application = Ember.Application.create({
+        rootElement: '#ember-testing'
+      });
       application.deferReadiness();
     });
 
@@ -23,15 +26,18 @@ module('Unit | Instance Initializer | axe-component', {
 /* Basic Behavior */
 
 test('initializer should not re-open Ember.Component more than once', function(assert) {
+  // Depending on if the initializer has already ran, we will either expect the
+  // reopen method to be called once or not at all.
+  let assertMethod = Ember.Component.prototype.audit ? 'notCalled' : 'calledOnce';
   let reopenSpy = sandbox.spy(Ember.Component, 'reopen');
 
   initialize(application);
   initialize(application);
 
-  assert.ok(reopenSpy.calledOnce);
+  assert.ok(reopenSpy[assertMethod]);
 });
 
-test('audit is run on render when not in testing mode', function(assert) {
+test('audit is run on didRender when not in testing mode', function(assert) {
   initialize(application);
 
   let component = Ember.Component.create({});
@@ -43,15 +49,16 @@ test('audit is run on render when not in testing mode', function(assert) {
   Ember.run(() => component.appendTo('#ember-testing'));
   assert.ok(auditSpy.calledOnce);
 
-  Ember.run(() => component.rerender());
+  Ember.run(() => component.trigger('didRender'));
   assert.ok(auditSpy.calledTwice);
 
-  component.destroy();
+  Ember.run(() => component.destroy());
 
+  // Turn testing mode back on to ensure validity of other tests
   Ember.testing = true;
 });
 
-test('audit is not run on render when in testing mode', function(assert) {
+test('audit is not run on didRender when in testing mode', function(assert) {
   initialize(application);
 
   let component = Ember.Component.create({});
@@ -60,12 +67,12 @@ test('audit is not run on render when in testing mode', function(assert) {
   Ember.run(() => component.appendTo('#ember-testing'));
   assert.ok(auditSpy.notCalled);
 
-  component.destroy();
+  Ember.run(() => component.destroy());
 });
 
 /* Ember.Component.turnAuditOff */
 
-test('turnAuditOff prevents audit from running after a render', function(assert) {
+test('turnAuditOff prevents audit from running on didRender', function(assert) {
   initialize(application);
 
   let component = Ember.Component.create({ turnAuditOff: true });
@@ -77,21 +84,22 @@ test('turnAuditOff prevents audit from running after a render', function(assert)
   Ember.run(() => component.appendTo('#ember-testing'));
   assert.ok(auditSpy.notCalled);
 
-  component.destroy();
+  Ember.run(() => component.destroy());
 
+  // Turn testing mode back on to ensure validity of other tests
   Ember.testing = true;
 });
 
 /* Ember.Component.audit */
 
-test('audit should log any violations found and mark offending DOM nodes', function(assert) {
+test('audit should log any violations found', function(assert) {
   let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
     callback({
       violations: [{
         name: 'test',
         nodes: []
       }]
-    })
+    });
   });
 
   let logSpy = sandbox.spy(Ember.Logger, 'error');
@@ -102,11 +110,15 @@ test('audit should log any violations found and mark offending DOM nodes', funct
   assert.ok(logSpy.calledOnce);
 });
 
+skip('audit should mark the DOM nodes of any violations', function(assert) {
+
+});
+
 test('audit should do nothing if no violations found', function(assert) {
   let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
     callback({
       violations: []
-    })
+    });
   });
 
   let logSpy = sandbox.spy(Ember.Logger, 'error');
@@ -121,7 +133,7 @@ test('audit should do nothing if no violations found', function(assert) {
 
 test('axeCallback receives the results of the audit', function(assert) {
   let results = { violations: [] };
-  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
+  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', (el, opts, callback) => {
     callback(results);
   });
 
@@ -129,6 +141,7 @@ test('axeCallback receives the results of the audit', function(assert) {
   let component = Ember.Component.create({
     axeCallback: axeCallbackSpy
   });
+
   component.audit();
 
   assert.ok(axeCallbackSpy.calledOnce);
@@ -136,7 +149,16 @@ test('axeCallback receives the results of the audit', function(assert) {
 });
 
 test('axeCallback throws an error if it is not a function', function(assert) {
+  let results = { violations: [] };
+  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', (el, opts, callback) => {
+    callback(results);
+  });
 
+  let component = Ember.Component.create({
+    axeCallback: 'axeCallbackSpy'
+  });
+
+  assert.throws(() => component.audit(), 'axeCallback should be a function.');
 });
 
 /* Ember.Component.axeOptions */
@@ -144,7 +166,7 @@ test('axeCallback throws an error if it is not a function', function(assert) {
 test('axeOptions are passed in as the second param to a11yCheck', function(assert) {
   let a11yCheckStub = sandbox.stub(axe, 'a11yCheck');
 
-  let axeOptions = { test: 'test' }
+  let axeOptions = { test: 'test' };
   let component = Ember.Component.create({ axeOptions });
   component.audit();
 

@@ -65,7 +65,8 @@ export function initialize(application) {
           }
         }
 
-        if (this.axeCallback && typeof this.axeCallback === 'function') {
+        if (this.axeCallback) {
+          Ember.assert('axeCallback should be a function.', typeof this.axeCallback === 'function');
           this.axeCallback(results);
         }
       });
@@ -77,5 +78,5 @@ export function initialize(application) {
 
 export default {
   name: 'axe-component',
-  initialize: initialize
+  initialize
 };
