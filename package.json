@@ -1,6 +1,6 @@
 {
   "name": "ember-axe",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The future of accessibility testing in Ember",
   "directories": {
     "doc": "doc",
