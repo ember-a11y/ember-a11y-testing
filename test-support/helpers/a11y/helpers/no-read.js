@@ -36,11 +36,11 @@ export function checkAriaHidden(app, el, throwError) {
     // Should have aria-hidden=true
     let ariaHidden = el.getAttribute('aria-hidden');
     if (ariaHidden !== 'true') {
-      let message = `${el} has no content yet is visible, it should probably have aria-hidden="true" set.`;
+      let message = `The element has no content yet is visible, it should probably have aria-hidden="true" set.`;
       if (throwError) {
-        throw new A11yError(message);
+        throw new A11yError(el, message);
       } else {
-        console.warn(message);
+        console.warn(el, message);
       }
     }
   }

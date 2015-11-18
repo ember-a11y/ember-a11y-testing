@@ -33,7 +33,7 @@ function checkMultipleIds(els) {
   let multiIds = els.filter((el) => el.id.trim().split(/\s+/).length > 1);
 
   if (multiIds.length) {
-    throw new A11yError(`${multiIds[0]} has multiple IDs; you should remove all but one of those.`);
+    throw new A11yError(els, `${multiIds[0]} has multiple IDs; you should remove all but one of those.`);
   }
 
   return true
@@ -49,7 +49,7 @@ function checkIdDuplicates(els) {
   let duplicate = hasDuplicates(ids);
 
   if (duplicate) {
-    throw new A11yError(`The ID '${duplicate}' is used more than once; you should only use each ID once.`);
+    throw new A11yError(duplicate, `The ID '${duplicate}' is used more than once; you should only use each ID once.`);
   }
 
   return true;
