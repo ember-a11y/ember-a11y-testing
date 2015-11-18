@@ -20,7 +20,7 @@ export function hasAltText(app, el) {
     return true;
   }
 
-  throw new A11yError(`${el} has no alt text. Either add an alt description or add the aria-hidden attribute.`);
+  throw new A11yError(`"${el.src || el.text}" has no alt text. Either add an alt description or add the aria-hidden attribute.`);
 }
 
 /**
