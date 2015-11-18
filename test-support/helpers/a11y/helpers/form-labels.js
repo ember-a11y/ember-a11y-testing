@@ -25,7 +25,7 @@ function needsLabel(tag, type) {
  * @return {Boolean|Error}
  */
 function verifyLabel(el) {
-  let ariaBy = el.getAttribute('aria-describedby') || 
+  let ariaBy = el.getAttribute('aria-describedby') ||
                el.getAttribute('aria-labelledby');
 
   if (ariaBy) {
@@ -48,7 +48,7 @@ function verifyAriaLabel(el, ariaBy) {
   for (let i = 0, l = ids.length; i < l; i++) {
     let label = document.getElementById(ids[i])
     if (!label) {
-      throw new A11yError(`${el} is missing the element it is associated with ID ${ids[i]}`);
+      throw new A11yError(`"${el.text}" is missing the element it is associated with ID ${ids[i]}`);
     } else if (!label.innerHTML) {
       throw new A11yError(`The label with ID ${ids[i]} has no content. You should add content to make this label useful.`);
     }
@@ -66,15 +66,15 @@ function verifyNonAriaLabel(el) {
   let elementId = el.id;
 
   if (!elementId) {
-    throw new A11yError(`${el} has no ID, describedby, or labelledby attribute. You should add one to associate it with a label.`);
+    throw new A11yError(`"${el.text}" has no ID, describedby, or labelledby attribute. You should add one to associate it with a label.`);
   }
 
   let label = document.querySelector(`[for="${elementId}"]`);
 
   if (!label) {
-    throw new A11yError(`${el} has an ID but no associated label. You should add a label and reference this element via the for attribute`);
+    throw new A11yError(`"${el.text}" has an ID but no associated label. You should add a label and reference this element via the for attribute`);
   } else if (!label.innerHTML) {
-    throw new A11yError(`The label for ${el} has no content. You should add content to make this label useful.`);
+    throw new A11yError(`The label for "${el.text}" has no content. You should add content to make this label useful.`);
   }
 
   return true;

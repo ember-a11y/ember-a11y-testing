@@ -26,7 +26,7 @@ function isBadHref(href) {
 
 export function checkLinkForMerge(app, link) {
   if (link.nextElementSibling && link.nextElementSibling.href === link.href) {
-    throw new A11yError(`${link} and ${link.nextElementSibling} should be merged together since they are adjacent and point to the same link.`);
+    throw new A11yError(`"${link.text}" and "${link.nextElementSibling.text}" should be merged together since they are adjacent and point to the same link.`);
   }
 
   return true;
@@ -34,7 +34,7 @@ export function checkLinkForMerge(app, link) {
 
 export function checkLinkHref(app, link) {
   if (isBadHref(link.href)) {
-    throw new A11yError(`${link} has a non-meaningful href, it should point to an actual link.`);
+    throw new A11yError(`"${link.text}" has a non-meaningful href, it should point to an actual link.`);
   }
 
   return true;
@@ -46,13 +46,13 @@ export function checkLinkText(app, link) {
 
     if (image) {
       if (!image.alt) {
-        throw new A11yError(`${image} in ${link} should have alt text`);
+        throw new A11yError(`${image.src} in "${link.text}" should have alt text`);
       }
 
       return true;
     }
 
-    throw new A11yError(`${link} has no textual content, you should add some to give the link meaning.`);
+    throw new A11yError(`"${link.text}" has no textual content, you should add some to give the link meaning.`);
   }
 
   return true;

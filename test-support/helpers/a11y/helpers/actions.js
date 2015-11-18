@@ -26,7 +26,7 @@ if (!Element.prototype.matches) {
     let el = this;
     let matches = (el.document || el.ownerDocument).querySelectorAll(selector);
     let i = 0;
-    
+
     while (matches[i] && matches[i] !== el) {
       i++;
     }
@@ -44,7 +44,7 @@ if (!Element.prototype.matches) {
  */
 export function actionIsFocusable(app, el) {
   if (!FOCUS_SELECTORS.filter((selector) => el.matches(selector)).length) {
-    throw new A11yError(`The action on ${el} is inaccessible, since the element does not receive focus.`);
+    throw new A11yError(`The action on "${el.text}" is inaccessible, since the element does not receive focus.`);
   }
 
   return true;
