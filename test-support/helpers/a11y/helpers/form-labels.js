@@ -3,6 +3,7 @@
  * Reference: http://www.w3.org/TR/WCAG20/#minimize-error
  */
 
+import Ember from 'ember';
 import A11yError from '../a11y-error';
 
 // Define the types of input elements that require a label
@@ -63,7 +64,7 @@ function verifyAriaLabel(el, ariaBy) {
  * @return {Boolean|Error}
  */
 function verifyNonAriaLabel(el) {
-  if (el.parentNode.tagName === 'LABEL') {
+  if (Ember.$(el).parents('label').length > 0) {
     return true;
   }
 

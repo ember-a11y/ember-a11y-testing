@@ -30,11 +30,11 @@ test('hasLabel passes with actual label', function(assert) {
   });
 });
 
-test('hasLabel passes when input is child of label', function(assert) {
+test('hasLabel passes when input has label ancestor', function(assert) {
   visit('/form-labels');
 
   andThen(function() {
-    let input = find('#wrapping-label input')[0];
+    let input = find('#input-with-label-ancestor input')[0];
     assert.ok(hasLabel(input));
   });
 });
