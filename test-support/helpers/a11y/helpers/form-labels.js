@@ -25,7 +25,7 @@ function needsLabel(tag, type) {
  * @return {Boolean|Error}
  */
 function verifyLabel(el) {
-  let ariaBy = el.getAttribute('aria-describedby') || 
+  let ariaBy = el.getAttribute('aria-describedby') ||
                el.getAttribute('aria-labelledby');
 
   if (ariaBy) {
@@ -63,6 +63,10 @@ function verifyAriaLabel(el, ariaBy) {
  * @return {Boolean|Error}
  */
 function verifyNonAriaLabel(el) {
+  if (el.parentNode.tagName === 'LABEL') {
+    return true;
+  }
+
   let elementId = el.id;
 
   if (!elementId) {
