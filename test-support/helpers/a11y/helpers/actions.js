@@ -14,11 +14,17 @@ const FOCUS_SELECTORS = [
   'a[href]',
   'area[href]',
   'iframe',
-  '[tabindex]:not([tabindex="-1"])'
+  '[tabindex]:not([tabindex="-1"])',
+];
+
+const FOCUS_EXCEPTIONS = [
+  'form',
 ];
 
 // Selector to find any Ember-bound actions
 const ACTION_SELECTOR = '[data-ember-action]';
+
+const MATCHES = (el) => (selector) => el.matches(selector);
 
 // Add polyfill for browsers that don't have Element.matches (including Phantom)
 if (!Element.prototype.matches) {
@@ -43,7 +49,8 @@ if (!Element.prototype.matches) {
  * @return {Boolean|Error}
  */
 export function actionIsFocusable(app, el) {
-  if (!FOCUS_SELECTORS.filter((selector) => el.matches(selector)).length) {
+  if (!FOCUS_SELECTORS.filter(MATCHES(el)).length &&
+      !FOCUS_EXCEPTIONS.filter(MATCHES(el)).length) {
     throw new A11yError(el, `The action on the element is inaccessible, since the element does not receive focus.`);
   }
 

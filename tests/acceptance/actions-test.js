@@ -30,6 +30,9 @@ test('actionIsFocusable passes', function(assert) {
 
     let focusableByTabindex = find('#focusable-by-tabindex')[0];
     assert.ok(actionIsFocusable(focusableByTabindex));
+
+    let formWithAction = find('form')[0];
+    assert.ok(actionIsFocusable(formWithAction));
   });
 });
 
