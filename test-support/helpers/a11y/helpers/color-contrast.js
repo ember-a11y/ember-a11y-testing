@@ -74,7 +74,7 @@ function resetTestingContainer() {
  * their contrast ratio to ensure accessibility
  * @param {Object} app - Not used
  * @param {String} level - The level of conformance to check, defaults to 'AA'
- * @return {Boolean|Error} 
+ * @return {Boolean|Error}
  */
 export function checkAllTextContrast(app, level) {
   // Set the conformance level we plan to check
@@ -131,7 +131,7 @@ export function checkAllTextContrast(app, level) {
 
     // Check if the background is a background-image
     if (window.getComputedStyle(background).backgroundImage !== 'none') {
-      console.warn(`${node} has a background-image for its background, be careful that the contrast ratio is still accessible`);
+      console.warn(node, `has a background-image for its background, be careful that the contrast ratio is still accessible`);
       continue;
     }
 
@@ -155,7 +155,7 @@ export function checkAllTextContrast(app, level) {
  * @param {Object} app - Not used
  * @param {HTMLElement} text
  * @param {HTMLElement} background (optional)
- * @return {Boolean|Error} 
+ * @return {Boolean|Error}
  */
 export function checkTextContrast(app, text, background=text, level='AA') {
   let testingContainer = document.getElementById('ember-testing');
@@ -177,7 +177,7 @@ export function checkTextContrast(app, text, background=text, level='AA') {
   testingContainer.style.zoom = null;
 
   if (!result) {
-    throw new A11yError(`The contrast between ${text} and ${background} is lower than expected for ${level} standards`);
+    throw new A11yError([text, background], `The contrast between the foreground and background is lower than expected for ${level} standards`);
   }
 
   return result;

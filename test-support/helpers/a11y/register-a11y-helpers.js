@@ -43,7 +43,15 @@ function a11yTest(app, config) {
   TEST_FUNCTIONS.forEach(function(testFn) {
     let testVal = config[testFn.name];
     if (testVal) {
-      testFn(null, testVal);
+      try {
+        testFn(null, testVal);
+      } catch(error) {
+        if (error.element) {
+          console.error(error.element, error.message);
+        }
+
+        throw error;
+      }
     }
   });
 

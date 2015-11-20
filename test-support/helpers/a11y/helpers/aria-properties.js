@@ -18,7 +18,7 @@ import { ARIA_MAP, GLOBAL_ARIA } from '../utils/wai-aria-map';
  */
 function checkAriaProp(el, prop) {
   if (el.getAttribute(`aria-${prop}`) === null) {
-    throw new A11yError(`${el} is required to have the attribute 'aria-${prop}' when using role='${el.getAttribute('role')}'.`);
+    throw new A11yError(el, `The element is required to have the attribute 'aria-${prop}' when using role='${el.getAttribute('role')}'.`);
   }
 
   return true;
@@ -34,7 +34,7 @@ function getAriaRole(el) {
   let role = el.getAttribute('role');
 
   if (role && !ARIA_MAP[role]) {
-    throw new A11yError(`The role '${role}' is not a valid role. You should remove it.`);
+    throw new A11yError(el, `The role '${role}' is not a valid role. You should remove it.`);
   }
 
   return role;
@@ -100,7 +100,7 @@ export function verifySupportedAria(app, el) {
 
     ariaAttributes.forEach((item) => {
       if (supportedAttributes.indexOf(item) === -1) {
-        throw new A11yError(`The attribute 'aria-${item}' is not a supported ARIA property/state for '${role}'; you should remove it from ${el}`);
+        throw new A11yError(el, `The attribute 'aria-${item}' is not a supported ARIA property/state for '${role}'; you should remove it`);
       }
     });
   }
