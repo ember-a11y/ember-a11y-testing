@@ -30,6 +30,15 @@ test('hasLabel passes with actual label', function(assert) {
   });
 });
 
+test('hasLabel passes when input has label ancestor', function(assert) {
+  visit('/form-labels');
+
+  andThen(function() {
+    let input = find('#input-with-label-ancestor input')[0];
+    assert.ok(hasLabel(input));
+  });
+});
+
 test('hasLabel fails due to no ID', function(assert) {
   visit('/form-labels');
 
@@ -131,7 +140,7 @@ test('hasLabel fails with one bad label in when aria-describedby has multiple ID
 
 /* hasLabel without having actual labels */
 
-test('hasLabel passs on button with content', function(assert) {
+test('hasLabel passes on button with content', function(assert) {
   visit('/form-labels');
 
   andThen(function() {
