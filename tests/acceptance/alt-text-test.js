@@ -28,6 +28,15 @@ test('hasAltText passes', function(assert) {
   });
 });
 
+test('hasAltText passes for empty alt attribute', function(assert) {
+  visit('/alt-text');
+
+  andThen(function() {
+    let altText = find('#empty-alt-text')[0];
+    assert.ok(hasAltText(altText));
+  });
+});
+
 test('hasAltText passes with aria-hidden', function(assert) {
   visit('/alt-text');
 
