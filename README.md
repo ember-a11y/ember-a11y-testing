@@ -8,6 +8,14 @@ framework. The goal is to help pick up on completely avoidable accessibility
 issues (such as alt text for images, labels in forms, and color contrast) during
 your testing pipeline.
 
+## Installation
+
+Within your Ember app, use the [Ember CLI](http://ember-cli.com/) to install this test suite as an add-on:
+
+```bash
+ember install ember-a11y-testing
+```
+
 ## Usage
 
 There are two ways to use this add-on:
@@ -21,7 +29,7 @@ modules on your page meet a specific requirement.
 
 To run an entire suite of a11y tests, simply call the `a11yTest` method from
 inside one of your assertions. If all tests pass, it will return `true` (making
-it easy to assert against); otherwise, an error gets thrown (and occassionally,
+it easy to assert against); otherwise, an error gets thrown (and occasionally,
 a `console.warn`).
 
 **Example:**
