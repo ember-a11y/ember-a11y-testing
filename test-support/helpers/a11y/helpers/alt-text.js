@@ -37,6 +37,7 @@ export function hasAltText(app, el) {
  * Checks all <img> elements on the page to make sure they have alt text
  * @return {Boolean|Error}
  */
+// TODO: Prior to releasing 1.0, remove this method in favor of using allNonTextElementsHaveAltText as default
 export function allImagesHaveAltText() {
   let images = document.querySelectorAll('img');
 
@@ -46,7 +47,6 @@ export function allImagesHaveAltText() {
 
   return true;
 }
-
 
 /**
  * Checks all non-text elements (including images) on the page to make sure they have alt text

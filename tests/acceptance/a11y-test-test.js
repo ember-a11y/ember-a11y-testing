@@ -53,7 +53,7 @@ test('a11yTest does not run tests with falsy config values', function(assert) {
   andThen(function() {
     let imageWithAltText = find('#alt-text')[0];
     imageWithAltText.removeAttribute('alt');
-    assert.ok(a11yTest({ allImagesHaveAltText: false }));
+    assert.ok(a11yTest({ allImagesHaveAltText: false, allNonTextElementsHaveAltText: false }));
     assert.throws(function() {
       a11yTest();
     }, /A11yError/);

@@ -25,6 +25,7 @@ const TEST_FUNCTIONS = [
 ];
 
 const DEFAULT_CONFIG = {
+  allImagesHaveAltText: false,
   allNonTextElementsHaveAltText: true,
   checkForNoRead: true,
   checkAriaRoles: true,
