@@ -28,7 +28,6 @@ function checkIsVisible(el) {
  */
 export function isAllowedFocus(app, el) {
   let isVisible = checkIsVisible(el);
-  // console.log('isvis'+ isVisible);
   if (isVisible) {
     return true;
   }
