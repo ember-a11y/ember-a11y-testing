@@ -117,6 +117,12 @@ ensures that they can receive focus.
 Note: _this check is DOM-based, and so only elements that use the Ember
 `{{action}}` helper will be checked_.
 
+### `allAreAllowedFocus`
+Finds all elements on the page that have a `tabindex` property assigned to them,
+and checks that they are visible. Although most browsers will intelligently turn off
+manually applied focusability for hidden elements under certain conditions
+(eg. `display:none`), this test is more liberal in order to be thorough.
+
 ## Todo List
 
 Below is the current list of proposed tests that will be built. Please feel free
@@ -127,6 +133,4 @@ this list.
 - [ ] Verify relationship of ARIA roles (radiogroup - radio, list - listitem,
 etc.)
 - [ ] Verify element is allowed to have ARIA attribute/role
-- [ ] Verify focusability and visibility (e.g., non-visible elements shouldn't
-be focusable)
 - [ ] Alternative text for other elements (e.g., `object`, `embed`)
