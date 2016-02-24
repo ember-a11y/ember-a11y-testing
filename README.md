@@ -73,8 +73,8 @@ Below are the tests and options that run in the `a11yTest` suite. By default,
 all tests run with a config value of `true`; they can be disabled by passing in
 `false` in their configuration.
 
-### `allImagesHaveAltText`
-Checks all images on the page to ensure they have `alt` text or that they have
+### `allNonTextElementsHaveAltText`
+Checks all non-text elements (img, audio, video, embed, object and canvas) on the page to ensure they have `alt` text or that they have
 `aria-hidden="true"`/`role="presentation"`.
 
 ### `checkForNoRead`
@@ -141,4 +141,3 @@ this list.
 - [ ] Verify relationship of ARIA roles (radiogroup - radio, list - listitem,
 etc.)
 - [ ] Verify element is allowed to have ARIA attribute/role
-- [ ] Alternative text for other elements (e.g., `object`, `embed`)

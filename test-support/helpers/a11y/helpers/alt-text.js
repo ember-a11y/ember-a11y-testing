@@ -5,6 +5,16 @@
 
 import A11yError from '../a11y-error';
 
+// Selectors for all non-text elements that should have text alternatives in the form of an alt attribute
+const ALT_SELECTORS = [
+  'audio',
+  'embed',
+  'object',
+  'canvas',
+  'img',
+  'video'
+];
+
 /**
  * Checks a specific element to make sure it has alt text
  * @param {Object} app - Not used
@@ -27,11 +37,26 @@ export function hasAltText(app, el) {
  * Checks all <img> elements on the page to make sure they have alt text
  * @return {Boolean|Error}
  */
+// TODO: Prior to releasing 1.0, remove this method in favor of using allNonTextElementsHaveAltText as default
 export function allImagesHaveAltText() {
   let images = document.querySelectorAll('img');
 
   for (let i = 0, l = images.length; i < l; i++) {
     hasAltText(null, images[i]);
+  }
+
+  return true;
+}
+
+/**
+ * Checks all non-text elements (including images) on the page to make sure they have alt text
+ * @return {Boolean|Error}
+ */
+export function allNonTextElementsHaveAltText() {
+  let elements = document.querySelectorAll(ALT_SELECTORS.join(','));
+
+  for (let i = 0, l = elements.length; i < l; i++) {
+    hasAltText(null, elements[i]);
   }
 
   return true;

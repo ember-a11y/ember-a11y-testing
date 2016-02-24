@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-import { hasAltText, allImagesHaveAltText } from './helpers/alt-text';
+import { hasAltText, allImagesHaveAltText, allNonTextElementsHaveAltText } from './helpers/alt-text';
 import { isAllowedFocus, allAreAllowedFocus } from './helpers/focusable-visibility';
 import { checkAriaHidden, checkForNoRead } from './helpers/no-read';
 import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/form-labels';
@@ -12,6 +12,7 @@ import { actionIsFocusable, allActionsFocusable } from './helpers/actions';
 
 const TEST_FUNCTIONS = [
   allImagesHaveAltText,
+  allNonTextElementsHaveAltText,
   checkForNoRead,
   checkAriaRoles,
   allFormsHaveLabels,
@@ -24,7 +25,8 @@ const TEST_FUNCTIONS = [
 ];
 
 const DEFAULT_CONFIG = {
-  allImagesHaveAltText: true,
+  allImagesHaveAltText: false,
+  allNonTextElementsHaveAltText: true,
   checkForNoRead: true,
   checkAriaRoles: true,
   allFormsHaveLabels: true,
@@ -69,6 +71,7 @@ export default function registerA11yHelpers() {
   // alt-text
   Ember.Test.registerHelper('hasAltText', hasAltText);
   Ember.Test.registerHelper('allImagesHaveAltText', allImagesHaveAltText);
+  Ember.Test.registerHelper('allNonTextElementsHaveAltText', allNonTextElementsHaveAltText);
 
   // no-read
   Ember.Test.registerHelper('checkAriaHidden', checkAriaHidden);
