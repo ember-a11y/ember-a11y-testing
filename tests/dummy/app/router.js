@@ -15,6 +15,7 @@ Router.map(function() {
   this.route('links');
   this.route('color-contrast');
   this.route('actions');
+  this.route('focusable-visibility');
 });
 
 export default Router;

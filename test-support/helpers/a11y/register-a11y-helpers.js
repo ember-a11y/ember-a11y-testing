@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 import { hasAltText, allImagesHaveAltText } from './helpers/alt-text';
+import { isAllowedFocus, allAreAllowedFocus } from './helpers/focusable-visibility';
 import { checkAriaHidden, checkForNoRead } from './helpers/no-read';
 import { hasLabel, formHasAllNeededLabels, allFormsHaveLabels } from './helpers/form-labels';
 import { verifyRequiredAria, verifySupportedAria, checkAriaRoles } from './helpers/aria-properties';
@@ -17,7 +18,9 @@ const TEST_FUNCTIONS = [
   checkIds,
   checkLinks,
   checkAllTextContrast,
-  allActionsFocusable
+  allActionsFocusable,
+  isAllowedFocus,
+  allAreAllowedFocus
 ];
 
 const DEFAULT_CONFIG = {
@@ -28,7 +31,8 @@ const DEFAULT_CONFIG = {
   checkIds: true,
   checkLinks: true,
   checkAllTextContrast: false,
-  allActionsFocusable: true
+  allActionsFocusable: true,
+  allAreAllowedFocus: true
 };
 
 /**
@@ -96,4 +100,8 @@ export default function registerA11yHelpers() {
   // actions
   Ember.Test.registerHelper('actionIsFocusable', actionIsFocusable);
   Ember.Test.registerHelper('allActionsFocusable', allActionsFocusable);
+
+  // focusable visibility
+  Ember.Test.registerHelper('isAllowedFocus', isAllowedFocus);
+  Ember.Test.registerHelper('allAreAllowedFocus', allAreAllowedFocus);
 }
