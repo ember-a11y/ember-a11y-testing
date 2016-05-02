@@ -48,28 +48,32 @@ export function initialize(application) {
      * @return {Void}
      */
     audit() {
-      axe.a11yCheck(this.$(), this.axeOptions, (results) => {
-        let violations = results.violations;
+      if (this.get('tagName') !== '') {
+        axe.a11yCheck(this.$(), this.axeOptions, (results) => {
+          let violations = results.violations;
 
-        for (let i = 0, l = violations.length; i < l; i++) {
-          let violation = violations[i];
+          for (let i = 0, l = violations.length; i < l; i++) {
+            let violation = violations[i];
 
-          Ember.Logger.error(`Violation #${i+1}`, violation);
+            Ember.Logger.error(`Violation #${i+1}`, violation);
 
-          let nodes = violation.nodes;
+            let nodes = violation.nodes;
 
-          for (let j = 0, k = nodes.length; j < k; j++) {
-            let node = nodes[i];
+            for (let j = 0, k = nodes.length; j < k; j++) {
+              let node = nodes[i];
 
-            this.$(node.target.join(','))[0].classList.add('axe-violation');
+              if (node) {
+                Ember.$(node.target.join(','))[0].classList.add('axe-violation');
+              }
+            }
           }
-        }
 
-        if (this.axeCallback) {
-          Ember.assert('axeCallback should be a function.', typeof this.axeCallback === 'function');
-          this.axeCallback(results);
-        }
-      });
+          if (this.axeCallback) {
+            Ember.assert('axeCallback should be a function.', typeof this.axeCallback === 'function');
+            this.axeCallback(results);
+          }
+        });
+      }
     }
   });
 
