@@ -46,7 +46,7 @@ export const ARIA_MAP = {
   },
   combobox: {
     required: [ 'expanded' ],
-    supported: [ 'autocomplet', 'require', 'activedescendant' ]
+    supported: [ 'autocomplete', 'require', 'activedescendant' ]
   },
   complementary: {
     supported: [ 'expanded' ]
