@@ -4,6 +4,7 @@ node_js:
   - "0.12"
   - "4"
   - "5"
+  - "6"
 
 sudo: false
 
@@ -14,8 +15,10 @@ cache:
 env:
   - EMBER_TRY_SCENARIO=default
   - EMBER_TRY_SCENARIO=ember-release
+  - EMBER_TRY_SCENARIO=ember-lts
   - EMBER_TRY_SCENARIO=ember-beta
   - EMBER_TRY_SCENARIO=ember-canary
+  - EMBER_TRY_SCENARIO=ember-1.13.0
 
 matrix:
   fast_finish: true

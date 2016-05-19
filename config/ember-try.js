@@ -50,6 +50,17 @@ module.exports = {
           'ember': 'canary'
         }
       }
+    },
+    {
+      name: 'ember-lts',
+      bower: {
+        dependencies: {
+          'ember': 'components/ember#lts'
+        },
+        resolutions: {
+          'ember': 'lts'
+        }
+      }
     }
   ]
 };
