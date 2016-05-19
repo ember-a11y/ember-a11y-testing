@@ -14,7 +14,7 @@ var ALLOWED_CONTENT_FOR = [
 ];
 
 module.exports = {
-  name: 'ember-axe',
+  name: 'ember-a11y-testing',
 
   /**
    * Includes axe-core in non-production builds. It includes the un-minified

@@ -1,9 +1,9 @@
-# ember-axe
+# ember-a11y-testing
 
-[![Build Status](https://travis-ci.org/trentmwillis/ember-axe.svg?branch=master)](https://travis-ci.org/trentmwillis/ember-axe)
-[![NPM Version](https://badge.fury.io/js/ember-axe.svg)](http://badge.fury.io/js/ember-axe)
+[![Build Status](https://travis-ci.org/trentmwillis/ember-a11y-testing.svg?branch=master)](https://travis-ci.org/trentmwillis/ember-a11y-testing)
+[![NPM Version](https://badge.fury.io/js/ember-a11y-testing.svg)](http://badge.fury.io/js/ember-a11y-testing)
 
-Ember Axe is a wrapper around [Deque Labs'](https://github.com/dequelabs)
+Ember A11y Testing is a wrapper around [Deque Labs'](https://github.com/dequelabs)
 [axe-core](https://github.com/dequelabs/axe-core) accessibility testing engine.
 It automatically integrates into your testing environment by running during the
 `afterRender` step in the [run loop](http://guides.emberjs.com/v1.10.0/understanding-ember/run-loop/)
@@ -27,17 +27,17 @@ accessibility issues, such as identifying actions on inaccessible elements.
 Usage inside tests right now is super simple, just install the addon via:
 
 ```bash
-ember install ember-axe
+ember install ember-a11y-testing
 ```
 
 That's it! It will automatically begin running during _acceptance_ tests. It
 also injects the `axe` object globally during development so you can run tests
 while developing your application as well.
 
-_Note:_ any tests run with Ember Axe will adjust the testing container to occupy
-the entire screen. This is to simulate the actual application environment, as
-browsers adjust styles at small sizes for accessibility reasons. It will reset
-itself at the conclusion of testing though.
+_Note:_ any tests run with Ember A11y Testing will adjust the testing container
+to occupy the entire screen. This is to simulate the actual application
+environment, as browsers adjust styles at small sizes for accessibility reasons.
+It will reset itself at the conclusion of testing though.
 
 ### Disable/Enable Tests
 
@@ -82,15 +82,15 @@ available in versions of Ember with the Glimmer rendering engine).
 That said, setup for development is as simple as it is for testing, simply
 install the addon.
 
-By default, Ember Axe will audit a component for accessibility each time it is
-rendered. This ensures that the component is still accessible even after state
-changes, and since the checks are scoped to a component's element, it means that
-any state change propagated downwards is also caught.
+By default, Ember A11y Testing will audit a component for accessibility each
+time it is rendered. This ensures that the component is still accessible even
+after state changes, and since the checks are scoped to a component's element,
+it means that any state change propagated downwards is also caught.
 
 ### Component Hooks
 
-Since development is not a uniform experience, Ember Axe provides several hooks
-to help stay out of the way.
+Since development is not a uniform experience, Ember A11y Testing provides
+several hooks to help stay out of the way.
 
 _Note:_ these are all `undefined` by default.
 

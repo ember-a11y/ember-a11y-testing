@@ -1,6 +1,6 @@
 {
-  "name": "ember-axe",
-  "version": "0.0.2",
+  "name": "ember-a11y-testing",
+  "version": "0.0.5",
   "description": "The future of accessibility testing in Ember",
   "directories": {
     "doc": "doc",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trentmwillis/ember-axe"
+    "url": "https://github.com/trentmwillis/ember-a11y-testing"
   },
   "engines": {
     "node": ">= 0.10.0"
