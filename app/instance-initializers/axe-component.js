@@ -60,7 +60,7 @@ export function initialize(application) {
             let nodes = violation.nodes;
 
             for (let j = 0, k = nodes.length; j < k; j++) {
-              let node = nodes[i];
+              let node = nodes[j];
 
               if (node) {
                 Ember.$(node.target.join(','))[0].classList.add('axe-violation');
