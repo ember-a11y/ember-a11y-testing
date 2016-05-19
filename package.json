@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trentmwillis/ember-a11y-testing"
+    "url": "https://github.com/ember-a11y/ember-a11y-testing"
   },
   "engines": {
     "node": ">= 0.10.0"
