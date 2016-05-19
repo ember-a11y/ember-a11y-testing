@@ -1,7 +1,8 @@
 # ember-a11y-testing
 
-[![Build Status](https://travis-ci.org/ember-a11y/ember-a11y-testing.svg?branch=master)](https://travis-ci.org/ember-a11y/ember-a11y-testing)
+[![Build Status](https://travis-ci.org/ember-a11y/ember-a11y-testing.svg)](https://travis-ci.org/ember-a11y/ember-a11y-testing)
 [![NPM Version](https://badge.fury.io/js/ember-a11y-testing.svg)](http://badge.fury.io/js/ember-a11y-testing)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-a11y-testing.svg)](https://emberobserver.com/addons/ember-a11y-testing)
 
 Ember A11y Testing is a wrapper around [Deque Labs'](https://github.com/dequelabs)
 [axe-core](https://github.com/dequelabs/axe-core) accessibility testing engine.
