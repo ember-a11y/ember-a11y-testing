@@ -15,23 +15,16 @@ workflow by running during a component's `didRender` phase in non-production
 environments. This gives you instant feedback on if your component's are
 accessible in any given state.
 
-## Future Plans
-
-Now that your components and acceptance tests can self-audit, the next step
-going forward is to give helpful and meaningful feedback to developers. This
-means easily highlighting areas with violations and giving suggestions on how to
-fix and improve them. Additionally, work will be done to tackle Ember-specific
-accessibility issues, such as identifying actions on inaccessible elements.
-
-## Usage In Testing
-
-Usage inside tests right now is super simple, just install the addon via:
+## Installation
 
 ```bash
 ember install ember-a11y-testing
 ```
 
-That's it! It will automatically begin running during _acceptance_ tests. It
+## Usage
+
+### Testing Usage
+By default, Ember A11y Testing will automatically begin running during _acceptance_ tests. It
 also injects the `axe` object globally during development so you can run tests
 while developing your application as well.
 
@@ -40,7 +33,7 @@ to occupy the entire screen. This is to simulate the actual application
 environment, as browsers adjust styles at small sizes for accessibility reasons.
 It will reset itself at the conclusion of testing though.
 
-### Disable/Enable Tests
+#### Disabling/Enabling Axe During Tests
 
 By default, the axe-core tests only run during acceptance tests. In order to
 enable them for other tests, simply run the following at the beginning of your
@@ -56,7 +49,7 @@ On the flip side, if you want to turn tests off, simply use:
 axe.ember.turnAxeOff();
 ```
 
-### Options
+#### Setting Axe Test Options
 
 You can pass specific options to be used during `a11yCheck` by setting them on a
 global `testOptions` property:
@@ -74,13 +67,14 @@ You can see the available options in the [axe-core repo](https://github.com/dequ
 
 _Note:_ the options will stay set, until set to something different.
 
-## Usage In Development
+
+### Development Usage
 
 Usage in development is restricted to applications using Ember 1.13 and up as it
 relies on the `didRender` hook of a component's life-cycle (a feature only
 available in versions of Ember with the Glimmer rendering engine).
 
-That said, setup for development is as simple as it is for testing, simply
+That said, setup for development is as simple as it is for testing: simply
 install the addon.
 
 By default, Ember A11y Testing will audit a component for accessibility each
@@ -88,14 +82,14 @@ time it is rendered. This ensures that the component is still accessible even
 after state changes, and since the checks are scoped to a component's element,
 it means that any state change propagated downwards is also caught.
 
-### Component Hooks
+#### Component Hooks
 
 Since development is not a uniform experience, Ember A11y Testing provides
 several hooks to help stay out of the way.
 
 _Note:_ these are all `undefined` by default.
 
-#### Defining a custom callback
+##### Defining a custom callback
 
 If you feel the logging of violations is poor or you just want to see the entire
 results of a component's audit, you can define a custom callback. The callback
@@ -108,7 +102,7 @@ axeCallback(results) {
 }
 ```
 
-#### Setting options for the audit
+##### Setting options for the audit
 
 As with testing, if you need to set custom auditing options for a component, you
 can do so easily. Simply set a value for the `axeOptions` property value:
@@ -117,7 +111,7 @@ can do so easily. Simply set a value for the `axeOptions` property value:
 axeOptions: { /* a11yCheck options */ }
 ```
 
-#### Turning the audit off
+##### Turning the audit off
 
 Lastly, if you really find the audits to be cramping development, you can turn
 them off via a simple boolean switch:
@@ -125,3 +119,24 @@ them off via a simple boolean switch:
 ```javascript
 turnAuditOff: true
 ```
+
+#### Environment Options
+Each of the fine-grained component hooks above can instead be defined for ALL components inside of your application's `config/environment.js` file. Simply supply them in a `componentOptions` hash on the `ember-a11y-testing` property of `ENV`.
+
+```javascript
+ENV['ember-a11y-testing'] = {
+    componentOptions: {
+      turnAuditOff: true
+      ...
+    }
+  }
+};
+```
+
+## Future Plans
+
+Now that your components and acceptance tests can self-audit, the next step
+going forward is to give helpful and meaningful feedback to developers. This
+means easily highlighting areas with violations and giving suggestions on how to
+fix and improve them. Additionally, work will be done to tackle Ember-specific
+accessibility issues, such as identifying actions on inaccessible elements.

@@ -1,3 +1,5 @@
+import ENV from '../config/environment';
+
 /**
  * Variable to ensure that the initializer is only ran once. Though in this
  * particular case, running more than once shouldn't cause side-effects.
@@ -8,27 +10,32 @@ let hasRan = false;
 export function initialize(application) {
   if (hasRan) { return; }
 
+  const appConfig = ENV['ember-a11y-testing'] || {};
+  const { componentOptions: { axeOptions, turnAuditOff, axeCallback } = {} } = appConfig;
+
   Ember.Component.reopen({
     /**
      * An optional callback to process the results from the a11yCheck.
      * @public
      * @type {Function}
      */
-    axeCallback: undefined,
+    axeCallback,
 
     /**
      * An optional options object to be used in a11yCheck.
      * @public
      * @type {Object}
      */
-    axeOptions: undefined,
+    axeOptions,
 
     /**
      * Turns off the accessibility audit during rendering.
+     * Defaults to false if not set in the application's configuration.
+     *
      * @public
      * @type {Boolean}
      */
-    turnAuditOff: false,
+    turnAuditOff: typeof turnAuditOff === 'boolean' ? turnAuditOff : false,
 
     /**
      * Runs an accessibility audit on any render of the component.
