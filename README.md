@@ -70,7 +70,7 @@ _Note:_ the options will stay set, until set to something different.
 
 ### Development Usage
 
-Usage in development is restricted to applications using Ember 1.13 and up as it
+Usage in development is restricted to applications using Ember 1.13, and up as it
 relies on the `didRender` hook of a component's life-cycle (a feature only
 available in versions of Ember with the Glimmer rendering engine).
 
@@ -121,13 +121,13 @@ turnAuditOff: true
 ```
 
 #### Environment Options
-Each of the fine-grained component hooks above can instead be defined for ALL components inside of your application's `config/environment.js` file. Simply supply them in a `componentOptions` hash on the `ember-a11y-testing` property of `ENV`.
+With the exception of `turnAuditOff`, each of the fine-grained component hooks above can instead be defined for ALL components inside of your application's `config/environment.js` file. Simply supply them in a `componentOptions` hash on the `ember-a11y-testing` property of `ENV`.
 
 ```javascript
 ENV['ember-a11y-testing'] = {
     componentOptions: {
-      turnAuditOff: true
-      ...
+      axeCallback: defaultAxeCallback,
+      axeOptions: defaultAxeOptions
     }
   }
 };

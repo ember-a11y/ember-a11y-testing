@@ -10,12 +10,14 @@ let hasRan = false;
 export function initialize(application) {
   if (hasRan) { return; }
 
-  const appConfig = ENV['ember-a11y-testing'] || {};
-  const { componentOptions: { axeOptions, turnAuditOff, axeCallback } = {} } = appConfig;
+  const addonConfig = ENV['ember-a11y-testing'] || {};
+  const { componentOptions: { axeOptions, axeCallback } = {} } = addonConfig;
 
   Ember.Component.reopen({
     /**
      * An optional callback to process the results from the a11yCheck.
+     * Defaults to `undefined` if not set in the application's configuration.
+     *
      * @public
      * @type {Function}
      */
@@ -23,6 +25,7 @@ export function initialize(application) {
 
     /**
      * An optional options object to be used in a11yCheck.
+     * Defaults to `undefined` if not set in the application's configuration.
      * @public
      * @type {Object}
      */
@@ -30,12 +33,11 @@ export function initialize(application) {
 
     /**
      * Turns off the accessibility audit during rendering.
-     * Defaults to false if not set in the application's configuration.
      *
      * @public
      * @type {Boolean}
      */
-    turnAuditOff: typeof turnAuditOff === 'boolean' ? turnAuditOff : false,
+    turnAuditOff: false,
 
     /**
      * Runs an accessibility audit on any render of the component.
