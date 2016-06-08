@@ -19,10 +19,11 @@
 
         for (var i = 0, l = violations.length; i < l; i++) {
           var violation = violations[i];
-          var violationNodeString = axe.ember.nodesToString(violation.nodes);
+          var violationNodes = axe.ember.generateNodesArray(violation.nodes);
 
           Ember.Logger.warn(violation.impact.toUpperCase() + ': ' + violation.help);
-          Ember.Logger.info('Offending markup (' + violation.nodes.length + '): ' + violationNodeString);
+          Ember.Logger.info('Offending markup (' + violation.nodes.length + ')');
+          Ember.Logger.debug(violationNodes);
           Ember.Logger.info('Additional info: ' + violation.helpUrl);
           Ember.Logger.info('-------------------------------------');
         }
@@ -32,14 +33,14 @@
 
     /**
      * Takes the violations' nodes param and converts it to
-     * a string that can be displayed with the console error.
+     * an array that constains only offending markup HTML.
      * @param {Array} nodes
-     * @return {String}
+     * @return {Array}
      */
-     nodesToString: function(nodes) {
+     generateNodesArray: function(nodes) {
        return nodes.map(function(node) {
          return node.html;
-       }).join(', ');
+       });
      },
 
     /**
