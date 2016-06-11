@@ -14,12 +14,34 @@
     a11yCheckCallback: function(results) {
       var violations = results.violations;
 
-      for (var i = 0, l = violations.length; i < l; i++) {
-        Ember.Logger.error('Violation #' + (i + 1), violations[i]);
-      }
+      if (violations.length) {
+        Ember.Logger.error('ACCESSIBILITY VIOLATIONS: ' + violations.length);
 
-      Ember.assert('The page should have no accessibility violations.', !violations.length);
+        for (var i = 0, l = violations.length; i < l; i++) {
+          var violation = violations[i];
+          var violationNodes = axe.ember.generateNodesArray(violation.nodes);
+
+          Ember.Logger.warn(violation.impact.toUpperCase() + ': ' + violation.help);
+          Ember.Logger.info('Offending markup (' + violation.nodes.length + ')');
+          Ember.Logger.debug(violationNodes);
+          Ember.Logger.info('Additional info: ' + violation.helpUrl);
+          Ember.Logger.info('-------------------------------------');
+        }
+      }
+      Ember.assert('The page should have no accessibility violations. Please check the developer console for more details.', !violations.length);
     },
+
+    /**
+     * Takes the violations' nodes param and converts it to
+     * an array that constains only offending markup HTML.
+     * @param {Array} nodes
+     * @return {Array}
+     */
+     generateNodesArray: function(nodes) {
+       return nodes.map(function(node) {
+         return node.html;
+       });
+     },
 
     /**
      * Used as a callback for afterRender. Simply runs axe.a11yCheck and passes

@@ -37,9 +37,9 @@ test('a11yCheckCallback should log any violations and throw an error', function(
 
   assert.throws(() => {
     axe.ember.a11yCheckCallback({ violations: [ {}, {} ] });
-  }, 'The page should have no accessibility violations.');
+  }, 'The page should have no accessibility violations. Please check the developer console for more details.');
 
-  assert.ok(loggerStub.calledTwice);
+  assert.equal(loggerStub.callCount, 1, 'An error is thrown when there are violations');
 });
 
 /* axe.ember.afterRender */
