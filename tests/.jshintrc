@@ -19,6 +19,7 @@
     "wait",
     "DS",
     "andThen",
+    "axe",
     "currentURL",
     "currentPath",
     "currentRouteName"
