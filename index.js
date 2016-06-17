@@ -16,6 +16,7 @@ var ALLOWED_CONTENT_FOR = [
 module.exports = {
   name: 'ember-a11y-testing',
 
+  isDevelopingAddon: () => true,
   /**
    * Includes axe-core in non-production builds. It includes the un-minified
    * version in case of a need to debug.
