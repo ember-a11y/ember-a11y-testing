@@ -4,7 +4,7 @@
 // For details on each option run `ember help release`
 module.exports = {
   // local: true,
-  // remote: 'some_remote',
+  remote: 'upstream'
   // annotation: "Release %@",
   // message: "Bumped version to %@",
   // manifest: [ 'package.json', 'bower.json', 'someconfig.json' ],
