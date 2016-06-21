@@ -93,7 +93,7 @@ test('turnAuditOff prevents audit from running on didRender', function(assert) {
 /* Ember.Component.audit */
 
 test('audit should log any violations found', function(assert) {
-  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
+  sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
     callback({
       violations: [{
         name: 'test',
@@ -110,12 +110,12 @@ test('audit should log any violations found', function(assert) {
   assert.ok(logSpy.calledOnce);
 });
 
-skip('audit should mark the DOM nodes of any violations', function(assert) {
+skip('audit should mark the DOM nodes of any violations', function(/* assert */) {
 
 });
 
 test('audit should do nothing if no violations found', function(assert) {
-  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
+  sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
     callback({
       violations: []
     });
@@ -133,7 +133,8 @@ test('audit should do nothing if no violations found', function(assert) {
 
 test('axeCallback receives the results of the audit', function(assert) {
   let results = { violations: [] };
-  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', (el, opts, callback) => {
+
+  sandbox.stub(axe, 'a11yCheck', (el, opts, callback) => {
     callback(results);
   });
 
@@ -150,7 +151,8 @@ test('axeCallback receives the results of the audit', function(assert) {
 
 test('axeCallback throws an error if it is not a function', function(assert) {
   let results = { violations: [] };
-  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck', (el, opts, callback) => {
+
+  sandbox.stub(axe, 'a11yCheck', (el, opts, callback) => {
     callback(results);
   });
 
