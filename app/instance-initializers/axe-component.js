@@ -58,7 +58,7 @@ export function initialize(application) {
      */
     audit() {
       if (this.get('tagName') !== '') {
-        axe.a11yCheck(this.$(), this.axeOptions, (results) => {
+        axe.a11yCheck(`#${this.elementId}`, this.axeOptions, (results) => {
           let violations = results.violations;
 
           for (let i = 0, l = violations.length; i < l; i++) {
