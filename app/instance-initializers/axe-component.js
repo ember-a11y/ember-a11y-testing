@@ -40,6 +40,17 @@ export function initialize(application) {
     turnAuditOff: false,
 
     /**
+     * An array of classNames to add to the component when a violation occurs.
+     * If unspecified, the `axe-violation` class is used to apply our default
+     * styling
+     *
+     * @public
+     * @type {Array}
+     */
+    axeViolationClassNames: ['axe-violation'],
+
+
+    /**
      * Runs an accessibility audit on any render of the component.
      * @private
      * @return {Void}
@@ -59,7 +70,8 @@ export function initialize(application) {
     audit() {
       if (this.get('tagName') !== '') {
         axe.a11yCheck(this.$(), this.axeOptions, (results) => {
-          let violations = results.violations;
+          const violations = results.violations;
+          const violationClassNames = this.get('axeViolationClassNames');
 
           for (let i = 0, l = violations.length; i < l; i++) {
             let violation = violations[i];
@@ -72,7 +84,7 @@ export function initialize(application) {
               let node = nodes[j];
 
               if (node) {
-                Ember.$(node.target.join(','))[0].classList.add('axe-violation');
+                Ember.$(node.target.join(','))[0].classList.add(...violationClassNames);
               }
             }
           }

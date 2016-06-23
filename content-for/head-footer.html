@@ -1,5 +1,19 @@
 <style>
   .axe-violation {
-    border: 2px solid red !important;
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 1.2em,   /* make transparent portion somewhat wider than total stripe width */
+      hsla(69, 84%, 83%, 1.00) 1.2em,
+      hsla(69, 84%, 83%, 1.00) 1.45em,
+      hsla(166, 44%, 65%, 1.00) 1.45em,
+      hsla(166, 44%, 65%, 1.00) 1.7em,
+      hsla(214, 96%, 45%, 1.00) 1.7em,
+      hsla(214, 96%, 45%, 1.00) 1.95em
+    ) !important;
+  }
+
+  .axe-violation:hover {
+    background-image: none !important;
   }
 </style>

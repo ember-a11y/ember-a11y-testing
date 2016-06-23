@@ -82,6 +82,18 @@ time it is rendered. This ensures that the component is still accessible even
 after state changes, and since the checks are scoped to a component's element,
 it means that any state change propagated downwards is also caught.
 
+#### Inspecting Violations
+When a violation is detected for a component's element, the element will have the `.axe-violation` class added to it. Visually, this will produce a striping pattern over the element (which will disappear on hover) designed to make it easily distinguishable from its expected appearance, even for users with low vision.
+
+Take this text input without a label, for example:
+
+![](docs/assets/violation-styling.png)
+
+At the same time, a violation error message will be logged to the console with even more detailed information as to what went wrong. The following message corresponds to the same text input element above:
+
+![](docs/assets/violation-console-output.png)
+
+
 #### Component Hooks
 
 Since development is not a uniform experience, Ember A11y Testing provides

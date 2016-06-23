@@ -6,6 +6,10 @@ import sinon from 'sinon';
 let application;
 let sandbox;
 
+const SELECTORS = {
+  passingInput: '[data-test-selector="passing-input"]'
+};
+
 module('Acceptance | auto-run', {
   beforeEach: function() {
     application = startApp();
@@ -39,7 +43,7 @@ test('should run the function whenever a render occurs', function(assert) {
     assert.equal(currentPath(), 'index');
   });
 
-  click('label');
+  click(`${SELECTORS.passingInput} label`);
 
   andThen(() => {
     assert.ok(callbackStub.calledTwice);
