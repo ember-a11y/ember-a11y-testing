@@ -52,7 +52,7 @@ module.exports = {
 
     if (isProductionBuild || isOldEmber) {
       tree = new Funnel(tree, {
-        exclude: [/instance-initializers\/axe-component.js/]
+        exclude: [/instance-initializers\/axe-component|violations-helper.js/]
       });
     }
 
