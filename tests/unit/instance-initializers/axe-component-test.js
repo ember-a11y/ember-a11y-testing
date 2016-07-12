@@ -39,29 +39,37 @@ test('initializer should not re-open Component more than once', function(assert)
   assert.ok(reopenSpy[assertMethod]);
 });
 
-test('audit is run on didRender when not in testing mode', function(assert) {
-  initialize(application);
 
-  let component = Component.create({});
+test('audit is run on didRender when not in testing mode', function(assert) {
+  // In order for the audit to run, Ember.testing has to be false
+  // when the component is initialized
+  Ember.testing = false;
+  console.log('Test for running audit: Calling initialize after setting Ember.testing to false');
+  initialize(application, { forceRun: true });
+  Ember.testing = true;
+
+  console.log('Test for running audit: Creating component');
+  let component = Ember.Component.create({});
+
+  console.log('Test for running audit: Creating spy');
   let auditSpy = sandbox.spy(component, 'audit');
 
-  // In order for the audit to run, we have to act like we're not in testing
-  Ember.testing = false;
+  console.log('Test for running audit: appending component');
+  Ember.run(() => component.appendTo('#ember-testing'));
 
-  run(() => component.appendTo('#ember-testing'));
+  console.log('Test for running audit: Testing spy after appending component');
   assert.ok(auditSpy.calledOnce);
 
   run(() => component.trigger('didRender'));
+
+  console.log('Test for running audit: Testing spy after manually triggering `didRender`');
   assert.ok(auditSpy.calledTwice);
 
   run(() => component.destroy());
-
-  // Turn testing mode back on to ensure validity of other tests
-  Ember.testing = true;
 });
 
 test('audit is not run on didRender when in testing mode', function(assert) {
-  initialize(application);
+  initialize(application, { forceRun: true });
 
   let component = Component.create({});
   let auditSpy = sandbox.spy(component, 'audit');
@@ -75,21 +83,15 @@ test('audit is not run on didRender when in testing mode', function(assert) {
 /* Component.turnAuditOff */
 
 test('turnAuditOff prevents audit from running on didRender', function(assert) {
-  initialize(application);
+  initialize(application, { forceRun: true });
 
   let component = Component.create({ turnAuditOff: true });
   let auditSpy = sandbox.spy(component, 'audit');
 
-  // In order for the audit to run, we have to act like we're not in testing
-  Ember.testing = false;
-
   run(() => component.appendTo('#ember-testing'));
   assert.ok(auditSpy.notCalled);
 
-  run(() => component.destroy());
-
-  // Turn testing mode back on to ensure validity of other tests
-  Ember.testing = true;
+  Ember.run(() => component.destroy());
 });
 
 /* Component.audit */
