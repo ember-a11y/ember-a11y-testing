@@ -40,12 +40,13 @@ export function initialize(application) {
     turnAuditOff: false,
 
     /**
-     * An array of classNames to add to the component when a violation occurs.
+     * An array of classNames (or a space-separated string) to add to the component when a violation occurs.
      * If unspecified, the `axe-violation` class is used to apply our default
      * styling
      *
      * @public
-     * @type {Array}
+     * @type {(Array|string)}
+     * @see(https://github.com/ember-a11y/ember-a11y-testing/blob/master/content-for/head-footer.html)
      */
     axeViolationClassNames: ['axe-violation'],
 
@@ -71,7 +72,12 @@ export function initialize(application) {
       if (this.get('tagName') !== '') {
         axe.a11yCheck(this.$(), this.axeOptions, (results) => {
           const violations = results.violations;
-          const violationClassNames = this.get('axeViolationClassNames');
+          let violationClassNames = this.get('axeViolationClassNames');
+
+          if (typeof violationClassNames === 'string') {
+            // support passing as a space-separated string
+            violationClassNames = violationClassNames.trim().split(/\s+/);
+          }
 
           for (let i = 0, l = violations.length; i < l; i++) {
             let violation = violations[i];
