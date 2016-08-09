@@ -4,9 +4,36 @@ import { initialize } from 'dummy/instance-initializers/axe-component';
 import { module, test } from 'qunit';
 
 const { Application, Component, Logger, run } = Ember;
+const ID_TEST_DOM_NODE = 'sign-up-button';
 
 let application;
 let sandbox;
+
+function setupDOMNode(id = ID_TEST_DOM_NODE) {
+  const node = document.createElement('div');
+
+  node.setAttribute('id', id);
+  document.body.appendChild(node);
+
+  return node;
+}
+
+function stubA11yCheck(sandbox, callbackPayload) {
+  sandbox.stub(axe, 'a11yCheck', function (el, options, callback) {
+    callback(callbackPayload);
+  });
+}
+
+function stubViolationOnDOMNode(sandbox, selector) {
+  stubA11yCheck(sandbox, {
+    violations: [{
+      name: 'test',
+      nodes: [
+        { target: [selector] }
+      ]
+    }]
+  });
+}
 
 module('Unit | Instance Initializer | axe-component', {
   beforeEach() {
@@ -95,18 +122,16 @@ test('turnAuditOff prevents audit from running on didRender', function(assert) {
 /* Component.audit */
 
 test('audit should log any violations found', function(assert) {
-  sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
-    callback({
-      violations: [{
-        name: 'test',
-        nodes: []
-      }]
-    });
+  stubA11yCheck(sandbox, {
+    violations: [{
+      name: 'test',
+      nodes: []
+    }]
   });
 
-  let logSpy = sandbox.spy(Logger, 'error');
+  const logSpy = sandbox.spy(Logger, 'error');
+  const component = Component.create({});
 
-  let component = Component.create({});
   component.audit();
 
   assert.ok(logSpy.calledOnce);
@@ -114,15 +139,11 @@ test('audit should log any violations found', function(assert) {
 
 
 test('audit should do nothing if no violations found', function(assert) {
-  sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
-    callback({
-      violations: []
-    });
-  });
+  stubA11yCheck(sandbox, { violations: [] });
 
-  let logSpy = sandbox.spy(Logger, 'error');
+  const logSpy = sandbox.spy(Logger, 'error');
+  const component = Component.create({});
 
-  let component = Component.create({});
   component.audit();
 
   assert.ok(logSpy.notCalled);
@@ -131,17 +152,13 @@ test('audit should do nothing if no violations found', function(assert) {
 /* Component.axeCallback */
 
 test('axeCallback receives the results of the audit', function(assert) {
-  let results = { violations: [] };
-
-  sandbox.stub(axe, 'a11yCheck', (el, opts, callback) => {
-    callback(results);
-  });
-
-  let axeCallbackSpy = sandbox.spy();
-  let component = Component.create({
+  const results = { violations: [] };
+  const axeCallbackSpy = sandbox.spy();
+  const component = Component.create({
     axeCallback: axeCallbackSpy
   });
 
+  stubA11yCheck(sandbox, results);
   component.audit();
 
   assert.ok(axeCallbackSpy.calledOnce);
@@ -149,13 +166,11 @@ test('axeCallback receives the results of the audit', function(assert) {
 });
 
 test('axeCallback throws an error if it is not a function', function(assert) {
-  let results = { violations: [] };
+  const results = { violations: [] };
 
-  sandbox.stub(axe, 'a11yCheck', (el, opts, callback) => {
-    callback(results);
-  });
+  stubA11yCheck(sandbox, results);
 
-  let component = Component.create({
+  const component = Component.create({
     axeCallback: 'axeCallbackSpy'
   });
 
@@ -165,69 +180,56 @@ test('axeCallback throws an error if it is not a function', function(assert) {
 /* Component.axeOptions */
 
 test('axeOptions are passed in as the second param to a11yCheck', function(assert) {
-  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck');
+  const a11yCheckStub = sandbox.stub(axe, 'a11yCheck');
 
-  let axeOptions = { test: 'test' };
-  let component = Component.create({ axeOptions });
+  const axeOptions = { test: 'test' };
+  const component = Component.create({ axeOptions });
   component.audit();
 
   assert.ok(a11yCheckStub.calledOnce);
   assert.ok(a11yCheckStub.calledWith(component.$(), axeOptions));
 });
 
-test('custom classNames are set on the violating elmenet if they are defined', function (assert) {
-  const dummyDOMNodeID = 'sign-up-button';
-  const dummyDOMNodeClass = 'icon-left-shark';
-  const dummyDOMNode = document.createElement('div');
+test('`axeViolationClassNames` are set on the violating element if they are defined', function (assert) {
+  stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
+  const dummyDOMNode = setupDOMNode();
+  const violationClassName = 'icon-left-shark';
   const component = Component.create({
-    axeViolationClassNames: [dummyDOMNodeClass]
-  });
-
-  dummyDOMNode.setAttribute('id', dummyDOMNodeID);
-  document.body.appendChild(dummyDOMNode);
-
-  // run(() => component.appendTo('#ember-testing'));
-  sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
-    callback({
-      violations: [{
-        name: 'test',
-        nodes: [
-          { target: [`#${dummyDOMNodeID}`] }
-        ]
-      }]
-    });
+    axeViolationClassNames: [violationClassName]
   });
 
   component.audit();
 
-  assert.ok(dummyDOMNode.classList.contains(dummyDOMNodeClass));
-  assert.notOk(dummyDOMNode.classList.contains('axe-violation'));
+  assert.ok(dummyDOMNode.classList.contains(violationClassName));
+  assert.notOk(
+    dummyDOMNode.classList.contains('axe-violation'),
+    'custom class names are used in lieu of `axe-violation`'
+  );
+
+  run(() => dummyDOMNode.remove());
+});
+
+test('`axeViolationClassNames` can be passed as a space-separated string (to aid template usage)', function (assert) {
+  const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
+  const component = Component.create({
+    axeViolationClassNames: 'spark 🐋   foo  '
+  });
+
+  stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
+
+  component.audit();
+  assert.deepEqual([].slice.call(dummyDOMNode.classList), ['spark', '🐋', 'foo']);
 
   run(() => dummyDOMNode.remove());
 });
 
 test(`the component defaults to setting the \`axe-violation\` class on
   the element if no custom class names are set`, function (assert) {
+  stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
-  const dummyDOMNodeID = 'sign-up-button';
-  const dummyDOMNode = document.createElement('div');
+  const dummyDOMNode = setupDOMNode();
   const component = Component.create();
-
-  dummyDOMNode.setAttribute('id', dummyDOMNodeID);
-  document.body.appendChild(dummyDOMNode);
-
-  // run(() => component.appendTo('#ember-testing'));
-  sandbox.stub(axe, 'a11yCheck', function(el, options, callback) {
-    callback({
-      violations: [{
-        name: 'test',
-        nodes: [
-          { target: [`#${dummyDOMNodeID}`] }
-        ]
-      }]
-    });
-  });
 
   component.audit();
 
