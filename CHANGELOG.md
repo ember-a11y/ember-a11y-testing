@@ -1,3 +1,7 @@
+# 0.1.5 / 09-08-2016
+
+- Fix parsing of `axeViolationClassNames`, which previously wasn't reading strings the right way (#36)[https://github.com/ember-a11y/ember-a11y-testing/pull/36]
+
 # 0.1.4 / 11-07-2016
 
 - Update to `axe-core` @ 2.0.5. For `ember-a11y-testing`, that fixes [this](https://github.com/ember-a11y/ember-a11y-testing/issues/29)
