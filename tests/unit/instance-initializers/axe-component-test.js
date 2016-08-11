@@ -6,11 +6,27 @@ import { module, test } from 'qunit';
 const { Application, Component, Logger, run } = Ember;
 const ID_TEST_DOM_NODE = 'sign-up-button';
 
+const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
+const VIOLATION_CLASS__LEVEL_2 = 'axe-violation--level-2';
+const VIOLATION_CLASS__LEVEL_3 = 'axe-violation--level-3';
+const VIOLATION_CLASS__REPLACED = 'axe-violation--replaced-element';
+
+/*
+ * Mapping of violation class names to their corresponding `visualNoiseLevel`
+ */
+const VIOLATION_CLASS_MAP = {
+  LEVEL_1: VIOLATION_CLASS__LEVEL_1,
+  LEVEL_2: VIOLATION_CLASS__LEVEL_2,
+  LEVEL_3: VIOLATION_CLASS__LEVEL_3,
+  REPLACED_ELEMENT: VIOLATION_CLASS__REPLACED
+};
+
+
 let application;
 let sandbox;
 
-function setupDOMNode(id = ID_TEST_DOM_NODE) {
-  const node = document.createElement('div');
+function setupDOMNode(id = ID_TEST_DOM_NODE, tagName = 'div') {
+  const node = document.createElement(tagName);
 
   node.setAttribute('id', id);
   document.body.appendChild(node);
@@ -190,50 +206,88 @@ test('axeOptions are passed in as the second param to a11yCheck', function(asser
   assert.ok(a11yCheckStub.calledWith(component.$(), axeOptions));
 });
 
-test('`axeViolationClassNames` are set on the violating element if they are defined', function (assert) {
+test('#violationClasses is computed from the current `visualNoiseLevel`', function(assert) {
+  initialize(application);
+
   stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
-  const dummyDOMNode = setupDOMNode();
-  const violationClassName = 'icon-left-shark';
-  const component = Component.create({
-    axeViolationClassNames: [violationClassName]
+  const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
+  const component = Component.create();
+
+  [1, 2, 3].forEach((currentNoiseLevel) => {
+    run(() => {
+      component.set('visualNoiseLevel', currentNoiseLevel);
+    });
+
+    component.audit();
+
+    [1, 2, 3].forEach((_noiseLevel) => {
+      const assertFunc = (_noiseLevel === currentNoiseLevel) ? 'ok' : 'notOk';
+      assert[assertFunc](dummyDOMNode.classList.contains(VIOLATION_CLASS_MAP[`LEVEL_${_noiseLevel}`], `assert ${assertFunc} for level ${_noiseLevel}`));
+    });
   });
-
-  component.audit();
-
-  assert.ok(dummyDOMNode.classList.contains(violationClassName));
-  assert.notOk(
-    dummyDOMNode.classList.contains('axe-violation'),
-    'custom class names are used in lieu of `axe-violation`'
-  );
 
   run(() => dummyDOMNode.remove());
 });
 
 test('`axeViolationClassNames` can be passed as a space-separated string (to aid template usage)', function (assert) {
+  stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
+
   const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
   const component = Component.create({
     axeViolationClassNames: 'spark 🐋   foo  '
   });
 
-  stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
-
   component.audit();
+
   assert.deepEqual([].slice.call(dummyDOMNode.classList), ['spark', '🐋', 'foo']);
 
   run(() => dummyDOMNode.remove());
 });
 
-test(`the component defaults to setting the \`axe-violation\` class on
-  the element if no custom class names are set`, function (assert) {
+test('#violationClasses will always give precedence to a `axeViolationClassNames`, if it is set', function (assert) {
   stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
-  const dummyDOMNode = setupDOMNode();
+  const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
+  const axeViolationClassNames = ['a11y-tomster', 'a11y-zoey'];
+
+  const component = Component.create({ axeViolationClassNames });
+
+  component.audit();
+
+  axeViolationClassNames.forEach(className => {
+   assert.ok(dummyDOMNode.classList.contains(className));
+  });
+
+  [1, 2, 3].forEach(noiseLevel => {
+   assert.notOk(dummyDOMNode.classList.contains(VIOLATION_CLASS_MAP[`LEVEL_${noiseLevel}`]));
+  });
+
+  run(() => dummyDOMNode.remove());
+});
+
+test('using default class names for violations when no `axeViolationClassNames` is provided', function (assert) {
+  stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
+
+  const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
   const component = Component.create();
 
   component.audit();
 
-  assert.ok(dummyDOMNode.classList.contains('axe-violation'));
+  assert.ok(dummyDOMNode.classList.contains(VIOLATION_CLASS_MAP.LEVEL_1));
 
   run(() => dummyDOMNode.remove());
+});
+
+test(`smartly detects replaced elements and applies a special \`border-box\` style instead
+of the styles from the current setting`, function(assert) {
+  stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
+
+  const customViolationClass = 'foo';
+  const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE, 'img');
+  const component = Component.create({ axeViolationClassNames: [customViolationClass] });
+
+  component.audit();
+  assert.ok(dummyDOMNode.classList.contains(VIOLATION_CLASS_MAP.REPLACED_ELEMENT));
+  assert.notOk(dummyDOMNode.classList.contains(customViolationClass));
 });

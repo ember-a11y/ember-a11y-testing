@@ -1,0 +1,46 @@
+@import "variables/variables";
+
+@import "components/components";
+@import "object-patterns/object-patterns";
+@import "pages/pages";
+@import "typography/typography";
+@import "utilities/utilities";
+
+html {
+  font-size: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $theme-color__offWhite;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.application {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: $theme-color__offWhite;
+  z-index: 1;
+
+  .application__header {
+  }
+
+  .application__main-content {
+    min-width: $min-width__main-content;
+  }
+
+
+}

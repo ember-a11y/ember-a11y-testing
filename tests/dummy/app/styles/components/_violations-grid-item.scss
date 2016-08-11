@@ -1,0 +1,30 @@
+.c-violations-grid-item {
+
+  box-shadow: $box-shadow__card;
+
+  .c-violations-grid-item__header {
+    height: 20%;
+  }
+
+  .c-violations-grid-item__body {
+    height: 80%;
+  }
+
+  .c-violations-grid-item__header,
+  .c-violations-grid-item__body {
+    overflow: hidden;
+  }
+
+  .c-violations-grid-item__body-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .c-violations-grid-item__title {
+    //border-bottom: 1px solid;
+    margin-bottom: 2em;
+  }
+
+}

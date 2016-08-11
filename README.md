@@ -70,7 +70,7 @@ _Note:_ the options will stay set, until set to something different.
 
 ### Development Usage
 
-Usage in development is restricted to applications using Ember 1.13, and up as it
+Usage in development is restricted to applications using Ember 1.13 and up, as it
 relies on the `didRender` hook of a component's life-cycle (a feature only
 available in versions of Ember with the Glimmer rendering engine).
 
@@ -83,15 +83,77 @@ after state changes, and since the checks are scoped to a component's element,
 it means that any state change propagated downwards is also caught.
 
 #### Inspecting Violations
-When a violation is detected for a component's element, the element will have the `.axe-violation` class added to it. Visually, this will produce a striping pattern over the element (which will disappear on hover) designed to make it easily distinguishable from its expected appearance, even for users with low vision.
+When a violation is detected for a component's element, Ember A11y Testing will
+attempt to visually indicate the violation by updating the component's
+element `className`.
 
-Take this text input without a label, for example:
+The class used is determined as follows:
 
-![](docs/assets/violation-styling.png)
+1) If a component's `axeViolationClassNames` property is set, these names will always be used. This provides a way for you to customize the styling of a violation to your own needs.
+  - `axeViolationClassNames` can be passed in your template, with each name as an element in a space-separated string:
+
+  ```hbs
+    {{x-button
+      id="violations__empty-button"
+      data-test-selector="empty-button"
+      axeViolationClassNames="outline outline--red"
+    }}
+  ```
+
+  - they can also be defined as an array of names within your component:
+
+  ```javascript
+    axeViolationClassNames: ['outline', 'outline--red']
+  ```
+
+2) By forgoing custom styling, you can rely on Ember A11y Testing's own set of
+default styles. These are set according to a series of configurable
+`visualNoiseLevel`s spanning from 1 to 3, and a special styling is applied to element's whose default appearance would require a different set of rules for visibility.
+
+```hbs
+  {{x-button
+    id="violations__empty-button"
+    data-test-selector="empty-button"
+    visualNoiseLevel=2
+  }}
+```
+
+The stylesheet that Ember A11y Testing gets these rules from can be found here[](),
+but below are a few sample results for a [violation caused by a button without discernable text](https://github.com/dylanb/axe-core/blob/master/lib/rules/button-name.json).
+
+"Noise" Level 1:
+
+![](docs/assets/violation-level-1.png)
+
+"Noise" Level 2:
+
+![](docs/assets/violation-level-2.png)
+
+"Noise" Level 3:
+
+![](docs/assets/violation-level-3.png)
 
 At the same time, a violation error message will be logged to the console with even more detailed information as to what went wrong. The following message corresponds to the same text input element above:
 
-![](docs/assets/violation-console-output.png)
+![](docs/assets/violation-log-output.png)
+
+
+##### Special Styling for Background-replaced elements
+
+As mentioned, some HTML elements are considered to be
+["replaced" elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element), wherein their rendered appearance is -- to varying degrees --
+determined by the browser and/or the content that the element
+consists of.
+
+An `img` is an example of a replaced element; it lacks the ability to be
+styled through `background` definitions, as it's background is replaced with
+its loaded source assets.
+
+To get around this, Ember A11y Testing tries to detect these elements and --
+unless custom class names have been specified -- apply special styling independent
+of the component's current noise level:
+
+![](docs/assets/violation-replaced-bg-element.png)
 
 
 #### Component Hooks
@@ -139,7 +201,9 @@ With the exception of `turnAuditOff`, each of the fine-grained component hooks a
 ENV['ember-a11y-testing'] = {
     componentOptions: {
       axeCallback: defaultAxeCallback,
-      axeOptions: defaultAxeOptions
+      axeOptions: defaultAxeOptions,
+      visualNoiseLevel: 2,
+      axeViolationClassNames: ['alert-box', 'alert-box--a11y']
     }
   }
 };

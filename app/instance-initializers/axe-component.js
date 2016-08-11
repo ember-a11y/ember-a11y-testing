@@ -1,4 +1,25 @@
+import Ember from 'ember';
 import ENV from '../config/environment';
+import isBackgroundReplacedElement from 'ember-a11y-testing/utils/is-background-replaced-element';
+
+const { Component, computed, isEmpty, isArray, run: { scheduleOnce } } = Ember;
+
+const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
+const VIOLATION_CLASS__LEVEL_2 = 'axe-violation--level-2';
+const VIOLATION_CLASS__LEVEL_3 = 'axe-violation--level-3';
+const VIOLATION_CLASS__REPLACED = 'axe-violation--replaced-element';
+
+/*
+ * Mapping of violation class names to their corresponding `visualNoiseLevel`
+ */
+const VIOLATION_CLASS_MAP = {
+  LEVEL_1: VIOLATION_CLASS__LEVEL_1,
+  LEVEL_2: VIOLATION_CLASS__LEVEL_2,
+  LEVEL_3: VIOLATION_CLASS__LEVEL_3,
+  REPLACED_ELEMENT: VIOLATION_CLASS__REPLACED
+};
+
+const VIOLATION_CLASS_NAMES = Object.keys(VIOLATION_CLASS_MAP).map(key => VIOLATION_CLASS_MAP[key]);
 
 /**
  * Variable to ensure that the initializer is only ran once. Though in this
@@ -7,13 +28,21 @@ import ENV from '../config/environment';
  */
 let hasRan = false;
 
+
 export function initialize(application) {
   if (hasRan) { return; }
 
   const addonConfig = ENV['ember-a11y-testing'] || {};
-  const { componentOptions: { axeOptions, axeCallback } = {} } = addonConfig;
+  const { componentOptions = {} } = addonConfig;
 
-  Ember.Component.reopen({
+  const {
+    axeOptions,
+    axeCallback,
+    visualNoiseLevel,
+    axeViolationClassNames
+  } = componentOptions;
+
+  Component.reopen({
     /**
      * An optional callback to process the results from the a11yCheck.
      * Defaults to `undefined` if not set in the application's configuration.
@@ -41,26 +70,52 @@ export function initialize(application) {
 
     /**
      * An array of classNames (or a space-separated string) to add to the component when a violation occurs.
-     * If unspecified, the `axe-violation` class is used to apply our default
-     * styling
+     * If unspecified, `ember-a11y-testing` will use a default class according to
+     * the current `visualNoiseLevel`
      *
      * @public
      * @type {(Array|string)}
      * @see(https://github.com/ember-a11y/ember-a11y-testing/blob/master/content-for/head-footer.html)
      */
-    axeViolationClassNames: ['axe-violation'],
-
+    axeViolationClassNames: [],
 
     /**
-     * Runs an accessibility audit on any render of the component.
-     * @private
-     * @return {Void}
+     * A numeric setting to determine the class applied to elements with violations
+     *
+     * @public
+     * @type {string}
+     * @see(https://github.com/ember-a11y/ember-a11y-testing/blob/master/content-for/head-footer.html)
      */
-    _runAudit: Ember.on('didRender', function() {
-      if (this.turnAuditOff || Ember.testing) { return; }
+    visualNoiseLevel: 1,
 
-      this.audit();
+    /**
+     * Computes class name to be set on the element according to the
+     * current `visualNoiseLevel` and the value of `axeViolationClassNames`
+     * (giving precedence to the latter).
+     *
+     * @private
+     * @return {string}
+     */
+    violationClasses: computed('axeViolationClassNames', 'visualNoiseLevel', {
+      get() {
+        const customViolationClass = this.get('axeViolationClassNames');
+        const visualNoiseLevel = this.get('visualNoiseLevel');
+
+        if (visualNoiseLevel < 1) {
+          return null;
+        }
+        if (isEmpty(customViolationClass)) {
+          return [VIOLATION_CLASS_MAP[`LEVEL_${visualNoiseLevel}`]];
+        }
+
+        return isArray(customViolationClass) ? customViolationClass : customViolationClass.trim().split(/\s+/);
+      }
     }),
+
+    didRender() {
+      this._super(...arguments);
+      this._runAudit();
+    },
 
     /**
      * Runs the axe a11yCheck audit and logs any violations to the console. It
@@ -70,27 +125,36 @@ export function initialize(application) {
      */
     audit() {
       if (this.get('tagName') !== '') {
+
         axe.a11yCheck(this.$(), this.axeOptions, (results) => {
           const violations = results.violations;
-          let violationClassNames = this.get('axeViolationClassNames');
+          const violationClasses = this.get('violationClasses') || [];
+          const visualNoiseLevel = this.get('visualNoiseLevel');
 
-          if (typeof violationClassNames === 'string') {
-            // support passing as a space-separated string
-            violationClassNames = violationClassNames.trim().split(/\s+/);
-          }
-
+          let violation;
+          let nodes;
+          let nodeData;
+          let nodeElem;
+          let classNamesToAdd;
           for (let i = 0, l = violations.length; i < l; i++) {
-            let violation = violations[i];
+            violation = violations[i];
 
             Ember.Logger.error(`Violation #${i+1}`, violation);
 
-            let nodes = violation.nodes;
+            nodes = violation.nodes;
 
             for (let j = 0, k = nodes.length; j < k; j++) {
-              let node = nodes[j];
+              nodeData = nodes[j];
 
-              if (node) {
-                Ember.$(node.target.join(','))[0].classList.add(...violationClassNames);
+              if (nodeData) {
+                nodeElem = document.querySelector(nodeData.target.join(','));
+                classNamesToAdd = isBackgroundReplacedElement(nodeElem) ? [VIOLATION_CLASS_MAP.REPLACED_ELEMENT] : violationClasses;
+
+                nodeElem.classList.remove(...VIOLATION_CLASS_NAMES);
+
+                if (visualNoiseLevel > 0) {
+                  nodeElem.classList.add(...classNamesToAdd);
+                }
               }
             }
           }
@@ -101,6 +165,17 @@ export function initialize(application) {
           }
         });
       }
+    },
+
+    /**
+     * Runs an accessibility audit on any render of the component.
+     * @private
+     * @return {Void}
+     */
+    _runAudit() {
+      if (this.turnAuditOff || Ember.testing) { return; }
+
+      scheduleOnce('afterRender', this, 'audit');
     }
   });
 

@@ -1,0 +1,189 @@
+$height__radio-selector-track-container: 4rem;
+$height__radio-selector-track-circle: $height__radio-selector-track-container * 0.5;
+$offset__title-below-circle: 0.40em;
+
+$color__circle--primary: $theme-color__primary-1--700;
+$color__circle--accent: $theme-color__primary-1--100;
+$color__label--checked: $theme-color__primary-1--300;
+$color__track: hsla(0, 0%, 59%, 1.00);
+$color__track-heading: $theme-color__primary-1--700;
+
+
+$animation-easing__to-checked: cubic-bezier(0.00, 0.300, 0.00, 1.480); /* ease-out-cubic with 8% bounce */
+$animation-easing__to-unchecked: cubic-bezier(0.470, 0.000, 0.745, 0.715); /* ease-in-sine */
+$animation-duration__circle-toggle: 0.37s;
+
+.c-radio-track {
+  border: 0;
+}
+
+.c-radio-track__heading {
+  font-size: 1.67em;
+  font-weight: bold;
+  padding-bottom: 0.5em;
+  color: $color__track-heading;
+}
+
+/**
+ * We'll treat the the container for our radio items as the "line",
+ * and make the track from a background linear gradient
+ */
+.c-radio-track__line {
+  margin: 0;
+  height: $height__radio-selector-track-container;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 48%,
+    $color__track 48%,
+    $color__track 52%,
+    transparent 52%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
+/**
+ * The containing element for each item, which consists of a wrapping
+ * label, the radio input, and a span that will comprise the label text,
+ * and shape of the indicators (using the spans ::after and ::before psuedo-elements)
+ */
+.c-radio-track__radio-item {
+  width: $height__radio-selector-track-circle;
+  height: $height__radio-selector-track-circle;
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  background-color: transparent;
+}
+
+.c-radio-track__item-input {
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  position: absolute;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+/**
+ * Each item will have a "pointer" and a "node" (the circle and a text title)
+ * which comprises its visual appearance a title will sit below it
+ */
+.c-radio-track__item-pointer,
+.c-radio-track__item-node {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.c-radio-track__item-node {
+  font-weight: bold;
+  color: $color__track;
+  white-space: nowrap;
+  pointer-events: none;  /* Have the pointer-events handled by the ::before element */
+
+  /* Push the title down below the psuedo-elements */
+  top: calc(#{$offset__title-below-circle} + #{$height__radio-selector-track-circle});
+  transition-property: color;
+}
+
+.c-radio-track__item-pointer {
+  position: absolute;
+  color: $color__label--checked;
+  margin-top: calc(
+    -1 * ( #{$height__radio-selector-track-circle / 2} + 1.5em )
+  );
+}
+
+.c-radio-track__item-pointer::after {
+  font-size: 1.5em;
+  opacity: 0;
+  transform: scale(0);
+  content: '\0020\2193';
+}
+
+/**
+ * Set up our circles
+ */
+.c-radio-track__item-node::after,
+.c-radio-track__item-node::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -1 * ($height__radio-selector-track-circle / 2);
+  width: $height__radio-selector-track-circle;
+  height: $height__radio-selector-track-circle;
+  border-radius: 50%;
+  margin-top: calc(-1 * #{$height__radio-selector-track-circle} - #{$offset__title-below-circle});
+}
+
+/**
+ * The ::before circle will be visible in the "unchecked" state
+ */
+.c-radio-track__item-node::before {
+  opacity: 1;
+  transform: scale(1);
+  background-color: $color__circle--accent;
+  transition-delay: 0;
+  pointer-events: all;
+}
+
+/**
+ * The ::after circle will animate over the ::before circle
+ * when the radio becomes checked
+ */
+.c-radio-track__item-node::after {
+  opacity: 0;
+  transform: scale(0);
+
+  background-image: radial-gradient(circle, $color__circle--primary 0%, $color__circle--primary);
+  box-shadow:
+    0 0 0 0.25em $color__circle--accent,
+    0 0 0 0.5em $color__circle--primary;
+}
+
+
+/* --------------------- Animations & event handling ----------------- */
+.c-radio-track__item-pointer::after,
+.c-radio-track__item-node::after,
+.c-radio-track__item-node::before {
+  transition-property: opacity, transform, background-color;
+  transition-duration: $animation-duration__circle-toggle;
+  transition-timing-function: $animation-easing__to-unchecked;
+}
+
+/**
+ * Define animations for the sibling of the input when the input
+ * becomes checked
+ */
+.c-radio-track__item-input:checked + .c-radio-track__item-node {
+  color: $color__label--checked;
+
+  &::after {
+    opacity: 1;
+    transform: scale(1);
+    transition-timing-function: $animation-easing__to-checked;
+  }
+  &::before {
+    opacity: 0;
+    transition-delay: $animation-duration__circle-toggle;
+  }
+}
+
+.c-radio-track__item-input:focus ~ .c-radio-track__item-pointer::after {
+  opacity: 1;
+  transform: scale(1);
+  transition-timing-function: $animation-easing__to-checked;
+}
+
+/**
+ * Hovering over circle when it's not focused or checked
+ */
+.c-radio-track__item-input:hover:not(:focus):not(:checked) + .c-radio-track__item-node::before {
+  background-color: $theme-color__primary-1--500;
+}

@@ -1,14 +1,16 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
-import startApp from '../helpers/start-app';
+import startApp from '../../tests/helpers/start-app';
 import sinon from 'sinon';
+
+const { run } = Ember;
+
+const SELECTORS = {
+  passingComponent: '[data-test-selector="violations-page__passing-component"]'
+};
 
 let application;
 let sandbox;
-
-const SELECTORS = {
-  passingInput: '[data-test-selector="passing-input"]'
-};
 
 module('Acceptance | auto-run', {
   beforeEach: function() {
@@ -23,29 +25,28 @@ module('Acceptance | auto-run', {
 });
 
 test('should run the function when visiting a new route', function(assert) {
-  let callbackStub = sandbox.stub(Ember.run.backburner.options.render, 'after');
+  const callbackStub = sandbox.stub(run.backburner.options.render, 'after');
 
   visit('/');
 
   andThen(() => {
     assert.ok(callbackStub.calledOnce);
-    assert.equal(currentPath(), 'index');
+    assert.equal(currentPath(), 'violations');
   });
 });
 
 test('should run the function whenever a render occurs', function(assert) {
-  let callbackStub = sandbox.stub(Ember.run.backburner.options.render, 'after');
+  const callbackStub = sandbox.stub(run.backburner.options.render, 'after');
 
-  visit('/');
+  visit('/').then(() => {
 
-  andThen(() => {
     assert.ok(callbackStub.calledOnce);
-    assert.equal(currentPath(), 'index');
-  });
+    assert.equal(currentPath(), 'violations');
 
-  click(`${SELECTORS.passingInput} label`);
+    click(`${SELECTORS.passingComponent}`);
 
-  andThen(() => {
-    assert.ok(callbackStub.calledTwice);
+    andThen(() => {
+      assert.ok(callbackStub.calledTwice);
+    });
   });
 });
