@@ -7,11 +7,12 @@ import ENV from '../config/environment';
  */
 let hasRan = false;
 
-export function initialize(application) {
-  if (hasRan) { return; }
+export function initialize(application, opts = { forceRun: false }) {
+  if (hasRan && !opts.forceRun) { return; }
 
   const addonConfig = ENV['ember-a11y-testing'] || {};
   const { componentOptions: { axeOptions, axeCallback } = {} } = addonConfig;
+
 
   Ember.Component.reopen({
     /**
@@ -34,10 +35,11 @@ export function initialize(application) {
     /**
      * Turns off the accessibility audit during rendering.
      *
+     * defaults to true in testing, false otherwise
      * @public
      * @type {Boolean}
      */
-    turnAuditOff: false,
+    turnAuditOff: !!Ember.testing,
 
     /**
      * An array of classNames (or a space-separated string) to add to the component when a violation occurs.
@@ -50,17 +52,15 @@ export function initialize(application) {
      */
     axeViolationClassNames: ['axe-violation'],
 
+    didRender() {
+      this._super(...arguments);
+      console.log(`didRender(): Checking Ember.testing: ${Ember.testing}`);
 
-    /**
-     * Runs an accessibility audit on any render of the component.
-     * @private
-     * @return {Void}
-     */
-    _runAudit: Ember.on('didRender', function() {
-      if (this.turnAuditOff || Ember.testing) { return; }
-
-      this.audit();
-    }),
+      // Run an accessibility audit on any render of the component.
+      if (!this.turnAuditOff) {
+        this.audit();
+      }
+    },
 
     /**
      * Runs the axe a11yCheck audit and logs any violations to the console. It
