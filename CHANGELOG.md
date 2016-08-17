@@ -1,3 +1,8 @@
+# 0.1.6 / 16-08-2016
+
+- Ensure version of `axe-core` added to projects is in sync with the current dependency.
+  - Implement initial testing for this behavior within `node-tests/blueprint-test.js`
+
 # 0.1.5 / 09-08-2016
 
 - Fix parsing of `axeViolationClassNames`, which previously wasn't reading strings the right way (#36)[https://github.com/ember-a11y/ember-a11y-testing/pull/36]
