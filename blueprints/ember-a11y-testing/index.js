@@ -4,6 +4,6 @@ module.exports = {
   normalizeEntityName: function() { },
 
   afterInstall: function() {
-    return this.addBowerPackageToProject('axe-core', '1.1.1');
+    return this.addBowerPackageToProject('axe-core', '~2.0.5');
   }
 };
