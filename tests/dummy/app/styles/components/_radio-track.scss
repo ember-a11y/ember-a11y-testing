@@ -84,7 +84,7 @@ $animation-duration__circle-toggle: 0.37s;
   font-weight: bold;
   color: $color__track;
   white-space: nowrap;
-  pointer-events: none;  /* Have the pointer-events handled by the ::before element */
+  //pointer-events: none;  /* Have the pointer-events handled by the ::before element */
 
   /* Push the title down below the psuedo-elements */
   top: calc(#{$offset__title-below-circle} + #{$height__radio-selector-track-circle});
@@ -130,7 +130,7 @@ $animation-duration__circle-toggle: 0.37s;
   transform: scale(1);
   background-color: $color__circle--accent;
   transition-delay: 0;
-  pointer-events: all;
+  //pointer-events: all;
 }
 
 /**
@@ -140,7 +140,7 @@ $animation-duration__circle-toggle: 0.37s;
 .c-radio-track__item-node::after {
   opacity: 0;
   transform: scale(0);
-
+  cursor: default;
   background-image: radial-gradient(circle, $color__circle--primary 0%, $color__circle--primary);
   box-shadow:
     0 0 0 0.25em $color__circle--accent,

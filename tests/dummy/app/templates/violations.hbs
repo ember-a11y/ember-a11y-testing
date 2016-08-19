@@ -11,12 +11,13 @@
     <p class="c-radio-track__line">
 
       <label for="noise-level-0" class="c-radio-track__radio-item">
-        {{radio-button
+        {{radio-button-input
           groupValue=model.currentNoiseLevel
           value=0
           name="noise-level"
-          radioClass="c-radio-track__item-input"
-          radioId="noise-level-0"
+          class="c-radio-track__item-input"
+          id="noise-level-0"
+          changed=(route-action "updateCurrentNoiseLevel")
           changed="updateCurrentNoiseLevel"
         }}
         <span class="c-radio-track__item-node">None</span>
@@ -24,12 +25,12 @@
       </label>
 
       <label for="noise-level-1" class="c-radio-track__radio-item">
-        {{radio-button
+        {{radio-button-input
           groupValue=model.currentNoiseLevel
           value=1
-          radioClass="c-radio-track__item-input"
+          class="c-radio-track__item-input"
           name="noise-level"
-          radioId="noise-level-1"
+          id="noise-level-1"
           changed="updateCurrentNoiseLevel"
         }}
         <span class="c-radio-track__item-node">Level 1</span>
@@ -37,12 +38,12 @@
       </label>
 
       <label for="noise-level-2" class="c-radio-track__radio-item">
-        {{radio-button
+        {{radio-button-input
           groupValue=model.currentNoiseLevel
           value=2
           name="noise-level"
-          radioClass="c-radio-track__item-input"
-          radioId="noise-level-2"
+          class="c-radio-track__item-input"
+          id="noise-level-2"
           changed="updateCurrentNoiseLevel"
         }}
         <span class="c-radio-track__item-node">Level 2</span>
@@ -50,11 +51,11 @@
       </label>
 
       <label for="noise-level-3" class="c-radio-track__radio-item">
-        {{radio-button
+        {{radio-button-input
           groupValue=model.currentNoiseLevel
           value=3
           name="noise-level"
-          radioClass="c-radio-track__item-input"
+          class="c-radio-track__item-input"
           radioId="noise-level-3"
           changed="updateCurrentNoiseLevel"
         }}
@@ -122,17 +123,17 @@
       <div class="p-violations__grid-item-content--radio-items">
         <label class="u-fill-width u-align-center p-violations__grid-item-content--radio" for="violations__radio-group-items--strawberries">
           Strawberries
-          {{radio-button name="fruits" groupValue=model.currentFruit value="Strawberries" radioId="violations__radio-group-items--strawberries" visualNoiseLevel=model.currentNoiseLevel}}
+          {{radio-button-input name="fruits" groupValue=model.currentFruit value="Strawberries" id="violations__radio-group-items--strawberries" visualNoiseLevel=model.currentNoiseLevel}}
         </label>
 
         <label class="u-fill-width u-align-center p-violations__grid-item-content--radio" for="violations__radio-group-items--blueberries">
           Blueberries
-          {{radio-button name="fruits" groupValue=model.currentFruit value="Blueberries" radioId="violations__radio-group-items--blueberries" visualNoiseLevel=model.currentNoiseLevel}}
+          {{radio-button-input name="fruits" groupValue=model.currentFruit value="Blueberries" id="violations__radio-group-items--blueberries" visualNoiseLevel=model.currentNoiseLevel}}
         </label>
 
         <label class="u-fill-width u-align-center p-violations__grid-item-content--radio" for="violations__radio-group-items--raspberries">
           Raspberries
-          {{radio-button name="fruits" groupValue=model.currentFruit value="Raspberries" radioId="violations__radio-group-items--raspberries" visualNoiseLevel=model.currentNoiseLevel}}
+          {{radio-button-input name="fruits" groupValue=model.currentFruit value="Raspberries" id="violations__radio-group-items--raspberries" visualNoiseLevel=model.currentNoiseLevel}}
         </label>
       </div>
 

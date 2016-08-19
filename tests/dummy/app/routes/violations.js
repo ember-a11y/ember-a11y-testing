@@ -13,7 +13,6 @@ export default Route.extend({
 
   actions: {
     updateCurrentNoiseLevel(level) {
-
       /**
        * This is a bit hacky, but for the purposes of the demo, we can remove
        * the exisiting classes set so that axe will perfom its check without our styles
