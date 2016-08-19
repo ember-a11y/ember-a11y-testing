@@ -52,6 +52,17 @@ module.exports = {
       }
     },
     {
+      name: 'ember-alpha',
+      bower: {
+        dependencies: {
+          'ember': 'components/ember#alpha'
+        },
+        resolutions: {
+          'ember': 'alpha'
+        }
+      }
+    },
+    {
       name: 'ember-lts-2.4',
       bower: {
         dependencies: {
