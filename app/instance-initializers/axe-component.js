@@ -119,7 +119,8 @@ export function initialize(application) {
 
     /**
      * Runs the axe a11yCheck audit and logs any violations to the console. It
-     * then passes the results to axeCallback if one is defined.
+     * then passes the results to axeCallback if one is defined. Finally, it logs
+     * the violationsHelper tip once after all of the components are rendered.
      * @public
      * @return {Void}
      */
@@ -140,6 +141,7 @@ export function initialize(application) {
             violation = violations[i];
 
             Ember.Logger.error(`Violation #${i+1}`, violation);
+            window.violationsHelper.push(violation);
 
             nodes = violation.nodes;
 
@@ -163,6 +165,8 @@ export function initialize(application) {
             Ember.assert('axeCallback should be a function.', typeof this.axeCallback === 'function');
             this.axeCallback(results);
           }
+
+          Ember.run.scheduleOnce('afterRender', window.violationsHelper, window.violationsHelper.logTip);
         });
       }
     },
@@ -184,5 +188,6 @@ export function initialize(application) {
 
 export default {
   name: 'axe-component',
+  after: 'violations-helper',
   initialize
 };

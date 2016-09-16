@@ -148,9 +148,15 @@ test('audit should log any violations found', function(assert) {
   const logSpy = sandbox.spy(Logger, 'error');
   const component = Component.create({});
 
+  // In order for the audit to run, we have to act like we're not in testing
+  Ember.testing = false;
+
   component.audit();
 
   assert.ok(logSpy.calledOnce);
+
+  // Turn testing mode back on to ensure validity of other tests
+  Ember.testing = true;
 });
 
 
