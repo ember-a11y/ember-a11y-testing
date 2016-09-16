@@ -39,8 +39,13 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'production') {
-
+  /**
+   * This logic allows us to generate gh-pages builds with axe still enabled
+   * by running `ember github-pages:commit --message "YOUR MESSAGE" --environment=gh-pages`
+   */
+  if (environment === 'production' || environment === 'gh-pages') {
+    ENV.locationType = 'hash';
+    ENV.baseURL = '/ember-a11y-testing/';
   }
 
   return ENV;

@@ -1,3 +1,148 @@
-{{empty-button id="empty-button" data-test-selector="empty-button"}}
+<header class="p-violations__header">
+  {{page-title title="Violations" data-test-selector="violations-page__passing-component"}} {{!-- Page titles will serve as our testable "passing" component --}}
+  <span class="p-violations__header-hint">&#42;Open your developer console to view violation logging</span>
+</header>
 
-{{sloppy-input id="sloppy-input" data-test-selector="sloppy-input"}}
+<section class="p-violations__noise-selectors">
+
+  <fieldset class="c-radio-track u-align-center u-relative">
+    <legend class="c-radio-track__heading">Visual Noise Level</legend>
+
+    <p class="c-radio-track__line">
+
+      <label for="noise-level-0" class="c-radio-track__radio-item">
+        {{radio-button-input
+          groupValue=model.currentNoiseLevel
+          value=0
+          name="noise-level"
+          class="c-radio-track__item-input"
+          id="noise-level-0"
+          changed="updateCurrentNoiseLevel"
+        }}
+        <span class="c-radio-track__item-node">None</span>
+        <span class="c-radio-track__item-pointer"></span>
+      </label>
+
+      <label for="noise-level-1" class="c-radio-track__radio-item">
+        {{radio-button-input
+          groupValue=model.currentNoiseLevel
+          value=1
+          class="c-radio-track__item-input"
+          name="noise-level"
+          id="noise-level-1"
+          changed="updateCurrentNoiseLevel"
+        }}
+        <span class="c-radio-track__item-node">Level 1</span>
+        <span class="c-radio-track__item-pointer"></span>
+      </label>
+
+      <label for="noise-level-2" class="c-radio-track__radio-item">
+        {{radio-button-input
+          groupValue=model.currentNoiseLevel
+          value=2
+          name="noise-level"
+          class="c-radio-track__item-input"
+          id="noise-level-2"
+          changed="updateCurrentNoiseLevel"
+        }}
+        <span class="c-radio-track__item-node">Level 2</span>
+        <span class="c-radio-track__item-pointer"></span>
+      </label>
+
+      <label for="noise-level-3" class="c-radio-track__radio-item">
+        {{radio-button-input
+          groupValue=model.currentNoiseLevel
+          value=3
+          name="noise-level"
+          class="c-radio-track__item-input"
+          radioId="noise-level-3"
+          changed="updateCurrentNoiseLevel"
+        }}
+        <span class="c-radio-track__item-node">Level 3</span>
+        <span class="c-radio-track__item-pointer"></span>
+      </label>
+
+    </p>
+
+  </fieldset>
+
+</section>
+
+{{!-- TODO: "Select" element that toggles the "spec" setting (e.g: wcag2a)?  --}}
+
+<section class="p-violations__body u-fill-width u-relative">
+  <ul class="p-violations__grid u-fill-width u-relative">
+
+    {{! Empty button }}
+    {{#violations-grid-item class="p-violations__grid-item" title="Button without title"}}
+
+      {{x-button
+        id="violations__empty-button"
+        data-test-selector="empty-button"
+        axeViolationClassNames="outline outline--red"
+      }}
+
+    {{/violations-grid-item}}
+
+    {{! Labeless text input }}
+    {{#violations-grid-item class="p-violations__grid-item" title="Input without label"}}
+      {{x-text-input id="violations__labeless-input" data-test-selector="labeless-text-input" visualNoiseLevel=model.currentNoiseLevel}}
+    {{/violations-grid-item}}
+
+    {{! Poorly Contrasting Text color }}
+    {{#violations-grid-item class="p-violations__grid-item" title="Poorly Contrasting Text Color"}}
+      {{#x-paragraph
+        class="p-violations__grid-item-content--low-contrast-text"
+        data-test-selector="labeless-text-input"
+        id="violations__low-contrast-text"
+        visualNoiseLevel=model.currentNoiseLevel}}
+          Swoooosh
+      {{/x-paragraph}}
+    {{/violations-grid-item}}
+
+    {{! Usage of the <blink> element }}
+    {{#violations-grid-item class="p-violations__grid-item" title="Non-standard HTML elements"}}
+      {{#x-paragraph id="violations__non-standard-html" data-test-selector="paragraph-with-blink-tag" visualNoiseLevel=model.currentNoiseLevel}}
+        Friends don't let friends use <code>&lt;blink&gt; tags</code>, <blink>like this one!</blink>
+      {{/x-paragraph}}
+    {{/violations-grid-item}}
+
+    {{! <img> tags without `alt` text }}
+    {{#violations-grid-item class="p-violations__grid-item" title="<img> Tags without `alt` attributes"}}
+      {{x-image class="u-fill" id="violations__img-without-alt" src="assets/img/empire-state-building-moonlight.png" visualNoiseLevel=model.currentNoiseLevel}}
+    {{/violations-grid-item}}
+
+    {{! Related radio elements without a `<radiogroup>` }}
+    {{#violations-grid-item class="p-violations__grid-item" title="Ungrouped radio inputs with a shared name"}}
+
+      {{!--
+        💡 PRO TIP: In lieu of a <radiogroup>, a containing <fieldset>
+        here would make these accessible.
+      --}}
+      <div class="p-violations__grid-item-content--radio-items">
+        <label class="u-fill-width u-align-center p-violations__grid-item-content--radio" for="violations__radio-group-items--strawberries">
+          Strawberries
+          {{radio-button-input name="fruits" groupValue=model.currentFruit value="Strawberries" id="violations__radio-group-items--strawberries" visualNoiseLevel=model.currentNoiseLevel}}
+        </label>
+
+        <label class="u-fill-width u-align-center p-violations__grid-item-content--radio" for="violations__radio-group-items--blueberries">
+          Blueberries
+          {{radio-button-input name="fruits" groupValue=model.currentFruit value="Blueberries" id="violations__radio-group-items--blueberries" visualNoiseLevel=model.currentNoiseLevel}}
+        </label>
+
+        <label class="u-fill-width u-align-center p-violations__grid-item-content--radio" for="violations__radio-group-items--raspberries">
+          Raspberries
+          {{radio-button-input name="fruits" groupValue=model.currentFruit value="Raspberries" id="violations__radio-group-items--raspberries" visualNoiseLevel=model.currentNoiseLevel}}
+        </label>
+      </div>
+
+    {{/violations-grid-item}}
+
+  </ul>
+</section>
+
+
+<footer class="p-violations__footer">
+  For more on <strong>accessible</strong> user interface patterns, check out
+    <a href="https://ember-a11y.github.io/a11y-demo-app/">Ember A11y's best-practices demo app</a>.
+</footer>

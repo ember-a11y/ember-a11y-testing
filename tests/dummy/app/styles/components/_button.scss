@@ -1,0 +1,18 @@
+.c-button {
+  display: flex;
+  font-size: 1em;
+  padding: $padding__content-box;
+  border-radius: 0.125em;
+  color: $theme-color__nearWhite;
+  border: 0;
+  cursor: pointer;
+  background-color: $theme-color__primary-1--500;
+  transition-property: background-color;
+  transition-duration: 0.25s;
+  transition-timing-function: $easing__ease-out-cubic;
+
+  &:hover {
+    background-color: $theme-color__primary-1--300;
+    transition-timing-function: $easing__ease-in-quad;
+  }
+}
