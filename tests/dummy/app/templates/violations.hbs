@@ -55,7 +55,7 @@
           value=3
           name="noise-level"
           class="c-radio-track__item-input"
-          radioId="noise-level-3"
+          id="noise-level-3"
           changed="updateCurrentNoiseLevel"
         }}
         <span class="c-radio-track__item-node">Level 3</span>
@@ -79,7 +79,7 @@
       {{x-button
         id="violations__empty-button"
         data-test-selector="empty-button"
-        axeViolationClassNames="outline outline--red"
+        visualNoiseLevel=model.currentNoiseLevel
       }}
 
     {{/violations-grid-item}}
