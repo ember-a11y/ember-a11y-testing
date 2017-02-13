@@ -12,7 +12,7 @@ during any acceptance tests.
 
 If you're using Ember 1.13.0 or above, it also integrates into your development
 workflow by running during a component's `didRender` phase in non-production
-environments. This gives you instant feedback on if your component's are
+environments. This gives you instant feedback on if your components are
 accessible in any given state.
 
 ## Installation
