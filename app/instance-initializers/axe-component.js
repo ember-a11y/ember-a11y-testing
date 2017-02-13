@@ -29,7 +29,7 @@ const VIOLATION_CLASS_NAMES = Object.keys(VIOLATION_CLASS_MAP).map(key => VIOLAT
 let hasRan = false;
 
 
-export function initialize(application) {
+export function initialize() {
   if (hasRan) { return; }
 
   const addonConfig = ENV['ember-a11y-testing'] || {};
