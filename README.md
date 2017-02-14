@@ -67,6 +67,56 @@ You can see the available options in the [axe-core repo](https://github.com/dequ
 
 _Note:_ the options will stay set, until set to something different.
 
+#### `a11yAudit` Helper
+
+Ember A11y Testing also provides a simple helper to run accessibility audits
+on-demand within your test suite.
+
+For Acceptance tests, the helper is an async test helper so you can use it like
+this:
+
+```javascript
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
+
+// ...elided for brevity
+
+test('Some test case', function(assert) {
+  visit('/');
+  a11yAudit();
+  andThen(() => assert.ok(true, 'no a11y errors found!'));
+});
+```
+
+The helper can optionally accept a "context" on which to focus the audit as
+either a selector string or an HTML element. You can also provide a secondary
+parameter to specify axe-core options.
+
+The helper is also able to be used Integration/Unit tests like so:
+
+```javascript
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
+
+// ...elided for brevity
+
+test('Some test case', function(assert) {
+  this.render(hbs`{{some-component}}`);
+
+  let axeOptions = {
+    rules: {
+      'button-name': {
+        enabled: false
+      }
+    }
+  };
+  return a11yAudit(this.$(), axeOptions).then(() => {
+    assert.ok(true, 'no a11y errors found!');
+  });
+});
+```
+
+As you can see, the usage for all types of tests is pretty much the same. The
+only real difference is Acceptance tests get automatic async handling.
+
 
 ### Development Usage
 

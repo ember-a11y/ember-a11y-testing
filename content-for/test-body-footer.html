@@ -1,9 +1,9 @@
 <script>
   (function() {
-    var runningAudits = 0;
+    var runningAudit = false;
 
     Ember.Test.registerWaiter(function runningAuditWaiter() {
-      return runningAudits === 0;;
+      return !runningAudit;;
     });
 
     /**
@@ -19,7 +19,7 @@
        * @return {Void}
        */
       a11yCheckCallback: function(results) {
-        runningAudits--;
+        runningAudit = false;
 
         var violations = results.violations;
 
@@ -59,7 +59,7 @@
        * @return {Void}
        */
       afterRender: function() {
-        runningAudits++;
+        runningAudit = true;
         axe.a11yCheck('#ember-testing-container', axe.ember.testOptions, axe.ember.a11yCheckCallback);
       },
 
