@@ -9,23 +9,23 @@ sudo: false
 
 cache:
   directories:
-    - node_modules
+    - $HOME/.npm
+    - $HOME/.cache # includes bowers cache
 
 matrix:
   fast_finish: true
 
 before_install:
   - npm config set spin false
-  - npm install -g bower
-  - npm install phantomjs-prebuilt
+  - npm install -g bower phantomjs-prebuilt
+  - bower --version
+  - phantomjs --version
 
 install:
   - npm install
   - bower install
 
 script:
-  # Usually, it's ok to finish the test scenario without reverting
-  #  to the addon's original dependency state, skipping "cleanup".
   - ember try:each
   - npm install bower
   - node node-tests/blueprint-tests.js

@@ -1,109 +1,121 @@
 <script>
-  /**
-   * Setup all our functions as an extension to the global axe object. This
-   * ensures their availability while also avoiding a continual pollution of the
-   * global namespace.
-   */
-  axe.ember = {
+  (function() {
+    var runningAudits = 0;
+
+    Ember.Test.registerWaiter(function runningAuditWaiter() {
+      return runningAudits === 0;;
+    });
+
     /**
-     * Processes the results of calling axe.a11yCheck. If there are any
-     * violations, it throws an error and then logs them individually.
-     * @param {Object} results
-     * @return {Void}
+     * Setup all our functions as an extension to the global axe object. This
+     * ensures their availability while also avoiding a continual pollution of the
+     * global namespace.
      */
-    a11yCheckCallback: function(results) {
-      var violations = results.violations;
+    axe.ember = {
+      /**
+       * Processes the results of calling axe.a11yCheck. If there are any
+       * violations, it throws an error and then logs them individually.
+       * @param {Object} results
+       * @return {Void}
+       */
+      a11yCheckCallback: function(results) {
+        runningAudits--;
 
-      if (violations.length) {
-        Ember.Logger.error('ACCESSIBILITY VIOLATIONS: ' + violations.length);
+        var violations = results.violations;
 
-        for (var i = 0, l = violations.length; i < l; i++) {
-          var violation = violations[i];
-          var violationNodes = axe.ember.generateNodesArray(violation.nodes);
+        if (violations.length) {
+          Ember.Logger.error('ACCESSIBILITY VIOLATIONS: ' + violations.length);
 
-          Ember.Logger.warn(violation.impact.toUpperCase() + ': ' + violation.help);
-          Ember.Logger.info('Offending markup (' + violation.nodes.length + ')');
-          Ember.Logger.debug(violationNodes);
-          Ember.Logger.info('Additional info: ' + violation.helpUrl);
-          Ember.Logger.info('-------------------------------------');
+          for (var i = 0, l = violations.length; i < l; i++) {
+            var violation = violations[i];
+            var violationNodes = axe.ember.generateNodesArray(violation.nodes);
+
+            Ember.Logger.warn(violation.impact.toUpperCase() + ': ' + violation.help);
+            Ember.Logger.info('Offending markup (' + violation.nodes.length + ')');
+            Ember.Logger.debug(violationNodes);
+            Ember.Logger.info('Additional info: ' + violation.helpUrl);
+            Ember.Logger.info('-------------------------------------');
+          }
         }
-      }
-      Ember.assert('The page should have no accessibility violations. Please check the developer console for more details.', !violations.length);
-    },
 
-    /**
-     * Takes the violations' nodes param and converts it to
-     * an array that constains only offending markup HTML.
-     * @param {Array} nodes
-     * @return {Array}
-     */
-     generateNodesArray: function(nodes) {
-       return nodes.map(function(node) {
-         return node.html;
-       });
-     },
+        Ember.assert('The page should have no accessibility violations. Please check the developer console for more details.', !violations.length);
+      },
 
-    /**
-     * Used as a callback for afterRender. Simply runs axe.a11yCheck and passes
-     * the results to a11yCheckCallback.
-     * @return {Void}
-     */
-    afterRender: function() {
-      axe.a11yCheck('#ember-testing-container', axe.ember.testOptions, axe.ember.a11yCheckCallback);
-    },
+      /**
+       * Takes the violations' nodes param and converts it to
+       * an array that constains only offending markup HTML.
+       * @param {Array} nodes
+       * @return {Array}
+       */
+      generateNodesArray: function(nodes) {
+        return nodes.map(function(node) {
+          return node.html;
+        });
+      },
 
-    /**
-     * Used as a callback at the beginning of each testing module. It checks
-     * if the test is an acceptance test (based on standard Ember-CLI naming
-     * conventions), and adjust the testing display accordingly.
-     * @param {Object} details
-     * @return {Void}
-     */
-    moduleStart: function(details) {
-      if (~details.name.indexOf('Acceptance')) {
-        axe.ember.turnAxeOn();
-      } else {
+      /**
+       * Used as a callback for afterRender. Simply runs axe.a11yCheck and passes
+       * the results to a11yCheckCallback.
+       * @return {Void}
+       */
+      afterRender: function() {
+        runningAudits++;
+        axe.a11yCheck('#ember-testing-container', axe.ember.testOptions, axe.ember.a11yCheckCallback);
+      },
+
+      /**
+       * Used as a callback at the beginning of each testing module. It checks
+       * if the test is an acceptance test (based on standard Ember-CLI naming
+       * conventions), and adjust the testing display accordingly.
+       * @param {Object} details
+       * @return {Void}
+       */
+      moduleStart: function(details) {
+        if (~details.name.indexOf('Acceptance')) {
+          axe.ember.turnAxeOn();
+        } else {
+          axe.ember.turnAxeOff();
+        }
+      },
+
+      /**
+       * Used as a callback at the end of testing. It ensures the testing display
+       * has been reset to it's original appearance.
+       * @return {Void}
+       */
+      qunitDone: function() {
         axe.ember.turnAxeOff();
-      }
-    },
+      },
 
-    /**
-     * Used as a callback at the end of testing. It ensures the testing display
-     * has been reset to it's original appearance.
-     * @return {Void}
-     */
-    qunitDone: function() {
-      axe.ember.turnAxeOff();
-    },
+      /**
+       * Enables the axe-core tests to run on afterRender and modifies the visual
+       * layout of the testing.
+       * @return {Void}
+       */
+      turnAxeOn: function() {
+        Ember.run.backburner.options.render = { after: axe.ember.afterRender };
+        document.body.classList.add('axe-enabled');
+      },
 
-    /**
-     * Enables the axe-core tests to run on afterRender and modifies the visual
-     * layout of the testing.
-     * @return {Void}
-     */
-    turnAxeOn: function() {
-      Ember.run.backburner.options.render = { after: axe.ember.afterRender };
-      document.body.classList.add('axe-enabled');
-    },
+      /**
+       * Disables the axe-core tests to run on afterRender and restores the
+       * original visual layout of the testing.
+       * @return {Void}
+       */
+      turnAxeOff: function() {
+        Ember.run.backburner.options.render = { after: undefined };
+        document.body.classList.remove('axe-enabled');
+      },
 
-    /**
-     * Disables the axe-core tests to run on afterRender and restores the
-     * original visual layout of the testing.
-     * @return {Void}
-     */
-    turnAxeOff: function() {
-      Ember.run.backburner.options.render = { after: undefined };
-      document.body.classList.remove('axe-enabled');
-    },
+      /**
+       * An object of options to pass into axe.a11yCheck.
+       * @type {Object}
+       */
+      testOptions: undefined
+    };
 
-    /**
-     * An object of options to pass into axe.a11yCheck.
-     * @type {Object}
-     */
-    testOptions: undefined
-  };
-
-  // Register the functions to their appropriate places for testing
-  QUnit.moduleStart(axe.ember.moduleStart);
-  QUnit.done(axe.ember.qunitDone);
+    // Register the functions to their appropriate places for testing
+    QUnit.moduleStart(axe.ember.moduleStart);
+    QUnit.done(axe.ember.qunitDone);
+  }());
 </script>

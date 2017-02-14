@@ -37,16 +37,19 @@ test('should run the function when visiting a new route', function(assert) {
 
 test('should run the function whenever a render occurs', function(assert) {
   const callbackStub = sandbox.stub(run.backburner.options.render, 'after');
+  let callCount = 0;
 
-  visit('/').then(() => {
+  visit('/');
 
-    assert.ok(callbackStub.calledOnce);
+  andThen(() => {
+    callCount = callbackStub.callCount;
+    assert.ok(callCount > 0, 'afterRender called at least once for initial visit');
     assert.equal(currentPath(), 'violations');
+  });
 
-    click(`${SELECTORS.passingComponent}`);
+  click(SELECTORS.passingComponent);
 
-    andThen(() => {
-      assert.ok(callbackStub.calledTwice);
-    });
+  andThen(() => {
+    assert.ok(callbackStub.callCount > callCount, 'afterRender called more than before');
   });
 });
