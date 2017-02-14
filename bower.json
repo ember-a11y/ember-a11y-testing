@@ -1,7 +1,6 @@
 {
   "name": "ember-a11y-testing",
   "dependencies": {
-    "axe-core": "~2.1.7",
     "ember": "release",
     "ember-cli-shims": "0.1.3"
   },
