@@ -1,9 +1,11 @@
 /* global sinon, axe */
 import Ember from 'ember';
 import { initialize } from 'dummy/instance-initializers/axe-component';
-import { module, test } from 'qunit';
+import { initialize as initializeViolationsHelper } from 'dummy/instance-initializers/violations-helper';
+import { moduleForComponent, test } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
 
-const { Application, Component, Logger, run } = Ember;
+const { Component, Logger } = Ember;
 const ID_TEST_DOM_NODE = 'sign-up-button';
 
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
@@ -21,8 +23,6 @@ const VIOLATION_CLASS_MAP = {
   REPLACED_ELEMENT: VIOLATION_CLASS__REPLACED
 };
 
-
-let application;
 let sandbox;
 
 function setupDOMNode(id = ID_TEST_DOM_NODE, tagName = 'div') {
@@ -51,93 +51,74 @@ function stubViolationOnDOMNode(sandbox, selector) {
   });
 }
 
-module('Unit | Instance Initializer | axe-component', {
-  beforeEach() {
-    run(() => {
-      application = Application.create({
-        rootElement: '#ember-testing'
-      });
-      application.deferReadiness();
-    });
+// We use a component integration test to verify the behavior of axe-component
+// instance initializer since we are concerned with component behavior.
+moduleForComponent('component:axe-component', 'Integration | Instance Initializer | axe-component', {
+  integration: true,
 
+  beforeEach() {
+    // In order for the audit to run, we have to act like we're not in testing
+    Ember.testing = false;
+
+    initialize();
+    this.register('component:axe-component', Component.extend());
     sandbox = sinon.sandbox.create();
   },
 
   afterEach() {
     sandbox.restore();
+
+    // Turn testing mode back on to ensure validity of other tests
+    Ember.testing = true;
   }
 });
 
 /* Basic Behavior */
 
 test('initializer should not re-open Component more than once', function(assert) {
-  // Depending on if the initializer has already ran, we will either expect the
-  // reopen method to be called once or not at all.
-  let assertMethod = Component.prototype.audit ? 'notCalled' : 'calledOnce';
+  // Since the initializer has already ran, we expect reopen to not be called
   let reopenSpy = sandbox.spy(Component, 'reopen');
 
-  initialize(application);
-  initialize(application);
+  initialize();
 
-  assert.ok(reopenSpy[assertMethod]);
+  assert.ok(reopenSpy.notCalled);
 });
 
 test('audit is run on didRender when not in testing mode', function(assert) {
-  initialize(application);
+  let auditSpy = sandbox.spy();
+  this.set('auditSpy', auditSpy);
+  this.set('content', 'derp');
+  this.render(hbs`{{#axe-component audit=auditSpy}}{{content}}{{/axe-component}}`);
 
-  let component = Component.create({});
-  let auditSpy = sandbox.spy(component, 'audit');
-
-  // In order for the audit to run, we have to act like we're not in testing
-  Ember.testing = false;
-
-  run(() => component.appendTo('#ember-testing'));
-  assert.ok(auditSpy.calledOnce);
-
-  run(() => component.trigger('didRender'));
-  assert.ok(auditSpy.calledTwice);
-
-  run(() => component.destroy());
-
-  // Turn testing mode back on to ensure validity of other tests
-  Ember.testing = true;
+  assert.ok(auditSpy.calledOnce, 'audit is called on render');
 });
 
 test('audit is not run on didRender when in testing mode', function(assert) {
-  initialize(application);
+  Ember.testing = true;
 
-  let component = Component.create({});
-  let auditSpy = sandbox.spy(component, 'audit');
-
-  run(() => component.appendTo('#ember-testing'));
+  let auditSpy = sandbox.spy();
+  this.set('auditSpy', auditSpy);
+  this.set('content', 'derp');
+  this.render(hbs`{{#axe-component audit=auditSpy}}{{content}}{{/axe-component}}`);
   assert.ok(auditSpy.notCalled);
-
-  run(() => component.destroy());
 });
 
 /* Component.turnAuditOff */
 
 test('turnAuditOff prevents audit from running on didRender', function(assert) {
-  initialize(application);
+  let auditSpy = sandbox.spy();
+  this.set('auditSpy', auditSpy);
+  this.set('content', 'derp');
+  this.render(hbs`{{#axe-component audit=auditSpy turnAuditOff=true}}{{content}}{{/axe-component}}`);
 
-  let component = Component.create({ turnAuditOff: true });
-  let auditSpy = sandbox.spy(component, 'audit');
-
-  // In order for the audit to run, we have to act like we're not in testing
-  Ember.testing = false;
-
-  run(() => component.appendTo('#ember-testing'));
   assert.ok(auditSpy.notCalled);
-
-  run(() => component.destroy());
-
-  // Turn testing mode back on to ensure validity of other tests
-  Ember.testing = true;
 });
 
 /* Component.audit */
 
 test('audit should log any violations found', function(assert) {
+  initializeViolationsHelper();
+
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
@@ -146,27 +127,19 @@ test('audit should log any violations found', function(assert) {
   });
 
   const logSpy = sandbox.spy(Logger, 'error');
-  const component = Component.create({});
-
-  // In order for the audit to run, we have to act like we're not in testing
-  Ember.testing = false;
-
-  component.audit();
+  this.render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
 
   assert.ok(logSpy.calledOnce);
-
-  // Turn testing mode back on to ensure validity of other tests
-  Ember.testing = true;
 });
 
 
 test('audit should do nothing if no violations found', function(assert) {
+  initializeViolationsHelper();
+
   stubA11yCheck(sandbox, { violations: [] });
 
   const logSpy = sandbox.spy(Logger, 'error');
-  const component = Component.create({});
-
-  component.audit();
+  this.render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
 
   assert.ok(logSpy.notCalled);
 });
@@ -174,14 +147,14 @@ test('audit should do nothing if no violations found', function(assert) {
 /* Component.axeCallback */
 
 test('axeCallback receives the results of the audit', function(assert) {
-  const results = { violations: [] };
-  const axeCallbackSpy = sandbox.spy();
-  const component = Component.create({
-    axeCallback: axeCallbackSpy
-  });
+  initializeViolationsHelper();
 
+  const results = { violations: [] };
   stubA11yCheck(sandbox, results);
-  component.audit();
+
+  const axeCallbackSpy = sandbox.spy();
+  this.set('axeCallbackSpy', axeCallbackSpy);
+  this.render(hbs`{{#axe-component axeCallback=axeCallbackSpy}}{{content}}{{/axe-component}}`);
 
   assert.ok(axeCallbackSpy.calledOnce);
   assert.ok(axeCallbackSpy.calledWith(results));
@@ -189,43 +162,35 @@ test('axeCallback receives the results of the audit', function(assert) {
 
 test('axeCallback throws an error if it is not a function', function(assert) {
   const results = { violations: [] };
-
   stubA11yCheck(sandbox, results);
 
-  const component = Component.create({
-    axeCallback: 'axeCallbackSpy'
-  });
-
-  assert.throws(() => component.audit(), 'axeCallback should be a function.');
+  assert.throws(() => {
+    this.render(hbs`{{#axe-component axeCallback='axeCallbackSpy'}}{{content}}{{/axe-component}}`);
+  }, 'axeCallback should be a function.');
 });
 
 /* Component.axeOptions */
 
 test('axeOptions are passed in as the second param to a11yCheck', function(assert) {
   const a11yCheckStub = sandbox.stub(axe, 'a11yCheck');
-
   const axeOptions = { test: 'test' };
-  const component = Component.create({ axeOptions });
-  component.audit();
+  this.set('axeOptions', axeOptions);
+  this.render(hbs`{{axe-component class="component" axeOptions=axeOptions}}`);
 
   assert.ok(a11yCheckStub.calledOnce);
-  assert.ok(a11yCheckStub.calledWith(component.$(), axeOptions));
+  assert.ok(a11yCheckStub.calledWith(sinon.match.any, axeOptions));
 });
 
 test('#violationClasses is computed from the current `visualNoiseLevel`', function(assert) {
-  initialize(application);
+  initializeViolationsHelper();
 
   stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
   const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
-  const component = Component.create();
 
   [1, 2, 3].forEach((currentNoiseLevel) => {
-    run(() => {
-      component.set('visualNoiseLevel', currentNoiseLevel);
-    });
-
-    component.audit();
+    this.set('visualNoiseLevel', currentNoiseLevel);
+    this.render(hbs`{{axe-component visualNoiseLevel=visualNoiseLevel}}`);
 
     [1, 2, 3].forEach((_noiseLevel) => {
       const assertFunc = (_noiseLevel === currentNoiseLevel) ? 'ok' : 'notOk';
@@ -233,33 +198,34 @@ test('#violationClasses is computed from the current `visualNoiseLevel`', functi
     });
   });
 
-  run(() => dummyDOMNode.remove());
+  dummyDOMNode.remove();
 });
 
 test('`axeViolationClassNames` can be passed as a space-separated string (to aid template usage)', function (assert) {
+  initializeViolationsHelper();
+
   stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
   const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
-  const component = Component.create({
-    axeViolationClassNames: 'spark 🐋   foo  '
-  });
 
-  component.audit();
+  this.set('axeViolationClassNames', 'spark 🐋   foo  ');
+  this.render(hbs`{{axe-component axeViolationClassNames=axeViolationClassNames}}`);
 
   assert.deepEqual([].slice.call(dummyDOMNode.classList), ['spark', '🐋', 'foo']);
 
-  run(() => dummyDOMNode.remove());
+  dummyDOMNode.remove();
 });
 
 test('#violationClasses will always give precedence to a `axeViolationClassNames`, if it is set', function (assert) {
+  initializeViolationsHelper();
+
   stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
   const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
+
   const axeViolationClassNames = ['a11y-tomster', 'a11y-zoey'];
-
-  const component = Component.create({ axeViolationClassNames });
-
-  component.audit();
+  this.set('axeViolationClassNames', axeViolationClassNames);
+  this.render(hbs`{{axe-component axeViolationClassNames=axeViolationClassNames}}`);
 
   axeViolationClassNames.forEach(className => {
    assert.ok(dummyDOMNode.classList.contains(className));
@@ -269,31 +235,37 @@ test('#violationClasses will always give precedence to a `axeViolationClassNames
    assert.notOk(dummyDOMNode.classList.contains(VIOLATION_CLASS_MAP[`LEVEL_${noiseLevel}`]));
   });
 
-  run(() => dummyDOMNode.remove());
+  dummyDOMNode.remove();
 });
 
 test('using default class names for violations when no `axeViolationClassNames` is provided', function (assert) {
+  initializeViolationsHelper();
+
   stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
   const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE);
-  const component = Component.create();
 
-  component.audit();
+  this.render(hbs`{{axe-component}}`);
 
   assert.ok(dummyDOMNode.classList.contains(VIOLATION_CLASS_MAP.LEVEL_1));
 
-  run(() => dummyDOMNode.remove());
+  dummyDOMNode.remove();
 });
 
 test(`smartly detects replaced elements and applies a special \`border-box\` style instead
 of the styles from the current setting`, function(assert) {
+  initializeViolationsHelper();
+
   stubViolationOnDOMNode(sandbox, `#${ID_TEST_DOM_NODE}`);
 
   const customViolationClass = 'foo';
   const dummyDOMNode = setupDOMNode(ID_TEST_DOM_NODE, 'img');
-  const component = Component.create({ axeViolationClassNames: [customViolationClass] });
 
-  component.audit();
+  this.set('axeViolationClassNames', [customViolationClass]);
+  this.render(hbs`{{axe-component axeViolationClassNames=axeViolationClassNames}}`);
+
   assert.ok(dummyDOMNode.classList.contains(VIOLATION_CLASS_MAP.REPLACED_ELEMENT));
   assert.notOk(dummyDOMNode.classList.contains(customViolationClass));
+
+  dummyDOMNode.remove();
 });
