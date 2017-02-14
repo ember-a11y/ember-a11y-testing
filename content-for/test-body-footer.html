@@ -2,7 +2,7 @@
   (function() {
     var runningAudits = 0;
 
-    Ember.Test.registerWaiter(function() {
+    Ember.Test.registerWaiter(function runningAuditWaiter() {
       return runningAudits === 0;;
     });
 
