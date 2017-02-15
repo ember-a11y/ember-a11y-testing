@@ -1,5 +1,6 @@
 /* global QUnit, axe */
 import Ember from 'ember';
+import RSVP from 'rsvp';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -44,17 +45,17 @@ test('a11yCheckCallback should log any violations and throw an error', function(
 
 /* axe.ember.afterRender */
 
-test('afterRender should run a11yCheck and feed the results to callback', function(assert) {
-  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck');
+test('afterRender should run axe.run and feed the results to callback', function(assert) {
+  let runStub = sandbox.stub(axe, 'run').returns(RSVP.Promise.resolve({ violations: [] }));
 
-  axe.ember.afterRender();
-
-  assert.ok(a11yCheckStub.calledOnce);
-  assert.ok(a11yCheckStub.calledWith('#ember-testing-container', undefined, axe.ember.a11yCheckCallback));
+  return axe.ember.afterRender().then(() => {
+    assert.ok(runStub.calledOnce);
+    assert.ok(runStub.calledWith('#ember-testing-container', undefined));
+  });
 });
 
-test('afterRender should run a11yCheck with options and feed the results to callback', function(assert) {
-  let a11yCheckStub = sandbox.stub(axe, 'a11yCheck');
+test('afterRender should run axe.run with options and feed the results to callback', function(assert) {
+  let runStub = sandbox.stub(axe, 'run').returns(RSVP.Promise.resolve({ violations: [] }));
 
   axe.ember.testOptions = {
     runOnly: {
@@ -63,14 +64,13 @@ test('afterRender should run a11yCheck with options and feed the results to call
       }
   };
 
-  axe.ember.afterRender();
+  return axe.ember.afterRender().then(() => {
+    assert.ok(runStub.calledOnce);
+    assert.ok(runStub.calledWith('#ember-testing-container', axe.ember.testOptions));
 
-  assert.ok(a11yCheckStub.calledOnce);
-  assert.ok(a11yCheckStub.calledWith('#ember-testing-container', axe.ember.testOptions, axe.ember.a11yCheckCallback));
-
-  axe.ember.testOptions = undefined;
+    axe.ember.testOptions = undefined;
+  });
 });
-
 /* axe.ember.moduleStart */
 
 test('moduleStart turns axe on for acceptance tests', function(assert) {
