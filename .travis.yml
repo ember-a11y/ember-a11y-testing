@@ -27,5 +27,3 @@ install:
 
 script:
   - ember try:each
-  - npm install bower
-  - node node-tests/blueprint-tests.js

@@ -24,9 +24,15 @@ module.exports = {
   included: function(app) {
     this._super.included(app);
 
-    if (app.env !== 'production') {
-      app.import(path.join(app.bowerDirectory, 'axe-core/axe.js'));
-    }
+    app.import('vendor/axe-core/axe.js', { type: 'test' });
+  },
+
+  treeForVendor: function() {
+    var axePath = path.dirname(require.resolve('axe-core'));
+    return new Funnel(axePath, {
+      files: ['axe.js'],
+      destDir: 'axe-core'
+    });
   },
 
   /**
