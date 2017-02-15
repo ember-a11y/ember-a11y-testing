@@ -19,8 +19,6 @@
        * @return {Void}
        */
       a11yCheckCallback: function(results) {
-        runningAudit = false;
-
         var violations = results.violations;
 
         if (violations.length) {
@@ -60,7 +58,12 @@
        */
       afterRender: function() {
         runningAudit = true;
-        axe.a11yCheck('#ember-testing-container', axe.ember.testOptions, axe.ember.a11yCheckCallback);
+        return axe.run('#ember-testing-container', axe.ember.testOptions)
+          .then(axe.ember.a11yCheckCallback)
+          .catch(Ember.Test.adapter.exception)
+          .then(function() {
+            runningAudit = false;
+          });
       },
 
       /**

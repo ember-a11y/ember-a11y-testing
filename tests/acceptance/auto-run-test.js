@@ -3,40 +3,42 @@ import { module, test } from 'qunit';
 import startApp from '../../tests/helpers/start-app';
 import sinon from 'sinon';
 
-const { run } = Ember;
+const { Test, run } = Ember;
 
 const SELECTORS = {
   passingComponent: '[data-test-selector="violations-page__passing-component"]'
 };
 
-let application;
-let sandbox;
-
 module('Acceptance | auto-run', {
-  beforeEach: function() {
-    application = startApp();
-    sandbox = sinon.sandbox.create();
+  beforeEach() {
+    this.application = startApp();
+    this.sandbox = sinon.sandbox.create();
   },
 
-  afterEach: function() {
-    sandbox.restore();
-    Ember.run(application, 'destroy');
+  afterEach() {
+    this.sandbox.restore();
+    run(this.application, 'destroy');
   }
 });
 
-test('should run the function when visiting a new route', function(assert) {
-  const callbackStub = sandbox.stub(run.backburner.options.render, 'after');
+test('should run the function when visiting a new route and properly report errors', function(assert) {
+  const callbackSpy = this.sandbox.spy(run.backburner.options.render, 'after');
+  const exceptionStub = this.sandbox.stub(Test.adapter, 'exception');
 
   visit('/');
 
   andThen(() => {
-    assert.ok(callbackStub.calledOnce);
+    assert.ok(callbackSpy.calledOnce);
+
+    assert.ok(exceptionStub.calledOnce);
+    assert.ok(exceptionStub.calledWithMatch(Error));
+
     assert.equal(currentPath(), 'violations');
   });
 });
 
 test('should run the function whenever a render occurs', function(assert) {
-  const callbackStub = sandbox.stub(run.backburner.options.render, 'after');
+  const callbackStub = this.sandbox.stub(run.backburner.options.render, 'after');
   let callCount = 0;
 
   visit('/');

@@ -6,11 +6,15 @@ moduleForAcceptance('Acceptance | violations', {
   beforeEach() {
     // In order for the audit to run, we have to act like we're not in testing
     Ember.testing = false;
+
+    // But we don't want to run the automatic audit
+    axe.ember.turnAxeOff();
   },
 
   afterEach() {
-    // Turn testing mode back on to ensure validity of other tests
+    // Reset everything to ensure validity of other tests
     Ember.testing = true;
+    axe.ember.turnAxeOn();
   }
 });
 
