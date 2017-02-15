@@ -1,3 +1,12 @@
+# 0.2.0 / 15-02-2017
+
+- Properly report exceptions
+- Move `axe-core` to `npm` dependency
+- Add `a11y-audit` test helper
+- Add waiter to ensure audits finish running before tests finish
+- Upgrade all dependencies
+- Remove application references in initializers
+
 # 0.1.6 / 16-08-2016
 
 - Ensure version of `axe-core` added to projects is in sync with the current dependency.
