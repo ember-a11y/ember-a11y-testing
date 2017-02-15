@@ -24,7 +24,9 @@ module.exports = {
   included: function(app) {
     this._super.included(app);
 
-    app.import('vendor/axe-core/axe.js', { type: 'test' });
+    if (app.env !== 'production') {
+      app.import('vendor/axe-core/axe.js');
+    }
   },
 
   treeForVendor: function() {
