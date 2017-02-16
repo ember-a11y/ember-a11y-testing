@@ -9,7 +9,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember try:each && node node-tests/blueprint-tests.js"
+    "test": "ember try:each"
   },
   "repository": {
     "type": "git",
