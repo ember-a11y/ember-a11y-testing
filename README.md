@@ -6,9 +6,7 @@
 
 Ember A11y Testing is a wrapper around [Deque Labs'](https://github.com/dequelabs)
 [axe-core](https://github.com/dequelabs/axe-core) accessibility testing engine.
-It automatically integrates into your testing environment by running during the
-`afterRender` step in the [run loop](http://guides.emberjs.com/v1.10.0/understanding-ember/run-loop/)
-during any acceptance tests.
+It integrates into your testing environment with a simple `a11yAudit()` helper.
 
 If you're using Ember 1.13.0 or above, it also integrates into your development
 workflow by running during a component's `didRender` phase in non-production
@@ -23,51 +21,12 @@ ember install ember-a11y-testing
 
 ## Usage
 
+Ember A11y Testing injects the `axe` global during development and tests so that
+you can run accessibility audits while developing your application. It also
+provides some Ember-specific tools so that you can integrate accessibility
+checks into your workflow easily.
+
 ### Testing Usage
-By default, Ember A11y Testing will automatically begin running during _acceptance_ tests. It
-also injects the `axe` object globally during development so you can run tests
-while developing your application as well.
-
-_Note:_ any tests run with Ember A11y Testing will adjust the testing container
-to occupy the entire screen. This is to simulate the actual application
-environment, as browsers adjust styles at small sizes for accessibility reasons.
-It will reset itself at the conclusion of testing though.
-
-#### Disabling/Enabling Axe During Tests
-
-By default, the axe-core tests only run during acceptance tests. In order to
-enable them for other tests, simply run the following at the beginning of your
-testing module:
-
-```javascript
-axe.ember.turnAxeOn();
-```
-
-On the flip side, if you want to turn tests off, simply use:
-
-```javascript
-axe.ember.turnAxeOff();
-```
-
-#### Setting Axe Test Options
-
-You can pass specific options to be used during `a11yCheck` by setting them on a
-global `testOptions` property:
-
-```javascript
-axe.ember.testOptions = {
-  runOnly: {
-    type: "tag",
-    values: ["wcag2a"]
-  }
-};
-```
-
-You can see the available options in the [axe-core repo](https://github.com/dequelabs/axe-core/blob/master/doc/API.md#b-options-parameter).
-
-_Note:_ the options will stay set, until set to something different.
-
-#### `a11yAudit` Helper
 
 Ember A11y Testing also provides a simple helper to run accessibility audits
 on-demand within your test suite.
@@ -117,6 +76,10 @@ test('Some test case', function(assert) {
 As you can see, the usage for all types of tests is pretty much the same. The
 only real difference is Acceptance tests get automatic async handling.
 
+_Note:_ any tests run with Ember A11y Testing will adjust the testing container
+to occupy the entire screen. This is to simulate the actual application
+environment, as browsers adjust styles at small sizes for accessibility reasons.
+It will reset itself at the conclusion of testing though.
 
 ### Development Usage
 
