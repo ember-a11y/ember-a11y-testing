@@ -12,13 +12,11 @@ const SELECTORS = {
 
 module('Acceptance | a11y-audit', {
   beforeEach() {
-    axe.ember.turnAxeOff();
     this.application = startApp();
   },
 
   afterEach() {
     run(this.application, 'destroy');
-    axe.ember.turnAxeOn();
   }
 });
 

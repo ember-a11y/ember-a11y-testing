@@ -9,8 +9,7 @@ var VersionChecker = require('ember-cli-version-checker');
 // The different types/area for which we have content for.
 var ALLOWED_CONTENT_FOR = [
   'head-footer',
-  'test-head-footer',
-  'test-body-footer'
+  'test-head-footer'
 ];
 
 module.exports = {

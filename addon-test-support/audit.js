@@ -1,17 +1,56 @@
+import RSVP from 'rsvp';
+
 /**
- * Runs the axe a11y audit on the given context selector and with options.
+ * Processes the results of calling axe.a11yCheck. If there are any
+ * violations, it throws an error and then logs them individually.
+ * @param {Object} results
+ * @return {Void}
+ */
+function a11yAuditCallback(results) {
+  let violations = results.violations;
+
+  if (violations.length) {
+    Ember.Logger.error('ACCESSIBILITY VIOLATIONS: ' + violations.length);
+
+    for (let i = 0, l = violations.length; i < l; i++) {
+      let violation = violations[i];
+      let violationNodes = violation.nodes.map(node => node.html);
+
+      Ember.Logger.warn(violation.impact.toUpperCase() + ': ' + violation.help);
+      Ember.Logger.info('Offending markup (' + violation.nodes.length + ')');
+      Ember.Logger.debug(violationNodes);
+      Ember.Logger.info('Additional info: ' + violation.helpUrl);
+      Ember.Logger.info('-------------------------------------');
+    }
+
+    Ember.assert('The page should have no accessibility violations. Please check the developer console for more details.');
+  }
+}
+
+/**
+ * Runs the axe a11y audit with the given context selector and options.
  * The context defaults to '#ember-testing-container' if not specified.
- * The options will fallback to the global axe.ember.testOptions if they're
- * defined and to the default axe-core options after that.
+ * The options default axe-core defaults.
  *
  * @method runA11yAudit
  * @private
  */
-function runA11yAudit(contextSelector, auditOptions) {
-  let context = contextSelector || '#ember-testing-container';
-  let options = auditOptions || axe.ember.testOptions || {};
+function runA11yAudit(contextSelector = '#ember-testing-container', auditOptions = {}) {
+  document.body.classList.add('axe-running');
 
-  return axe.run(context, options).then(axe.ember.a11yCheckCallback);
+  let auditPromise = new RSVP.Promise((resolve, reject) => {
+    axe.run(contextSelector, auditOptions, (error, result) => {
+      if (!error) {
+        return resolve(result);
+      } else {
+        return reject(error);
+      }
+    })
+  });
+
+  return auditPromise
+    .then(a11yAuditCallback)
+    .finally(() => document.body.classList.remove('axe-running'));
 }
 
 // Register an async helper to use in acceptance tests
