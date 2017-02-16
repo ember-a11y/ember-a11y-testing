@@ -1,3 +1,7 @@
+# 0.2.1 / 15-02-2017
+
+- Include axe-core in all non-prod environments
+
 # 0.2.0 / 15-02-2017
 
 - Properly report exceptions
