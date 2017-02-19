@@ -36,6 +36,7 @@ export function initialize() {
   const { componentOptions = {} } = addonConfig;
 
   const {
+    turnAuditOff,
     axeOptions,
     axeCallback,
     visualNoiseLevel,
@@ -64,9 +65,10 @@ export function initialize() {
      * Turns off the accessibility audit during rendering.
      *
      * @public
+     * @default false
      * @type {Boolean}
      */
-    turnAuditOff: false,
+    turnAuditOff: turnAuditOff || false,
 
     /**
      * An array of classNames (or a space-separated string) to add to the component when a violation occurs.

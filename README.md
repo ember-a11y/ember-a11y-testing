@@ -245,11 +245,13 @@ turnAuditOff: true
 ```
 
 #### Environment Options
-With the exception of `turnAuditOff`, each of the fine-grained component hooks above can instead be defined for ALL components inside of your application's `config/environment.js` file. Simply supply them in a `componentOptions` hash on the `ember-a11y-testing` property of `ENV`.
+
+Each of the fine-grained component hooks above can instead be defined for ALL components inside of your application's `config/environment.js` file. Simply supply them in a `componentOptions` hash on the `ember-a11y-testing` property of `ENV`.
 
 ```javascript
 ENV['ember-a11y-testing'] = {
     componentOptions: {
+      turnAuditOff: false, // Change to true to disable the audit in development
       axeCallback: defaultAxeCallback,
       axeOptions: defaultAxeOptions,
       visualNoiseLevel: 2,
