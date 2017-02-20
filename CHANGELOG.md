@@ -1,3 +1,7 @@
+# 0.2.2 / 20-02-2017
+
+- Allow `turnAuditOff` to be defined globally
+
 # 0.2.1 / 15-02-2017
 
 - Include axe-core in all non-prod environments

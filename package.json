@@ -1,6 +1,6 @@
 {
   "name": "ember-a11y-testing",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "The future of accessibility testing in Ember",
   "directories": {
     "doc": "doc",
