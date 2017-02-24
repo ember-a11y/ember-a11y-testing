@@ -9,22 +9,21 @@ var VersionChecker = require('ember-cli-version-checker');
 // The different types/area for which we have content for.
 var ALLOWED_CONTENT_FOR = [
   'head-footer',
-  'test-head-footer',
-  'test-body-footer'
+  'test-head-footer'
 ];
 
 module.exports = {
   name: 'ember-a11y-testing',
 
   /**
-   * Includes axe-core in non-production builds. It includes the un-minified
+   * Includes axe-core in builds that have tests. It includes the un-minified
    * version in case of a need to debug.
    * @override
    */
   included: function(app) {
     this._super.included(app);
 
-    if (app.env !== 'production') {
+    if (app.tests) {
       app.import('vendor/axe-core/axe.js');
     }
   },

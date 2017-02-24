@@ -6,12 +6,12 @@
    */
 
   /* We hide the QUnit content so that it doesn't modify the screen at all */
-  .axe-enabled #qunit {
+  .axe-running #qunit {
     display: none;
   }
 
   /* We position the testing container to be the entire screen */
-  .axe-enabled #ember-testing-container {
+  .axe-running #ember-testing-container {
     position: static !important;
     background: transparent;
     bottom: auto;
@@ -24,7 +24,7 @@
   }
 
   /* Reset the zoom on the actual application so that everything is normal */
-  .axe-enabled #ember-testing-container #ember-testing {
+  .axe-running #ember-testing-container #ember-testing {
     zoom: 1;
   }
 </style>
