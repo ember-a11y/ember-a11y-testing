@@ -21,7 +21,7 @@ module.exports = {
    * @override
    */
   included: function(app) {
-    this._super.included(app);
+    this._super.included.apply(this, arguments);
 
     if (app.tests) {
       app.import('vendor/axe-core/axe.js');
