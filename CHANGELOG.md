@@ -1,3 +1,12 @@
+# 0.3.0 / 27-02-2017
+
+- Replace `jshint` with `eslint`
+- Update `readme` with new, simpler test API
+- Remove auto-run feature
+- Ensure `axe-core` is included in production test builds
+- Remove blueprint tests from `npm` scripts
+- Remove `babel` polyfill from test app
+
 # 0.2.2 / 20-02-2017
 
 - Allow `turnAuditOff` to be defined globally
