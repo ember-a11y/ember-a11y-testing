@@ -28,6 +28,16 @@ function a11yAuditCallback(results) {
 }
 
 /**
+ * Determines if an object is a plain object (as opposed to a jQuery or other
+ * type of object).
+ * @param {Object} obj
+ * @return {Boolean}
+ */
+function isPlainObj(obj) {
+  return typeof obj == 'object' && obj.constructor == Object;
+}
+
+/**
  * Runs the axe a11y audit with the given context selector and options.
  * The context defaults to '#ember-testing-container' if not specified.
  * The options default axe-core defaults.
@@ -36,6 +46,12 @@ function a11yAuditCallback(results) {
  * @private
  */
 function runA11yAudit(contextSelector = '#ember-testing-container', auditOptions = {}) {
+  // Support passing axeOptions as a single argument
+  if (arguments.length === 1 && isPlainObj(contextSelector)) {
+    auditOptions = contextSelector;
+    contextSelector = '#ember-testing-container';
+  }
+
   document.body.classList.add('axe-running');
 
   let auditPromise = new RSVP.Promise((resolve, reject) => {
