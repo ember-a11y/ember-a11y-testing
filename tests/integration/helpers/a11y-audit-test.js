@@ -15,10 +15,18 @@ moduleForComponent('component:axe-component', 'Integration | Helper | a11y-audit
   }
 });
 
-test('a11yAudit runs successfully', function(assert) {
+test('a11yAudit runs successfully with jquery context', function(assert) {
   this.render(hbs`{{#axe-component}}{{/axe-component}}`);
 
   return a11yAudit(this.$()).then(() => {
+    assert.ok(true, 'a11yAudit ran and didn\'t find any issues');
+  });
+});
+
+test('a11yAudit runs successfully with element context', function(assert) {
+  this.render(hbs`{{#axe-component}}{{/axe-component}}`);
+
+  return a11yAudit(this.$()[0]).then(() => {
     assert.ok(true, 'a11yAudit ran and didn\'t find any issues');
   });
 });
@@ -35,6 +43,20 @@ test('a11yAudit can use custom axe options', function(assert) {
   this.render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
   return a11yAudit(this.$(), {
+    rules: {
+      'button-name': {
+        enabled: false
+      }
+    }
+  }).then(() => {
+    assert.ok(true, 'a11yAudit ran and used the custom options');
+  });
+});
+
+test('a11yAudit can use custom axe options as single argument', function(assert) {
+  this.render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
+
+  return a11yAudit( {
     rules: {
       'button-name': {
         enabled: false

@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import startApp from '../../tests/helpers/start-app';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
-const { run } = Ember;
+const { $, run } = Ember;
 
 const SELECTORS = {
   passingComponent: '[data-test-selector="violations-page__passing-component"]',
@@ -32,7 +32,7 @@ test('a11yAudit should catch violations as an async helper', function(assert) {
   });
 });
 
-test('a11yAudit should properly scope to a specified context selector', function(assert) {
+test('a11yAudit should properly scope to a specified string context selector', function(assert) {
   visit('/');
 
   a11yAudit(SELECTORS.passingComponent).then(() => {
@@ -48,6 +48,26 @@ test('a11yAudit should properly scope to a specified context selector', function
   });
 });
 
+test('a11yAudit should properly scope to a specified jquery context (not recommended)', function(assert) {
+  visit('/');
+
+  andThen(() => {
+    return a11yAudit($(SELECTORS.passingComponent)).then(() => {
+      assert.ok(true, 'a11yAudit should not have discovered any issues');
+    });
+  });
+});
+
+test('a11yAudit should properly scope to a specified html element context (not recommended)', function(assert) {
+  visit('/');
+
+  andThen(() => {
+    return a11yAudit(document.querySelector(SELECTORS.passingComponent)).then(() => {
+      assert.ok(true, 'a11yAudit should not have discovered any issues');
+    });
+  });
+});
+
 test('a11yAudit can accept an options hash in addition to context', function(assert) {
   visit('/');
 
@@ -56,6 +76,21 @@ test('a11yAudit can accept an options hash in addition to context', function(ass
       'button-name': {
         enabled: false
       }
+    }
+  });
+
+  andThen(() => {
+    assert.ok(true, 'no errors should have been found in a11yAudit');
+  });
+});
+
+test('a11yAudit can accept an options hash as a single argument', function(assert) {
+  visit('/');
+
+  a11yAudit({
+    runOnly: {
+      type: "rule",
+      values: []
     }
   });
 
