@@ -48,7 +48,23 @@ test('Some test case', function(assert) {
 
 The helper can optionally accept a "context" on which to focus the audit as
 either a selector string or an HTML element. You can also provide a secondary
-parameter to specify axe-core options.
+parameter to specify axe-core options, or specify options as a single argument:
+
+```js
+test('Some test case', function(assert) {
+  let axeOptions = {
+    rules: {
+      'button-name': {
+        enabled: false
+      }
+    }
+  };
+
+  visit('/');
+  a11yAudit(axeOptions);
+  andThen(() => assert.ok(true, 'no a11y errors found!'));
+});
+```
 
 The helper is also able to be used Integration/Unit tests like so:
 
@@ -80,6 +96,23 @@ _Note:_ any tests run with Ember A11y Testing will adjust the testing container
 to occupy the entire screen. This is to simulate the actual application
 environment, as browsers adjust styles at small sizes for accessibility reasons.
 It will reset itself at the conclusion of testing though.
+
+#### Optionally Running a11yAudit
+
+Ember A11y Testing also provides an `a11yAuditIf` helper which will only run
+audits if `enableA11yAudit=true` is set as a query param on the test page. This
+is useful if you want to conditionally run accessibility audits, such as during
+nightly build jobs.
+
+```javascript
+import a11yAuditIf from 'ember-a11y-testing/test-support/audit-if';
+
+test('Some test case', function(assert) {
+  visit('/');
+  a11yAuditIf(); // Only runs when enableA11yAudit=true is in the URL
+  andThen(() => assert.ok(true, 'no a11y errors found!'));
+});
+```
 
 ### Development Usage
 
