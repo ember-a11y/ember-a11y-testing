@@ -1,3 +1,11 @@
+# 0.4.0 / 2017-03-22
+
+- Update readme with new features/info
+- Support passing options as a single argument to a11yAudit
+- feat(a11yAudit): opt in to a11yAudit
+- Fix axe-component error test
+- Ensure `super` call is bounded
+
 # 0.3.0 / 27-02-2017
 
 - Replace `jshint` with `eslint`
