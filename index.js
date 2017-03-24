@@ -42,7 +42,7 @@ module.exports = {
    * @override
    */
   contentFor: function(type) {
-    if (~ALLOWED_CONTENT_FOR.indexOf(type)) {
+    if (this.app.env !== 'production' && ~ALLOWED_CONTENT_FOR.indexOf(type)) {
       return fs.readFileSync(path.join(__dirname, 'content-for', type + '.html'));
     }
   },
