@@ -147,7 +147,7 @@ export function initialize() {
             for (let j = 0, k = nodes.length; j < k; j++) {
               nodeData = nodes[j];
 
-              Ember.Logger.error(`[${violation.impact.toUpperCase()}]: ${violation.help} \nOffending markup is: \n${nodeData.html} \n${violation.helpUrl}`, violation);
+              Ember.Logger.error(`[${violation.impact}]: ${violation.help} \nOffending markup is: \n${nodeData.html} \n${violation.helpUrl}`, violation);
               window.violationsHelper.push(violation);
 
               if (nodeData) {
