@@ -142,13 +142,13 @@ export function initialize() {
           for (let i = 0, l = violations.length; i < l; i++) {
             violation = violations[i];
 
-            Ember.Logger.error(`Violation #${i+1}`, violation);
-            window.violationsHelper.push(violation);
-
             nodes = violation.nodes;
 
             for (let j = 0, k = nodes.length; j < k; j++) {
               nodeData = nodes[j];
+
+              Ember.Logger.error(`[${violation.impact.toUpperCase()}]: ${violation.help} \nOffending markup is: \n${nodeData.html} \n${violation.helpUrl}`);
+              window.violationsHelper.push(violation);
 
               if (nodeData) {
                 nodeElem = document.querySelector(nodeData.target.join(','));

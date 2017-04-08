@@ -88,7 +88,7 @@ export default class ViolationsHelper {
   }
 
   /**
-   * Logs the tips for using violatonHelper in the console.
+   * Logs the tips for using violationHelper in the console.
    * Only logs if there are existing violations and the tip has not been logged before.
    *
    * @type {Function}

@@ -122,7 +122,14 @@ test('audit should log any violations found', function(assert) {
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
-      nodes: []
+      nodes: [
+        {
+          target:
+          [
+            '#ember-testing'
+          ]
+        }
+      ]
     }]
   });
 
