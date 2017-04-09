@@ -144,6 +144,11 @@ export function initialize() {
 
             nodes = violation.nodes;
 
+            if (!nodes) {
+              Ember.Logger.error(`[${violation.impact}]: ${violation.help} \nOffending markup is: \n \n${violation.helpUrl}`, violation);
+              window.violationsHelper.push(violation);
+            }
+
             for (let j = 0, k = nodes.length; j < k; j++) {
               nodeData = nodes[j];
 
