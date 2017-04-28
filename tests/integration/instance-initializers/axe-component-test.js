@@ -145,8 +145,7 @@ test('audit should log any violations found if no nodes are found', function(ass
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
-      nodes: [
-      ]
+      nodes: []
     }]
   });
 
