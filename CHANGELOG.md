@@ -1,3 +1,12 @@
+# 0.4.2 / 2017-05-19
+
+- Add release notes
+- Update axe-core version and range
+
+# 0.4.1 / 2017-03-24
+
+- Don't include content for production builds
+
 # 0.4.0 / 2017-03-22
 
 - Update readme with new features/info
@@ -35,7 +44,7 @@
 # 0.1.6 / 16-08-2016
 
 - Ensure version of `axe-core` added to projects is in sync with the current dependency.
-  - Implement initial testing for this behavior within `node-tests/blueprint-test.js`
+- Implement initial testing for this behavior within `node-tests/blueprint-test.js`
 
 # 0.1.5 / 09-08-2016
 
