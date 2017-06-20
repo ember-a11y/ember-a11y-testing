@@ -257,6 +257,20 @@ ENV['ember-a11y-testing'] = {
 };
 ```
 
+By example, to disable a specific check you can:
+
+```javascript
+ENV['ember-a11y-testing']: {
+  componentOptions: {
+    axeOptions: {
+      rules: {
+        'color-contrast': { 'enabled': false }
+      }
+    }
+  }
+}
+```
+
 ## Future Plans
 
 Now that your components and acceptance tests can self-audit, the next step
