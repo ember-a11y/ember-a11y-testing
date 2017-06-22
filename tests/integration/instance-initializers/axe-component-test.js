@@ -122,7 +122,14 @@ test('audit should log any violations found', function(assert) {
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
-      nodes: []
+      nodes: [
+        {
+          target:
+          [
+            '#ember-testing'
+          ]
+        }
+      ]
     }]
   });
 
@@ -132,6 +139,21 @@ test('audit should log any violations found', function(assert) {
   assert.ok(logSpy.calledOnce);
 });
 
+test('audit should log any violations found if no nodes are found', function(assert) {
+  initializeViolationsHelper();
+
+  stubA11yCheck(sandbox, {
+    violations: [{
+      name: 'test',
+      nodes: []
+    }]
+  });
+
+  const logSpy = sandbox.spy(Logger, 'error');
+  this.render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
+
+  assert.ok(logSpy.calledOnce);
+});
 
 test('audit should do nothing if no violations found', function(assert) {
   initializeViolationsHelper();

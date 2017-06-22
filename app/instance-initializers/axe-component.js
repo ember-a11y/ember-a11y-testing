@@ -142,13 +142,18 @@ export function initialize() {
           for (let i = 0, l = violations.length; i < l; i++) {
             violation = violations[i];
 
-            Ember.Logger.error(`Violation #${i+1}`, violation);
-            window.violationsHelper.push(violation);
-
             nodes = violation.nodes;
+
+            if (Ember.isEmpty(nodes) || nodes.length === 0) {
+              Ember.Logger.error(`[${violation.impact}]: ${violation.help} \nOffending markup is: \n \n${violation.helpUrl}`, violation);
+              window.violationsHelper.push(violation);
+            }
 
             for (let j = 0, k = nodes.length; j < k; j++) {
               nodeData = nodes[j];
+
+              Ember.Logger.error(`[${violation.impact}]: ${violation.help} \nOffending markup is: \n${nodeData.html} \n${violation.helpUrl}`, violation);
+              window.violationsHelper.push(violation);
 
               if (nodeData) {
                 nodeElem = document.querySelector(nodeData.target.join(','));
