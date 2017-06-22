@@ -271,6 +271,20 @@ ENV['ember-a11y-testing']: {
 }
 ```
 
+The color contrast check can cause undesired scrolling behavior.  To disable:
+
+```javascript
+ENV['ember-a11y-testing'] = {
+  componentOptions: {
+    axeOptions: {
+      checks: {
+        'color-contrast': { options: { noScroll: true } }
+      }
+    }
+  }
+};
+```
+
 ## Future Plans
 
 Now that your components and acceptance tests can self-audit, the next step
