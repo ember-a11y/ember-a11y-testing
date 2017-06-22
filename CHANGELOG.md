@@ -1,3 +1,8 @@
+# 0.4.3 / 2017-06-21
+
+- Present information in an easy-to-digest format #18 (#78)
+- Add example on Readme to disable specific checks
+
 # 0.4.2 / 2017-05-19
 
 - Add release notes
