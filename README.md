@@ -264,7 +264,7 @@ ENV['ember-a11y-testing']: {
   componentOptions: {
     axeOptions: {
       rules: {
-        "region": { enabled: true } // enable region rule
+        'region': { enabled: true } // enable region rule
       },
       checks: {
         'color-contrast': { options: { noScroll: true } } // disable scrolling of color-contrast check
