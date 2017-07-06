@@ -257,14 +257,17 @@ ENV['ember-a11y-testing'] = {
 };
 ```
 
-By example, to disable a specific check you can:
+By example, to enable a specific rule and to set options for a specific check, you can:
 
 ```javascript
 ENV['ember-a11y-testing']: {
   componentOptions: {
     axeOptions: {
       rules: {
-        'color-contrast': { 'enabled': false }
+        'region': { enabled: true } // enable region rule
+      },
+      checks: {
+        'color-contrast': { options: { noScroll: true } } // disable scrolling of color-contrast check
       }
     }
   }
