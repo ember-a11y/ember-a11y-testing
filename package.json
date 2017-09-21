@@ -29,7 +29,7 @@
     "ember-cli-eslint": "^3.0.2",
     "ember-cli-github-pages": "^0.1.2",
     "ember-cli-htmlbars": "^1.1.1",
-    "ember-cli-htmlbars-inline-precompile": "^0.3.6",
+    "ember-cli-htmlbars-inline-precompile": "0.3.11",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-qunit": "^3.0.1",
     "ember-cli-release": "^0.2.9",
@@ -54,7 +54,7 @@
     "testing"
   ],
   "dependencies": {
-    "axe-core": "^2.2.1",
+    "axe-core": "^2.4.1",
     "broccoli-funnel": "^1.1.0",
     "ember-cli-babel": "^5.2.4",
     "ember-cli-version-checker": "^1.2.0"
