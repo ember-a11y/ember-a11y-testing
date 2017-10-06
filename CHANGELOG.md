@@ -1,3 +1,10 @@
+# 0.4.4 / 2017-10-05
+
+  - Package upgrades and locking version of htmlbars-inline-precompile
+  - update README -change double-ticks to single-ticks
+  - update README to combine axeOptions examples
+  - README - example to disable color contrast scroll
+
 # 0.4.3 / 2017-06-21
 
 - Present information in an easy-to-digest format #18 (#78)
