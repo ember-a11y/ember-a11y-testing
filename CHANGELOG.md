@@ -1,3 +1,8 @@
+# 0.5.0 / 2017-10-19
+
+  * Update a couple more dependencies
+  * Update runtime dependencies
+
 # 0.4.4 / 2017-10-05
 
   - Package upgrades and locking version of htmlbars-inline-precompile
