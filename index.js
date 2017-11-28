@@ -42,7 +42,7 @@ module.exports = {
    * @override
    */
   contentFor: function(type) {
-    if (this.app.env !== 'production' && ~ALLOWED_CONTENT_FOR.indexOf(type)) {
+    if (this._findHost().env !== 'production' && ~ALLOWED_CONTENT_FOR.indexOf(type)) {
       return fs.readFileSync(path.join(__dirname, 'content-for', type + '.html'));
     }
   },
@@ -54,7 +54,7 @@ module.exports = {
    */
   treeForApp: function(tree) {
     var checker = new VersionChecker(this);
-    var isProductionBuild = this.app.env === 'production';
+    var isProductionBuild = this._findHost().env === 'production';
     var isOldEmber = checker.for('ember', 'bower').lt('1.13.0');
 
     if (isProductionBuild || isOldEmber) {
@@ -64,5 +64,16 @@ module.exports = {
     }
 
     return tree;
-  }
+  },
+
+  _findHost() {
+    let current = this;
+    let app;
+
+    do {
+      app = current.app || app;
+    } while (current.parent.parent && (current = current.parent));
+
+    return app;
+  },
 };
