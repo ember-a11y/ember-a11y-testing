@@ -55,7 +55,7 @@ module.exports = {
   treeForApp: function(tree) {
     var checker = new VersionChecker(this);
     var isProductionBuild = this.app.env === 'production';
-    var isOldEmber = checker.for('ember', 'bower').lt('1.13.0');
+    var isOldEmber = checker.for('ember').lt('1.13.0');
 
     if (isProductionBuild || isOldEmber) {
       tree = new Funnel(tree, {
