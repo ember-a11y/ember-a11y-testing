@@ -3,24 +3,24 @@ module.exports = {
   scenarios: [
     {
       name: 'ember-1.13',
-      npm: {
-        devDependencies: {
+      bower: {
+        dependencies: {
           'ember': '~1.13.0'
         }
       }
     },
     {
       name: 'ember-release',
-      npm: {
-        devDependencies: {
+      bower: {
+        dependencies: {
           'ember': 'release'
         }
       }
     },
     {
       name: 'ember-beta',
-      npm: {
-        devDependencies: {
+      bower: {
+        dependencies: {
           'ember': 'beta'
         }
       }
@@ -28,24 +28,24 @@ module.exports = {
     {
       name: 'ember-canary',
       allowedToFail: true,
-      npm: {
-        devDependencies: {
+      bower: {
+        dependencies: {
           'ember': 'canary'
         }
       }
     },
     {
       name: 'ember-lts-2.4',
-      npm: {
-        devDependencies: {
+      bower: {
+        dependencies: {
           'ember': 'lts-2-4'
         }
       }
     },
     {
       name: 'ember-lts-2.8',
-      npm: {
-        devDependencies: {
+      bower: {
+        dependencies: {
           'ember': 'lts-2-8'
         }
       }
