@@ -130,6 +130,10 @@ export function initialize() {
       if (this.get('tagName') !== '') {
 
         axe.a11yCheck(this.$(), this.axeOptions, (results) => {
+          if (this.get('isDestroyed')) {
+            return;
+          }
+
           const violations = results.violations;
           const violationClasses = this.get('violationClasses') || [];
           const visualNoiseLevel = this.get('visualNoiseLevel');
