@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from '../templates/components/violations-grid-item';
-
-const { Component } = Ember;
 
 
 export default Component.extend({

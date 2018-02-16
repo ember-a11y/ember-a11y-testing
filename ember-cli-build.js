@@ -1,8 +1,10 @@
 /* eslint-env node */
-var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults);
+  var app = new EmberAddon(defaults, {
+    // Add options here
+  });
 
   /*
     This build file specifies the options for the dummy test app of this

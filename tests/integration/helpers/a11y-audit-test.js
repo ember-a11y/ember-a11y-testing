@@ -1,9 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
-
-const { Component } = Ember;
 
 // We use a component integration test to verify the behavior of the a11y-audit
 // by rendering a component and then running the audit on it.

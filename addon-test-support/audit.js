@@ -1,3 +1,5 @@
+import { registerAsyncHelper } from '@ember/test';
+import { assert } from '@ember/debug';
 import RSVP from 'rsvp';
 
 /**
@@ -23,7 +25,7 @@ function a11yAuditCallback(results) {
       Ember.Logger.info('-------------------------------------');
     }
 
-    Ember.assert('The page should have no accessibility violations. Please check the developer console for more details.');
+    assert('The page should have no accessibility violations. Please check the developer console for more details.');
   }
 }
 
@@ -70,7 +72,7 @@ function runA11yAudit(contextSelector = '#ember-testing-container', auditOptions
 }
 
 // Register an async helper to use in acceptance tests
-Ember.Test.registerAsyncHelper('a11yAudit', function(app, ...args) {
+registerAsyncHelper('a11yAudit', function(app, ...args) {
   return runA11yAudit(...args);
 });
 

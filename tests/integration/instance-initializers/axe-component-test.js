@@ -1,11 +1,17 @@
 /* global sinon, axe */
+import Component from '@ember/component';
+
 import Ember from 'ember';
 import { initialize } from 'dummy/instance-initializers/axe-component';
-import { initialize as initializeViolationsHelper } from 'dummy/instance-initializers/violations-helper';
+import {
+  initialize as initializeViolationsHelper
+} from 'dummy/instance-initializers/violations-helper';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-const { Component, Logger } = Ember;
+const {
+  Logger
+} = Ember;
 const ID_TEST_DOM_NODE = 'sign-up-button';
 
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
