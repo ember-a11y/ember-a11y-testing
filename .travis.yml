@@ -7,7 +7,7 @@ node_js:
   - "6"
   - "7"
 
-sudo: false
+sudo: required
 dist: trusty
 
 addons:
