@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { run } from '@ember/runloop';
 import { module, test } from 'qunit';
 import startApp from '../../tests/helpers/start-app';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
-
-const { $, run } = Ember;
 
 const SELECTORS = {
   passingComponent: '[data-test-selector="violations-page__passing-component"]',

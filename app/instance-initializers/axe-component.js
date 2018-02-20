@@ -1,8 +1,12 @@
+import { assert } from '@ember/debug';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
+import { isArray } from '@ember/array';
+import { scheduleOnce } from '@ember/runloop';
 import Ember from 'ember';
 import ENV from '../config/environment';
 import isBackgroundReplacedElement from 'ember-a11y-testing/utils/is-background-replaced-element';
-
-const { Component, computed, isEmpty, isArray, run: { scheduleOnce } } = Ember;
 
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
 const VIOLATION_CLASS__LEVEL_2 = 'axe-violation--level-2';
@@ -144,7 +148,7 @@ export function initialize() {
 
             nodes = violation.nodes;
 
-            if (Ember.isEmpty(nodes) || nodes.length === 0) {
+            if (isEmpty(nodes) || nodes.length === 0) {
               Ember.Logger.error(`[${violation.impact}]: ${violation.help} \nOffending markup is: \n \n${violation.helpUrl}`, violation);
               window.violationsHelper.push(violation);
             }
@@ -169,11 +173,11 @@ export function initialize() {
           }
 
           if (this.axeCallback) {
-            Ember.assert('axeCallback should be a function.', typeof this.axeCallback === 'function');
+            assert('axeCallback should be a function.', typeof this.axeCallback === 'function');
             this.axeCallback(results);
           }
 
-          Ember.run.scheduleOnce('afterRender', window.violationsHelper, window.violationsHelper.logTip);
+          scheduleOnce('afterRender', window.violationsHelper, window.violationsHelper.logTip);
         });
       }
     },
