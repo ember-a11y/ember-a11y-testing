@@ -1,3 +1,8 @@
+# 0.5.1 / 2018-02-20
+
+  * Update Ember-CLI to 2.18.x (#94)
+  * Add check of `isDestroyed` when running an audit (#92)
+
 # 0.5.0 / 2017-10-19
 
   * Update a couple more dependencies
