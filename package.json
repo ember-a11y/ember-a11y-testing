@@ -22,7 +22,6 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.3.0",
     "axe-core": "^2.4.2",
     "broccoli-funnel": "^2.0.1",
     "ember-cli-babel": "^6.8.2",
