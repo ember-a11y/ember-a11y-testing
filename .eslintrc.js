@@ -14,6 +14,9 @@ module.exports = {
   env: {
     browser: true
   },
+  globals: {
+    axe: false
+  },
   rules: {
   },
   overrides: [
