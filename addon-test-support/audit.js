@@ -1,5 +1,6 @@
 import { registerAsyncHelper } from '@ember/test';
 import { assert } from '@ember/debug';
+import Ember from 'ember';
 import RSVP from 'rsvp';
 
 /**

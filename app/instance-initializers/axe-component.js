@@ -1,7 +1,7 @@
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { isEmpty } from '@ember/utils';
+import { isEmpty, isPresent } from '@ember/utils';
 import { isArray } from '@ember/array';
 import { scheduleOnce } from '@ember/runloop';
 import Ember from 'ember';
@@ -40,12 +40,16 @@ export function initialize() {
   const { componentOptions = {} } = addonConfig;
 
   const {
-    turnAuditOff,
+    turnAuditOff: configuredTurnAuditOff,
     axeOptions,
     axeCallback,
-    visualNoiseLevel,
-    axeViolationClassNames
+    visualNoiseLevel: configuredVisualNoiseLevel,
+    axeViolationClassNames: configuredAxeViolationClassNames
   } = componentOptions;
+
+  let visualNoiseLevel = configuredVisualNoiseLevel ? configuredVisualNoiseLevel : 1;
+  let axeViolationClassNames = isPresent(configuredAxeViolationClassNames) ? configuredAxeViolationClassNames : [];
+  let turnAuditOff = configuredTurnAuditOff || false;
 
   Component.reopen({
     /**
@@ -72,7 +76,7 @@ export function initialize() {
      * @default false
      * @type {Boolean}
      */
-    turnAuditOff: turnAuditOff || false,
+    turnAuditOff,
 
     /**
      * An array of classNames (or a space-separated string) to add to the component when a violation occurs.
@@ -83,7 +87,7 @@ export function initialize() {
      * @type {(Array|string)}
      * @see(https://github.com/ember-a11y/ember-a11y-testing/blob/master/content-for/head-footer.html)
      */
-    axeViolationClassNames: [],
+    axeViolationClassNames,
 
     /**
      * A numeric setting to determine the class applied to elements with violations
@@ -92,7 +96,7 @@ export function initialize() {
      * @type {string}
      * @see(https://github.com/ember-a11y/ember-a11y-testing/blob/master/content-for/head-footer.html)
      */
-    visualNoiseLevel: 1,
+    visualNoiseLevel,
 
     /**
      * Computes class name to be set on the element according to the
