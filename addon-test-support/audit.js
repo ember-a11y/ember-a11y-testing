@@ -2,6 +2,7 @@ import { registerAsyncHelper } from '@ember/test';
 import { assert } from '@ember/debug';
 import Ember from 'ember';
 import RSVP from 'rsvp';
+import config from 'ember-get-config';
 
 /**
  * Processes the results of calling axe.a11yCheck. If there are any
@@ -48,17 +49,24 @@ function isPlainObj(obj) {
  * @method runA11yAudit
  * @private
  */
-function runA11yAudit(contextSelector = '#ember-testing-container', auditOptions = {}) {
+function runA11yAudit(contextSelector = '#ember-testing-container', axeOptions) {
   // Support passing axeOptions as a single argument
   if (arguments.length === 1 && isPlainObj(contextSelector)) {
-    auditOptions = contextSelector;
+    axeOptions = contextSelector;
     contextSelector = '#ember-testing-container';
+  }
+
+  if (!axeOptions) {
+    // Try load default config
+    let a11yConfig = config['ember-a11y-testing'] || {};
+    let componentOptions = a11yConfig['componentOptions'] || {};
+    axeOptions = componentOptions['axeOptions'] || {};
   }
 
   document.body.classList.add('axe-running');
 
   let auditPromise = new RSVP.Promise((resolve, reject) => {
-    axe.run(contextSelector, auditOptions, (error, result) => {
+    axe.run(contextSelector, axeOptions, (error, result) => {
       if (!error) {
         return resolve(result);
       } else {

@@ -97,3 +97,14 @@ test('a11yAudit can accept an options hash as a single argument', function(asser
     assert.ok(true, 'no errors should have been found in a11yAudit');
   });
 });
+
+test('a11yAudit loads default config if none specified', function(assert) {
+  visit('/ignored-image-alt');
+
+  // There is an error with img alt tag, but it's ignored in global config
+  a11yAudit();
+
+  andThen(() => {
+    assert.ok(true, 'the image-alt rule should be ignored');
+  });
+});
