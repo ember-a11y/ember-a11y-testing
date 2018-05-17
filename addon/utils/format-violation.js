@@ -12,11 +12,20 @@ export default function formatViolation(violation, markup) {
     throw new Error('formatViolation called with improper structure of parameter: violation. Required properties: impact, help, helpUrl.');
   }
 
+  let count = 1;
+
   if (markup) {
-    markup = `Offending markup is: \n ${markup}\n`;
+    if (Array.isArray(markup)) {
+      count = markup.length;
+      markup = markup.join('\n');
+    }
+    markup = ` Offending nodes are: \n${markup}`;
   } else {
     markup = '';
   }
 
-  return `[${violation.impact}]: ${violation.help} \n${markup}${violation.helpUrl}`;
+  let plural = (count === 1) ? '' : 's';
+  let violationCount = `Violated ${count} time${plural}.`;
+
+  return `[${violation.impact}]: ${violation.help} \n${violationCount}${markup}\n${violation.helpUrl}`;
 }

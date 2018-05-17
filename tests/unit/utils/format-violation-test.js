@@ -19,7 +19,7 @@ test('formats a well-formed violation and relevant html', function(assert) {
   };
 
   let message = formatViolation(violation, violation.nodes[0].html);
-  let expected = `[critical]: it should be better \nOffending markup is: \n <input type="text">\nhttp://example.com`;
+  let expected = `[critical]: it should be better \nViolated 1 time. Offending nodes are: \n<input type="text">\nhttp://example.com`;
   assert.equal(message, expected);
 });
 
@@ -32,7 +32,7 @@ test('formats a well-formed violation', function(assert) {
   };
 
   let message = formatViolation(violation);
-  let expected = `[critical]: it should be better \nhttp://example.com`;
+  let expected = `[critical]: it should be better \nViolated 1 time.\nhttp://example.com`;
   assert.equal(message, expected);
 });
 
