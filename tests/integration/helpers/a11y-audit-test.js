@@ -33,7 +33,7 @@ test('a11yAudit catches violations successfully', function(assert) {
   this.render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
   return a11yAudit(this.$()).catch((e) => {
-    assert.strictEqual(e.message, 'Assertion Failed: The page should have no accessibility violations. Please check the developer console for more details.');
+    assert.ok(e.message.startsWith('Assertion Failed: The page should have no accessibility violations. Violations:', 'error message is correct'));
   });
 });
 

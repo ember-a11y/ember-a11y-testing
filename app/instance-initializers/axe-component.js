@@ -7,6 +7,8 @@ import { scheduleOnce } from '@ember/runloop';
 import Ember from 'ember';
 import ENV from '../config/environment';
 import isBackgroundReplacedElement from 'ember-a11y-testing/utils/is-background-replaced-element';
+import formatViolation from 'ember-a11y-testing/utils/format-violation';
+import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
 
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
 const VIOLATION_CLASS__LEVEL_2 = 'axe-violation--level-2';
@@ -157,15 +159,15 @@ export function initialize() {
             nodes = violation.nodes;
 
             if (isEmpty(nodes) || nodes.length === 0) {
-              Ember.Logger.error(`[${violation.impact}]: ${violation.help} \nOffending markup is: \n \n${violation.helpUrl}`, violation);
-              window.violationsHelper.push(violation);
+              Ember.Logger.error(formatViolation(violation), violation);
+              violationsHelper.push(violation);
             }
 
             for (let j = 0, k = nodes.length; j < k; j++) {
               nodeData = nodes[j];
 
-              Ember.Logger.error(`[${violation.impact}]: ${violation.help} \nOffending markup is: \n${nodeData.html} \n${violation.helpUrl}`, violation);
-              window.violationsHelper.push(violation);
+              Ember.Logger.error(formatViolation(violation, nodeData.html), violation);
+              violationsHelper.push(violation);
 
               if (nodeData) {
                 nodeElem = document.querySelector(nodeData.target.join(','));
@@ -185,7 +187,7 @@ export function initialize() {
             this.axeCallback(results);
           }
 
-          scheduleOnce('afterRender', window.violationsHelper, window.violationsHelper.logTip);
+          scheduleOnce('afterRender', violationsHelper, violationsHelper.logTip);
         });
       }
     },

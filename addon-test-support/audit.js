@@ -3,6 +3,8 @@ import { assert } from '@ember/debug';
 import Ember from 'ember';
 import RSVP from 'rsvp';
 import config from 'ember-get-config';
+import formatViolation from 'ember-a11y-testing/utils/format-violation';
+import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
 
 /**
  * Processes the results of calling axe.a11yCheck. If there are any
@@ -14,20 +16,21 @@ function a11yAuditCallback(results) {
   let violations = results.violations;
 
   if (violations.length) {
-    Ember.Logger.error('ACCESSIBILITY VIOLATIONS: ' + violations.length);
+    let allViolations = [];
 
     for (let i = 0, l = violations.length; i < l; i++) {
       let violation = violations[i];
       let violationNodes = violation.nodes.map(node => node.html);
 
-      Ember.Logger.warn(violation.impact.toUpperCase() + ': ' + violation.help);
-      Ember.Logger.info('Offending markup (' + violation.nodes.length + ')');
-      Ember.Logger.debug(violationNodes);
-      Ember.Logger.info('Additional info: ' + violation.helpUrl);
-      Ember.Logger.info('-------------------------------------');
+      let violationMessage = formatViolation(violation, violationNodes);
+      allViolations.push(violationMessage);
+
+      Ember.Logger.error(violationMessage, violation);
+      violationsHelper.push(violation);
     }
 
-    assert('The page should have no accessibility violations. Please check the developer console for more details.');
+    let allViolationMessages = allViolations.join('\n');
+    assert(`The page should have no accessibility violations. Violations:\n${allViolationMessages}`);
   }
 }
 

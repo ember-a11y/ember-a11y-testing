@@ -1,4 +1,5 @@
 import Ember from 'ember';
+
 /**
  * @module ember-a11y-testing
  *
@@ -18,7 +19,7 @@ import Ember from 'ember';
  * @public
  * @class ViolationsHelper
  */
-export default class ViolationsHelper {
+export class ViolationsHelper {
   /**
    * Instantiate by calling either:
    *
@@ -101,3 +102,5 @@ export default class ViolationsHelper {
     }
   }
 }
+
+export default new ViolationsHelper();
