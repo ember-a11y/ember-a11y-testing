@@ -30,6 +30,6 @@ test('a11yAudit should execute a11yAudit if enableA11yAudit=ture is passed as qu
     }
   }
   return a11yAuditIf(this.$()).catch((e) => {
-    assert.strictEqual(e.message, 'Assertion Failed: The page should have no accessibility violations. Please check the developer console for more details.');
+    assert.ok(e.message.startsWith('Assertion Failed: The page should have no accessibility violations.'));
   });
 });

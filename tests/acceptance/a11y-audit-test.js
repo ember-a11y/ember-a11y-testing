@@ -20,6 +20,8 @@ module('Acceptance | a11y-audit', {
 });
 
 test('a11yAudit should catch violations as an async helper', function(assert) {
+  assert.expect(1);
+
   visit('/');
 
   // Since we have `catch` blocks, we need to return these promises to ensure
@@ -27,11 +29,13 @@ test('a11yAudit should catch violations as an async helper', function(assert) {
   return a11yAudit().then(() => {
     assert.ok(false, 'a11yAudit should have thrown an error on violations');
   }).catch((e) => {
-    assert.strictEqual(e.message, 'Assertion Failed: The page should have no accessibility violations. Please check the developer console for more details.');
+    assert.ok(e.message.startsWith('Assertion Failed: The page should have no accessibility violations. Violations:', 'error message is correct'));
   });
 });
 
 test('a11yAudit should properly scope to a specified string context selector', function(assert) {
+  assert.expect(2);
+
   visit('/');
 
   a11yAudit(SELECTORS.passingComponent).then(() => {
@@ -43,7 +47,7 @@ test('a11yAudit should properly scope to a specified string context selector', f
   return a11yAudit(SELECTORS.failingComponent).then(() => {
     assert.ok(false, 'a11yAudit should have thrown an error on violations');
   }).catch((e) => {
-    assert.strictEqual(e.message, 'Assertion Failed: The page should have no accessibility violations. Please check the developer console for more details.', 'error message is correct');
+    assert.ok(e.message.startsWith('Assertion Failed: The page should have no accessibility violations. Violations:', 'error message is correct'));
   });
 });
 

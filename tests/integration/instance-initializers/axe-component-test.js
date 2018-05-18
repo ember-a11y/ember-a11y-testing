@@ -50,6 +50,9 @@ function stubViolationOnDOMNode(sandbox, selector) {
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
+      impact: 'critical',
+      help: 'it should be better',
+      helpUrl: 'http://example.com',
       nodes: [
         { target: [selector] }
       ]
@@ -128,6 +131,9 @@ test('audit should log any violations found', function(assert) {
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
+      impact: 'critical',
+      help: 'it should be better',
+      helpUrl: 'http://example.com',
       nodes: [
         {
           target:
@@ -151,6 +157,9 @@ test('audit should log any violations found if no nodes are found', function(ass
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
+      impact: 'critical',
+      help: 'it should be better',
+      helpUrl: 'http://example.com',
       nodes: []
     }]
   });
