@@ -40,13 +40,13 @@ import a11yAudit from 'ember-a11y-testing/test-support/audit';
 // ...elided for brevity
 
 test('Some test case', async function(assert) {
-  visit('/');
+  await visit('/');
   await a11yAudit();
   assert.ok(true, 'no a11y errors found!'));
 });
 ```
 
-If you are using Ember 2.18 or below, you will need to use the the andThen() helper and a regular function (as opposed to `async function`).
+If your app does now allow async/await, you will need to use the the andThen() helper and a regular function (as opposed to `async function`).
 
 ```javascript
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -74,7 +74,7 @@ test('Some test case', async function(assert) {
     }
   };
 
-  visit('/');
+  await visit('/');
   await a11yAudit(axeOptions);
   assert.ok(true, 'no a11y errors found!'));
 });
@@ -122,7 +122,7 @@ nightly build jobs.
 import a11yAuditIf from 'ember-a11y-testing/test-support/audit-if';
 
 test('Some test case', await function(assert) {
-  visit('/');
+  await visit('/');
   await a11yAuditIf(); // Only runs when enableA11yAudit=true is in the URL
   assert.ok(true, 'no a11y errors found!'));
 });
