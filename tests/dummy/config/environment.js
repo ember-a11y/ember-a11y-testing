@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 
 module.exports = function(environment) {
@@ -21,6 +20,18 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    'ember-a11y-testing': {
+      componentOptions: {
+        axeOptions: {
+          rules: {
+            // Disabled to test whether the config is
+            // properly loaded in test environment
+            'image-alt': { enabled: false },
+          }
+        }
+      }
     }
   };
 
@@ -41,6 +52,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   /**

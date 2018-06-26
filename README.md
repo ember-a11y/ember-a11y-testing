@@ -10,7 +10,7 @@ It integrates into your testing environment with a simple `a11yAudit()` helper.
 
 If you're using Ember 1.13.0 or above, it also integrates into your development
 workflow by running during a component's `didRender` phase in non-production
-environments. This gives you instant feedback on if your component's are
+environments. This gives you instant feedback on if your components are
 accessible in any given state.
 
 ## Installation
@@ -21,15 +21,23 @@ ember install ember-a11y-testing
 
 ## Usage
 
-Ember A11y Testing injects the `axe` global during development and tests so that
-you can run accessibility audits while developing your application. It also
-provides some Ember-specific tools so that you can integrate accessibility
-checks into your workflow easily.
+### aXe Options
+
+When using the `a11yAudit` helper, you can pass in `axe-core` options.
+These options are documents on [axe-core.org](https://axe-core.org/docs/#options-parameter).
+The rule definitions are documented on [dequeuniversity.com/rules](https://dequeuniversity.com/rules/axe/3.0).
 
 ### Testing Usage
 
 Ember A11y Testing also provides a simple helper to run accessibility audits
 on-demand within your test suite.
+
+_Note:_ any tests run with Ember A11y Testing will adjust the testing container
+to occupy the entire screen. This is to simulate the actual application
+environment, as browsers adjust styles at small sizes for accessibility reasons.
+It will reset itself at the conclusion of testing though.
+
+#### Acceptance Tests
 
 For Acceptance tests, the helper is an async test helper so you can use it like
 this:
@@ -62,7 +70,7 @@ test('Some test case', function(assert) {
 
 The helper can optionally accept a "context" on which to focus the audit as
 either a selector string or an HTML element. You can also provide a secondary
-parameter to specify axe-core options, or specify options as a single argument:
+parameter to specify axe-core options:
 
 ```js
 test('Some test case', async function(assert) {
@@ -79,6 +87,26 @@ test('Some test case', async function(assert) {
   assert.ok(true, 'no a11y errors found!'));
 });
 ```
+
+Or specify options as a single argument:
+
+```js
+test('Some test case', function(assert) {
+  let axeOptions = {
+    rules: {
+      'button-name': {
+        enabled: false
+      }
+    }
+  };
+
+  visit('/');
+  a11yAudit('.modal', axeOptions);
+  andThen(() => assert.ok(true, 'no a11y errors found!'));
+});
+```
+
+#### Integration and Unit Tests
 
 The helper is also able to be used Integration/Unit tests like so:
 
@@ -105,11 +133,6 @@ test('Some test case', function(assert) {
 
 As you can see, the usage for all types of tests is pretty much the same. The
 only real difference is Acceptance tests get automatic async handling.
-
-_Note:_ any tests run with Ember A11y Testing will adjust the testing container
-to occupy the entire screen. This is to simulate the actual application
-environment, as browsers adjust styles at small sizes for accessibility reasons.
-It will reset itself at the conclusion of testing though.
 
 #### Optionally Running a11yAudit
 
@@ -287,6 +310,13 @@ ENV['ember-a11y-testing']: {
   }
 }
 ```
+
+#### Using Native aXe Global
+
+Ember A11y Testing injects the `axe` global during development and tests so that
+you can run accessibility audits while developing your application. It also
+provides some Ember-specific tools so that you can integrate accessibility
+checks into your workflow easily.
 
 ## Future Plans
 

@@ -8,6 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('violations', { path: '/' });
+  this.route('ignored-image-alt');
 });
 
 export default Router;

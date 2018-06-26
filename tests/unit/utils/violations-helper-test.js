@@ -1,6 +1,6 @@
 /* global sinon */
 import { module, test } from 'qunit';
-import ViolationsHelper from 'ember-a11y-testing/utils/violations-helper';
+import { ViolationsHelper } from 'ember-a11y-testing/utils/violations-helper';
 import Ember from 'ember';
 
 let sandbox;

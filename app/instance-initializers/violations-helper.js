@@ -1,7 +1,7 @@
-import ViolationsHelper from 'ember-a11y-testing/utils/violations-helper';
+import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
 
 export function initialize() {
-  window.violationsHelper = new ViolationsHelper();
+  window.violationsHelper = violationsHelper;
 }
 
 export default {

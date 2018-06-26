@@ -41,7 +41,7 @@ function setupDOMNode(id = ID_TEST_DOM_NODE, tagName = 'div') {
 }
 
 function stubA11yCheck(sandbox, callbackPayload) {
-  sandbox.stub(axe, 'a11yCheck', function (el, options, callback) {
+  sandbox.stub(axe, 'a11yCheck').callsFake(function (el, options, callback) {
     callback(callbackPayload);
   });
 }
@@ -50,6 +50,9 @@ function stubViolationOnDOMNode(sandbox, selector) {
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
+      impact: 'critical',
+      help: 'it should be better',
+      helpUrl: 'http://example.com',
       nodes: [
         { target: [selector] }
       ]
@@ -128,6 +131,9 @@ test('audit should log any violations found', function(assert) {
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
+      impact: 'critical',
+      help: 'it should be better',
+      helpUrl: 'http://example.com',
       nodes: [
         {
           target:
@@ -151,6 +157,9 @@ test('audit should log any violations found if no nodes are found', function(ass
   stubA11yCheck(sandbox, {
     violations: [{
       name: 'test',
+      impact: 'critical',
+      help: 'it should be better',
+      helpUrl: 'http://example.com',
       nodes: []
     }]
   });
@@ -191,10 +200,8 @@ test('axeCallback receives the results of the audit', function(assert) {
 test('axeCallback throws an error if it is not a function', function(assert) {
   const results = { violations: [] };
 
-  sandbox.stub(axe, 'a11yCheck', function (el, options, callback) {
-    assert.throws(() => {
-      callback(results);
-    }, /axeCallback should be a function./);
+  sandbox.stub(axe, 'a11yCheck').callsFake(function (el, options, callback) {
+    assert.throws(() => callback(results) , /axeCallback should be a function./);
   });
 
   this.render(hbs`{{#axe-component axeCallback='axeCallbackSpy'}}{{content}}{{/axe-component}}`);

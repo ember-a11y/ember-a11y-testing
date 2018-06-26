@@ -1,3 +1,10 @@
+# 0.5.2 / 2018-06-05
+
+  * Improve Test Failure Messages (#103)
+  * Update README with aXe Options and Scoped Auditing (#104)
+  * Upgrade axe-core to 2.6.1 (#98)
+  * Fix: `a11yAudit` not using default `axeOptions` (#100)
+
 # 0.5.1 / 2018-02-20
 
   * Update Ember-CLI to 2.18.x (#94)
