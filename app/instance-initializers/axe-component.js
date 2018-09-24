@@ -9,6 +9,7 @@ import ENV from '../config/environment';
 import isBackgroundReplacedElement from 'ember-a11y-testing/utils/is-background-replaced-element';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
 import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
+import { inject as service } from '@ember/service';
 
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
 const VIOLATION_CLASS__LEVEL_2 = 'axe-violation--level-2';
@@ -54,6 +55,15 @@ export function initialize() {
   let turnAuditOff = configuredTurnAuditOff || false;
 
   Component.reopen({
+    /**
+     * An Ember service which resolves concurrent axe.run v3 issue.
+     *
+     * @public
+     * @type {Object}
+     * @see(https://github.com/dequelabs/axe-core/issues/1041)
+     */
+    concurrentAxe: service('concurrent-axe'),
+
     /**
      * An optional callback to process the results from the a11yCheck.
      * Defaults to `undefined` if not set in the application's configuration.
@@ -138,10 +148,13 @@ export function initialize() {
      */
     audit() {
       if (this.get('tagName') !== '') {
-
-        axe.a11yCheck(this.$(), this.axeOptions, (results) => {
+        this.get('concurrentAxe').run(this.element, this.axeOptions, (error, results) => {
           if (this.get('isDestroyed')) {
             return;
+          }
+
+          if (error) {
+            throw error;
           }
 
           const violations = results.violations;

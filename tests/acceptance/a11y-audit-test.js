@@ -93,7 +93,7 @@ test('a11yAudit can accept an options hash as a single argument', function(asser
   a11yAudit({
     runOnly: {
       type: "rule",
-      values: []
+      values: ["accesskeys"]
     }
   });
 
