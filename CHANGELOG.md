@@ -1,3 +1,10 @@
+
+# 0.5.3 / 2018-10-01
+
+  * Update axe-core to 3.1.2 (#109)
+  * Make aXe v3 compatible with component audit
+  * Fix “Visual Noise Level” demo page
+
 # 0.5.2 / 2018-06-05
 
   * Improve Test Failure Messages (#103)
