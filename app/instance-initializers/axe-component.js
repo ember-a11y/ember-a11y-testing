@@ -9,7 +9,7 @@ import ENV from '../config/environment';
 import isBackgroundReplacedElement from 'ember-a11y-testing/utils/is-background-replaced-element';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
 import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
-import { inject as service } from '@ember/service';
+import concurrentAxe from 'ember-a11y-testing/utils/concurrent-axe';
 
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
 const VIOLATION_CLASS__LEVEL_2 = 'axe-violation--level-2';
@@ -44,6 +44,7 @@ export function initialize() {
 
   const {
     turnAuditOff: configuredTurnAuditOff,
+    excludeAxeCore,
     axeOptions,
     axeCallback,
     visualNoiseLevel: configuredVisualNoiseLevel,
@@ -54,16 +55,11 @@ export function initialize() {
   let axeViolationClassNames = isPresent(configuredAxeViolationClassNames) ? configuredAxeViolationClassNames : [];
   let turnAuditOff = configuredTurnAuditOff || false;
 
-  Component.reopen({
-    /**
-     * An Ember service which resolves concurrent axe.run v3 issue.
-     *
-     * @public
-     * @type {Object}
-     * @see(https://github.com/dequelabs/axe-core/issues/1041)
-     */
-    concurrentAxe: service('concurrent-axe'),
+  // Avoid modifying the Component class if the visual audit feature is configured disabled
+  // and axe-core is excluded from the dev build
+  if (turnAuditOff && excludeAxeCore) { return; }
 
+  Component.reopen({
     /**
      * An optional callback to process the results from the a11yCheck.
      * Defaults to `undefined` if not set in the application's configuration.
@@ -148,7 +144,7 @@ export function initialize() {
      */
     audit() {
       if (this.get('tagName') !== '') {
-        this.get('concurrentAxe').run(this.element, this.axeOptions, (error, results) => {
+        concurrentAxe.run(this.element, this.axeOptions, (error, results) => {
           if (this.get('isDestroyed')) {
             return;
           }

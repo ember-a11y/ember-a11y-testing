@@ -20,10 +20,15 @@ module.exports = {
    * @override
    */
   included: function(app) {
+    var config = this.project.config();
+    var options = (config[this.name] && config[this.name].componentOptions) || {};
+    var isComponentAuditOff = options.turnAuditOff || false;
+    var shouldExcludeAxeCore = isComponentAuditOff && options.excludeAxeCore;
+
     this._super.included.apply(this, arguments);
 
     if (app.tests) {
-      app.import('vendor/axe-core/axe.js');
+      app.import('vendor/axe-core/axe.js', shouldExcludeAxeCore ? { type: 'test' } : undefined);
     }
   },
 

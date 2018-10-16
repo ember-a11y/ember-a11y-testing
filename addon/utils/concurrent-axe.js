@@ -1,13 +1,11 @@
 /* global axe */
-import Service from '@ember/service';
 import { next } from '@ember/runloop';
 
-export default Service.extend({
-  init() {
-    this._super(...arguments);
+export class ConcurrentAxe {
+  constructor() {
     this._timer = null;
     this._queue = [];
-  },
+  }
 
   /**
    * Axe v3 contains a concurrency issue which breaks the component auditing feature.
@@ -38,4 +36,6 @@ export default Service.extend({
       });
     }
   }
-});
+}
+
+export default new ConcurrentAxe();
