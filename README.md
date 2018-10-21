@@ -111,7 +111,7 @@ test('Some test case', function(assert) {
       }
     }
   };
-  return a11yAudit(this.$(), axeOptions).then(() => {
+  return a11yAudit(this.element, axeOptions).then(() => {
     assert.ok(true, 'no a11y errors found!');
   });
 });
