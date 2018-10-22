@@ -1,3 +1,6 @@
+# 0.5.4 / 2018-10-22
+
+  * Fix services for engines, add option to exclude axe-core for component audits
 
 # 0.5.3 / 2018-10-01
 
