@@ -1,3 +1,7 @@
+# 0.5.5 / 2018-11-04
+
+  * Fixes #113: provides empty object if axeOptions are not defined to prevent axe.run from failing
+
 # 0.5.4 / 2018-10-22
 
   * Fix services for engines, add option to exclude axe-core for component audits
