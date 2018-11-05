@@ -45,7 +45,7 @@ export function initialize() {
   const {
     turnAuditOff: configuredTurnAuditOff,
     excludeAxeCore,
-    axeOptions,
+    axeOptions = {},
     axeCallback,
     visualNoiseLevel: configuredVisualNoiseLevel,
     axeViolationClassNames: configuredAxeViolationClassNames
@@ -71,7 +71,7 @@ export function initialize() {
 
     /**
      * An optional options object to be used in a11yCheck.
-     * Defaults to `undefined` if not set in the application's configuration.
+     * Defaults to empty object if not set in the application's configuration.
      * @public
      * @type {Object}
      */
