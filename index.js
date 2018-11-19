@@ -46,7 +46,7 @@ module.exports = {
    * @override
    */
   contentFor: function(type) {
-    if (this.app.env !== 'production' && ~ALLOWED_CONTENT_FOR.indexOf(type)) {
+    if (process.env.EMBER_ENV !== 'production' && ~ALLOWED_CONTENT_FOR.indexOf(type)) {
       return fs.readFileSync(path.join(__dirname, 'content-for', type + '.html'));
     }
   },
@@ -58,7 +58,7 @@ module.exports = {
    */
   treeForApp: function(tree) {
     var checker = new VersionChecker(this);
-    var isProductionBuild = this.app.env === 'production';
+    var isProductionBuild = process.env.EMBER_ENV === 'production';
     var isOldEmber = checker.for('ember', 'bower').lt('1.13.0');
 
     if (isProductionBuild || isOldEmber) {
