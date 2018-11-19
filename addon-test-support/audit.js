@@ -5,6 +5,7 @@ import RSVP from 'rsvp';
 import config from 'ember-get-config';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
 import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
+import { mark, markEndAndMeasure } from './utils';
 
 /**
  * Processes the results of calling axe.a11yCheck. If there are any
@@ -53,6 +54,8 @@ function isPlainObj(obj) {
  * @private
  */
 function runA11yAudit(contextSelector = '#ember-testing-container', axeOptions) {
+  mark('a11y_audit_start');
+
   // Support passing axeOptions as a single argument
   if (arguments.length === 1 && isPlainObj(contextSelector)) {
     axeOptions = contextSelector;
@@ -80,7 +83,10 @@ function runA11yAudit(contextSelector = '#ember-testing-container', axeOptions) 
 
   return auditPromise
     .then(a11yAuditCallback)
-    .finally(() => document.body.classList.remove('axe-running'));
+    .finally(() => {
+      document.body.classList.remove('axe-running');
+      markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
+    });
 }
 
 // Register an async helper to use in acceptance tests
