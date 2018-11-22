@@ -1,3 +1,9 @@
+
+# 0.5.6 / 2018-11-22
+
+  * Adds user timing mechanism for performance profiling
+  * Use process.env.EMBER_ENV for env check
+
 # 0.5.5 / 2018-11-04
 
   * Fixes #113: provides empty object if axeOptions are not defined to prevent axe.run from failing
