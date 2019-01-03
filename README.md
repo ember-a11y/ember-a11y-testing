@@ -269,15 +269,14 @@ Each of the fine-grained component hooks above can instead be defined for ALL co
 
 ```javascript
 ENV['ember-a11y-testing'] = {
-    componentOptions: {
-      turnAuditOff: false, // Change to true to disable the audit in development
-      axeCallback: defaultAxeCallback,
-      axeOptions: defaultAxeOptions,
-      visualNoiseLevel: 2,
-      axeViolationClassNames: ['alert-box', 'alert-box--a11y']
-    }
+  componentOptions: {
+    turnAuditOff: false, // Change to true to disable the audit in development
+    axeCallback: defaultAxeCallback,
+    axeOptions: defaultAxeOptions,
+    visualNoiseLevel: 2,
+    axeViolationClassNames: ['alert-box', 'alert-box--a11y']
   }
-};
+}
 ```
 
 By example, to enable a specific rule and to set options for a specific check, you can:
