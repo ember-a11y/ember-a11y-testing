@@ -11,6 +11,9 @@ import formatViolation from 'ember-a11y-testing/utils/format-violation';
 import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
 import concurrentAxe from 'ember-a11y-testing/utils/concurrent-axe';
 
+// The following instance initializer augments the base component class to enable component self auditing during (re)render.
+// This visual component audit mechanism is exclusively used during development and does not get invoked when executing tests.
+
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
 const VIOLATION_CLASS__LEVEL_2 = 'axe-violation--level-2';
 const VIOLATION_CLASS__LEVEL_3 = 'axe-violation--level-3';
