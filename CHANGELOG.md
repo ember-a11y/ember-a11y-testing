@@ -1,4 +1,8 @@
 
+# 0.5.7 / 2019-03-08
+
+  * Axe-core version bump to 3.2.2
+
 # 0.5.6 / 2018-11-22
 
   * Adds user timing mechanism for performance profiling
