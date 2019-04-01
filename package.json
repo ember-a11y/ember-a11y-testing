@@ -41,7 +41,7 @@
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-qunit": "^4.4.0",
     "ember-cli-release": "^0.2.9",
-    "ember-cli-sass": "^7.1.7",
+    "ember-cli-sass": "^10.0.0",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
@@ -55,7 +55,8 @@
     "ember-truth-helpers": "^2.1.0",
     "eslint-plugin-ember": "^5.0.0",
     "eslint-plugin-node": "^6.0.1",
-    "loader.js": "^4.7.0"
+    "loader.js": "^4.7.0",
+    "sass": "^1.17.3"
   },
   "engines": {
     "node": ">= 4"
