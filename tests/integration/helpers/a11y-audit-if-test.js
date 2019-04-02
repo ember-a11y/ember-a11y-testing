@@ -1,35 +1,37 @@
-import Component from '@ember/component';
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import utils from 'ember-a11y-testing/test-support/utils';
 import a11yAuditIf from 'ember-a11y-testing/test-support/audit-if';
 
-// We use a component integration test to verify the behavior of the a11y-audit
-// by rendering a component and then running the audit on it.
-moduleForComponent('component:axe-component', 'Integration | Helper | a11y-audit', {
-  integration: true,
+module('Integration | Helper | a11yAuditIf', function(hooks) {
+  setupRenderingTest(hooks);
 
-  beforeEach() {
-    this.register('component:axe-component', Component.extend());
-  }
-});
+  test('a11yAuditIf should not execute a11yAudit', async function(assert) {
+    await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
-test('a11yAuditIf should not execute a11yAudit', function(assert) {
-  this.render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
+    await a11yAuditIf(this.$());
 
-  return a11yAuditIf(this.$()).then(() => {
     assert.ok(true, 'a11yAuditIf should not run a11yAudit');
   });
-});
 
-test('a11yAudit should execute a11yAudit if enableA11yAudit=ture is passed as query param', function(assert) {
-  this.render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
-  utils.getLocation = function() {
-    return {
-      search: '?enableA11yAudit=true'
+  test('a11yAudit should execute a11yAudit if enableA11yAudit=ture is passed as query param', async function(assert) {
+    await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
+
+    // TODO
+    utils.getLocation = function() {
+      return {
+        search: '?enableA11yAudit=true'
+      }
+    };
+
+    try {
+      await a11yAuditIf(this.$())
+      assert.ok(false, 'audit should have failed');
+    } catch (error) {
+      let foundExpectedError = error.message.startsWith('Assertion Failed: The page should have no accessibility violations.');
+      assert.ok(foundExpectedError);
     }
-  }
-  return a11yAuditIf(this.$()).catch((e) => {
-    assert.ok(e.message.startsWith('Assertion Failed: The page should have no accessibility violations.'));
   });
 });

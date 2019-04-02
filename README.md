@@ -13,7 +13,8 @@ workflow by running during a component's `didRender` phase in non-production
 environments. This gives you instant feedback on if your components are
 accessible in any given state.
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 ```bash
 ember install ember-a11y-testing
