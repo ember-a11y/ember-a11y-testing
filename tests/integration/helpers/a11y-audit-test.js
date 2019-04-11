@@ -25,7 +25,7 @@ module('Integration | Helper | a11yAudit', function(hooks) {
     await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
     try {
-      await a11yAudit(this.$());
+      await a11yAudit(this.element);
       assert.ok(false, 'should have failed');
     } catch (error) {
       let found = error.message.startsWith('Assertion Failed: The page should have no accessibility violations. Violations:');
