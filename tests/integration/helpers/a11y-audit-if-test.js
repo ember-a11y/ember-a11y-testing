@@ -27,7 +27,7 @@ module('Integration | Helper | a11yAuditIf', function(hooks) {
     };
 
     try {
-      await a11yAuditIf(this.$())
+      await a11yAuditIf(this.element)
       assert.ok(false, 'audit should have failed');
     } catch (error) {
       let foundExpectedError = error.message.startsWith('Assertion Failed: The page should have no accessibility violations.');
