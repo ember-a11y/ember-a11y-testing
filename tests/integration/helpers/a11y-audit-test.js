@@ -17,7 +17,7 @@ module('Integration | Helper | a11yAudit', function(hooks) {
   test('a11yAudit runs successfully with element context', async function(assert) {
     await render(hbs`{{#axe-component}}{{/axe-component}}`);
 
-    await a11yAudit(this.$()[0]);
+    await a11yAudit(this.element);
     assert.ok(true, 'a11yAudit ran and didn\'t find any issues');
   });
 
