@@ -36,7 +36,7 @@ module('Integration | Helper | a11yAudit', function(hooks) {
   test('a11yAudit can use custom axe options', async function(assert) {
     await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
-    await a11yAudit(this.$(), {
+    await a11yAudit(this.element, {
       rules: {
         'button-name': {
           enabled: false
