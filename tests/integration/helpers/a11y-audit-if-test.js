@@ -11,7 +11,7 @@ module('Integration | Helper | a11yAuditIf', function(hooks) {
   test('a11yAuditIf should not execute a11yAudit', async function(assert) {
     await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
-    await a11yAuditIf(this.$());
+    await a11yAuditIf(this.element);
 
     assert.ok(true, 'a11yAuditIf should not run a11yAudit');
   });
