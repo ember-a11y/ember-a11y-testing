@@ -24,8 +24,8 @@ ember install ember-a11y-testing
 ### aXe Options
 
 When using the `a11yAudit` helper, you can pass in `axe-core` options.
-These options are documents on [axe-core.org](https://axe-core.org/docs/#options-parameter).
-The rule definitions are documented on [dequeuniversity.com/rules](https://dequeuniversity.com/rules/axe/3.0).
+These options are documented in the [axe-core API docs](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#options-parameter).
+The rule definitions are documented on [dequeuniversity.com/rules](https://dequeuniversity.com/rules/axe/3.2).
 
 ### Testing Usage
 
