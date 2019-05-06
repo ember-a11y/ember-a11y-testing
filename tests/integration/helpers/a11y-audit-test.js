@@ -1,66 +1,63 @@
-import Component from '@ember/component';
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
-// We use a component integration test to verify the behavior of the a11y-audit
-// by rendering a component and then running the audit on it.
-moduleForComponent('component:axe-component', 'Integration | Helper | a11y-audit', {
-  integration: true,
+module('Integration | Helper | a11yAudit', function(hooks) {
+  setupRenderingTest(hooks);
 
-  beforeEach() {
-    this.register('component:axe-component', Component.extend());
-  }
-});
+  test('a11yAudit runs successfully with jquery context', async function(assert) {
+    await render(hbs`{{#axe-component}}{{/axe-component}}`);
 
-test('a11yAudit runs successfully with jquery context', function(assert) {
-  this.render(hbs`{{#axe-component}}{{/axe-component}}`);
-
-  return a11yAudit(this.$()).then(() => {
+    await a11yAudit(this.$());
     assert.ok(true, 'a11yAudit ran and didn\'t find any issues');
   });
-});
 
-test('a11yAudit runs successfully with element context', function(assert) {
-  this.render(hbs`{{#axe-component}}{{/axe-component}}`);
+  test('a11yAudit runs successfully with element context', async function(assert) {
+    await render(hbs`{{#axe-component}}{{/axe-component}}`);
 
-  return a11yAudit(this.$()[0]).then(() => {
+    await a11yAudit(this.element);
     assert.ok(true, 'a11yAudit ran and didn\'t find any issues');
   });
-});
 
-test('a11yAudit catches violations successfully', function(assert) {
-  this.render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
+  test('a11yAudit catches violations successfully', async function(assert) {
+    await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
-  return a11yAudit(this.$()).catch((e) => {
-    assert.ok(e.message.startsWith('Assertion Failed: The page should have no accessibility violations. Violations:', 'error message is correct'));
-  });
-});
-
-test('a11yAudit can use custom axe options', function(assert) {
-  this.render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
-
-  return a11yAudit(this.$(), {
-    rules: {
-      'button-name': {
-        enabled: false
-      }
+    try {
+      await a11yAudit(this.element);
+      assert.ok(false, 'should have failed');
+    } catch (error) {
+      let found = error.message.startsWith('Assertion Failed: The page should have no accessibility violations. Violations:');
+      assert.ok(found, 'error message is correct');
     }
-  }).then(() => {
+  });
+
+  test('a11yAudit can use custom axe options', async function(assert) {
+    await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
+
+    await a11yAudit(this.element, {
+      rules: {
+        'button-name': {
+          enabled: false
+        }
+      }
+    });
+
     assert.ok(true, 'a11yAudit ran and used the custom options');
   });
-});
 
-test('a11yAudit can use custom axe options as single argument', function(assert) {
-  this.render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
+  test('a11yAudit can use custom axe options as single argument', async function(assert) {
+    await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
-  return a11yAudit( {
-    rules: {
-      'button-name': {
-        enabled: false
+    await a11yAudit( {
+      rules: {
+        'button-name': {
+          enabled: false
+        }
       }
-    }
-  }).then(() => {
+    });
+
     assert.ok(true, 'a11yAudit ran and used the custom options');
   });
 });

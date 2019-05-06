@@ -23,26 +23,26 @@ function makeMessage({ tagName, type }, expected) {
   return `Element with tagName "${tagName}" ${type ? `with type "${type}" ` : ''}evaluates to ${expected}`;
 }
 
-let expected, actual, message;
+module('Unit | Utility | is replaced element', function() {
+  test(`it determines whether or not an HTMLElement is of the variety that will have its background content be unstylable`, function(assert) {
+    let expected;
+    let actual;
+    let message;
 
-module('Unit | Utility | is replaced element');
+    BACKGROUND_REPLACED_ELEMENTS.forEach(element => {
+      expected = true;
+      actual = isBackgroundReplacedElement(element);
+      message = makeMessage(element, expected);
 
-test(`it determines whether or not an HTMLElement is of the variety that will
-have its background content be unstylable`, function(assert) {
+      assert.equal(actual, expected, message);
+    });
 
-  BACKGROUND_REPLACED_ELEMENTS.forEach(element => {
-    expected = true;
-    actual = isBackgroundReplacedElement(element);
-    message = makeMessage(element, expected);
+    STANDARD_ELEMENTS.forEach(element => {
+      expected = false;
+      actual = isBackgroundReplacedElement(element);
+      message = makeMessage(element, expected);
 
-    assert.equal(actual, expected, message);
-  });
-
-  STANDARD_ELEMENTS.forEach(element => {
-    expected = false;
-    actual = isBackgroundReplacedElement(element);
-    message = makeMessage(element, expected);
-
-    assert.equal(actual, expected, message);
+      assert.equal(actual, expected, message);
+    });
   });
 });
