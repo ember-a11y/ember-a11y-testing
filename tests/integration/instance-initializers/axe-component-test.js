@@ -90,9 +90,6 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
     Ember.testing = false;
 
     initialize();
-
-    // this.owner.register('component:axe-component', Component.extend());
-
     sandbox = sinon.sandbox.create();
   });
 
