@@ -125,12 +125,8 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
     let auditSpy = sandbox.spy();
     this.set('auditSpy', auditSpy);
     this.set('content', 'derp');
-
     await render(hbs`{{#axe-component audit=auditSpy}}{{content}}{{/axe-component}}`);
-
     assert.ok(auditSpy.notCalled);
-
-    Ember.testing = false;
   });
 
   /* Component.turnAuditOff */

@@ -1,7 +1,7 @@
 /* global sinon, axe */
 import { module, test } from 'qunit';
 import { ConcurrentAxe } from 'ember-a11y-testing/utils/concurrent-axe';
-import wait from 'ember-test-helpers/wait';
+import { settled } from '@ember/test-helpers';
 
 function setupDOMNode() {
   const node = document.createElement('div');
@@ -33,7 +33,7 @@ module('Unit | Utils | ConcurrentAxe', function(hooks) {
 
     this.subject.run(this.testNode, this.testOptions, this.testCallback);
 
-    await wait();
+    await settled();
     assert.ok(this.axeRunStub.withArgs(this.testNode, this.testOptions, this.testCallback).calledOnce, 'called once with all arguments');
   });
 
@@ -47,7 +47,7 @@ module('Unit | Utils | ConcurrentAxe', function(hooks) {
     assert.equal(this.subject._queue.length, 2, 'subsequent calls are placed in the queue');
     assert.ok(this.subject._timer, 'subsequent calls are scheduled for the next run loop');
 
-    await wait();
+    await settled();
 
     assert.ok(this.axeRunStub.calledThrice, 'axe.run is called thrice');
     assert.equal(this.subject._queue.length, 0, 'queue is cleared');
@@ -66,7 +66,7 @@ module('Unit | Utils | ConcurrentAxe', function(hooks) {
     this.testNode.remove();
     this.subject.run(this.testNode, this.testOptions, this.testCallback);
 
-    await wait();
+    await settled();
     assert.ok(this.axeRunStub.notCalled, 'axe.run is not called');
   });
 });
