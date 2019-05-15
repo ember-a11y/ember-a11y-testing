@@ -12,7 +12,7 @@ var ALLOWED_CONTENT_FOR = [
 ];
 
 module.exports = {
-  name: 'ember-a11y-testing',
+  name: require('./package').name,
 
   /**
    * Includes axe-core in builds that have tests. It includes the un-minified
@@ -69,4 +69,5 @@ module.exports = {
 
     return tree;
   }
+
 };
