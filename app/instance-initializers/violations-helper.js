@@ -1,11 +1,1 @@
-import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
-
-export function initialize() {
-  window.violationsHelper = violationsHelper;
-}
-
-export default {
-  name: 'violations-helper',
-  before: 'axe-component',
-  initialize
-};
+export { default, initialize } from 'ember-a11y-testing/instance-initializers/violations-helper';
