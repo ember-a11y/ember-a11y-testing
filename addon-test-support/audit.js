@@ -1,6 +1,5 @@
 import { registerAsyncHelper } from '@ember/test';
 import { assert } from '@ember/debug';
-import Ember from 'ember';
 import RSVP from 'rsvp';
 import config from 'ember-get-config';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
@@ -26,7 +25,7 @@ function a11yAuditCallback(results) {
       let violationMessage = formatViolation(violation, violationNodes);
       allViolations.push(violationMessage);
 
-      Ember.Logger.error(violationMessage, violation);
+      console.error(violationMessage, violation);  // eslint-disable-line no-console
       violationsHelper.push(violation);
     }
 

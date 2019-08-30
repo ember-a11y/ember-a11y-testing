@@ -10,9 +10,6 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 
-const {
-  Logger
-} = Ember;
 const ID_TEST_DOM_NODE = 'sign-up-button';
 
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
@@ -92,7 +89,7 @@ moduleForComponent('component:axe-component', 'Integration | Instance Initialize
 
     initialize();
     this.register('component:axe-component', Component.extend());
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   },
 
   afterEach() {
@@ -166,7 +163,7 @@ test('audit should log any violations found', function(assert) {
     }]
   });
 
-  const logSpy = sandbox.spy(Logger, 'error');
+  const logSpy = sandbox.spy(console, 'error');
   this.render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
 
   return wait().then(() => {
@@ -187,7 +184,7 @@ test('audit should log any violations found if no nodes are found', function(ass
     }]
   });
 
-  const logSpy = sandbox.spy(Logger, 'error');
+  const logSpy = sandbox.spy(console, 'error');
   this.render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
   return wait().then(() => assert.ok(logSpy.calledOnce));
 });
@@ -197,7 +194,7 @@ test('audit should do nothing if no violations found', function(assert) {
 
   stubA11yCheck(sandbox, { violations: [] });
 
-  const logSpy = sandbox.spy(Logger, 'error');
+  const logSpy = sandbox.spy(console, 'error');
   this.render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
 
   assert.ok(logSpy.notCalled);
