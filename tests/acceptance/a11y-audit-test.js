@@ -71,6 +71,36 @@ test('a11yAudit should properly scope to a specified html element context (not r
   });
 });
 
+test('a11yAudit accounts for axe.run include and exclude context parameter', function(assert) {
+  const exclSelectors = [
+    [SELECTORS.failingComponent],
+    ['[data-test-selector="labeless-text-input"]'],
+    ['[data-test-selector="poor-text-contrast"]'],
+    ['[data-test-selector="paragraph-with-blink-tag"]'],
+    ['[data-test-selector="ungrouped-radio-inputs"]'],
+    ['[data-test-selector="noise-level-selection"]']
+  ];
+
+  visit('/');
+
+  a11yAudit({
+    include: [[SELECTORS.passingComponent]]
+  });
+
+  a11yAudit({
+    exclude: exclSelectors
+  });
+
+  a11yAudit({
+    include: [['#ember-testing-container']],
+    exclude: exclSelectors
+  });
+
+  andThen(() => {
+    assert.ok(true, 'no errors should have been found in a11yAudit');
+  });
+});
+
 test('a11yAudit can accept an options hash in addition to context', function(assert) {
   visit('/');
 
