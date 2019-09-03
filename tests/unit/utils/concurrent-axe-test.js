@@ -16,7 +16,7 @@ module('Unit | Utils | ConcurrentAxe', {
   },
   beforeEach() {
     this.subject = new ConcurrentAxe();
-    this.sandbox = sinon.sandbox.create();
+    this.sandbox = sinon.createSandbox();
     this.axeRunStub = this.sandbox.stub(axe, 'run');
     this.testNode = setupDOMNode();
   },
@@ -33,7 +33,7 @@ test('util calls axe.run with the correct arguments', function(assert) {
   this.subject.run(this.testNode, this.testOptions, this.testCallback);
 
   return wait().then(() => {
-    assert.ok(this.axeRunStub.withArgs(this.testNode, this.testOptions, this.testCallback).calledOnce, 'called once with all arguments');
+    assert.ok(this.axeRunStub.calledOnceWith(this.testNode, this.testOptions, this.testCallback), 'called once with all arguments');
   });
 });
 

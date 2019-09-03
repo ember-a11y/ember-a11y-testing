@@ -1,5 +1,3 @@
-import Ember from 'ember';
-
 /**
  * @module ember-a11y-testing
  *
@@ -96,8 +94,10 @@ export class ViolationsHelper {
    */
   logTip() {
     if (this.count && !this.hasLoggedTip) {
-      Ember.Logger.info("You can inspect or filter your violations from the console with: window.violationsHelper");
-      Ember.Logger.info("For a description of violationsHelper's API, see: https://github.com/ember-a11y/ember-a11y-testing/blob/master/addon/utils/violations-helper.js");
+      /* eslint-disable no-console */
+      console.info("You can inspect or filter your violations from the console with: window.violationsHelper");
+      console.info("For a description of violationsHelper's API, see: https://github.com/ember-a11y/ember-a11y-testing/blob/master/addon/utils/violations-helper.js");
+      /* eslint-enable no-console */
       this.hasLoggedTip = true;
     }
   }

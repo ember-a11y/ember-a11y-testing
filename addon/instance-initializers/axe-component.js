@@ -170,14 +170,14 @@ export function initialize(appInstance) {
             nodes = violation.nodes;
 
             if (isEmpty(nodes) || nodes.length === 0) {
-              Ember.Logger.error(formatViolation(violation), violation);
+              console.error(formatViolation(violation), violation); // eslint-disable-line no-console
               violationsHelper.push(violation);
             }
 
             for (let j = 0, k = nodes.length; j < k; j++) {
               nodeData = nodes[j];
 
-              Ember.Logger.error(formatViolation(violation, nodeData.html), violation);
+              console.error(formatViolation(violation, nodeData.html), violation); // eslint-disable-line no-console
               violationsHelper.push(violation);
 
               if (nodeData) {
