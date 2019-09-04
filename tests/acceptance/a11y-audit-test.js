@@ -72,15 +72,6 @@ test('a11yAudit should properly scope to a specified html element context (not r
 });
 
 test('a11yAudit accounts for axe.run include and exclude context parameter', function(assert) {
-  const exclSelectors = [
-    [SELECTORS.failingComponent],
-    ['[data-test-selector="labeless-text-input"]'],
-    ['[data-test-selector="poor-text-contrast"]'],
-    ['[data-test-selector="paragraph-with-blink-tag"]'],
-    ['[data-test-selector="ungrouped-radio-inputs"]'],
-    ['[data-test-selector="noise-level-selection"]']
-  ];
-
   visit('/');
 
   a11yAudit({
@@ -88,12 +79,15 @@ test('a11yAudit accounts for axe.run include and exclude context parameter', fun
   });
 
   a11yAudit({
-    exclude: exclSelectors
-  });
-
-  a11yAudit({
     include: [['#ember-testing-container']],
-    exclude: exclSelectors
+    exclude: [
+      [SELECTORS.failingComponent],
+      ['[data-test-selector="labeless-text-input"]'],
+      ['[data-test-selector="paragraph-with-blink-tag"]'],
+      ['[data-test-selector="ungrouped-radio-inputs"]'],
+      ['[data-test-selector="noise-level-selection"]'],
+      ['[data-test-selector="poor-text-contrast"]']
+    ]
   });
 
   andThen(() => {
