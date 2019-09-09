@@ -47,6 +47,20 @@ import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
 // ...elided for brevity
 
+test('Some test case', async function(assert) {
+  await visit('/');
+  await a11yAudit();
+  assert.ok(true, 'no a11y errors found!');
+});
+```
+
+If your app does now allow async/await, you will need to use the the andThen() helper and a regular function (as opposed to `async function`).
+
+```javascript
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
+
+// ...elided for brevity
+
 test('Some test case', function(assert) {
   visit('/');
   a11yAudit();
@@ -59,7 +73,7 @@ either a selector string or an HTML element. You can also provide a secondary
 parameter to specify axe-core options:
 
 ```js
-test('Some test case', function(assert) {
+test('Some test case', async function(assert) {
   let axeOptions = {
     rules: {
       'button-name': {
@@ -68,16 +82,16 @@ test('Some test case', function(assert) {
     }
   };
 
-  visit('/');
-  a11yAudit(axeOptions);
-  andThen(() => assert.ok(true, 'no a11y errors found!'));
+  await visit('/');
+  await a11yAudit(axeOptions);
+  assert.ok(true, 'no a11y errors found!');
 });
 ```
 
 Or specify options as a single argument:
 
 ```js
-test('Some test case', function(assert) {
+test('Some test case', async function(assert) {
   let axeOptions = {
     rules: {
       'button-name': {
@@ -86,9 +100,9 @@ test('Some test case', function(assert) {
     }
   };
 
-  visit('/');
-  a11yAudit('.modal', axeOptions);
-  andThen(() => assert.ok(true, 'no a11y errors found!'));
+  await visit('/');
+  await a11yAudit('.modal', axeOptions);
+  assert.ok(true, 'no a11y errors found!');
 });
 ```
 
@@ -130,10 +144,10 @@ nightly build jobs.
 ```javascript
 import a11yAuditIf from 'ember-a11y-testing/test-support/audit-if';
 
-test('Some test case', function(assert) {
-  visit('/');
-  a11yAuditIf(); // Only runs when enableA11yAudit=true is in the URL
-  andThen(() => assert.ok(true, 'no a11y errors found!'));
+test('Some test case', await function(assert) {
+  await visit('/');
+  await a11yAuditIf(); // Only runs when enableA11yAudit=true is in the URL
+  assert.ok(true, 'no a11y errors found!');
 });
 ```
 
