@@ -20,7 +20,7 @@ export class ConcurrentAxe {
    * @return {Void}
    */
   run(element, options, callback) {
-    if (this._timer) {
+    if (this._timer !== null) {
       this._queue.push(arguments);
     } else {
       this._timer = next(() => {
