@@ -59,11 +59,34 @@ module.exports = {
   treeForApp: function(tree) {
     var checker = new VersionChecker(this);
     var isProductionBuild = process.env.EMBER_ENV === 'production';
-    var isOldEmber = checker.for('ember', 'bower').lt('1.13.0');
+    var isOldEmber = checker.forEmber().lt('1.13.0');
 
     if (isProductionBuild || isOldEmber) {
       tree = new Funnel(tree, {
-        exclude: [/instance-initializers\/axe-component|violations-helper.js/]
+        exclude: [/instance-initializers\/(axe-component|violations-helper)\.js/]
+      });
+    }
+
+    return tree;
+  },
+
+  /**
+   * Exclude all addon code during build if this is a
+   * production build or if the version of Ember being used is less than 1.13.
+   * @override
+   */
+  treeForAddon: function() {
+    var tree = this._super.treeForAddon.apply(this, arguments);
+    var checker = new VersionChecker(this);
+    var isProductionBuild = process.env.EMBER_ENV === 'production';
+    var isOldEmber = checker.forEmber().lt('1.13.0');
+
+    if (isProductionBuild || isOldEmber) {
+      tree = new Funnel(tree, {
+        exclude: [
+          /instance-initializers\/(axe-component|violations-helper)\.js/,
+          /utils\/(concurrent-axe|format-violation|is-background-replaced-element|violations-helper)\.js/
+        ]
       });
     }
 
