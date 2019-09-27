@@ -46,7 +46,7 @@ export function initialize(appInstance) {
 
   const {
     turnAuditOff: configuredTurnAuditOff,
-    excludeAxeCore,
+    excludeAxeCore = false,
     axeOptions = {},
     axeCallback,
     visualNoiseLevel: configuredVisualNoiseLevel,
@@ -59,7 +59,10 @@ export function initialize(appInstance) {
 
   // Avoid modifying the Component class if the visual audit feature is configured disabled
   // and axe-core is excluded from the dev build
-  if (turnAuditOff && excludeAxeCore) { return; }
+  if ((turnAuditOff && excludeAxeCore) || typeof axe === 'undefined') {
+    hasRan = true;
+    return;
+  }
 
   Component.reopen({
     /**
