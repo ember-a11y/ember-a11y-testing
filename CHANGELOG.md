@@ -1,4 +1,8 @@
 
+# 1.1.1 / 2019-09-29
+
+  * Fixes code included in production builds [#108] (#134)
+
 # 1.1.0 / 2019-09-09
 
   * Bumps axe-core to v3.3
