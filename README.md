@@ -54,7 +54,7 @@ test('Some test case', async function(assert) {
 });
 ```
 
-If your app does now allow async/await, you will need to use the the andThen() helper and a regular function (as opposed to `async function`).
+If your app does not allow async/await, you will need to use the the andThen() helper and a regular function (as opposed to `async function`).
 
 ```javascript
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
