@@ -87,7 +87,7 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
 
   hooks.beforeEach(function(){
     // In order for the audit to run, we have to act like we're not in testing
-    Ember.testing = false;
+    Ember.testing = false; // eslint-disable-line ember/no-ember-testing-in-module-scope
 
     initialize();
     sandbox = sinon.sandbox.create();
@@ -97,7 +97,7 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
     sandbox.restore();
 
     // Turn testing mode back on to ensure validity of other tests
-    Ember.testing = true;
+    Ember.testing = true; // eslint-disable-line ember/no-ember-testing-in-module-scope
   });
 
   test('initializer should not re-open Component more than once', function(assert) {
@@ -120,7 +120,7 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
   });
 
   test('audit is not run on didRender when in testing mode', async function(assert) {
-    Ember.testing = true;
+    Ember.testing = true; // eslint-disable-line ember/no-ember-testing-in-module-scope
 
     let auditSpy = sandbox.spy();
     this.set('auditSpy', auditSpy);

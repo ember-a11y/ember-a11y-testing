@@ -13,6 +13,15 @@ workflow by running during a component's `didRender` phase in non-production
 environments. This gives you instant feedback on if your components are
 accessible in any given state.
 
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v1.13 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
+
+
 Installation
 ------------------------------------------------------------------------------
 
