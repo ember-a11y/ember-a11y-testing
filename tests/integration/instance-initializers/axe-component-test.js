@@ -10,9 +10,6 @@ import {
   initialize as initializeViolationsHelper
 } from 'dummy/instance-initializers/violations-helper';
 
-const {
-  Logger
-} = Ember;
 const ID_TEST_DOM_NODE = 'sign-up-button';
 
 const VIOLATION_CLASS__LEVEL_1 = 'axe-violation--level-1';
@@ -90,7 +87,7 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
     Ember.testing = false; // eslint-disable-line ember/no-ember-testing-in-module-scope
 
     initialize();
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   });
 
   hooks.afterEach(function(){
@@ -163,7 +160,7 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
       }]
     });
 
-    const logSpy = sandbox.spy(Logger, 'error');
+    const logSpy = sandbox.spy(console, 'error');
     await render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
 
     assert.ok(logSpy.calledOnce);
@@ -182,7 +179,7 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
       }]
     });
 
-    const logSpy = sandbox.spy(Logger, 'error');
+    const logSpy = sandbox.spy(console, 'error');
     await render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
     assert.ok(logSpy.calledOnce);
   });
@@ -192,7 +189,7 @@ module('Integration | Instance Initializer | axe-component', function(hooks) {
 
     stubA11yCheck(sandbox, { violations: [] });
 
-    const logSpy = sandbox.spy(Logger, 'error');
+    const logSpy = sandbox.spy(console, 'error');
     await render(hbs`{{#axe-component}}{{content}}{{/axe-component}}`);
 
     assert.ok(logSpy.notCalled);

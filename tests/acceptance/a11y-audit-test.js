@@ -60,6 +60,28 @@ module('Acceptance | a11y audit', function(hooks) {
     assert.ok(true, 'a11yAudit should not have discovered any issues');
   });
 
+  test('a11yAudit accounts for axe.run include and exclude context parameter', function(assert) {
+    await visit('/');
+
+    await a11yAudit({
+      include: [[SELECTORS.passingComponent]]
+    });
+
+    await a11yAudit({
+      include: [['#ember-testing-container']],
+      exclude: [
+        [SELECTORS.failingComponent],
+        ['[data-test-selector="labeless-text-input"]'],
+        ['[data-test-selector="paragraph-with-blink-tag"]'],
+        ['[data-test-selector="ungrouped-radio-inputs"]'],
+        ['[data-test-selector="noise-level-selection"]'],
+        ['[data-test-selector="poor-text-contrast"]']
+      ]
+    });
+
+    assert.ok(true, 'no errors should have been found in a11yAudit');
+  });
+
   test('a11yAudit can accept an options hash in addition to context', async function(assert) {
     await visit('/');
 

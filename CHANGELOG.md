@@ -1,4 +1,16 @@
 
+# 1.1.1 / 2019-09-29
+
+  * Fixes code included in production builds [#108] (#134)
+
+# 1.1.0 / 2019-09-09
+
+  * Bumps axe-core to v3.3
+  * Adds concurrent-axe strict check to counter next() 0 value
+  * Fixes #124, allows a11yAudit to account for axe inlude/exclude context param
+  * Fixes #127, removes use of Ember.Logger
+  * Fixes #107 by adding app re-exports
+
 # 0.5.7 / 2019-03-08
 
   * Axe-core version bump to 3.2.2

@@ -17,7 +17,7 @@ module('Unit | Instance Initializer | violations-helper', function(hooks) {
     this.application = this.TestApplication.create({ autoboot: false });
     this.instance = this.application.buildInstance();
 
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   });
   hooks.afterEach(function() {
     run(this.application, 'destroy');

@@ -1,6 +1,5 @@
 import { registerAsyncHelper } from '@ember/test';
 import { assert } from '@ember/debug';
-import Ember from 'ember';
 import RSVP from 'rsvp';
 import config from 'ember-get-config';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
@@ -26,7 +25,7 @@ function a11yAuditCallback(results) {
       let violationMessage = formatViolation(violation, violationNodes);
       allViolations.push(violationMessage);
 
-      Ember.Logger.error(violationMessage, violation);
+      console.error(violationMessage, violation);  // eslint-disable-line no-console
       violationsHelper.push(violation);
     }
 
@@ -46,6 +45,18 @@ function isPlainObj(obj) {
 }
 
 /**
+ * Determines whether supplied object contains `include` and `exclude` axe
+ * context selector properties. This is necessary to distinguish an axe
+ * config object from a context selector object, after a single argument
+ * is supplied to `runA11yAudit`.
+ * @param {Object} obj
+ * @return {Boolean}
+ */
+function isNotSelectorObj(obj) {
+  return !obj.hasOwnProperty('include') && !obj.hasOwnProperty('exclude');
+}
+
+/**
  * Runs the axe a11y audit with the given context selector and options.
  * The context defaults to '#ember-testing-container' if not specified.
  * The options default axe-core defaults.
@@ -57,7 +68,7 @@ function runA11yAudit(contextSelector = '#ember-testing-container', axeOptions) 
   mark('a11y_audit_start');
 
   // Support passing axeOptions as a single argument
-  if (arguments.length === 1 && isPlainObj(contextSelector)) {
+  if (arguments.length === 1 && isPlainObj(contextSelector) && isNotSelectorObj(contextSelector)) {
     axeOptions = contextSelector;
     contextSelector = '#ember-testing-container';
   }

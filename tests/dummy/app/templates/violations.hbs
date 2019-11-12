@@ -3,7 +3,7 @@
   <span class="p-violations__header-hint">&#42;Open your developer console to view violation logging</span>
 </header>
 
-<section class="p-violations__noise-selectors">
+<section class="p-violations__noise-selectors" data-test-selector="noise-level-selection">
 
   <fieldset class="c-radio-track u-align-center u-relative">
     <legend class="c-radio-track__heading">Visual Noise Level</legend>
@@ -93,7 +93,7 @@
     {{#violations-grid-item class="p-violations__grid-item" title="Poorly Contrasting Text Color" turnAuditOff=true}}
       {{#x-paragraph
         class="p-violations__grid-item-content--low-contrast-text"
-        data-test-selector="labeless-text-input"
+        data-test-selector="poor-text-contrast"
         id="violations__low-contrast-text"
         visualNoiseLevel=model.currentNoiseLevel}}
           Swoooosh
@@ -119,7 +119,7 @@
         💡 PRO TIP: In lieu of a <radiogroup>, a containing <fieldset>
         here would make these accessible.
       --}}
-      <div class="p-violations__grid-item-content--radio-items">
+      <div class="p-violations__grid-item-content--radio-items" data-test-selector="ungrouped-radio-inputs">
         <label class="u-fill-width u-align-center p-violations__grid-item-content--radio" for="violations__radio-group-items--strawberries">
           Strawberries
           {{radio-button-input name="fruits" groupValue=model.currentFruit value="Strawberries" id="violations__radio-group-items--strawberries" visualNoiseLevel=model.currentNoiseLevel}}

@@ -1,13 +1,12 @@
 /* global sinon */
 import { module, test } from 'qunit';
 import { ViolationsHelper } from 'ember-a11y-testing/utils/violations-helper';
-import Ember from 'ember';
 
 let sandbox;
 
 module('Unit | Utils | ViolationsHelper', function(hooks) {
   hooks.beforeEach(function() {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   });
 
   hooks.afterEach(function(){
@@ -78,7 +77,7 @@ module('Unit | Utils | ViolationsHelper', function(hooks) {
 
   test('only logs tip if there are violations', function(assert) {
     let violationsHelper = new ViolationsHelper();
-    let loggerInfoSpy = sandbox.spy(Ember.Logger, 'info');
+    let loggerInfoSpy = sandbox.spy(console, 'info');
 
     violationsHelper.logTip();
     assert.ok(!loggerInfoSpy.called, "Nothing is logged if there are no violations");
@@ -91,7 +90,7 @@ module('Unit | Utils | ViolationsHelper', function(hooks) {
 
   test('will not log tip more than once', function(assert) {
     let violationsHelper = new ViolationsHelper('violation');
-    let loggerInfoSpy = sandbox.spy(Ember.Logger, 'info');
+    let loggerInfoSpy = sandbox.spy(console, 'info');
 
     violationsHelper.logTip();
     assert.ok(loggerInfoSpy.called);
