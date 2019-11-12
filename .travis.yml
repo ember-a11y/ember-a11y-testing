@@ -28,7 +28,7 @@ env:
     - env: EMBER_TRY_SCENARIO=ember-release
     - env: EMBER_TRY_SCENARIO=ember-beta
     - env: EMBER_TRY_SCENARIO=ember-canary
-        - EMBER_TRY_SCENARIO=ember-default
+    - env: EMBER_TRY_SCENARIO=ember-default
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
