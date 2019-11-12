@@ -60,7 +60,7 @@ module('Acceptance | a11y audit', function(hooks) {
     assert.ok(true, 'a11yAudit should not have discovered any issues');
   });
 
-  test('a11yAudit accounts for axe.run include and exclude context parameter', function(assert) {
+  test('a11yAudit accounts for axe.run include and exclude context parameter', async function(assert) {
     await visit('/');
 
     await a11yAudit({

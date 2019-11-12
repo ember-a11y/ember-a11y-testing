@@ -31,6 +31,7 @@
     "ember-get-config": "^0.2.4"
   },
   "devDependencies": {
+    "@ember/jquery": "^1.1.0",
     "@ember/optional-features": "^0.7.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-ajax": "^3.1.0",
