@@ -17,7 +17,7 @@ accessible in any given state.
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v1.13 or above
+* Ember.js v2.18 or above
 * Ember CLI v2.13 or above
 * Node.js v8 or above
 
