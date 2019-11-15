@@ -31,14 +31,14 @@ module('Acceptance | a11y audit', function(hooks) {
     await visit('/');
 
     try {
-      await a11yAudit(SELECTORS.passingComponent)
+      await a11yAudit(SELECTORS.passingComponent);
       assert.ok(true, 'a11yAudit should not have discovered any issues');
     } catch (error) {
       assert.ok(false, error.message);
     }
 
     try {
-      await a11yAudit(SELECTORS.failingComponent)
+      await a11yAudit(SELECTORS.failingComponent);
       assert.ok(false, 'a11yAudit should have thrown an error on violations');
     } catch (error) {
       let foundExpectedError = error.message.startsWith('Assertion Failed: The page should have no accessibility violations. Violations:');
