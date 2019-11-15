@@ -65,7 +65,7 @@
     "sass": "^1.17.3"
   },
   "engines": {
-    "node": "8.* || >= 10.*"
+    "node": "8.* || 10.* || >= 12"
   },
   "ember-addon": {
     "demoURL": "http://ember-a11y.github.io/ember-a11y-testing",
