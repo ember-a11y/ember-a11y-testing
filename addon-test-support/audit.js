@@ -1,4 +1,3 @@
-import { registerAsyncHelper } from '@ember/test';
 import { assert } from '@ember/debug';
 import RSVP from 'rsvp';
 import config from 'ember-get-config';
@@ -99,11 +98,6 @@ function runA11yAudit(contextSelector = '#ember-testing-container', axeOptions) 
       markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
     });
 }
-
-// Register an async helper to use in acceptance tests
-registerAsyncHelper('a11yAudit', function(app, ...args) {
-  return runA11yAudit(...args);
-});
 
 /**
  * A wrapper method to run the async a11yAudit test helper if in an acceptance

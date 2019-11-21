@@ -1,12 +1,35 @@
+/* global sinon */
+
+import Application from '@ember/application';
 import { initialize } from 'dummy/instance-initializers/violations-helper';
 import { module, test } from 'qunit';
+import { run } from '@ember/runloop';
 
-let application;
+let sandbox;
 
-module('Unit | Instance Initializer | violations-helper');
+module('Unit | Instance Initializer | violations-helper', function(hooks) {
+  hooks.beforeEach(function() {
+    this.TestApplication = Application.extend();
+    this.TestApplication.instanceInitializer({
+      name: 'initializer under test',
+      initialize
+    });
+    this.application = this.TestApplication.create({ autoboot: false });
+    this.instance = this.application.buildInstance();
 
-test('initializer sets a violationsHelper in the global scope', function(assert) {
-  initialize(application);
+    sandbox = sinon.createSandbox();
+  });
+  hooks.afterEach(function() {
+    run(this.application, 'destroy');
+    run(this.instance, 'destroy');
 
-  assert.ok(window.violationsHelper);
+    sandbox.restore();
+  });
+
+  // Replace this with your real tests.
+  test('it works', async function(assert) {
+    await this.instance.boot();
+
+    assert.ok(window.violationsHelper);
+  });
 });

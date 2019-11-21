@@ -3,7 +3,7 @@
  *
  * @constant
  * @private
- * @type {Booelan}
+ * @type {Boolean}
  */
 const performance = hasPerformanceApi() ? window.performance : undefined;
 
@@ -23,7 +23,7 @@ function hasPerformanceApi() {
 /**
  * Utility to add a performance marker.
  *
- * @param {String} name 
+ * @param {String} name
  * @public
  */
 export function mark(name) {
