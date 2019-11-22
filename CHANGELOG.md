@@ -1,18 +1,18 @@
 # 2.0.0 / 2019-11-21
 
-  * Upgrade Ember CLI to 3.12 LTS (#138)
+  * Upgrade Ember CLI to 3.12 LTS and drop Node.js 6 support ([#138](https://github.com/ember-a11y/ember-a11y-testing/pull/138))
 
 # 1.1.1 / 2019-09-29
 
-  * Fixes code included in production builds [#108] (#134)
+  * Fixes code included in production builds [#108] ([#134](https://github.com/ember-a11y/ember-a11y-testing/pull/134))
 
 # 1.1.0 / 2019-09-09
 
   * Bumps axe-core to v3.3
   * Adds concurrent-axe strict check to counter next() 0 value
-  * Fixes #124, allows a11yAudit to account for axe inlude/exclude context param
-  * Fixes #127, removes use of Ember.Logger
-  * Fixes #107 by adding app re-exports
+  * Fixes [#124](https://github.com/ember-a11y/ember-a11y-testing/issues/124), allows a11yAudit to account for axe inlude/exclude context param
+  * Fixes [#127](https://github.com/ember-a11y/ember-a11y-testing/issues/127), removes use of Ember.Logger
+  * Fixes [#107](https://github.com/ember-a11y/ember-a11y-testing/issues/107) by adding app re-exports
 
 # 0.5.7 / 2019-03-08
 
@@ -33,21 +33,21 @@
 
 # 0.5.3 / 2018-10-01
 
-  * Update axe-core to 3.1.2 (#109)
+  * Update axe-core to 3.1.2 ([#109](https://github.com/ember-a11y/ember-a11y-testing/pull/109))
   * Make aXe v3 compatible with component audit
   * Fix “Visual Noise Level” demo page
 
 # 0.5.2 / 2018-06-05
 
-  * Improve Test Failure Messages (#103)
-  * Update README with aXe Options and Scoped Auditing (#104)
-  * Upgrade axe-core to 2.6.1 (#98)
-  * Fix: `a11yAudit` not using default `axeOptions` (#100)
+  * Improve Test Failure Messages ([#103](https://github.com/ember-a11y/ember-a11y-testing/pull/103))
+  * Update README with aXe Options and Scoped Auditing ([#104]((https://github.com/ember-a11y/ember-a11y-testing/pull/104)))
+  * Upgrade axe-core to 2.6.1 ([#98]((https://github.com/ember-a11y/ember-a11y-testing/pull/98)))
+  * Fix: `a11yAudit` not using default `axeOptions` ([#100]((https://github.com/ember-a11y/ember-a11y-testing/pull/100)))
 
 # 0.5.1 / 2018-02-20
 
-  * Update Ember-CLI to 2.18.x (#94)
-  * Add check of `isDestroyed` when running an audit (#92)
+  * Update Ember-CLI to 2.18.x ([#94]((https://github.com/ember-a11y/ember-a11y-testing/pull/94)))
+  * Add check of `isDestroyed` when running an audit ([#92]((https://github.com/ember-a11y/ember-a11y-testing/pull/92)))
 
 # 0.5.0 / 2017-10-19
 
@@ -116,7 +116,7 @@
 
 # 0.1.5 / 09-08-2016
 
-- Fix parsing of `axeViolationClassNames`, which previously wasn't reading strings the right way (#36)[https://github.com/ember-a11y/ember-a11y-testing/pull/36]
+- Fix parsing of `axeViolationClassNames`, which previously wasn't reading strings the right way ([#36](https://github.com/ember-a11y/ember-a11y-testing/pull/36))
 
 # 0.1.4 / 11-07-2016
 
