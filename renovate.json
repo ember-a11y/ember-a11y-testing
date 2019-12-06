@@ -3,5 +3,11 @@
     "config:base",
     "schedule:nonOfficeHours"
   ],
-  "prConcurrentLimit": 5
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "packagePatterns": [ "eslint" ],
+      "groupName": "eslint"
+    }
+  ]
 }
