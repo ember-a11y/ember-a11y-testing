@@ -16,6 +16,7 @@
     {
       "packageNames": [
         "broccoli-funnel",
+        "ember-ajax",
         "ember-cli",
         "ember-cli-babel",
         "ember-cli-dependency-checker",
@@ -36,7 +37,7 @@
         "ember-source-channel-url",
         "ember-sinon"
        ],
-      "groupName": "ember tests packages"
+      "groupName": "ember test packages"
     }
   ]
 }
