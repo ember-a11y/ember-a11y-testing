@@ -10,7 +10,7 @@
       "groupName": "eslint"
     },
     {
-      "packageNames":  [
+      "packageNames": [
         "broccoli-funnel",
         "ember-cli",
         "ember-cli-babel",
