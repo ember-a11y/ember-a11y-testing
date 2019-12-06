@@ -22,7 +22,7 @@
         "ember-cli-htmlbars",
         "ember-cli-htmlbars-inline-precompile",
         "ember-cli-inject-live-reload",
-        "ember-cli-uglify"
+        "ember-cli-uglify",
         "ember-export-application-global",
         "ember-source",
         "ember-resolver"
