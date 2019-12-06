@@ -25,19 +25,14 @@
         "ember-cli-inject-live-reload",
         "ember-cli-uglify",
         "ember-export-application-global",
+        "ember-resolver",
+        "ember-sinon",
         "ember-source",
-        "ember-resolver"
+        "ember-source-channel-url",
+        "ember-try",
+        "qunit-dom"
       ],
       "groupName": "ember packages"
-    },
-    {
-      "packageNames": [
-        "qunit-dom",
-        "ember-try",
-        "ember-source-channel-url",
-        "ember-sinon"
-       ],
-      "groupName": "ember test packages"
     }
   ]
 }
