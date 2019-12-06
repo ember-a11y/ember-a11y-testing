@@ -3,5 +3,5 @@
     "config:base",
     "schedule:nonOfficeHours"
   ],
-  prConcurrentLimit: 5
+  "prConcurrentLimit": 5
 }
