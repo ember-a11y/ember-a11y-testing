@@ -8,6 +8,30 @@
     {
       "packagePatterns": [ "eslint" ],
       "groupName": "eslint"
+    },
+    {
+      "packageNames":  [
+        "broccoli-funnel",
+        "ember-cli",
+        "ember-cli-babel",
+        "ember-cli-dependency-checker",
+        "ember-cli-htmlbars",
+        "ember-cli-htmlbars-inline-precompile",
+        "ember-cli-inject-live-reload",
+        "ember-export-application-global",
+        "ember-source",
+        "ember-resolver"
+      ],
+      "groupName": "ember packages"
+    },
+    {
+      "packageNames": [
+        "qunit-dom",
+        "ember-try",
+        "ember-source-channel-url",
+        "ember-sinon"
+       ],
+      "groupName": "ember tests packages"
     }
   ]
 }
