@@ -1,0 +1,38 @@
+{
+  "extends": [
+    "config:base",
+    "schedule:nonOfficeHours"
+  ],
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "packagePatterns": [ "eslint" ],
+      "groupName": "eslint"
+    },
+    {
+      "packagePatterns": [ "sass" ],
+      "groupName": "sass"
+    },
+    {
+      "packageNames": [
+        "broccoli-funnel",
+        "ember-ajax",
+        "ember-cli",
+        "ember-cli-babel",
+        "ember-cli-dependency-checker",
+        "ember-cli-htmlbars",
+        "ember-cli-htmlbars-inline-precompile",
+        "ember-cli-inject-live-reload",
+        "ember-cli-uglify",
+        "ember-export-application-global",
+        "ember-resolver",
+        "ember-sinon",
+        "ember-source",
+        "ember-source-channel-url",
+        "ember-try",
+        "qunit-dom"
+      ],
+      "groupName": "ember packages"
+    }
+  ]
+}
