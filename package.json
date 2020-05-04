@@ -44,7 +44,7 @@
     "ember-cli-inject-live-reload": "1.10.2",
     "ember-cli-qunit": "4.4.0",
     "ember-cli-release": "0.2.9",
-    "ember-cli-sass": "10.0.0",
+    "ember-cli-sass": "10.0.1",
     "ember-cli-sri": "2.1.1",
     "ember-cli-uglify": "2.1.0",
     "ember-disable-prototype-extensions": "1.1.3",
@@ -62,7 +62,7 @@
     "eslint-plugin-node": "9.2.0",
     "loader.js": "4.7.0",
     "qunit-dom": "0.8.5",
-    "sass": "1.17.3"
+    "sass": "1.26.5"
   },
   "engines": {
     "node": "10.* || >= 12"
