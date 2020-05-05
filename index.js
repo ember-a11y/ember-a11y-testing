@@ -59,7 +59,7 @@ module.exports = {
   treeForApp: function(tree) {
     var checker = new VersionChecker(this);
     var isProductionBuild = process.env.EMBER_ENV === 'production';
-    var isOldEmber = checker.forEmber().lt('1.13.0');
+    var isOldEmber = checker.for('ember-source').lt('1.13.0');
 
     if (isProductionBuild || isOldEmber) {
       tree = new Funnel(tree, {
@@ -79,7 +79,7 @@ module.exports = {
     var tree = this._super.treeForAddon.apply(this, arguments);
     var checker = new VersionChecker(this);
     var isProductionBuild = process.env.EMBER_ENV === 'production';
-    var isOldEmber = checker.forEmber().lt('1.13.0');
+    var isOldEmber = checker.for('ember-source').lt('1.13.0');
 
     if (isProductionBuild || isOldEmber) {
       tree = new Funnel(tree, {
