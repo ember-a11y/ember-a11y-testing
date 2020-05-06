@@ -121,8 +121,8 @@ export function initialize(appInstance) {
      */
     violationClasses: computed('axeViolationClassNames', 'visualNoiseLevel', {
       get() {
-        const customViolationClass = this.get('axeViolationClassNames');
-        const visualNoiseLevel = this.get('visualNoiseLevel');
+        const customViolationClass = this.axeViolationClassNames;
+        const visualNoiseLevel = this.visualNoiseLevel;
 
         if (visualNoiseLevel < 1) {
           return null;
@@ -148,9 +148,9 @@ export function initialize(appInstance) {
      * @return {Void}
      */
     audit() {
-      if (this.get('tagName') !== '') {
+      if (this.tagName !== '') {
         concurrentAxe.run(this.element, this.axeOptions, (error, results) => {
-          if (this.get('isDestroyed')) {
+          if (this.isDestroyed) {
             return;
           }
 
@@ -159,8 +159,8 @@ export function initialize(appInstance) {
           }
 
           const violations = results.violations;
-          const violationClasses = this.get('violationClasses') || [];
-          const visualNoiseLevel = this.get('visualNoiseLevel');
+          const violationClasses = this.violationClasses || [];
+          const visualNoiseLevel = this.visualNoiseLevel;
 
           let violation;
           let nodes;

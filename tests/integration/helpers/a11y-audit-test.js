@@ -7,14 +7,6 @@ import a11yAudit from 'ember-a11y-testing/test-support/audit';
 module('Integration | Helper | a11yAudit', function(hooks) {
   setupRenderingTest(hooks);
 
-  if (typeof jQuery != 'undefined') {
-    test('a11yAudit runs successfully with jquery context', async function(assert) {
-      await render(hbs`{{#axe-component}}{{/axe-component}}`);
-      await a11yAudit(this.$());
-      assert.ok(true, 'a11yAudit ran and didn\'t find any issues');
-    });
-  }
-
   test('a11yAudit runs successfully with element context', async function(assert) {
     await render(hbs`{{#axe-component}}{{/axe-component}}`);
     await a11yAudit(this.element);
