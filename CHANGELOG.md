@@ -1,3 +1,17 @@
+
+# 3.0.0 / 2020-05-07
+
+  * Drops support for Ember 2.18 due to major dependencies
+  * Drops support for Node.js v8 due to EOL
+  * Update eslint
+  * Update dependency ember-cli-version-checker to v5
+  * Update dependency @ember/optional-features to v1
+  * Update ember packages
+  * Update sass
+  * Update dependency ember-cli-github-pages to v0.2.2
+  * Update dependency axe-core to v3.5.3
+  * Update dependency ember-radio-button to v2
+
 # 2.0.0 / 2019-11-21
 
   * Upgrade Ember CLI to 3.12 LTS and drop Node.js 6 support ([#138](https://github.com/ember-a11y/ember-a11y-testing/pull/138))
