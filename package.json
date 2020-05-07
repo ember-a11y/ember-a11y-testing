@@ -40,7 +40,6 @@
     "ember-cli-eslint": "5.1.0",
     "ember-cli-github-pages": "0.2.2",
     "ember-cli-htmlbars": "5.1.0",
-    "ember-cli-htmlbars-inline-precompile": "3.0.1",
     "ember-cli-inject-live-reload": "2.0.2",
     "ember-cli-qunit": "4.4.0",
     "ember-cli-release": "0.2.9",
