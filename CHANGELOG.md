@@ -1,4 +1,10 @@
 
+# 3.0.1 / 2020-05-18
+
+  * Update dependency ember-cli-version-checker to v5.1.1
+  * Update dependency eslint-plugin-ember to v8.5.1
+  * Update ember packages
+
 # 3.0.0 / 2020-05-07
 
   * Drops support for Ember 2.18 due to major dependencies
