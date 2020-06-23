@@ -61,7 +61,7 @@
     "eslint-plugin-node": "11.1.0",
     "loader.js": "4.7.0",
     "qunit-dom": "1.2.0",
-    "sass": "1.26.5"
+    "sass": "1.26.9"
   },
   "engines": {
     "node": "10.* || >= 12"
