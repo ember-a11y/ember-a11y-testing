@@ -1,4 +1,13 @@
 
+# 3.0.1 / 2020-06-29
+
+  * Update dependency ember-cli-htmlbars to v5.2.0
+  * Update dependency eslint-plugin-ember to v8.9.0
+  * Update dependency sass to v1.26.9
+  * Update ember packages
+  * Update dependency axe-core to v3.5.5
+  * Update dependency eslint-plugin-ember to v8.7.0
+
 # 3.0.1 / 2020-05-18
 
   * Update dependency ember-cli-version-checker to v5.1.1
