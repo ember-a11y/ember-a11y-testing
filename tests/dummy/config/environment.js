@@ -28,9 +28,7 @@ module.exports = function(environment) {
           rules: {
             // Disabled to test whether the config is
             // properly loaded in test environment
-            'image-alt': { enabled: false },
-            // Enable for demo app, as rule is deprecated
-            'radiogroup': { enabled: true }
+            'image-alt': { enabled: false }
           }
         }
       }
