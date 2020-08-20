@@ -28,7 +28,7 @@ When reviewing merged PR's the labels to be used are:
 
 ## Release
 
-Once the prep work is completed, the actual release is straight forward:
+Once the prep work is completed, the release itself is straightforward:
 
 * First, ensure that you have installed your projects dependencies:
 
