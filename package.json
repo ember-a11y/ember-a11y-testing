@@ -61,13 +61,33 @@
     "eslint-plugin-node": "^11.1.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^1.4.0",
+    "release-it": "^13.6.5",
+    "release-it-lerna-changelog": "^2.3.0",
     "sass": "^1.26.10"
   },
   "engines": {
     "node": "10.* || >= 12"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "ember-addon": {
     "demoURL": "http://ember-a11y.github.io/ember-a11y-testing",
     "configPath": "tests/dummy/config"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   }
 }

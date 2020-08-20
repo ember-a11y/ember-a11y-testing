@@ -1,47 +1,62 @@
-# Release Process
+# Release
 
-The following is the release process you should follow to publish a new version of `ember-a11y-testing`.
+Releases are mostly automated using
+[release-it](https://github.com/release-it/release-it/) and
+[lerna-changelog](https://github.com/lerna/lerna-changelog/).
 
-## Update The Changelog
 
-First, we need to update the `CHANGELOG.md` file for the project. This requires having [`git-extras`](https://github.com/tj/git-extras) installed.
+## Preparation
 
-Checkout the current `master` version of the repo and run:
+Since the majority of the actual release process is automated, the primary
+remaining task prior to releasing is confirming that all pull requests that
+have been merged since the last release have been labeled with the appropriate
+`lerna-changelog` labels and the titles have been updated to ensure they
+represent something that would make sense to our users. Some great information
+on why this is important can be found at
+[keepachangelog.com](https://keepachangelog.com/en/1.0.0/), but the overall
+guiding principle here is that changelogs are for humans, not machines.
 
-```bash
-git changelog
+When reviewing merged PR's the labels to be used are:
+
+* breaking - Used when the PR is considered a breaking change.
+* enhancement - Used when the PR adds a new feature or enhancement.
+* bug - Used when the PR fixes a bug included in a previous release.
+* documentation - Used when the PR adds or updates documentation.
+* internal - Used for internal changes that still require a mention in the
+  changelog/release notes.
+
+
+## Release
+
+Once the prep work is completed, the release itself is straightforward:
+
+* First, ensure that you have installed your projects dependencies:
+
+```
+yarn install
 ```
 
-Clean up the generated changelog by inserting the appropriate verion number and removing merge commits and previous release commits if necessary.
+* Second, ensure that you have obtained a
+  [GitHub personal access token][generate-token] with the `repo` scope (no
+  other permissions are needed). Make sure the token is available as the
+  `GITHUB_AUTH` environment variable.
 
-Review the changes and then commit them with a message like:
+  For instance:
 
-```bash
-git commit -am "Update CHANGELOG for x.x.x"
+  ```bash
+  export GITHUB_AUTH=abc123def456
+  ```
+
+[generate-token]: https://github.com/settings/tokens/new?scopes=repo&description=GITHUB_AUTH+env+variable
+
+* And last (but not least 😁) do your release.
+
+```
+npx release-it
 ```
 
-Where `x.x.x` is the version you are releasing.
-
-## Bump The Version
-
-Next, we bump the version of the addon and tag it. You can do this by using the default `npm version` command, like so:
-
-```bash
-npm version x.x.x
-```
-
-That should bump the version in `package.json`, commit it, and then tag it.
-
-Next, push the version bump and the changelog changes to the repository (ensure you push the new tag as well).
-
-## Publish The Release
-
-Once the changes have been pushed, run:
-
-```bash
-npm publish
-```
-
-To actually publish the new release.
-
-Finally, update the [GitHub Releases page](https://github.com/ember-a11y/ember-a11y-testing/releases) with a new release; using the changelog info as the release notes.
+[release-it](https://github.com/release-it/release-it/) manages the actual
+release process. It will prompt you to to choose the version number after which
+you will have the chance to hand tweak the changelog to be used (for the
+`CHANGELOG.md` and GitHub release), then `release-it` continues on to tagging,
+pushing the tag and commits, etc.
