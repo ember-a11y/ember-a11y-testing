@@ -7,11 +7,13 @@
   "packageRules": [
     {
       "packagePatterns": [ "eslint" ],
-      "groupName": "eslint"
+      "groupName": "eslint",
+      "rangeStrategy": "replace"
     },
     {
       "packagePatterns": [ "sass" ],
-      "groupName": "sass"
+      "groupName": "sass",
+      "rangeStrategy": "replace"
     },
     {
       "packageNames": [
@@ -32,6 +34,7 @@
         "ember-try",
         "qunit-dom"
       ],
+      "rangeStrategy": "replace",
       "groupName": "ember packages"
     }
   ]
