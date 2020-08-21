@@ -1,6 +1,5 @@
 {
-  "extends": ["config:base", "schedule:nonOfficeHours"],
-    ":preserveSemverRanges",
+  "extends": ["config:base", ":preserveSemverRanges", "schedule:nonOfficeHours"],
   "prConcurrentLimit": 5,
   "packageRules": [
     {
