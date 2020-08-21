@@ -1,6 +1,6 @@
 # ember-a11y-testing
 
-[![Build Status](https://travis-ci.org/ember-a11y/ember-a11y-testing.svg)](https://travis-ci.org/ember-a11y/ember-a11y-testing)
+[![CI Build](https://github.com/ember-a11y/ember-a11y-testing/workflows/CI%20Build/badge.svg)](https://github.com/ember-a11y/ember-a11y-testing/actions?query=workflow%3A%22CI+Build%22)
 [![NPM Version](https://badge.fury.io/js/ember-a11y-testing.svg)](http://badge.fury.io/js/ember-a11y-testing)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-a11y-testing.svg)](https://emberobserver.com/addons/ember-a11y-testing)
 
