@@ -19,10 +19,6 @@ jobs:
         os: [ubuntu-latest, macOS-latest]
 
     steps:
-      - if: matrix.os == 'macOS-latest'
-        run: |
-          brew update
-          brew cask install google-chrome
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
@@ -37,6 +33,24 @@ jobs:
         run: |
           yarn install --no-lockfile --non-interactive
           yarn test:ember-compatibility
+
+  floating-dependencies:
+    name: Floating dependencies
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: install dependencies
+        run: yarn install --no-lockfile --non-interactive
+      - name: test
+        run: yarn test:ember-compatibility
 
   try-scenarios:
     name: ${{ matrix.ember-try-scenario }}
