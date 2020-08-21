@@ -2,7 +2,7 @@
  * Formats the axe violation for human consumption
  *
  * @param {AxeViolation} violation
- * @param {String} markup (optional) string of HTML relevant to the violation
+ * @param {string | string[]} markup (optional) string of HTML relevant to the violation
  */
 export default function formatViolation(violation, markup) {
   if (!violation) {

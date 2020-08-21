@@ -16,30 +16,30 @@ module.exports = {
    * version in case of a need to debug.
    * @override
    */
-  included: function (app) {
-    var config = this.project.config();
-    var options =
-      (config[this.name] && config[this.name].componentOptions) || {};
-    var isComponentAuditOff = options.turnAuditOff || false;
-    var shouldExcludeAxeCore = isComponentAuditOff && options.excludeAxeCore;
+  // included: function (app) {
+  //   var config = this.project.config();
+  //   var options =
+  //     (config[this.name] && config[this.name].componentOptions) || {};
+  //   var isComponentAuditOff = options.turnAuditOff || false;
+  //   var shouldExcludeAxeCore = isComponentAuditOff && options.excludeAxeCore;
 
-    this._super.included.apply(this, arguments);
+  //   this._super.included.apply(this, arguments);
 
-    if (app.tests) {
-      app.import(
-        'vendor/axe-core/axe.js',
-        shouldExcludeAxeCore ? { type: 'test' } : undefined
-      );
-    }
-  },
+  //   if (app.tests) {
+  //     app.import(
+  //       'vendor/axe-core/axe.js',
+  //       shouldExcludeAxeCore ? { type: 'test' } : undefined
+  //     );
+  //   }
+  // },
 
-  treeForVendor: function () {
-    var axePath = path.dirname(require.resolve('axe-core'));
-    return new Funnel(axePath, {
-      files: ['axe.js'],
-      destDir: 'axe-core',
-    });
-  },
+  // treeForVendor: function () {
+  //   var axePath = path.dirname(require.resolve('axe-core'));
+  //   return new Funnel(axePath, {
+  //     files: ['axe.js'],
+  //     destDir: 'axe-core',
+  //   });
+  // },
 
   /**
    * Adds content for the areas specified in the array above. It appends the
