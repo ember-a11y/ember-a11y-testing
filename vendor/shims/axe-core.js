@@ -2,10 +2,7 @@
   function vendorModule() {
     'use strict';
 
-    return {
-      default: self['axe-core'],
-      __esModule: true,
-    };
+    return self['axe'];
   }
 
   define('axe-core', [], vendorModule);
