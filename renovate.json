@@ -1,18 +1,15 @@
 {
-  "extends": [
-    "config:base",
+  "extends": ["config:base", "schedule:nonOfficeHours"],
     ":preserveSemverRanges",
-    "schedule:nonOfficeHours"
-  ],
   "prConcurrentLimit": 5,
   "packageRules": [
     {
-      "packagePatterns": [ "eslint" ],
+      "packagePatterns": ["eslint"],
       "groupName": "eslint",
       "rangeStrategy": "replace"
     },
     {
-      "packagePatterns": [ "sass" ],
+      "packagePatterns": ["sass"],
       "groupName": "sass",
       "rangeStrategy": "replace"
     },

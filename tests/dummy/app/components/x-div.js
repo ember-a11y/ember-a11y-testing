@@ -8,5 +8,5 @@ import layout from '../templates/components/x-div';
  */
 export default Component.extend({
   layout,
-  tagName: 'div'
+  tagName: 'div',
 });

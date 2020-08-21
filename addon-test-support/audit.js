@@ -19,17 +19,19 @@ function a11yAuditCallback(results) {
 
     for (let i = 0, l = violations.length; i < l; i++) {
       let violation = violations[i];
-      let violationNodes = violation.nodes.map(node => node.html);
+      let violationNodes = violation.nodes.map((node) => node.html);
 
       let violationMessage = formatViolation(violation, violationNodes);
       allViolations.push(violationMessage);
 
-      console.error(violationMessage, violation);  // eslint-disable-line no-console
+      console.error(violationMessage, violation); // eslint-disable-line no-console
       violationsHelper.push(violation);
     }
 
     let allViolationMessages = allViolations.join('\n');
-    assert(`The page should have no accessibility violations. Violations:\n${allViolationMessages}`);
+    assert(
+      `The page should have no accessibility violations. Violations:\n${allViolationMessages}`
+    );
   }
 }
 
@@ -52,7 +54,10 @@ function isPlainObj(obj) {
  * @return {Boolean}
  */
 function isNotSelectorObj(obj) {
-  return !obj.hasOwnProperty('include') && !obj.hasOwnProperty('exclude');
+  return (
+    !Object.prototype.hasOwnProperty.call(obj, 'include') &&
+    !Object.prototype.hasOwnProperty.call(obj, 'exclude')
+  );
 }
 
 /**
@@ -63,11 +68,18 @@ function isNotSelectorObj(obj) {
  * @method runA11yAudit
  * @private
  */
-function runA11yAudit(contextSelector = '#ember-testing-container', axeOptions) {
+function runA11yAudit(
+  contextSelector = '#ember-testing-container',
+  axeOptions
+) {
   mark('a11y_audit_start');
 
   // Support passing axeOptions as a single argument
-  if (arguments.length === 1 && isPlainObj(contextSelector) && isNotSelectorObj(contextSelector)) {
+  if (
+    arguments.length === 1 &&
+    isPlainObj(contextSelector) &&
+    isNotSelectorObj(contextSelector)
+  ) {
     axeOptions = contextSelector;
     contextSelector = '#ember-testing-container';
   }
@@ -88,15 +100,13 @@ function runA11yAudit(contextSelector = '#ember-testing-container', axeOptions) 
       } else {
         return reject(error);
       }
-    })
+    });
   });
 
-  return auditPromise
-    .then(a11yAuditCallback)
-    .finally(() => {
-      document.body.classList.remove('axe-running');
-      markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
-    });
+  return auditPromise.then(a11yAuditCallback).finally(() => {
+    document.body.classList.remove('axe-running');
+    markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
+  });
 }
 
 /**

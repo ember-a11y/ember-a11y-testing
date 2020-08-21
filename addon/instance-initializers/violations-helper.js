@@ -7,5 +7,5 @@ export function initialize() {
 export default {
   name: 'violations-helper',
   before: 'axe-component',
-  initialize
+  initialize,
 };

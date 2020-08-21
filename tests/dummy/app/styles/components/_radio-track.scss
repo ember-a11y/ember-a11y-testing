@@ -1,16 +1,26 @@
 $height__radio-selector-track-container: 4rem;
-$height__radio-selector-track-circle: $height__radio-selector-track-container * 0.5;
-$offset__title-below-circle: 0.40em;
+$height__radio-selector-track-circle: $height__radio-selector-track-container *
+  0.5;
+$offset__title-below-circle: 0.4em;
 
 $color__circle--primary: $theme-color__primary-1--700;
 $color__circle--accent: $theme-color__primary-1--100;
 $color__label--checked: $theme-color__primary-1--300;
-$color__track: hsla(0, 0%, 59%, 1.00);
+$color__track: hsla(0, 0%, 59%, 1);
 $color__track-heading: $theme-color__primary-1--700;
 
-
-$animation-easing__to-checked: cubic-bezier(0.00, 0.300, 0.00, 1.480); /* ease-out-cubic with 8% bounce */
-$animation-easing__to-unchecked: cubic-bezier(0.470, 0.000, 0.745, 0.715); /* ease-in-sine */
+$animation-easing__to-checked: cubic-bezier(
+  0,
+  0.3,
+  0,
+  1.48
+); /* ease-out-cubic with 8% bounce */
+$animation-easing__to-unchecked: cubic-bezier(
+  0.47,
+  0,
+  0.745,
+  0.715
+); /* ease-in-sine */
 $animation-duration__circle-toggle: 0.37s;
 
 .c-radio-track {
@@ -42,7 +52,6 @@ $animation-duration__circle-toggle: 0.37s;
   display: flex;
   align-items: center;
   justify-content: space-around;
-
 }
 
 /**
@@ -87,16 +96,16 @@ $animation-duration__circle-toggle: 0.37s;
   //pointer-events: none;  /* Have the pointer-events handled by the ::before element */
 
   /* Push the title down below the psuedo-elements */
-  top: calc(#{$offset__title-below-circle} + #{$height__radio-selector-track-circle});
+  top: calc(
+    #{$offset__title-below-circle} + #{$height__radio-selector-track-circle}
+  );
   transition-property: color;
 }
 
 .c-radio-track__item-pointer {
   position: absolute;
   color: $color__label--checked;
-  margin-top: calc(
-    -1 * ( #{$height__radio-selector-track-circle / 2} + 1.5em )
-  );
+  margin-top: calc(-1 * (#{$height__radio-selector-track-circle / 2} + 1.5em));
 }
 
 .c-radio-track__item-pointer::after {
@@ -119,7 +128,9 @@ $animation-duration__circle-toggle: 0.37s;
   width: $height__radio-selector-track-circle;
   height: $height__radio-selector-track-circle;
   border-radius: 50%;
-  margin-top: calc(-1 * #{$height__radio-selector-track-circle} - #{$offset__title-below-circle});
+  margin-top: calc(
+    -1 * #{$height__radio-selector-track-circle} - #{$offset__title-below-circle}
+  );
 }
 
 /**
@@ -141,12 +152,14 @@ $animation-duration__circle-toggle: 0.37s;
   opacity: 0;
   transform: scale(0);
   cursor: default;
-  background-image: radial-gradient(circle, $color__circle--primary 0%, $color__circle--primary);
-  box-shadow:
-    0 0 0 0.25em $color__circle--accent,
+  background-image: radial-gradient(
+    circle,
+    $color__circle--primary 0%,
+    $color__circle--primary
+  );
+  box-shadow: 0 0 0 0.25em $color__circle--accent,
     0 0 0 0.5em $color__circle--primary;
 }
-
 
 /* --------------------- Animations & event handling ----------------- */
 .c-radio-track__item-pointer::after,
@@ -184,6 +197,7 @@ $animation-duration__circle-toggle: 0.37s;
 /**
  * Hovering over circle when it's not focused or checked
  */
-.c-radio-track__item-input:hover:not(:focus):not(:checked) + .c-radio-track__item-node::before {
+.c-radio-track__item-input:hover:not(:focus):not(:checked)
+  + .c-radio-track__item-node::before {
   background-color: $theme-color__primary-1--500;
 }

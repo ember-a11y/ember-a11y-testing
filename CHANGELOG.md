@@ -1,94 +1,93 @@
-
 # 3.0.1 / 2020-06-29
 
-  * Update dependency ember-cli-htmlbars to v5.2.0
-  * Update dependency eslint-plugin-ember to v8.9.0
-  * Update dependency sass to v1.26.9
-  * Update ember packages
-  * Update dependency axe-core to v3.5.5
-  * Update dependency eslint-plugin-ember to v8.7.0
+- Update dependency ember-cli-htmlbars to v5.2.0
+- Update dependency eslint-plugin-ember to v8.9.0
+- Update dependency sass to v1.26.9
+- Update ember packages
+- Update dependency axe-core to v3.5.5
+- Update dependency eslint-plugin-ember to v8.7.0
 
 # 3.0.1 / 2020-05-18
 
-  * Update dependency ember-cli-version-checker to v5.1.1
-  * Update dependency eslint-plugin-ember to v8.5.1
-  * Update ember packages
+- Update dependency ember-cli-version-checker to v5.1.1
+- Update dependency eslint-plugin-ember to v8.5.1
+- Update ember packages
 
 # 3.0.0 / 2020-05-07
 
-  * Drops support for Ember 2.18 due to major dependencies
-  * Drops support for Node.js v8 due to EOL
-  * Update eslint
-  * Update dependency ember-cli-version-checker to v5
-  * Update dependency @ember/optional-features to v1
-  * Update ember packages
-  * Update sass
-  * Update dependency ember-cli-github-pages to v0.2.2
-  * Update dependency axe-core to v3.5.3
-  * Update dependency ember-radio-button to v2
+- Drops support for Ember 2.18 due to major dependencies
+- Drops support for Node.js v8 due to EOL
+- Update eslint
+- Update dependency ember-cli-version-checker to v5
+- Update dependency @ember/optional-features to v1
+- Update ember packages
+- Update sass
+- Update dependency ember-cli-github-pages to v0.2.2
+- Update dependency axe-core to v3.5.3
+- Update dependency ember-radio-button to v2
 
 # 2.0.0 / 2019-11-21
 
-  * Upgrade Ember CLI to 3.12 LTS and drop Node.js 6 support ([#138](https://github.com/ember-a11y/ember-a11y-testing/pull/138))
+- Upgrade Ember CLI to 3.12 LTS and drop Node.js 6 support ([#138](https://github.com/ember-a11y/ember-a11y-testing/pull/138))
 
 # 1.1.1 / 2019-09-29
 
-  * Fixes code included in production builds [#108] ([#134](https://github.com/ember-a11y/ember-a11y-testing/pull/134))
+- Fixes code included in production builds [#108](<[#134](https://github.com/ember-a11y/ember-a11y-testing/pull/134)>)
 
 # 1.1.0 / 2019-09-09
 
-  * Bumps axe-core to v3.3
-  * Adds concurrent-axe strict check to counter next() 0 value
-  * Fixes [#124](https://github.com/ember-a11y/ember-a11y-testing/issues/124), allows a11yAudit to account for axe inlude/exclude context param
-  * Fixes [#127](https://github.com/ember-a11y/ember-a11y-testing/issues/127), removes use of Ember.Logger
-  * Fixes [#107](https://github.com/ember-a11y/ember-a11y-testing/issues/107) by adding app re-exports
+- Bumps axe-core to v3.3
+- Adds concurrent-axe strict check to counter next() 0 value
+- Fixes [#124](https://github.com/ember-a11y/ember-a11y-testing/issues/124), allows a11yAudit to account for axe inlude/exclude context param
+- Fixes [#127](https://github.com/ember-a11y/ember-a11y-testing/issues/127), removes use of Ember.Logger
+- Fixes [#107](https://github.com/ember-a11y/ember-a11y-testing/issues/107) by adding app re-exports
 
 # 0.5.7 / 2019-03-08
 
-  * Axe-core version bump to 3.2.2
+- Axe-core version bump to 3.2.2
 
 # 0.5.6 / 2018-11-22
 
-  * Adds user timing mechanism for performance profiling
-  * Use process.env.EMBER_ENV for env check
+- Adds user timing mechanism for performance profiling
+- Use process.env.EMBER_ENV for env check
 
 # 0.5.5 / 2018-11-04
 
-  * Fixes #113: provides empty object if axeOptions are not defined to prevent axe.run from failing
+- Fixes #113: provides empty object if axeOptions are not defined to prevent axe.run from failing
 
 # 0.5.4 / 2018-10-22
 
-  * Fix services for engines, add option to exclude axe-core for component audits
+- Fix services for engines, add option to exclude axe-core for component audits
 
 # 0.5.3 / 2018-10-01
 
-  * Update axe-core to 3.1.2 ([#109](https://github.com/ember-a11y/ember-a11y-testing/pull/109))
-  * Make aXe v3 compatible with component audit
-  * Fix “Visual Noise Level” demo page
+- Update axe-core to 3.1.2 ([#109](https://github.com/ember-a11y/ember-a11y-testing/pull/109))
+- Make aXe v3 compatible with component audit
+- Fix “Visual Noise Level” demo page
 
 # 0.5.2 / 2018-06-05
 
-  * Improve Test Failure Messages ([#103](https://github.com/ember-a11y/ember-a11y-testing/pull/103))
-  * Update README with aXe Options and Scoped Auditing ([#104]((https://github.com/ember-a11y/ember-a11y-testing/pull/104)))
-  * Upgrade axe-core to 2.6.1 ([#98]((https://github.com/ember-a11y/ember-a11y-testing/pull/98)))
-  * Fix: `a11yAudit` not using default `axeOptions` ([#100]((https://github.com/ember-a11y/ember-a11y-testing/pull/100)))
+- Improve Test Failure Messages ([#103](https://github.com/ember-a11y/ember-a11y-testing/pull/103))
+- Update README with aXe Options and Scoped Auditing ([#104](<(https://github.com/ember-a11y/ember-a11y-testing/pull/104)>))
+- Upgrade axe-core to 2.6.1 ([#98](<(https://github.com/ember-a11y/ember-a11y-testing/pull/98)>))
+- Fix: `a11yAudit` not using default `axeOptions` ([#100](<(https://github.com/ember-a11y/ember-a11y-testing/pull/100)>))
 
 # 0.5.1 / 2018-02-20
 
-  * Update Ember-CLI to 2.18.x ([#94]((https://github.com/ember-a11y/ember-a11y-testing/pull/94)))
-  * Add check of `isDestroyed` when running an audit ([#92]((https://github.com/ember-a11y/ember-a11y-testing/pull/92)))
+- Update Ember-CLI to 2.18.x ([#94](<(https://github.com/ember-a11y/ember-a11y-testing/pull/94)>))
+- Add check of `isDestroyed` when running an audit ([#92](<(https://github.com/ember-a11y/ember-a11y-testing/pull/92)>))
 
 # 0.5.0 / 2017-10-19
 
-  * Update a couple more dependencies
-  * Update runtime dependencies
+- Update a couple more dependencies
+- Update runtime dependencies
 
 # 0.4.4 / 2017-10-05
 
-  - Package upgrades and locking version of htmlbars-inline-precompile
-  - update README -change double-ticks to single-ticks
-  - update README to combine axeOptions examples
-  - README - example to disable color contrast scroll
+- Package upgrades and locking version of htmlbars-inline-precompile
+- update README -change double-ticks to single-ticks
+- update README to combine axeOptions examples
+- README - example to disable color contrast scroll
 
 # 0.4.3 / 2017-06-21
 

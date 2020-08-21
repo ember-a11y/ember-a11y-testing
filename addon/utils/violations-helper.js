@@ -36,7 +36,9 @@ export class ViolationsHelper {
    * @public
    * @type {Number}
    */
-  get count() { return this.violations.length; }
+  get count() {
+    return this.violations.length;
+  }
 
   /**
    * Alias method to return the first violation
@@ -44,7 +46,9 @@ export class ViolationsHelper {
    * @public
    * @type {Object}
    */
-  get first() { return this.violations[0]; }
+  get first() {
+    return this.violations[0];
+  }
 
   /**
    * Alias method to return the last violation
@@ -52,7 +56,9 @@ export class ViolationsHelper {
    * @public
    * @type {Object}
    */
-  get last() { return this.violations[this.count - 1]; }
+  get last() {
+    return this.violations[this.count - 1];
+  }
 
   /**
    * Alias method to push a violation into the collection
@@ -76,10 +82,12 @@ export class ViolationsHelper {
    * @return {Array}
    */
   filterBy(key, value) {
-    if (key === "rule") { key = "id"; }
+    if (key === 'rule') {
+      key = 'id';
+    }
 
     return this.violations.filter((violation) => {
-      if (key === "node") {
+      if (key === 'node') {
         return violation.nodes[0].target[0] === value;
       }
       return violation[key] === value;
@@ -95,8 +103,12 @@ export class ViolationsHelper {
   logTip() {
     if (this.count && !this.hasLoggedTip) {
       /* eslint-disable no-console */
-      console.info("You can inspect or filter your violations from the console with: window.violationsHelper");
-      console.info("For a description of violationsHelper's API, see: https://github.com/ember-a11y/ember-a11y-testing/blob/master/addon/utils/violations-helper.js");
+      console.info(
+        'You can inspect or filter your violations from the console with: window.violationsHelper'
+      );
+      console.info(
+        "For a description of violationsHelper's API, see: https://github.com/ember-a11y/ember-a11y-testing/blob/master/addon/utils/violations-helper.js"
+      );
       /* eslint-enable no-console */
       this.hasLoggedTip = true;
     }

@@ -1,4 +1,3 @@
-/* global axe */
 import { next } from '@ember/runloop';
 
 export class ConcurrentAxe {
@@ -9,7 +8,7 @@ export class ConcurrentAxe {
 
   /**
    * Axe v3 contains a concurrency issue which breaks the component auditing feature.
-   * This service defers axe.run calls on onto the next loop so that concurrent 
+   * This service defers axe.run calls on onto the next loop so that concurrent
    * axe executions do not occur.
    *
    * @see(https://github.com/dequelabs/axe-core/issues/1041)

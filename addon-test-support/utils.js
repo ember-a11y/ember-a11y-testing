@@ -14,10 +14,12 @@ const performance = hasPerformanceApi() ? window.performance : undefined;
  * @private
  */
 function hasPerformanceApi() {
-  return window &&
+  return (
+    window &&
     typeof window.performance !== 'undefined' &&
     typeof window.performance.mark === 'function' &&
-    typeof window.performance.measure === 'function';
+    typeof window.performance.measure === 'function'
+  );
 }
 
 /**
@@ -48,7 +50,10 @@ export function measure(comment, startMark, endMark) {
     performance.measure(comment, startMark, endMark);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('performance.measure could not be executed because of ', e.message);
+    console.warn(
+      'performance.measure could not be executed because of ',
+      e.message
+    );
   }
 }
 
@@ -77,5 +82,5 @@ export default {
    */
   getLocation() {
     return window && window.location;
-  }
+  },
 };
