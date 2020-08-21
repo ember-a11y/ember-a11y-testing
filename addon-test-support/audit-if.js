@@ -9,10 +9,12 @@ import utils from './utils';
  * @private
  */
 function getUrlParameter(name) {
-    const location = utils.getLocation();
-    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    const results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  const location = utils.getLocation();
+  const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  const results = regex.exec(location.search);
+  return results === null
+    ? ''
+    : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
 /**
@@ -22,7 +24,7 @@ function getUrlParameter(name) {
  * @public
  */
 export default function a11yAuditIf(...args) {
-  if(getUrlParameter('enableA11yAudit') === 'true') {
+  if (getUrlParameter('enableA11yAudit') === 'true') {
     return a11yAudit(...args);
   }
 

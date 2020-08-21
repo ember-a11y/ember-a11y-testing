@@ -3,7 +3,6 @@ $height__grid-item: $width__grid-item * 0.55;
 $margin__grid-item--vertical: 0.5em;
 $margin__grid-item--horizontal: 0.75em;
 
-
 .p-violations__header,
 .p-violations__noise-selectors,
 .p-violations__body {
@@ -46,8 +45,6 @@ $margin__grid-item--horizontal: 0.75em;
     width: 100%;
   }
 }
-
-
 
 .p-violations__grid-item-content--low-contrast-text {
   color: yellow;

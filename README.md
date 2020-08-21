@@ -13,17 +13,13 @@ workflow by running during a component's `didRender` phase in non-production
 environments. This gives you instant feedback on if your components are
 accessible in any given state.
 
+## Compatibility
 
-Compatibility
-------------------------------------------------------------------------------
+- Ember.js v3.0.0 or above
+- Ember CLI v3.0.0 or above
+- Node.js v10 or above
 
-* Ember.js v3.0.0 or above
-* Ember CLI v3.0.0 or above
-* Node.js v10 or above
-
-
-Installation
-------------------------------------------------------------------------------
+## Installation
 
 ```bash
 ember install ember-a11y-testing
@@ -57,7 +53,7 @@ import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
 // ...elided for brevity
 
-test('Some test case', async function(assert) {
+test('Some test case', async function (assert) {
   await visit('/');
   await a11yAudit();
   assert.ok(true, 'no a11y errors found!');
@@ -71,7 +67,7 @@ import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
 // ...elided for brevity
 
-test('Some test case', function(assert) {
+test('Some test case', function (assert) {
   visit('/');
   a11yAudit();
   andThen(() => assert.ok(true, 'no a11y errors found!'));
@@ -83,13 +79,13 @@ either a selector string or an HTML element. You can also provide a secondary
 parameter to specify axe-core options:
 
 ```js
-test('Some test case', async function(assert) {
+test('Some test case', async function (assert) {
   let axeOptions = {
     rules: {
       'button-name': {
-        enabled: false
-      }
-    }
+        enabled: false,
+      },
+    },
   };
 
   await visit('/');
@@ -101,13 +97,13 @@ test('Some test case', async function(assert) {
 Or specify options as a single argument:
 
 ```js
-test('Some test case', async function(assert) {
+test('Some test case', async function (assert) {
   let axeOptions = {
     rules: {
       'button-name': {
-        enabled: false
-      }
-    }
+        enabled: false,
+      },
+    },
   };
 
   await visit('/');
@@ -125,15 +121,15 @@ import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
 // ...elided for brevity
 
-test('Some test case', function(assert) {
+test('Some test case', function (assert) {
   this.render(hbs`{{some-component}}`);
 
   let axeOptions = {
     rules: {
       'button-name': {
-        enabled: false
-      }
-    }
+        enabled: false,
+      },
+    },
   };
   return a11yAudit(this.element, axeOptions).then(() => {
     assert.ok(true, 'no a11y errors found!');
@@ -176,32 +172,34 @@ after state changes, and since the checks are scoped to a component's element,
 it means that any state change propagated downwards is also caught.
 
 #### Inspecting Violations
+
 When a violation is detected for a component's element, Ember A11y Testing will
 attempt to visually indicate the violation by updating the component's
 element `className`.
 
 The class used is determined as follows:
 
-1) If a component's `axeViolationClassNames` property is set, these names will always be used. This provides a way for you to customize the styling of a violation to your own needs.
-  - `axeViolationClassNames` can be passed in your template, with each name as an element in a space-separated string:
+1. If a component's `axeViolationClassNames` property is set, these names will always be used. This provides a way for you to customize the styling of a violation to your own needs.
 
-  ```hbs
-    {{x-button
-      id="violations__empty-button"
-      data-test-selector="empty-button"
-      axeViolationClassNames="outline outline--red"
-    }}
-  ```
+- `axeViolationClassNames` can be passed in your template, with each name as an element in a space-separated string:
 
-  - they can also be defined as an array of names within your component:
+```hbs
+  {{x-button
+    id="violations__empty-button"
+    data-test-selector="empty-button"
+    axeViolationClassNames="outline outline--red"
+  }}
+```
 
-  ```javascript
-    axeViolationClassNames: ['outline', 'outline--red']
-  ```
+- they can also be defined as an array of names within your component:
 
-2) By forgoing custom styling, you can rely on Ember A11y Testing's own set of
-default styles. These are set according to a series of configurable
-`visualNoiseLevel`s spanning from 1 to 3, and a special styling is applied to element's whose default appearance would require a different set of rules for visibility.
+```javascript
+axeViolationClassNames: ['outline', 'outline--red'];
+```
+
+2. By forgoing custom styling, you can rely on Ember A11y Testing's own set of
+   default styles. These are set according to a series of configurable
+   `visualNoiseLevel`s spanning from 1 to 3, and a special styling is applied to element's whose default appearance would require a different set of rules for visibility.
 
 ```hbs
   {{x-button
@@ -230,7 +228,6 @@ At the same time, a violation error message will be logged to the console with e
 
 ![](docs/assets/violation-log-output.png)
 
-
 ##### Special Styling for Background-replaced elements
 
 As mentioned, some HTML elements are considered to be
@@ -247,7 +244,6 @@ unless custom class names have been specified -- apply special styling independe
 of the component's current noise level:
 
 ![](docs/assets/violation-replaced-bg-element.png)
-
 
 #### Component Hooks
 
@@ -275,7 +271,9 @@ As with testing, if you need to set custom auditing options for a component, you
 can do so easily. Simply set a value for the `axeOptions` property value:
 
 ```javascript
-axeOptions: { /* a11yCheck options */ }
+axeOptions: {
+  /* a11yCheck options */
+}
 ```
 
 ##### Turning the audit off
@@ -284,7 +282,7 @@ Lastly, if you really find the audits to be cramping development, you can turn
 them off via a simple boolean switch:
 
 ```javascript
-turnAuditOff: true
+turnAuditOff: true;
 ```
 
 #### Environment Options
@@ -298,9 +296,9 @@ ENV['ember-a11y-testing'] = {
     axeCallback: defaultAxeCallback,
     axeOptions: defaultAxeOptions,
     visualNoiseLevel: 2,
-    axeViolationClassNames: ['alert-box', 'alert-box--a11y']
-  }
-}
+    axeViolationClassNames: ['alert-box', 'alert-box--a11y'],
+  },
+};
 ```
 
 By example, to enable a specific rule and to set options for a specific check, you can:

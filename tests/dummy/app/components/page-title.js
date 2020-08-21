@@ -17,5 +17,5 @@ export default Component.extend({
     if (Ember.testing) {
       this.set('title', 'Clicked during tests');
     }
-  }
+  },
 });

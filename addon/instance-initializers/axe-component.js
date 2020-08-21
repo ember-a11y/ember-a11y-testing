@@ -25,10 +25,12 @@ const VIOLATION_CLASS_MAP = {
   LEVEL_1: VIOLATION_CLASS__LEVEL_1,
   LEVEL_2: VIOLATION_CLASS__LEVEL_2,
   LEVEL_3: VIOLATION_CLASS__LEVEL_3,
-  REPLACED_ELEMENT: VIOLATION_CLASS__REPLACED
+  REPLACED_ELEMENT: VIOLATION_CLASS__REPLACED,
 };
 
-const VIOLATION_CLASS_NAMES = Object.keys(VIOLATION_CLASS_MAP).map(key => VIOLATION_CLASS_MAP[key]);
+const VIOLATION_CLASS_NAMES = Object.keys(VIOLATION_CLASS_MAP).map(
+  (key) => VIOLATION_CLASS_MAP[key]
+);
 
 /**
  * Variable to ensure that the initializer is only ran once. Though in this
@@ -38,7 +40,9 @@ const VIOLATION_CLASS_NAMES = Object.keys(VIOLATION_CLASS_MAP).map(key => VIOLAT
 let hasRan = false;
 
 export function initialize(appInstance) {
-  if (hasRan) { return; }
+  if (hasRan) {
+    return;
+  }
 
   const ENV = appInstance.resolveRegistration('config:environment');
   const addonConfig = ENV['ember-a11y-testing'] || {};
@@ -50,11 +54,15 @@ export function initialize(appInstance) {
     axeOptions = {},
     axeCallback,
     visualNoiseLevel: configuredVisualNoiseLevel,
-    axeViolationClassNames: configuredAxeViolationClassNames
+    axeViolationClassNames: configuredAxeViolationClassNames,
   } = componentOptions;
 
-  let visualNoiseLevel = configuredVisualNoiseLevel ? configuredVisualNoiseLevel : 1;
-  let axeViolationClassNames = isPresent(configuredAxeViolationClassNames) ? configuredAxeViolationClassNames : [];
+  let visualNoiseLevel = configuredVisualNoiseLevel
+    ? configuredVisualNoiseLevel
+    : 1;
+  let axeViolationClassNames = isPresent(configuredAxeViolationClassNames)
+    ? configuredAxeViolationClassNames
+    : [];
   let turnAuditOff = configuredTurnAuditOff || false;
 
   // Avoid modifying the Component class if the visual audit feature is configured disabled
@@ -131,8 +139,10 @@ export function initialize(appInstance) {
           return [VIOLATION_CLASS_MAP[`LEVEL_${visualNoiseLevel}`]];
         }
 
-        return isArray(customViolationClass) ? customViolationClass : customViolationClass.trim().split(/\s+/);
-      }
+        return isArray(customViolationClass)
+          ? customViolationClass
+          : customViolationClass.trim().split(/\s+/);
+      },
     }),
 
     didRender() {
@@ -180,12 +190,17 @@ export function initialize(appInstance) {
             for (let j = 0, k = nodes.length; j < k; j++) {
               nodeData = nodes[j];
 
-              console.error(formatViolation(violation, nodeData.html), violation); // eslint-disable-line no-console
+              console.error(
+                formatViolation(violation, nodeData.html),
+                violation
+              ); // eslint-disable-line no-console
               violationsHelper.push(violation);
 
               if (nodeData) {
                 nodeElem = document.querySelector(nodeData.target.join(','));
-                classNamesToAdd = isBackgroundReplacedElement(nodeElem) ? [VIOLATION_CLASS_MAP.REPLACED_ELEMENT] : violationClasses;
+                classNamesToAdd = isBackgroundReplacedElement(nodeElem)
+                  ? [VIOLATION_CLASS_MAP.REPLACED_ELEMENT]
+                  : violationClasses;
 
                 nodeElem.classList.remove(...VIOLATION_CLASS_NAMES);
 
@@ -197,11 +212,18 @@ export function initialize(appInstance) {
           }
 
           if (this.axeCallback) {
-            assert('axeCallback should be a function.', typeof this.axeCallback === 'function');
+            assert(
+              'axeCallback should be a function.',
+              typeof this.axeCallback === 'function'
+            );
             this.axeCallback(results);
           }
 
-          scheduleOnce('afterRender', violationsHelper, violationsHelper.logTip);
+          scheduleOnce(
+            'afterRender',
+            violationsHelper,
+            violationsHelper.logTip
+          );
         });
       }
     },
@@ -212,10 +234,12 @@ export function initialize(appInstance) {
      * @return {Void}
      */
     _runAudit() {
-      if (this.turnAuditOff || Ember.testing) { return; }
+      if (this.turnAuditOff || Ember.testing) {
+        return;
+      }
 
       scheduleOnce('afterRender', this, 'audit');
-    }
+    },
   });
 
   hasRan = true;
@@ -224,5 +248,5 @@ export function initialize(appInstance) {
 export default {
   name: 'axe-component',
   after: 'violations-helper',
-  initialize
+  initialize,
 };

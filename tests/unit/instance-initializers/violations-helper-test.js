@@ -7,19 +7,19 @@ import { run } from '@ember/runloop';
 
 let sandbox;
 
-module('Unit | Instance Initializer | violations-helper', function(hooks) {
-  hooks.beforeEach(function() {
+module('Unit | Instance Initializer | violations-helper', function (hooks) {
+  hooks.beforeEach(function () {
     this.TestApplication = Application.extend();
     this.TestApplication.instanceInitializer({
       name: 'initializer under test',
-      initialize
+      initialize,
     });
     this.application = this.TestApplication.create({ autoboot: false });
     this.instance = this.application.buildInstance();
 
     sandbox = sinon.createSandbox();
   });
-  hooks.afterEach(function() {
+  hooks.afterEach(function () {
     run(this.application, 'destroy');
     run(this.instance, 'destroy');
 
@@ -27,7 +27,7 @@ module('Unit | Instance Initializer | violations-helper', function(hooks) {
   });
 
   // Replace this with your real tests.
-  test('it works', async function(assert) {
+  test('it works', async function (assert) {
     await this.instance.boot();
 
     assert.ok(window.violationsHelper);
