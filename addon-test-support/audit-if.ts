@@ -1,6 +1,7 @@
 import RSVP from 'rsvp';
 import a11yAudit from './audit';
 import utils from './utils';
+import { ElementContext, RunOptions } from 'axe-core';
 
 /**
  * A method to return the value of queryParameter
@@ -23,9 +24,12 @@ function getUrlParameter(name: string) {
  * @method a11yAuditIf
  * @public
  */
-export default function a11yAuditIf(...args: any[]) {
+export default function a11yAuditIf(
+  contextSelector: ElementContext | RunOptions | undefined,
+  axeOptions?: RunOptions | undefined
+) {
   if (getUrlParameter('enableA11yAudit') === 'true') {
-    return a11yAudit(...args);
+    return a11yAudit(contextSelector, axeOptions);
   }
 
   return RSVP.resolve(undefined, 'a11y audit not run');

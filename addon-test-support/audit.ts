@@ -71,7 +71,7 @@ function isNotContextObject(obj: MaybeContextObject) {
  * @method runA11yAudit
  * @private
  */
-function runA11yAudit(
+export default function a11yAudit(
   contextSelector:
     | ElementContext
     | RunOptions
@@ -118,20 +118,4 @@ function runA11yAudit(
     document.body.classList.remove('axe-running');
     markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
   });
-}
-
-/**
- * A wrapper method to run the async a11yAudit test helper if in an acceptance
- * testing situation, but also supports being used in integration/unit test
- * scenarios.
- *
- * @method a11yAudit
- * @public
- */
-export default function a11yAudit(...args: any[]) {
-  if ((<any>window).a11yAudit) {
-    return (<any>window).a11yAudit(...args);
-  }
-
-  return runA11yAudit(...args);
 }
