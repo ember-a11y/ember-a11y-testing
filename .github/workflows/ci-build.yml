@@ -24,15 +24,11 @@ jobs:
         with:
           node-version: 10.x
       - name: install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile --non-interactive
       - name: lint
         run: yarn lint
       - name: test
         run: yarn test:ember
-      - name: test floating dependencies
-        run: |
-          yarn install --no-lockfile --non-interactive
-          yarn test:ember-compatibility
 
   floating-dependencies:
     name: Floating dependencies
