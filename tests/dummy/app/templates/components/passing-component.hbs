@@ -1,2 +1,3 @@
-<label for="test" {{action "toggle"}} style="display:{{if isFailing "none"}}">Test</label>
+{{!-- template-lint-disable no-inline-styles style-concatenation no-action --}}
+<label for="test" {{action "toggle"}} style="display:{{if @isFailing "none"}}">Test</label>
 <input id="test" type="test">
