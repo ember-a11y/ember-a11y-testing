@@ -1,9 +1,12 @@
 import { assert } from '@ember/debug';
 import RSVP from 'rsvp';
+import { run, AxeResults, RunOptions, ElementContext } from 'axe-core';
 import config from 'ember-get-config';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
 import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
 import { mark, markEndAndMeasure } from './utils';
+
+type MaybeContextObject = ElementContext | RunOptions | undefined;
 
 /**
  * Processes the results of calling axe.a11yCheck. If there are any
@@ -11,7 +14,7 @@ import { mark, markEndAndMeasure } from './utils';
  * @param {Object} results
  * @return {Void}
  */
-function a11yAuditCallback(results) {
+function a11yAuditCallback(results: AxeResults) {
   let violations = results.violations;
 
   if (violations.length) {
@@ -41,7 +44,7 @@ function a11yAuditCallback(results) {
  * @param {Object} obj
  * @return {Boolean}
  */
-function isPlainObj(obj) {
+function isPlainObj(obj: MaybeContextObject) {
   return typeof obj == 'object' && obj.constructor == Object;
 }
 
@@ -53,7 +56,7 @@ function isPlainObj(obj) {
  * @param {Object} obj
  * @return {Boolean}
  */
-function isNotSelectorObj(obj) {
+function isNotContextObject(obj: MaybeContextObject) {
   return (
     !Object.prototype.hasOwnProperty.call(obj, 'include') &&
     !Object.prototype.hasOwnProperty.call(obj, 'exclude')
@@ -69,32 +72,40 @@ function isNotSelectorObj(obj) {
  * @private
  */
 function runA11yAudit(
-  contextSelector = '#ember-testing-container',
-  axeOptions
+  contextSelector:
+    | ElementContext
+    | RunOptions
+    | undefined = '#ember-testing-container',
+  axeOptions?: RunOptions | undefined
 ) {
   mark('a11y_audit_start');
 
+  let context: ElementContext;
+  let options: RunOptions | undefined = axeOptions;
+
   // Support passing axeOptions as a single argument
-  if (
-    arguments.length === 1 &&
-    isPlainObj(contextSelector) &&
-    isNotSelectorObj(contextSelector)
-  ) {
-    axeOptions = contextSelector;
-    contextSelector = '#ember-testing-container';
+  if (arguments.length === 1) {
+    if (isPlainObj(contextSelector) && isNotContextObject(contextSelector)) {
+      context = '#ember-testing-container';
+      options = <RunOptions>contextSelector;
+    } else {
+      context = <ElementContext>contextSelector;
+    }
+  } else {
+    context = <ElementContext>contextSelector;
   }
 
-  if (!axeOptions) {
+  if (!options) {
     // Try load default config
     let a11yConfig = config['ember-a11y-testing'] || {};
     let componentOptions = a11yConfig['componentOptions'] || {};
-    axeOptions = componentOptions['axeOptions'] || {};
+    options = componentOptions['axeOptions'] || {};
   }
 
   document.body.classList.add('axe-running');
 
   let auditPromise = new RSVP.Promise((resolve, reject) => {
-    axe.run(contextSelector, axeOptions, (error, result) => {
+    run(context, options!, (error, result) => {
       if (!error) {
         return resolve(result);
       } else {
@@ -117,9 +128,9 @@ function runA11yAudit(
  * @method a11yAudit
  * @public
  */
-export default function a11yAudit(...args) {
-  if (window.a11yAudit) {
-    return window.a11yAudit(...args);
+export default function a11yAudit(...args: any[]) {
+  if ((<any>window).a11yAudit) {
+    return (<any>window).a11yAudit(...args);
   }
 
   return runA11yAudit(...args);

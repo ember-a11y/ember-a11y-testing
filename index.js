@@ -1,12 +1,13 @@
 'use strict';
 
-var path = require('path');
-var fs = require('fs');
-var Funnel = require('broccoli-funnel');
-var VersionChecker = require('ember-cli-version-checker');
+const path = require('path');
+const fs = require('fs');
+const Funnel = require('broccoli-funnel');
+const MergeTrees = require('broccoli-merge-trees');
+const VersionChecker = require('ember-cli-version-checker');
 
 // The different types/area for which we have content for.
-var ALLOWED_CONTENT_FOR = ['head-footer', 'test-head-footer'];
+const ALLOWED_CONTENT_FOR = ['head-footer', 'test-head-footer'];
 
 module.exports = {
   name: require('./package').name,
@@ -17,28 +18,29 @@ module.exports = {
    * @override
    */
   included: function (app) {
-    var config = this.project.config();
-    var options =
+    let config = this.project.config();
+    let options =
       (config[this.name] && config[this.name].componentOptions) || {};
-    var isComponentAuditOff = options.turnAuditOff || false;
-    var shouldExcludeAxeCore = isComponentAuditOff && options.excludeAxeCore;
+    let isComponentAuditOff = options.turnAuditOff || false;
+    let shouldExcludeAxeCore = isComponentAuditOff && options.excludeAxeCore;
 
     this._super.included.apply(this, arguments);
 
     if (app.tests) {
-      app.import(
-        'vendor/axe-core/axe.js',
-        shouldExcludeAxeCore ? { type: 'test' } : undefined
-      );
+      let type = shouldExcludeAxeCore ? { type: 'test' } : undefined;
+      app.import('vendor/axe-core/axe.js', type);
+      app.import('vendor/shims/axe-core.js', type);
     }
   },
 
-  treeForVendor: function () {
-    var axePath = path.dirname(require.resolve('axe-core'));
-    return new Funnel(axePath, {
+  treeForVendor: function (tree) {
+    let axePath = path.dirname(require.resolve('axe-core'));
+    let axeTree = new Funnel(axePath, {
       files: ['axe.js'],
       destDir: 'axe-core',
     });
+
+    return new MergeTrees([tree, axeTree]);
   },
 
   /**
@@ -63,9 +65,9 @@ module.exports = {
    * @override
    */
   treeForApp: function (tree) {
-    var checker = new VersionChecker(this);
-    var isProductionBuild = process.env.EMBER_ENV === 'production';
-    var isOldEmber = checker.for('ember-source').lt('1.13.0');
+    let checker = new VersionChecker(this);
+    let isProductionBuild = process.env.EMBER_ENV === 'production';
+    let isOldEmber = checker.for('ember-source').lt('1.13.0');
 
     if (isProductionBuild || isOldEmber) {
       tree = new Funnel(tree, {
@@ -84,10 +86,10 @@ module.exports = {
    * @override
    */
   treeForAddon: function () {
-    var tree = this._super.treeForAddon.apply(this, arguments);
-    var checker = new VersionChecker(this);
-    var isProductionBuild = process.env.EMBER_ENV === 'production';
-    var isOldEmber = checker.for('ember-source').lt('1.13.0');
+    let tree = this._super.treeForAddon.apply(this, arguments);
+    let checker = new VersionChecker(this);
+    let isProductionBuild = process.env.EMBER_ENV === 'production';
+    let isOldEmber = checker.for('ember-source').lt('1.13.0');
 
     if (isProductionBuild || isOldEmber) {
       tree = new Funnel(tree, {

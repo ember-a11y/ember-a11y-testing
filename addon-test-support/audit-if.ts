@@ -8,7 +8,7 @@ import utils from './utils';
  * @method getUrlParameter
  * @private
  */
-function getUrlParameter(name) {
+function getUrlParameter(name: string) {
   const location = utils.getLocation();
   const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
   const results = regex.exec(location.search);
@@ -23,7 +23,7 @@ function getUrlParameter(name) {
  * @method a11yAuditIf
  * @public
  */
-export default function a11yAuditIf(...args) {
+export default function a11yAuditIf(...args: any[]) {
   if (getUrlParameter('enableA11yAudit') === 'true') {
     return a11yAudit(...args);
   }
