@@ -25,7 +25,7 @@ function getUrlParameter(name: string) {
  * @public
  */
 export default function a11yAuditIf(
-  contextSelector: ElementContext | RunOptions | undefined,
+  contextSelector?: ElementContext | RunOptions | undefined,
   axeOptions?: RunOptions | undefined
 ) {
   if (getUrlParameter('enableA11yAudit') === 'true') {

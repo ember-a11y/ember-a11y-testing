@@ -14,7 +14,7 @@ type MaybeContextObject = ElementContext | RunOptions | undefined;
  * @param {Object} results
  * @return {Void}
  */
-function a11yAuditCallback(results: AxeResults) {
+function processAxeResults(results: AxeResults) {
   let violations = results.violations;
 
   if (violations.length) {
@@ -114,7 +114,7 @@ export default function a11yAudit(
     });
   });
 
-  return auditPromise.then(a11yAuditCallback).finally(() => {
+  return auditPromise.then(processAxeResults).finally(() => {
     document.body.classList.remove('axe-running');
     markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
   });
