@@ -1,12 +1,31 @@
 import { assert } from '@ember/debug';
 import RSVP from 'rsvp';
-import { run, AxeResults, RunOptions, ElementContext } from 'axe-core';
+import {
+  run,
+  AxeResults,
+  RunOptions,
+  ElementContext,
+  ContextObject,
+} from 'axe-core';
 import config from 'ember-get-config';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
 import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
 import { mark, markEndAndMeasure } from './utils';
 
-type MaybeContextObject = ElementContext | RunOptions | undefined;
+type MaybeElementContext = ElementContext | RunOptions | undefined;
+
+let _configName = 'ember-a11y-testing';
+
+/**
+ * Test only function used to mimic the behavior of when there's no
+ * default config
+ *
+ * @param configName
+ * @private
+ */
+export function _setConfigName(configName = 'ember-a11y-testing') {
+  _configName = configName;
+}
 
 /**
  * Processes the results of calling axe.a11yCheck. If there are any
@@ -14,7 +33,7 @@ type MaybeContextObject = ElementContext | RunOptions | undefined;
  * @param {Object} results
  * @return {Void}
  */
-function a11yAuditCallback(results: AxeResults) {
+function processAxeResults(results: AxeResults) {
   let violations = results.violations;
 
   if (violations.length) {
@@ -39,28 +58,62 @@ function a11yAuditCallback(results: AxeResults) {
 }
 
 /**
- * Determines if an object is a plain object (as opposed to a jQuery or other
- * type of object).
- * @param {Object} obj
- * @return {Boolean}
+ * Validation function used to determine if we have the shape of an {ElementContext} object.
+ *
+ * Function mirrors what axe-core uses for internal param validation.
+ * https://github.com/dequelabs/axe-core/blob/d5b6931cba857a5c787d912ee56bdd973e3742d4/lib/core/public/run.js#L4
+ *
+ * @param potential
  */
-function isPlainObj(obj: MaybeContextObject) {
-  return typeof obj == 'object' && obj.constructor == Object;
+export function _isContext(potential: MaybeElementContext) {
+  'use strict';
+  switch (true) {
+    case typeof potential === 'string':
+    case Array.isArray(potential):
+    case self.Node && potential instanceof self.Node:
+    case self.NodeList && potential instanceof self.NodeList:
+      return true;
+
+    case typeof potential !== 'object':
+      return false;
+
+    case (<ContextObject>potential).include !== undefined:
+    case (<ContextObject>potential).exclude !== undefined:
+      return true;
+
+    default:
+      return false;
+  }
 }
 
 /**
- * Determines whether supplied object contains `include` and `exclude` axe
- * context selector properties. This is necessary to distinguish an axe
- * config object from a context selector object, after a single argument
- * is supplied to `runA11yAudit`.
- * @param {Object} obj
- * @return {Boolean}
+ * Normalize the optional params of axe.run()
+ *
+ * Influenced by https://github.com/dequelabs/axe-core/blob/d5b6931cba857a5c787d912ee56bdd973e3742d4/lib/core/public/run.js#L35
+ *
+ * @param  elementContext
+ * @param  runOptions
  */
-function isNotContextObject(obj: MaybeContextObject) {
-  return (
-    !Object.prototype.hasOwnProperty.call(obj, 'include') &&
-    !Object.prototype.hasOwnProperty.call(obj, 'exclude')
-  );
+export function _normalizeRunParams(
+  elementContext?: MaybeElementContext,
+  runOptions?: RunOptions | undefined
+): [ElementContext, RunOptions] {
+  let context: ElementContext;
+  let options: RunOptions | undefined;
+
+  if (!_isContext(elementContext)) {
+    options = <RunOptions>elementContext;
+    context = '#ember-testing-container';
+  } else {
+    context = <ElementContext>elementContext;
+    options = runOptions;
+  }
+
+  if (typeof options !== 'object') {
+    options = config[_configName]?.componentOptions?.axeOptions || {};
+  }
+
+  return [context, options!];
 }
 
 /**
@@ -71,67 +124,28 @@ function isNotContextObject(obj: MaybeContextObject) {
  * @method runA11yAudit
  * @private
  */
-function runA11yAudit(
-  contextSelector:
-    | ElementContext
-    | RunOptions
-    | undefined = '#ember-testing-container',
+export default function a11yAudit(
+  contextSelector: MaybeElementContext = '#ember-testing-container',
   axeOptions?: RunOptions | undefined
 ) {
   mark('a11y_audit_start');
 
-  let context: ElementContext;
-  let options: RunOptions | undefined = axeOptions;
-
-  // Support passing axeOptions as a single argument
-  if (arguments.length === 1) {
-    if (isPlainObj(contextSelector) && isNotContextObject(contextSelector)) {
-      context = '#ember-testing-container';
-      options = <RunOptions>contextSelector;
-    } else {
-      context = <ElementContext>contextSelector;
-    }
-  } else {
-    context = <ElementContext>contextSelector;
-  }
-
-  if (!options) {
-    // Try load default config
-    let a11yConfig = config['ember-a11y-testing'] || {};
-    let componentOptions = a11yConfig['componentOptions'] || {};
-    options = componentOptions['axeOptions'] || {};
-  }
+  let [context, options] = _normalizeRunParams(contextSelector, axeOptions);
 
   document.body.classList.add('axe-running');
 
-  let auditPromise = new RSVP.Promise((resolve, reject) => {
-    run(context, options!, (error, result) => {
+  return new RSVP.Promise((resolve, reject) => {
+    run(context, options, (error, result) => {
       if (!error) {
         return resolve(result);
       } else {
         return reject(error);
       }
     });
-  });
-
-  return auditPromise.then(a11yAuditCallback).finally(() => {
-    document.body.classList.remove('axe-running');
-    markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
-  });
-}
-
-/**
- * A wrapper method to run the async a11yAudit test helper if in an acceptance
- * testing situation, but also supports being used in integration/unit test
- * scenarios.
- *
- * @method a11yAudit
- * @public
- */
-export default function a11yAudit(...args: any[]) {
-  if ((<any>window).a11yAudit) {
-    return (<any>window).a11yAudit(...args);
-  }
-
-  return runA11yAudit(...args);
+  })
+    .then(processAxeResults)
+    .finally(() => {
+      document.body.classList.remove('axe-running');
+      markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
+    });
 }
