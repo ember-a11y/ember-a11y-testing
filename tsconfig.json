@@ -27,6 +27,7 @@
       "ember-a11y-testing/*": ["addon/*"],
       "ember-a11y-testing/test-support": ["addon-test-support"],
       "ember-a11y-testing/test-support/*": ["addon-test-support/*"],
+      "@ember/destroyable": ["node_modules/ember-destroyable-polyfill"],
       "*": ["types/*"]
     }
   },

@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import { a11yAudit } from 'ember-a11y-testing/test-support';
 
 module('Integration | Helper | a11yAudit', function (hooks) {
   setupRenderingTest(hooks);

@@ -95,7 +95,7 @@ module.exports = {
       tree = new Funnel(tree, {
         exclude: [
           /instance-initializers\/(axe-component|violations-helper)\.js/,
-          /utils\/(concurrent-axe|format-violation|is-background-replaced-element|violations-helper)\.js/,
+          /performance\/(concurrent-axe|format-violation|is-background-replaced-element|violations-helper)\.js/,
         ],
       });
     }

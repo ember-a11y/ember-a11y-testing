@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
-import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import { a11yAudit } from 'ember-a11y-testing/test-support';
 
 const SELECTORS = {
   passingComponent: '[data-test-selector="violations-page__passing-component"]',

@@ -960,16 +960,17 @@
     mkdirp "^1.0.4"
     silent-error "^1.1.1"
 
-"@ember/test-helpers@^2.0.0-beta.4":
-  version "2.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.0.0-beta.4.tgz#61134f12d7607a572c32841cf9d2a52bda6c11ac"
-  integrity sha512-cjToCr0RAbfuZGvmu5apZjCd9E4XBEg+afBbTqHA8eRqzToe82Jso8b3YnzqMRc5OVURI2c6JhGwNbO+Aj8zlw==
+"@ember/test-helpers@^2.0.0-beta.6":
+  version "2.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.0.0-beta.6.tgz#47d9e56b963595d8303df90d7bdd085497f1b006"
+  integrity sha512-H+HcDLtzuHCUJxt2vG3T5lfnQUkuVkPJIPLVN/1LVzthnVxPOV9are3D5wilSD7Rtq0cgSTU71QqQ6e0Lmm9IQ==
   dependencies:
     "@ember/test-waiters" "^2.2.0"
     broccoli-debug "^0.6.5"
     broccoli-funnel "^3.0.3"
     ember-cli-babel "^7.22.1"
     ember-cli-htmlbars "^5.2.0"
+    ember-destroyable-polyfill "^2.0.1"
 
 "@ember/test-waiters@^2.2.0":
   version "2.2.0"
@@ -4754,7 +4755,7 @@ ember-cli@^3.20.0:
     watch-detector "^1.0.0"
     yam "^1.0.0"
 
-ember-compatibility-helpers@^1.1.2:
+ember-compatibility-helpers@^1.1.2, ember-compatibility-helpers@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/ember-compatibility-helpers/-/ember-compatibility-helpers-1.2.1.tgz#87c92c4303f990ff455c28ca39fb3ee11441aa16"
   integrity sha512-6wzYvnhg1ihQUT5yGqnLtleq3Nv5KNv79WhrEuNU9SwR4uIxCO+KpyC7r3d5VI0EM7/Nmv9Nd0yTkzmTMdVG1A==
@@ -4762,6 +4763,15 @@ ember-compatibility-helpers@^1.1.2:
     babel-plugin-debug-macros "^0.2.0"
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
+
+ember-destroyable-polyfill@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ember-destroyable-polyfill/-/ember-destroyable-polyfill-2.0.1.tgz#391cd95a99debaf24148ce953054008d00f151a6"
+  integrity sha512-hyK+/GPWOIxM1vxnlVMknNl9E5CAFVbcxi8zPiM0vCRwHiFS8Wuj7PfthZ1/OFitNNv7ITTeU8hxqvOZVsrbnQ==
+  dependencies:
+    ember-cli-babel "^7.22.1"
+    ember-cli-version-checker "^5.1.1"
+    ember-compatibility-helpers "^1.2.1"
 
 ember-disable-prototype-extensions@^1.1.3:
   version "1.1.3"
@@ -4799,17 +4809,17 @@ ember-maybe-import-regenerator@^0.1.6:
     ember-cli-babel "^6.0.0-beta.4"
     regenerator-runtime "^0.9.5"
 
-ember-qunit@5.0.0-beta.1:
-  version "5.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/ember-qunit/-/ember-qunit-5.0.0-beta.1.tgz#21dbbf52ac8b4c70545bc552394b69685f5582ff"
-  integrity sha512-j/S/PTEWuYRGX9cX1vE5y6cfkPwIqF/DKrgRWpmsHbCCX96vRr9LkUfBhIhy8W3cmAqjXgd2qSHw7v7kA2DKpA==
+ember-qunit@5.0.0-beta.2:
+  version "5.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/ember-qunit/-/ember-qunit-5.0.0-beta.2.tgz#453c460a2fdc971b5bdfa11fc73448d2be83cbbc"
+  integrity sha512-P44z8lX8JIeAuXNWZ/2az29l6QjBj4SrG74W1mc/seXIIM90X/LZM4I2dY/xpWG0baE5ybpz/bchqybdvANLCQ==
   dependencies:
     broccoli-funnel "^3.0.3"
     broccoli-merge-trees "^3.0.2"
     common-tags "^1.8.0"
     ember-cli-babel "^7.22.1"
     ember-cli-test-loader "^3.0.0"
-    ember-cli-version-checker "^5.1.1"
+    semver "^7.3.2"
     silent-error "^1.1.1"
 
 ember-radio-button@^2.0.1:

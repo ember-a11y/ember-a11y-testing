@@ -35,12 +35,13 @@
     "ember-cli-babel": "^7.21.0",
     "ember-cli-typescript": "^3.1.4",
     "ember-cli-version-checker": "^5.1.1",
+    "ember-destroyable-polyfill": "^2.0.1",
     "ember-get-config": "^0.2.4"
   },
   "devDependencies": {
     "@ember/jquery": "^1.1.0",
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "^2.0.0-beta.4",
+    "@ember/test-helpers": "^2.0.0-beta.6",
     "@glimmer/component": "^1.0.1",
     "@glimmer/tracking": "^1.0.1",
     "@types/ember": "^3.16.0",
@@ -66,7 +67,7 @@
     "ember-export-application-global": "^2.0.1",
     "ember-load-initializers": "^2.1.1",
     "ember-maybe-import-regenerator": "^0.1.6",
-    "ember-qunit": "5.0.0-beta.1",
+    "ember-qunit": "5.0.0-beta.2",
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^8.0.2",
     "ember-sinon": "^5.0.0",
