@@ -1,4 +1,3 @@
-import { assert } from '@ember/debug';
 import RSVP from 'rsvp';
 import {
   run,
