@@ -21,7 +21,7 @@ module('Integration | Helper | a11yAudit', function (hooks) {
       assert.ok(false, 'should have failed');
     } catch (error) {
       let found = error.message.startsWith(
-        'Assertion Failed: The page should have no accessibility violations. Violations:'
+        'The page should have no accessibility violations. Violations:'
       );
       assert.ok(found, 'error message is correct');
     }

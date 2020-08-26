@@ -21,7 +21,7 @@ module('Acceptance | a11y audit', function (hooks) {
       assert.ok(false, 'a11yAudit should have thrown an error on violations');
     } catch (error) {
       let foundExpectedError = error.message.startsWith(
-        'Assertion Failed: The page should have no accessibility violations. Violations:'
+        'The page should have no accessibility violations. Violations:'
       );
       assert.ok(foundExpectedError, 'error message is correct');
     }
@@ -44,7 +44,7 @@ module('Acceptance | a11y audit', function (hooks) {
       assert.ok(false, 'a11yAudit should have thrown an error on violations');
     } catch (error) {
       let foundExpectedError = error.message.startsWith(
-        'Assertion Failed: The page should have no accessibility violations. Violations:'
+        'The page should have no accessibility violations. Violations:'
       );
       assert.ok(foundExpectedError, 'error message is correct');
     }
