@@ -16,7 +16,7 @@ export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
   audit: (...args: any[]) => PromiseLike<void> = a11yAudit
 ) {
-  ['visit', 'click'].forEach((helperName) => {
+  ['visit', 'click', 'doubleClick', 'tap'].forEach((helperName) => {
     let hook = _registerHook(helperName, 'end', async () => {
       if (shouldForceAudit() && shouldAudit(helperName, 'end')) {
         await audit(getRunOptions());
