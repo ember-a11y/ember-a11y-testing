@@ -1,4 +1,3 @@
-import { assert } from '@ember/debug';
 import RSVP from 'rsvp';
 import {
   run,
@@ -39,7 +38,7 @@ function processAxeResults(results: AxeResults) {
   if (violations.length) {
     let allViolations = [];
 
-    for (let i = 0, l = violations.length; i < l; i++) {
+    for (let i = 0; i < violations.length; i++) {
       let violation = violations[i];
       let violationNodes = violation.nodes.map((node) => node.html);
 
@@ -51,7 +50,7 @@ function processAxeResults(results: AxeResults) {
     }
 
     let allViolationMessages = allViolations.join('\n');
-    assert(
+    throw new Error(
       `The page should have no accessibility violations. Violations:\n${allViolationMessages}`
     );
   }

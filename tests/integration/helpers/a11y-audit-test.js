@@ -16,15 +16,11 @@ module('Integration | Helper | a11yAudit', function (hooks) {
   test('a11yAudit catches violations successfully', async function (assert) {
     await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
-    try {
-      await a11yAudit(this.element);
-      assert.ok(false, 'should have failed');
-    } catch (error) {
-      let found = error.message.startsWith(
-        'Assertion Failed: The page should have no accessibility violations. Violations:'
-      );
-      assert.ok(found, 'error message is correct');
-    }
+    await assert.rejects(
+      a11yAudit(this.element),
+      /The page should have no accessibility violations. Violations:/,
+      'error message is correct'
+    );
   });
 
   test('a11yAudit can use custom axe options', async function (assert) {

@@ -16,15 +16,11 @@ module('Acceptance | a11y audit', function (hooks) {
 
     await visit('/');
 
-    try {
-      await a11yAudit();
-      assert.ok(false, 'a11yAudit should have thrown an error on violations');
-    } catch (error) {
-      let foundExpectedError = error.message.startsWith(
-        'Assertion Failed: The page should have no accessibility violations. Violations:'
-      );
-      assert.ok(foundExpectedError, 'error message is correct');
-    }
+    await assert.rejects(
+      a11yAudit(),
+      /The page should have no accessibility violations. Violations:/,
+      'error message is correct'
+    );
   });
 
   test('a11yAudit should properly scope to a specified string context selector', async function (assert) {
@@ -32,22 +28,14 @@ module('Acceptance | a11y audit', function (hooks) {
 
     await visit('/');
 
-    try {
-      await a11yAudit(SELECTORS.passingComponent);
-      assert.ok(true, 'a11yAudit should not have discovered any issues');
-    } catch (error) {
-      assert.ok(false, error.message);
-    }
+    await a11yAudit(SELECTORS.passingComponent);
+    assert.ok(true, 'a11yAudit should not have discovered any issues');
 
-    try {
-      await a11yAudit(SELECTORS.failingComponent);
-      assert.ok(false, 'a11yAudit should have thrown an error on violations');
-    } catch (error) {
-      let foundExpectedError = error.message.startsWith(
-        'Assertion Failed: The page should have no accessibility violations. Violations:'
-      );
-      assert.ok(foundExpectedError, 'error message is correct');
-    }
+    await assert.rejects(
+      a11yAudit(SELECTORS.failingComponent),
+      /The page should have no accessibility violations. Violations:/,
+      'error message is correct'
+    );
   });
 
   test('a11yAudit should properly scope to a specified jquery context (not recommended)', async function (assert) {
