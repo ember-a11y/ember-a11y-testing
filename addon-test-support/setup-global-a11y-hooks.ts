@@ -1,5 +1,5 @@
 import { _registerHook, HookUnregister } from '@ember/test-helpers';
-import { InvocationStrategy } from './invocation-strategies';
+import { InvocationStrategy } from './types';
 import { getRunOptions } from './run-options';
 import { shouldForceAudit } from './should-force-audit';
 import a11yAudit from './audit';

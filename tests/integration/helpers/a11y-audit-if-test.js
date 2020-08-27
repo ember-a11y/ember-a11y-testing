@@ -19,20 +19,22 @@ module('Integration | Helper | a11yAuditIf', function (hooks) {
   });
 
   test('a11yAudit should execute a11yAudit if enableA11yAudit=true is passed as query param', async function (assert) {
-    await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
-
-    setEnableA11yAudit(true);
-
     try {
-      await a11yAuditIf(this.element);
-      assert.ok(false, 'audit should have failed');
-    } catch (error) {
-      let foundExpectedError = error.message.startsWith(
-        'The page should have no accessibility violations.'
-      );
-      assert.ok(foundExpectedError);
-    }
+      await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
-    setEnableA11yAudit(false);
+      setEnableA11yAudit(true);
+
+      try {
+        await a11yAuditIf(this.element);
+        assert.ok(false, 'audit should have failed');
+      } catch (error) {
+        let foundExpectedError = error.message.startsWith(
+          'The page should have no accessibility violations.'
+        );
+        assert.ok(foundExpectedError);
+      }
+    } finally {
+      setEnableA11yAudit(false);
+    }
   });
 });

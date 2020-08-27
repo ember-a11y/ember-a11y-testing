@@ -8,17 +8,19 @@ module('Acceptance | temp test', function (hooks) {
   setupApplicationTest(hooks);
 
   test('violationsHelper set in the global scope', async function (assert) {
-    setEnableA11yAudit(true);
+    try {
+      setEnableA11yAudit(true);
 
-    await visit('/');
+      await visit('/');
 
-    // This number will vary over time as the document updates and the axe-core
-    // library changes, therefore we only care that it is finding violations
-    assert.ok(
-      violationsHelper.count > 0,
-      'Violations are found in the violationsHelper'
-    );
-
-    setEnableA11yAudit(false);
+      // This number will vary over time as the document updates and the axe-core
+      // library changes, therefore we only care that it is finding violations
+      assert.ok(
+        violationsHelper.count > 0,
+        'Violations are found in the violationsHelper'
+      );
+    } finally {
+      setEnableA11yAudit(false);
+    }
   });
 });

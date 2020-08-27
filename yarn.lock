@@ -4809,7 +4809,7 @@ ember-maybe-import-regenerator@^0.1.6:
     ember-cli-babel "^6.0.0-beta.4"
     regenerator-runtime "^0.9.5"
 
-ember-qunit@5.0.0-beta.2:
+ember-qunit@^5.0.0-beta.2:
   version "5.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/ember-qunit/-/ember-qunit-5.0.0-beta.2.tgz#453c460a2fdc971b5bdfa11fc73448d2be83cbbc"
   integrity sha512-P44z8lX8JIeAuXNWZ/2az29l6QjBj4SrG74W1mc/seXIIM90X/LZM4I2dY/xpWG0baE5ybpz/bchqybdvANLCQ==

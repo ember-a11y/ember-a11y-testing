@@ -3,12 +3,11 @@ import { resolve } from 'rsvp';
 import {
   setupGlobalA11yHooks,
   teardownGlobalA11yHooks,
-  invokeAll,
   setEnableA11yAudit,
 } from 'ember-a11y-testing/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { visit } from '@ember/test-helpers';
-import { InvocationStrategy } from 'ember-a11y-testing/test-support/invocation-strategies';
+import { InvocationStrategy } from 'ember-a11y-testing/test-support/types';
 
 function getRange(count: number) {
   return Array(count)
@@ -29,6 +28,10 @@ module('setupGlobalA11yHooks with invokeAll', function (hooks) {
   const EXPECTED_AUDIT_INVOCATIONS_COUNT = 6;
   let actualAuditInvocationsCount = 0;
   let numInvoked = 0;
+
+  function invokeAll(): boolean {
+    return true;
+  }
 
   function a11yAuditFake() {
     actualAuditInvocationsCount += 1;

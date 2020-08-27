@@ -1,4 +1,4 @@
-let _url: URL = new URL(window.location.href, document.baseURI);
+const _url: URL = new URL(window.location.href, document.baseURI);
 
 export function setEnableA11yAudit(enabled: boolean = false) {
   if (enabled) {

@@ -12,8 +12,9 @@ let optionsStack: RunOptions[] = [];
 export function setRunOptions(options: RunOptions = {}) {
   optionsStack.push(options);
 
-  if (getContext()) {
-    registerDestructor((getContext() as any).owner, () => optionsStack.pop());
+  let context = getContext();
+  if (context) {
+    registerDestructor((context as any).owner, () => optionsStack.pop());
   }
 }
 
