@@ -147,7 +147,7 @@ is set as a query param on the test page. This is useful if you want to conditio
 run accessibility audits, such as during nightly build jobs.
 
 ```javascript
-// &enableA11yAudit=true set in the URL
+// `&enableA11yAudit` set in the URL
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 
 test('Some test case', await function(assert) {
@@ -158,13 +158,13 @@ test('Some test case', await function(assert) {
 ```
 
 ```javascript
-// &enableA11yAudit=false set in the URL
+// No `enableA11yAudit` set in the URL
 import { a11yAudit } from 'ember-a11y-testing/test-support';
 
 test('Some test case', await function(assert) {
   await visit('/');
   await a11yAudit(); // will not run
-  assert.ok(true, 'no a11y errors found!');
+  // ...
 });
 ```
 
