@@ -1,4 +1,4 @@
-import { Result } from 'axe-core';
+import type { Result } from 'axe-core';
 
 /**
  * Formats the axe violation for human consumption
