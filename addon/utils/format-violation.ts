@@ -1,10 +1,15 @@
+import { Result } from 'axe-core';
+
 /**
  * Formats the axe violation for human consumption
  *
  * @param {AxeViolation} violation
  * @param {string | string[]} markup (optional) string of HTML relevant to the violation
  */
-export default function formatViolation(violation, markup) {
+export default function formatViolation(
+  violation: Result,
+  markup: string | string[]
+) {
   if (!violation) {
     throw new Error(
       'formatViolation called without required parameter: violation'
