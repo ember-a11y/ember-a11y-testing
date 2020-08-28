@@ -26,6 +26,15 @@ module.exports = {
 
     this._super.included.apply(this, arguments);
 
+    let checker = VersionChecker.forProject(this.project);
+    let check = checker.check({
+      '@ember/test-helpers': '>= 2.0.0-beta.6',
+    });
+
+    check.assert(
+      `[ember-a11y-testing] Missing required version of @ember/test-helpers`
+    );
+
     if (app.tests) {
       let type = shouldExcludeAxeCore ? { type: 'test' } : undefined;
       app.import('vendor/axe-core/axe.js', type);
@@ -95,7 +104,7 @@ module.exports = {
       tree = new Funnel(tree, {
         exclude: [
           /instance-initializers\/(axe-component|violations-helper)\.js/,
-          /utils\/(concurrent-axe|format-violation|is-background-replaced-element|violations-helper)\.js/,
+          /performance\/(concurrent-axe|format-violation|is-background-replaced-element|violations-helper)\.js/,
         ],
       });
     }

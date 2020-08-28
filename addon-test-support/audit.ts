@@ -1,4 +1,5 @@
-import RSVP from 'rsvp';
+import QUnit from 'qunit';
+import { Promise } from 'rsvp';
 import {
   run,
   AxeResults,
@@ -9,7 +10,7 @@ import {
 import config from 'ember-get-config';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
 import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
-import { mark, markEndAndMeasure } from './utils';
+import { mark, markEndAndMeasure } from './performance';
 
 type MaybeElementContext = ElementContext | RunOptions | undefined;
 
@@ -51,7 +52,8 @@ function processAxeResults(results: AxeResults) {
 
     let allViolationMessages = allViolations.join('\n');
     throw new Error(
-      `The page should have no accessibility violations. Violations:\n${allViolationMessages}`
+      `The page should have no accessibility violations. Violations:\n${allViolationMessages}
+To rerun this specific failure, use the following query params: &${QUnit.config.current.testId}&enableA11yAudit=true`
     );
   }
 }
@@ -126,14 +128,14 @@ export function _normalizeRunParams(
 export default function a11yAudit(
   contextSelector: MaybeElementContext = '#ember-testing-container',
   axeOptions?: RunOptions | undefined
-) {
+): PromiseLike<void> {
   mark('a11y_audit_start');
 
   let [context, options] = _normalizeRunParams(contextSelector, axeOptions);
 
   document.body.classList.add('axe-running');
 
-  return new RSVP.Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     run(context, options, (error, result) => {
       if (!error) {
         return resolve(result);

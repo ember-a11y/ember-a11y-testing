@@ -64,15 +64,3 @@ export function markEndAndMeasure(
     measure(comment, startMark, endMark);
   }
 }
-
-export default {
-  /**
-   * Utility to get window location object.
-   *
-   * @return {Location}
-   * @public
-   */
-  getLocation() {
-    return window && window.location;
-  },
-};
