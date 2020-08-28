@@ -9,5 +9,7 @@ export function setEnableA11yAudit(enabled: boolean = false) {
 }
 
 export function shouldForceAudit() {
-  return _url.searchParams.get('enableA11yAudit') !== null;
+  const url = new URL(window.location.href, document.baseURI);
+
+  return url.searchParams.get('enableA11yAudit') !== null;
 }
