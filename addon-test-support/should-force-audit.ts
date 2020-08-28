@@ -7,9 +7,9 @@ export function setEnableA11yAudit(enabled: boolean = false) {
   } else {
     url.searchParams.delete('enableA11yAudit');
   }
-  
+
   // updates the URL without reloading
-  window.history.replaceState(null, '', url.href)
+  window.history.replaceState(null, '', url.href);
 }
 
 export function shouldForceAudit() {
