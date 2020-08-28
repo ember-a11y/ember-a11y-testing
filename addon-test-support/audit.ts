@@ -1,5 +1,5 @@
 import QUnit from 'qunit';
-import { Promise } from 'rsvp';
+import { Promise, resolve } from 'rsvp';
 import {
   run,
   AxeResults,
@@ -11,6 +11,7 @@ import config from 'ember-get-config';
 import formatViolation from 'ember-a11y-testing/utils/format-violation';
 import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
 import { mark, markEndAndMeasure } from './performance';
+import { shouldForceAudit } from './should-force-audit';
 
 type MaybeElementContext = ElementContext | RunOptions | undefined;
 
@@ -130,6 +131,13 @@ export default function a11yAudit(
   axeOptions?: RunOptions | undefined
 ): PromiseLike<void> {
   mark('a11y_audit_start');
+
+  if (!shouldForceAudit()) {
+    return resolve(
+      undefined,
+      'a11yAudit is disabled. To enable, please use the `enableA11yAudit` query param.'
+    );
+  }
 
   let [context, options] = _normalizeRunParams(contextSelector, axeOptions);
 

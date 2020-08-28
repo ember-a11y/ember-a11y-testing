@@ -1,7 +1,6 @@
 import { _registerHook, HookUnregister } from '@ember/test-helpers';
 import { InvocationStrategy } from './types';
 import { getRunOptions } from './run-options';
-import { shouldForceAudit } from './should-force-audit';
 import a11yAudit from './audit';
 
 let _unregisterHooks: HookUnregister[] = [];
@@ -18,7 +17,7 @@ export function setupGlobalA11yHooks(
 ) {
   ['visit', 'click', 'doubleClick', 'tap'].forEach((helperName) => {
     let hook = _registerHook(helperName, 'end', async () => {
-      if (shouldForceAudit() && shouldAudit(helperName, 'end')) {
+      if (shouldAudit(helperName, 'end')) {
         await audit(getRunOptions());
       }
     });

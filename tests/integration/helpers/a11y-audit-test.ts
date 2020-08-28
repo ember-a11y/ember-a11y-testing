@@ -2,10 +2,18 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { a11yAudit } from 'ember-a11y-testing/test-support';
+import { a11yAudit, setEnableA11yAudit } from 'ember-a11y-testing/test-support';
 
 module('Integration | Helper | a11yAudit', function (hooks) {
   setupRenderingTest(hooks);
+
+  hooks.beforeEach(function () {
+    setEnableA11yAudit(true);
+  });
+
+  hooks.afterEach(function () {
+    setEnableA11yAudit(false);
+  });
 
   test('a11yAudit runs successfully with element context', async function (assert) {
     await render(hbs`{{#axe-component}}{{/axe-component}}`);
@@ -17,7 +25,7 @@ module('Integration | Helper | a11yAudit', function (hooks) {
     await render(hbs`{{#axe-component}}<button></button>{{/axe-component}}`);
 
     await assert.rejects(
-      a11yAudit(this.element),
+      <Promise<any>>a11yAudit(this.element),
       /The page should have no accessibility violations. Violations:/,
       'error message is correct'
     );
