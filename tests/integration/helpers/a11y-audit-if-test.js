@@ -24,15 +24,11 @@ module('Integration | Helper | a11yAuditIf', function (hooks) {
 
       setEnableA11yAudit(true);
 
-      try {
-        await a11yAuditIf(this.element);
-        assert.ok(false, 'audit should have failed');
-      } catch (error) {
-        let foundExpectedError = error.message.startsWith(
-          'The page should have no accessibility violations.'
-        );
-        assert.ok(foundExpectedError);
-      }
+      await assert.rejects(
+        a11yAuditIf(this.element),
+        /The page should have no accessibility violations. Violations:/,
+        'error message is correct'
+      );
     } finally {
       setEnableA11yAudit(false);
     }
