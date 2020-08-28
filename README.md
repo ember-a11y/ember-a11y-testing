@@ -142,17 +142,28 @@ only real difference is Acceptance tests get automatic async handling.
 
 #### Optionally Running a11yAudit
 
-Ember A11y Testing also provides an `a11yAuditIf` helper which will only run
-audits if `enableA11yAudit=true` is set as a query param on the test page. This
-is useful if you want to conditionally run accessibility audits, such as during
-nightly build jobs.
+Ember A11y Testing also allows you to run audits only if `enableA11yAudit=true`
+is set as a query param on the test page. This is useful if you want to conditionally
+run accessibility audits, such as during nightly build jobs.
 
 ```javascript
-import a11yAuditIf from 'ember-a11y-testing/test-support/audit-if';
+// &enableA11yAudit=true set in the URL
+import { a11yAudit } from 'ember-a11y-testing/test-support';
 
 test('Some test case', await function(assert) {
   await visit('/');
-  await a11yAuditIf(); // Only runs when enableA11yAudit=true is in the URL
+  await a11yAudit();
+  assert.ok(true, 'no a11y errors found!');
+});
+```
+
+```javascript
+// &enableA11yAudit=false set in the URL
+import { a11yAudit } from 'ember-a11y-testing/test-support';
+
+test('Some test case', await function(assert) {
+  await visit('/');
+  await a11yAudit(); // will not run
   assert.ok(true, 'no a11y errors found!');
 });
 ```
