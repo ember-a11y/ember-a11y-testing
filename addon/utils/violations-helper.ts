@@ -1,4 +1,4 @@
-import { Result } from 'axe-core';
+import type { Result } from 'axe-core';
 
 /**
  * @module ember-a11y-testing
