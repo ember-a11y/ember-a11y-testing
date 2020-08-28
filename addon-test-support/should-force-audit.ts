@@ -1,11 +1,15 @@
-const _url: URL = new URL(window.location.href, document.baseURI);
-
 export function setEnableA11yAudit(enabled: boolean = false) {
+  const url = new URL(window.location.href, document.baseURI);
+
+  // set up the enableA11yAudit query param
   if (enabled) {
-    _url.searchParams.set('enableA11yAudit', 'true');
+    url.searchParams.set('enableA11yAudit', '');
   } else {
-    _url.searchParams.delete('enableA11yAudit');
+    url.searchParams.delete('enableA11yAudit');
   }
+  
+  // updates the URL without reloading
+  window.history.replaceState(null, '', url.href)
 }
 
 export function shouldForceAudit() {
