@@ -1,3 +1,32 @@
+## v4.0.0-beta.0 (2020-08-31)
+
+#### :boom: Breaking Change
+* [#199](https://github.com/ember-a11y/ember-a11y-testing/pull/199) Drop support for `moduleForAcceptance` ([@scalvert](https://github.com/scalvert))
+* [#175](https://github.com/ember-a11y/ember-a11y-testing/pull/175) Update dependency axe-core to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### :rocket: Enhancement
+* [#203](https://github.com/ember-a11y/ember-a11y-testing/pull/203) Deprecate `a11yAuditIf` ([@scalvert](https://github.com/scalvert))
+* [#200](https://github.com/ember-a11y/ember-a11y-testing/pull/200) Implements `setupGlobalA11yHooks` helper ([@scalvert](https://github.com/scalvert))
+* [#191](https://github.com/ember-a11y/ember-a11y-testing/pull/191) Converts files in `addon-test-support` to TypeScript ([@scalvert](https://github.com/scalvert))
+
+#### :bug: Bug Fix
+* [#182](https://github.com/ember-a11y/ember-a11y-testing/pull/182) Unpinning dependencies to allow for easier blueprint upgrades ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#204](https://github.com/ember-a11y/ember-a11y-testing/pull/204) Converting utils to TS to fix compile time errors ([@scalvert](https://github.com/scalvert))
+* [#193](https://github.com/ember-a11y/ember-a11y-testing/pull/193) Updates build status badge to use github actions ([@scalvert](https://github.com/scalvert))
+* [#192](https://github.com/ember-a11y/ember-a11y-testing/pull/192) Convert to github actions ([@scalvert](https://github.com/scalvert))
+* [#188](https://github.com/ember-a11y/ember-a11y-testing/pull/188) Update linting configuration to work with TypeScript (+Prettier) ([@scalvert](https://github.com/scalvert))
+* [#184](https://github.com/ember-a11y/ember-a11y-testing/pull/184) Add support for migrating to TypeScript ([@scalvert](https://github.com/scalvert))
+* [#183](https://github.com/ember-a11y/ember-a11y-testing/pull/183) Setup automated release system. ([@rwjblue](https://github.com/rwjblue))
+* [#181](https://github.com/ember-a11y/ember-a11y-testing/pull/181) Regenerates lockfile to address issue with fsevents version ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 3
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 # 3.0.2 / 2020-06-29
 
 - Update dependency ember-cli-htmlbars to v5.2.0
