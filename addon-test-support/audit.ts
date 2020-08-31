@@ -8,8 +8,7 @@ import {
   ContextObject,
 } from 'axe-core';
 import config from 'ember-get-config';
-import formatViolation from 'ember-a11y-testing/utils/format-violation';
-import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
+import formatViolation from './format-violation';
 import { mark, markEndAndMeasure } from './performance';
 
 type MaybeElementContext = ElementContext | RunOptions | undefined;
@@ -37,18 +36,11 @@ function processAxeResults(results: AxeResults) {
   let violations = results.violations;
 
   if (violations.length) {
-    let allViolations = [];
-
-    for (let i = 0; i < violations.length; i++) {
-      let violation = violations[i];
+    let allViolations = violations.map((violation) => {
       let violationNodes = violation.nodes.map((node) => node.html);
 
-      let violationMessage = formatViolation(violation, violationNodes);
-      allViolations.push(violationMessage);
-
-      console.error(violationMessage, violation); // eslint-disable-line no-console
-      violationsHelper.push(violation);
-    }
+      return formatViolation(violation, violationNodes);
+    });
 
     let allViolationMessages = allViolations.join('\n');
     throw new Error(

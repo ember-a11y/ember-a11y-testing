@@ -67,48 +67,4 @@ module.exports = {
       );
     }
   },
-
-  /**
-   * Exclude the self-auditing components code during build if this is a
-   * production build or if the version of Ember being used is less than 1.13.
-   * @override
-   */
-  treeForApp: function (tree) {
-    let checker = new VersionChecker(this);
-    let isProductionBuild = process.env.EMBER_ENV === 'production';
-    let isOldEmber = checker.for('ember-source').lt('1.13.0');
-
-    if (isProductionBuild || isOldEmber) {
-      tree = new Funnel(tree, {
-        exclude: [
-          /instance-initializers\/(axe-component|violations-helper)\.js/,
-        ],
-      });
-    }
-
-    return tree;
-  },
-
-  /**
-   * Exclude all addon code during build if this is a
-   * production build or if the version of Ember being used is less than 1.13.
-   * @override
-   */
-  treeForAddon: function () {
-    let tree = this._super.treeForAddon.apply(this, arguments);
-    let checker = new VersionChecker(this);
-    let isProductionBuild = process.env.EMBER_ENV === 'production';
-    let isOldEmber = checker.for('ember-source').lt('1.13.0');
-
-    if (isProductionBuild || isOldEmber) {
-      tree = new Funnel(tree, {
-        exclude: [
-          /instance-initializers\/(axe-component|violations-helper)\.js/,
-          /performance\/(concurrent-axe|format-violation|is-background-replaced-element|violations-helper)\.js/,
-        ],
-      });
-    }
-
-    return tree;
-  },
 };

@@ -1,17 +1,23 @@
+import { Result } from 'axe-core';
 import { module, test } from 'qunit';
-import formatViolation from 'ember-a11y-testing/utils/format-violation';
+import formatViolation from 'ember-a11y-testing/test-support/format-violation';
 
 module('Unit | Utils | formatViolation', function () {
   test('formats a well-formed violation and relevant html', function (assert) {
-    let violation = {
-      name: 'test',
+    let violation: Result = {
+      id: 'test',
       impact: 'critical',
       help: 'it should be better',
       helpUrl: 'http://example.com',
+      description: '',
+      tags: [],
       nodes: [
         {
           target: ['.some-class'],
           html: '<input type="text">',
+          any: [],
+          all: [],
+          none: [],
         },
       ],
     };
@@ -22,11 +28,14 @@ module('Unit | Utils | formatViolation', function () {
   });
 
   test('formats a well-formed violation', function (assert) {
-    let violation = {
-      name: 'test',
+    let violation: Result = {
+      id: 'test',
       impact: 'critical',
       help: 'it should be better',
       helpUrl: 'http://example.com',
+      description: '',
+      tags: [],
+      nodes: [],
     };
 
     let message = formatViolation(violation);
@@ -35,12 +44,19 @@ module('Unit | Utils | formatViolation', function () {
   });
 
   test('validates violation parameter structure', function (assert) {
-    let violation = {
-      name: 'test',
+    let violation: Result = {
+      id: 'test',
+      help: 'it should be better',
+      helpUrl: 'http://example.com',
+      description: '',
+      tags: [],
       nodes: [
         {
           target: ['.some-class'],
           html: '<input type="text">',
+          any: [],
+          all: [],
+          none: [],
         },
       ],
     };
@@ -56,7 +72,7 @@ module('Unit | Utils | formatViolation', function () {
     let expected = /formatViolation called without required parameter: violation/;
 
     assert.throws(function () {
-      formatViolation();
+      formatViolation(undefined);
     }, expected);
   });
 });
