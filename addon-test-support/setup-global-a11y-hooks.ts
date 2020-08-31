@@ -1,8 +1,8 @@
 import { _registerHook, HookUnregister } from '@ember/test-helpers';
 import { InvocationStrategy } from './types';
 import { getRunOptions } from './run-options';
-import { shouldForceAudit } from './should-force-audit';
 import a11yAudit from './audit';
+import { shouldForceAudit } from './should-force-audit';
 
 let _unregisterHooks: HookUnregister[] = [];
 

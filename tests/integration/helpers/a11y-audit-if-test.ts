@@ -25,7 +25,7 @@ module('Integration | Helper | a11yAuditIf', function (hooks) {
       setEnableA11yAudit(true);
 
       await assert.rejects(
-        a11yAuditIf(this.element),
+        <Promise<any>>a11yAuditIf(this.element),
         /The page should have no accessibility violations. Violations:/,
         'error message is correct'
       );
