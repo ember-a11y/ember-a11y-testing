@@ -142,30 +142,56 @@ only real difference is Acceptance tests get automatic async handling.
 
 #### Optionally Running a11yAudit
 
-Ember A11y Testing also allows you to run audits only if `enableA11yAudit=true`
+Ember A11y Testing also allows you to run audits only if `enableA11yAudit`
 is set as a query param on the test page. This is useful if you want to conditionally
 run accessibility audits, such as during nightly build jobs.
 
+This addon used to include a specific API to conditionally invoke the audits: `a11yAuditIf`. This
+helper would need to be included to separately conditionally invoke the helper. As of `4.0.0`, this
+helper is now deprecated in favor of providing the primitives necessary for you to control conditional
+invocation of the audits yourself.
+
+To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown below.
+
 ```javascript
 // `&enableA11yAudit` set in the URL
-import { a11yAudit } from 'ember-a11y-testing/test-support';
+import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
 
 test('Some test case', await function(assert) {
   await visit('/');
-  await a11yAudit();
+
+  if (shouldForceAudit()) {
+    await a11yAudit();
+  }
   assert.ok(true, 'no a11y errors found!');
 });
 ```
 
 ```javascript
 // No `enableA11yAudit` set in the URL
-import { a11yAudit } from 'ember-a11y-testing/test-support';
+import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
 
 test('Some test case', await function(assert) {
   await visit('/');
-  await a11yAudit(); // will not run
+
+  if (shouldForceAudit()) {
+    await a11yAudit();  // will not run
+  }
   // ...
 });
+```
+
+You can also create your own app-level helper, which will mimic the same functionality that was provide
+by `a11yAuditIf`:
+
+```javascript
+export function a11yAuditIf(contextSelector, axeOptions) {
+  if (shouldForceAudit()) {
+    return a11yAudit(contextSelector, axeOptions);
+  }
+
+  return resolve(undefined, 'a11y audit not run');
+}
 ```
 
 ### Development Usage
