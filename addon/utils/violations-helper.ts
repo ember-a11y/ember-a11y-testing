@@ -1,3 +1,5 @@
+import type { Result } from 'axe-core';
+
 /**
  * @module ember-a11y-testing
  *
@@ -18,6 +20,8 @@
  * @class ViolationsHelper
  */
 export class ViolationsHelper {
+  violations: Result[];
+  hasLoggedTip: boolean;
   /**
    * Instantiate by calling either:
    *
@@ -66,7 +70,7 @@ export class ViolationsHelper {
    * @public
    * @return {Void}
    */
-  push(violation) {
+  push(violation: Result) {
     this.violations.push(violation);
   }
 
@@ -81,13 +85,13 @@ export class ViolationsHelper {
    * @public
    * @return {Array}
    */
-  filterBy(key, value) {
-    if (key === 'rule') {
+  filterBy(key: keyof Result, value: any) {
+    if (<any>key === 'rule') {
       key = 'id';
     }
 
     return this.violations.filter((violation) => {
-      if (key === 'node') {
+      if (<any>key === 'node') {
         return violation.nodes[0].target[0] === value;
       }
       return violation[key] === value;
