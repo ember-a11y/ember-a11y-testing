@@ -1,4 +1,4 @@
-# 3.0.1 / 2020-06-29
+# 3.0.2 / 2020-06-29
 
 - Update dependency ember-cli-htmlbars to v5.2.0
 - Update dependency eslint-plugin-ember to v8.9.0
