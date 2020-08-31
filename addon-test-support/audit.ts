@@ -7,24 +7,11 @@ import {
   ElementContext,
   ContextObject,
 } from 'axe-core';
-import config from 'ember-get-config';
 import formatViolation from './format-violation';
 import { mark, markEndAndMeasure } from './performance';
+import { getRunOptions } from './run-options';
 
 type MaybeElementContext = ElementContext | RunOptions | undefined;
-
-let _configName = 'ember-a11y-testing';
-
-/**
- * Test only function used to mimic the behavior of when there's no
- * default config
- *
- * @param configName
- * @private
- */
-export function _setConfigName(configName = 'ember-a11y-testing') {
-  _configName = configName;
-}
 
 /**
  * Processes the results of calling axe.a11yCheck. If there are any
@@ -103,10 +90,10 @@ export function _normalizeRunParams(
   }
 
   if (typeof options !== 'object') {
-    options = config[_configName]?.componentOptions?.axeOptions || {};
+    options = getRunOptions() || {};
   }
 
-  return [context, options!];
+  return [context, options];
 }
 
 /**

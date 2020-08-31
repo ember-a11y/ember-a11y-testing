@@ -18,12 +18,6 @@ module.exports = {
    * @override
    */
   included: function (app) {
-    let config = this.project.config();
-    let options =
-      (config[this.name] && config[this.name].componentOptions) || {};
-    let isComponentAuditOff = options.turnAuditOff || false;
-    let shouldExcludeAxeCore = isComponentAuditOff && options.excludeAxeCore;
-
     this._super.included.apply(this, arguments);
 
     let checker = VersionChecker.forProject(this.project);
@@ -36,7 +30,7 @@ module.exports = {
     );
 
     if (app.tests) {
-      let type = shouldExcludeAxeCore ? { type: 'test' } : undefined;
+      let type = { type: 'test' };
       app.import('vendor/axe-core/axe.js', type);
       app.import('vendor/shims/axe-core.js', type);
     }

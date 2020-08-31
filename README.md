@@ -221,7 +221,7 @@ import { module, test } from 'qunit';
 import { setRunOptions } from 'ember-a11y-testing';
 
 module('some test module', function (hooks) {
-  hooks.before(function () {
+  hooks.beforeEach(function () {
     setRunOptions({
       rules: {
         region: { enabled: true },
@@ -271,17 +271,16 @@ module('some test module', function (hooks) {
 });
 ```
 
-Options are automatically torn down when the test context's owner is destroyed.
+When using `setRunOptions` during a test, the options you set are automatically reset when the test completes.
 
 ### Development Usage
 
 While this addon previously included a number of components that would aid in identifying axe violations during development, those have been deprecated in favor of other, industry standard tools such as:
 
+- [**Accessibility Insights for Web**](https://accessibilityinsights.io/docs/en/web/overview) - Accessibility Insights for Web helps developers find and fix accessibility issues in web apps and sites. This browser extension for Chrome and the new Microsoft Edge runs on Windows, MacOS, and Linux computers.
 - [**Lighthouse**](https://developers.google.com/web/tools/lighthouse) - an open-source, automated tool for improving the quality of web pages. You can run it against any web page, public or requiring authentication. It has audits for performance, accessibility, progressive web apps, SEO and more.
-  - Homepage: https://developers.google.com/web/tools/lighthouse
 - [**Sa11y**](https://ryersondmp.github.io/sa11y/) - an accessibility quality assurance tool that visually highlights common accessibility and usability issues. Geared towards content authors, Sa11y indicates errors or warnings at the source with a simple tooltip on how to fix.
 - [**axe Chrome extension**](https://www.deque.com/axe/browser-extensions/) - a free axe browser extension ideal for development teams to test web applications to help identify and resolve common accessibility issues.
-  [**Accessibility Insights for Web**](https://accessibilityinsights.io/docs/en/web/overview) - Accessibility Insights for Web helps developers find and fix accessibility issues in web apps and sites. This browser extension for Chrome and the new Microsoft Edge runs on Windows, MacOS, and Linux computers.
 
 ## Future Plans
 
