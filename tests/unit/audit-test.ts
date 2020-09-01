@@ -1,20 +1,12 @@
 import { module, test } from 'qunit';
 import {
   _normalizeRunParams,
-  _setConfigName,
   _isContext,
 } from 'ember-a11y-testing/test-support/audit';
+import { setRunOptions } from 'ember-a11y-testing/test-support';
 
 module('audit', function () {
-  module('with no config', function (hooks) {
-    hooks.beforeEach(function () {
-      _setConfigName('foo');
-    });
-
-    hooks.afterEach(function () {
-      _setConfigName();
-    });
-
+  module('with no config', function () {
     test('_normalizeRunParams returns defaults when no params provided', function (assert) {
       let [context, options] = _normalizeRunParams();
 
@@ -66,6 +58,14 @@ module('audit', function () {
 
   module('with config', function () {
     test('_normalizeRunParams returns defaults when no params provided', function (assert) {
+      setRunOptions({
+        rules: {
+          // Disabled to test whether the config is
+          // properly loaded in test environment
+          'image-alt': { enabled: false },
+        },
+      });
+
       let [context, options] = _normalizeRunParams();
 
       assert.equal(context, '#ember-testing-container');
@@ -73,6 +73,14 @@ module('audit', function () {
     });
 
     test('_normalizeRunParams returns config options when only string context provided', function (assert) {
+      setRunOptions({
+        rules: {
+          // Disabled to test whether the config is
+          // properly loaded in test environment
+          'image-alt': { enabled: false },
+        },
+      });
+
       let ctx = '#my-container';
       let [context, options] = _normalizeRunParams(ctx);
 

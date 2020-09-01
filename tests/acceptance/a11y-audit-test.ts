@@ -1,7 +1,11 @@
 import { module, test } from 'qunit';
 import { visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
-import { a11yAudit, setEnableA11yAudit } from 'ember-a11y-testing/test-support';
+import {
+  a11yAudit,
+  setEnableA11yAudit,
+  setRunOptions,
+} from 'ember-a11y-testing/test-support';
 
 const SELECTORS = {
   passingComponent: '[data-test-selector="violations-page__passing-component"]',
@@ -61,6 +65,14 @@ module('Acceptance | a11y audit', function (hooks) {
   });
 
   test('a11yAudit accounts for axe.run include and exclude context parameter', async function (assert) {
+    setRunOptions({
+      rules: {
+        // Disabled to test whether the config is
+        // properly loaded in test environment
+        'image-alt': { enabled: false },
+      },
+    });
+
     await visit('/');
 
     await a11yAudit({
@@ -111,6 +123,14 @@ module('Acceptance | a11y audit', function (hooks) {
 
   test('a11yAudit loads default config if none specified', async function (assert) {
     await visit('/ignored-image-alt');
+
+    setRunOptions({
+      rules: {
+        // Disabled to test whether the config is
+        // properly loaded in test environment
+        'image-alt': { enabled: false },
+      },
+    });
 
     // There is an error with img alt tag, but it's ignored in global config
     await a11yAudit();

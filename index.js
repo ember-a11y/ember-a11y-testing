@@ -18,12 +18,6 @@ module.exports = {
    * @override
    */
   included: function (app) {
-    let config = this.project.config();
-    let options =
-      (config[this.name] && config[this.name].componentOptions) || {};
-    let isComponentAuditOff = options.turnAuditOff || false;
-    let shouldExcludeAxeCore = isComponentAuditOff && options.excludeAxeCore;
-
     this._super.included.apply(this, arguments);
 
     let checker = VersionChecker.forProject(this.project);
@@ -36,7 +30,7 @@ module.exports = {
     );
 
     if (app.tests) {
-      let type = shouldExcludeAxeCore ? { type: 'test' } : undefined;
+      let type = { type: 'test' };
       app.import('vendor/axe-core/axe.js', type);
       app.import('vendor/shims/axe-core.js', type);
     }
@@ -66,49 +60,5 @@ module.exports = {
         path.join(__dirname, 'content-for', type + '.html')
       );
     }
-  },
-
-  /**
-   * Exclude the self-auditing components code during build if this is a
-   * production build or if the version of Ember being used is less than 1.13.
-   * @override
-   */
-  treeForApp: function (tree) {
-    let checker = new VersionChecker(this);
-    let isProductionBuild = process.env.EMBER_ENV === 'production';
-    let isOldEmber = checker.for('ember-source').lt('1.13.0');
-
-    if (isProductionBuild || isOldEmber) {
-      tree = new Funnel(tree, {
-        exclude: [
-          /instance-initializers\/(axe-component|violations-helper)\.js/,
-        ],
-      });
-    }
-
-    return tree;
-  },
-
-  /**
-   * Exclude all addon code during build if this is a
-   * production build or if the version of Ember being used is less than 1.13.
-   * @override
-   */
-  treeForAddon: function () {
-    let tree = this._super.treeForAddon.apply(this, arguments);
-    let checker = new VersionChecker(this);
-    let isProductionBuild = process.env.EMBER_ENV === 'production';
-    let isOldEmber = checker.for('ember-source').lt('1.13.0');
-
-    if (isProductionBuild || isOldEmber) {
-      tree = new Funnel(tree, {
-        exclude: [
-          /instance-initializers\/(axe-component|violations-helper)\.js/,
-          /performance\/(concurrent-axe|format-violation|is-background-replaced-element|violations-helper)\.js/,
-        ],
-      });
-    }
-
-    return tree;
   },
 };

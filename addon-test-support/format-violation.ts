@@ -7,8 +7,8 @@ import type { Result } from 'axe-core';
  * @param {string | string[]} markup (optional) string of HTML relevant to the violation
  */
 export default function formatViolation(
-  violation: Result,
-  markup: string | string[]
+  violation: Partial<Result> | undefined,
+  markup?: string | string[]
 ) {
   if (!violation) {
     throw new Error(

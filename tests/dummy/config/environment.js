@@ -21,18 +21,6 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-
-    'ember-a11y-testing': {
-      componentOptions: {
-        axeOptions: {
-          rules: {
-            // Disabled to test whether the config is
-            // properly loaded in test environment
-            'image-alt': { enabled: false },
-          },
-        },
-      },
-    },
   };
 
   if (environment === 'development') {

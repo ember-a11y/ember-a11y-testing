@@ -146,11 +146,6 @@ Ember A11y Testing also allows you to run audits only if `enableA11yAudit`
 is set as a query param on the test page. This is useful if you want to conditionally
 run accessibility audits, such as during nightly build jobs.
 
-This addon used to include a specific API to conditionally invoke the audits: `a11yAuditIf`. This
-helper would need to be included to separately conditionally invoke the helper. As of `4.0.0`, this
-helper is now deprecated in favor of providing the primitives necessary for you to control conditional
-invocation of the audits yourself.
-
 To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown below.
 
 ```javascript
@@ -194,173 +189,98 @@ export function a11yAuditIf(contextSelector, axeOptions) {
 }
 ```
 
-### Development Usage
+#### Setting Options
 
-Usage in development is restricted to applications using Ember 1.13 and up, as it
-relies on the `didRender` hook of a component's life-cycle (a feature only
-available in versions of Ember with the Glimmer rendering engine).
+You can provide options to axe-core for your tests using the `setRunOptions` API. Options can
+be set a few ways:
 
-That said, setup for development is as simple as it is for testing: simply
-install the addon.
-
-By default, Ember A11y Testing will audit a component for accessibility each
-time it is rendered. This ensures that the component is still accessible even
-after state changes, and since the checks are scoped to a component's element,
-it means that any state change propagated downwards is also caught.
-
-#### Inspecting Violations
-
-When a violation is detected for a component's element, Ember A11y Testing will
-attempt to visually indicate the violation by updating the component's
-element `className`.
-
-The class used is determined as follows:
-
-1. If a component's `axeViolationClassNames` property is set, these names will always be used. This provides a way for you to customize the styling of a violation to your own needs.
-
-- `axeViolationClassNames` can be passed in your template, with each name as an element in a space-separated string:
-
-```hbs
-  {{x-button
-    id="violations__empty-button"
-    data-test-selector="empty-button"
-    axeViolationClassNames="outline outline--red"
-  }}
-```
-
-- they can also be defined as an array of names within your component:
+Globally:
 
 ```javascript
-axeViolationClassNames: ['outline', 'outline--red'];
-```
+// tests/test-helper.js
+import { setRunOptions } from 'ember-a11y-testing';
 
-2. By forgoing custom styling, you can rely on Ember A11y Testing's own set of
-   default styles. These are set according to a series of configurable
-   `visualNoiseLevel`s spanning from 1 to 3, and a special styling is applied to element's whose default appearance would require a different set of rules for visibility.
-
-```hbs
-  {{x-button
-    id="violations__empty-button"
-    data-test-selector="empty-button"
-    visualNoiseLevel=2
-  }}
-```
-
-The stylesheet that Ember A11y Testing gets these rules from can be found here[](),
-but below are a few sample results for a [violation caused by a button without discernable text](https://github.com/dylanb/axe-core/blob/master/lib/rules/button-name.json).
-
-"Noise" Level 1:
-
-![](docs/assets/violation-level-1.png)
-
-"Noise" Level 2:
-
-![](docs/assets/violation-level-2.png)
-
-"Noise" Level 3:
-
-![](docs/assets/violation-level-3.png)
-
-At the same time, a violation error message will be logged to the console with even more detailed information as to what went wrong. The following message corresponds to the same text input element above:
-
-![](docs/assets/violation-log-output.png)
-
-##### Special Styling for Background-replaced elements
-
-As mentioned, some HTML elements are considered to be
-["replaced" elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element), wherein their rendered appearance is -- to varying degrees --
-determined by the browser and/or the content that the element
-consists of.
-
-An `img` is an example of a replaced element; it lacks the ability to be
-styled through `background` definitions, as it's background is replaced with
-its loaded source assets.
-
-To get around this, Ember A11y Testing tries to detect these elements and --
-unless custom class names have been specified -- apply special styling independent
-of the component's current noise level:
-
-![](docs/assets/violation-replaced-bg-element.png)
-
-#### Component Hooks
-
-Since development is not a uniform experience, Ember A11y Testing provides
-several hooks to help stay out of the way.
-
-_Note:_ these are all `undefined` by default.
-
-##### Defining a custom callback
-
-If you feel the logging of violations is poor or you just want to see the entire
-results of a component's audit, you can define a custom callback. The callback
-receives the results of the `a11yCheck` audit that is scoped to the component's
-element. Simply set it as `axeCallback` on the component in question:
-
-```javascript
-axeCallback(results) {
-  // do stuff with results
-}
-```
-
-##### Setting options for the audit
-
-As with testing, if you need to set custom auditing options for a component, you
-can do so easily. Simply set a value for the `axeOptions` property value:
-
-```javascript
-axeOptions: {
-  /* a11yCheck options */
-}
-```
-
-##### Turning the audit off
-
-Lastly, if you really find the audits to be cramping development, you can turn
-them off via a simple boolean switch:
-
-```javascript
-turnAuditOff: true;
-```
-
-#### Environment Options
-
-Each of the fine-grained component hooks above can instead be defined for ALL components inside of your application's `config/environment.js` file. Simply supply them in a `componentOptions` hash on the `ember-a11y-testing` property of `ENV`.
-
-```javascript
-ENV['ember-a11y-testing'] = {
-  componentOptions: {
-    turnAuditOff: false, // Change to true to disable the audit in development
-    axeCallback: defaultAxeCallback,
-    axeOptions: defaultAxeOptions,
-    visualNoiseLevel: 2,
-    axeViolationClassNames: ['alert-box', 'alert-box--a11y'],
+setRunOptions({
+  rules: {
+    region: { enabled: true },
   },
-};
+  checks: {
+    'color-contrast': {
+      options: {
+        noScroll: true,
+      },
+    },
+  },
+});
 ```
 
-By example, to enable a specific rule and to set options for a specific check, you can:
+Test module level:
 
 ```javascript
-ENV['ember-a11y-testing']: {
-  componentOptions: {
-    axeOptions: {
+import { module, test } from 'qunit';
+import { setRunOptions } from 'ember-a11y-testing';
+
+module('some test module', function (hooks) {
+  hooks.beforeEach(function () {
+    setRunOptions({
       rules: {
-        'region': { enabled: true } // enable region rule
+        region: { enabled: true },
       },
       checks: {
-        'color-contrast': { options: { noScroll: true } } // disable scrolling of color-contrast check
-      }
-    }
-  }
-}
+        'color-contrast': {
+          options: {
+            noScroll: true,
+          },
+        },
+      },
+    });
+  });
+
+  // ...
+});
 ```
 
-#### Using Native aXe Global
+Individual test level:
 
-Ember A11y Testing injects the `axe` global during development and tests so that
-you can run accessibility audits while developing your application. It also
-provides some Ember-specific tools so that you can integrate accessibility
-checks into your workflow easily.
+```javascript
+import { module, test } from 'qunit';
+import { a11yAudit } from 'ember-a11y-testing/test-support';
+import { setRunOptions } from 'ember-a11y-testing';
+
+module('some test module', function (hooks) {
+  test('some test', function (assert) {
+    setRunOptions({
+      rules: {
+        region: { enabled: true },
+      },
+      checks: {
+        'color-contrast': {
+          options: {
+            noScroll: true,
+          },
+        },
+      },
+    });
+
+    // ...
+    a11yAudit();
+    // ...
+  });
+
+  // ...
+});
+```
+
+When using `setRunOptions` during a test, the options you set are automatically reset when the test completes.
+
+### Development Usage
+
+While this addon previously included a number of components that would aid in identifying axe violations during development, those have been deprecated in favor of other, industry standard tools such as:
+
+- [**Accessibility Insights for Web**](https://accessibilityinsights.io/docs/en/web/overview) - Accessibility Insights for Web helps developers find and fix accessibility issues in web apps and sites. This browser extension for Chrome and the new Microsoft Edge runs on Windows, MacOS, and Linux computers.
+- [**Lighthouse**](https://developers.google.com/web/tools/lighthouse) - an open-source, automated tool for improving the quality of web pages. You can run it against any web page, public or requiring authentication. It has audits for performance, accessibility, progressive web apps, SEO and more.
+- [**Sa11y**](https://ryersondmp.github.io/sa11y/) - an accessibility quality assurance tool that visually highlights common accessibility and usability issues. Geared towards content authors, Sa11y indicates errors or warnings at the source with a simple tooltip on how to fix.
+- [**axe Chrome extension**](https://www.deque.com/axe/browser-extensions/) - a free axe browser extension ideal for development teams to test web applications to help identify and resolve common accessibility issues.
 
 ## Future Plans
 

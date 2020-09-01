@@ -7,25 +7,11 @@ import {
   ElementContext,
   ContextObject,
 } from 'axe-core';
-import config from 'ember-get-config';
-import formatViolation from 'ember-a11y-testing/utils/format-violation';
-import violationsHelper from 'ember-a11y-testing/utils/violations-helper';
+import formatViolation from './format-violation';
 import { mark, markEndAndMeasure } from './performance';
+import { getRunOptions } from './run-options';
 
 type MaybeElementContext = ElementContext | RunOptions | undefined;
-
-let _configName = 'ember-a11y-testing';
-
-/**
- * Test only function used to mimic the behavior of when there's no
- * default config
- *
- * @param configName
- * @private
- */
-export function _setConfigName(configName = 'ember-a11y-testing') {
-  _configName = configName;
-}
 
 /**
  * Processes the results of calling axe.a11yCheck. If there are any
@@ -37,18 +23,11 @@ function processAxeResults(results: AxeResults) {
   let violations = results.violations;
 
   if (violations.length) {
-    let allViolations = [];
-
-    for (let i = 0; i < violations.length; i++) {
-      let violation = violations[i];
+    let allViolations = violations.map((violation) => {
       let violationNodes = violation.nodes.map((node) => node.html);
 
-      let violationMessage = formatViolation(violation, violationNodes);
-      allViolations.push(violationMessage);
-
-      console.error(violationMessage, violation); // eslint-disable-line no-console
-      violationsHelper.push(violation);
-    }
+      return formatViolation(violation, violationNodes);
+    });
 
     let allViolationMessages = allViolations.join('\n');
     throw new Error(
@@ -111,10 +90,10 @@ export function _normalizeRunParams(
   }
 
   if (typeof options !== 'object') {
-    options = config[_configName]?.componentOptions?.axeOptions || {};
+    options = getRunOptions() || {};
   }
 
-  return [context, options!];
+  return [context, options];
 }
 
 /**
