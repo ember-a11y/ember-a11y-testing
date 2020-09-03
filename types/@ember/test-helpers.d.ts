@@ -1,5 +1,19 @@
 type Hook = (...args: any[]) => void | Promise<void>;
 
+interface BaseContext {
+  [key: string]: any;
+}
+
+interface ITestMetadata {
+  testName?: string;
+  setupTypes: string[];
+  usedHelpers: string[];
+  [key: string]: any;
+
+  readonly isRendering: boolean;
+  readonly isApplication: boolean;
+}
+
 declare module '@ember/test-helpers' {
   export type HookUnregister = {
     unregister: () => void;
@@ -16,4 +30,6 @@ declare module '@ember/test-helpers' {
     label: string,
     ...args: any[]
   ): Promise<void>;
+
+  export function getTestMetadata(context: BaseContext): ITestMetadata;
 }
