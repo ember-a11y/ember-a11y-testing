@@ -1,10 +1,7 @@
 import QUnit from 'qunit';
 import { AxeResults } from 'axe-core';
 import formatViolation from './format-violation';
-
-interface A11yAuditReporter {
-  (axeResults: AxeResults): Promise<void>;
-}
+import { A11yAuditReporter } from './types';
 
 const DEFAULT_REPORTER = async (results: AxeResults) => {
   let violations = results.violations;
