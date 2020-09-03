@@ -1,0 +1,23 @@
+import { AxeResults } from 'axe-core';
+import { module, test } from 'qunit';
+import { visit } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
+import { a11yAudit, setCustomReporter } from 'ember-a11y-testing/test-support';
+
+module('reporter', function (hooks) {
+  setupApplicationTest(hooks);
+
+  test('setCustomReporter can correctly set a custom reporter in favor of default', async function (assert) {
+    assert.expect(1);
+
+    setCustomReporter(async (axeResult: AxeResults) => {
+      assert.equal(axeResult.violations.length, 3);
+    });
+
+    await visit('/');
+
+    await a11yAudit();
+
+    setCustomReporter();
+  });
+});
