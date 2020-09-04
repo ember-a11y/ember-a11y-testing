@@ -7,10 +7,10 @@ import { a11yAudit, setCustomReporter } from 'ember-a11y-testing/test-support';
 module('reporter', function (hooks) {
   setupApplicationTest(hooks);
 
-  hooks.afterEach(function() {
+  hooks.afterEach(function () {
     setCustomReporter(); // reset to default value
   });
-  
+
   test('setCustomReporter can correctly set a custom reporter in favor of default', async function (assert) {
     assert.expect(1);
 
