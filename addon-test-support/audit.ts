@@ -1,41 +1,10 @@
-import QUnit from 'qunit';
 import { Promise } from 'rsvp';
-import {
-  run,
-  AxeResults,
-  RunOptions,
-  ElementContext,
-  ContextObject,
-} from 'axe-core';
-import formatViolation from './format-violation';
+import { run, RunOptions, ElementContext, ContextObject } from 'axe-core';
 import { mark, markEndAndMeasure } from './performance';
 import { getRunOptions } from './run-options';
+import { reportA11yAudit } from './reporter';
 
 type MaybeElementContext = ElementContext | RunOptions | undefined;
-
-/**
- * Processes the results of calling axe.a11yCheck. If there are any
- * violations, it throws an error and then logs them individually.
- * @param {Object} results
- * @return {Void}
- */
-function processAxeResults(results: AxeResults) {
-  let violations = results.violations;
-
-  if (violations.length) {
-    let allViolations = violations.map((violation) => {
-      let violationNodes = violation.nodes.map((node) => node.html);
-
-      return formatViolation(violation, violationNodes);
-    });
-
-    let allViolationMessages = allViolations.join('\n');
-    throw new Error(
-      `The page should have no accessibility violations. Violations:\n${allViolationMessages}
-To rerun this specific failure, use the following query params: &${QUnit.config.current.testId}&enableA11yAudit=true`
-    );
-  }
-}
 
 /**
  * Validation function used to determine if we have the shape of an {ElementContext} object.
@@ -123,7 +92,7 @@ export default function a11yAudit(
       }
     });
   })
-    .then(processAxeResults)
+    .then(reportA11yAudit)
     .finally(() => {
       document.body.classList.remove('axe-running');
       markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');

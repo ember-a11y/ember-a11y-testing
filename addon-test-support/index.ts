@@ -6,5 +6,6 @@ export {
   setupGlobalA11yHooks,
   teardownGlobalA11yHooks,
 } from './setup-global-a11y-hooks';
+export { setCustomReporter } from './reporter';
 
-export { InvocationStrategy } from './types';
+export { InvocationStrategy, A11yAuditReporter } from './types';
