@@ -1,15 +1,18 @@
 'use strict';
 
 const bodyParser = require('body-parser').json({ limit: '50mb' });
-const writeJsonSync = require('fs-extra').writeJSONSync;
 const path = require('path');
 const date = require('date-and-time');
+const { ensureDirSync, writeJsonSync } = require('fs-extra');
 
 function reportViolations(req, res, options) {
   const REPORT_TIMESTAMP = date.format(new Date(), 'YYYY-MM-DD-HH_mm_ss');
+  let outputDir = path.join(options.root, 'ember-a11y-report');
   let outputPath = path.resolve(
-    path.join(options.root, 'ember-a11y-report', `${REPORT_TIMESTAMP}.json`)
+    path.join(outputDir, `${REPORT_TIMESTAMP}.json`)
   );
+
+  ensureDirSync(outputDir);
   writeJsonSync(outputPath, req.body);
 
   res.send({
