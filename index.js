@@ -5,6 +5,7 @@ const fs = require('fs');
 const Funnel = require('broccoli-funnel');
 const MergeTrees = require('broccoli-merge-trees');
 const VersionChecker = require('ember-cli-version-checker');
+const setupMiddleware = require('./setup-middleware');
 
 // The different types/area for which we have content for.
 const ALLOWED_CONTENT_FOR = ['head-footer', 'test-head-footer'];
@@ -60,5 +61,17 @@ module.exports = {
         path.join(__dirname, 'content-for', type + '.html')
       );
     }
+  },
+
+  serverMiddleware(startOptions) {
+    setupMiddleware(startOptions.app, {
+      root: this.project.root,
+    });
+  },
+
+  testemMiddleware(app) {
+    setupMiddleware(app, {
+      root: this.project.root,
+    });
   },
 };

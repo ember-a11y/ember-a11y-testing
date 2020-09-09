@@ -25,6 +25,8 @@ jobs:
         run: yarn lint
       - name: test
         run: yarn test:ember
+      - name: test node
+        run: yarn test:node
 
   floating-dependencies:
     name: Floating dependencies
