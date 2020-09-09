@@ -2,9 +2,12 @@ import QUnit from 'qunit';
 import { AxeResults } from 'axe-core';
 import formatViolation from './format-violation';
 import { A11yAuditReporter } from './types';
+import { storeResults } from './logger';
 
 const DEFAULT_REPORTER = async (results: AxeResults) => {
   let violations = results.violations;
+
+  storeResults(results);
 
   if (violations.length) {
     let allViolations = violations.map((violation) => {
