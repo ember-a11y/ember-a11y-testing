@@ -88,7 +88,7 @@ function logElement(
 }
 
 /**
- * Log the axe result node html tot he console
+ * Log the axe result node html to the console
  * @param {NodeResult} node
  */
 function logHtml(node: NodeResult | RelatedNode): void {
