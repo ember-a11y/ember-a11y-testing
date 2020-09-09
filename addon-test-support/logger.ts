@@ -1,7 +1,7 @@
 import axeCore, { AxeResults, NodeResult, RelatedNode, Result } from 'axe-core';
 
 /**
- * This file is heavily borrowed from https://github.com/dequelabs/react-axe
+ * This file is heavily borrowed from https://github.com/dequelabs/react-axe/blob/d3245b32fc5ed19e3c7b2c43d2815fe63f5875cb/index.ts
  *
  * An issue (https://github.com/dequelabs/react-axe/issues/180) has been opened which
  * suggests extracting out the common pieces of axe formatting to a separate repository,
