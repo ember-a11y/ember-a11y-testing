@@ -44,7 +44,7 @@ QUnit.module('setupMiddleware', function (hooks) {
   QUnit.test('can respond to requests to report violations', async function (
     assert
   ) {
-    let data = buildResult(violationsFixture);
+    let data = [buildResult(violationsFixture)];
 
     let json = await fetch('http://localhost:3000/report-violations', {
       method: 'POST',

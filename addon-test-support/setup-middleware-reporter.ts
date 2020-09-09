@@ -4,13 +4,15 @@ import { AxeResults } from 'axe-core';
 import { setCustomReporter } from './reporter';
 import { DEBUG } from '@glimmer/env';
 
-export const TEST_SUITE_RESULTS: {
+interface AxeTestResult {
   moduleName: string;
   testName: string;
   helperName: string;
   stack: string;
   axeResults: AxeResults;
-}[] = [];
+}
+
+export const TEST_SUITE_RESULTS: AxeTestResult[] = [];
 
 export function buildResult(axeResults: AxeResults) {
   let { module, testName } = QUnit.config.current;
