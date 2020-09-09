@@ -13,5 +13,6 @@ export {
   setupMiddlewareReporter,
 } from './setup-middleware-reporter';
 export { storeResults, printResults } from './logger';
+export { setupConsoleLogger } from './setup-console-logger';
 
 export { InvocationStrategy, A11yAuditReporter } from './types';
