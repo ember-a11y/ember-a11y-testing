@@ -12,6 +12,10 @@ export function setEnableA11yAudit(enabled: boolean = false) {
   window.history.replaceState(null, '', url.href);
 }
 
+/**
+ * Evaluates whether or not to run the audit. This functionality is enabled by
+ * the presence of an `enableA11yAudit` query parameter passed to the test suite.
+ */
 export function shouldForceAudit() {
   const url = new URL(window.location.href, document.baseURI);
 

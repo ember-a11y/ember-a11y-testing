@@ -7,8 +7,11 @@ import { shouldForceAudit } from './should-force-audit';
 /**
  * A wrapper method to run the a11yAudit if desired
  *
- * @method a11yAuditIf
+ * @function a11yAuditIf
+ * @deprecated
  * @public
+ * @param contextSelector A DOM node specifying the context to run the audit in. Defaults to '#ember-testing-container' if not specified.
+ * @param axeOptions options to provide to the axe audit. Defaults axe-core defaults.
  */
 export default function a11yAuditIf(
   contextSelector?: ElementContext | RunOptions | undefined,

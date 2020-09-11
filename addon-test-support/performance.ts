@@ -1,9 +1,3 @@
-/**
- * Determines if the performance API exists in the current environment.
- *
- * @constant
- * @private
- */
 const HAS_PERFORMANCE =
   window &&
   typeof window.performance !== 'undefined' &&
@@ -13,8 +7,7 @@ const HAS_PERFORMANCE =
 /**
  * Utility to add a performance marker.
  *
- * @param {String} markName
- * @public
+ * @param markName
  */
 export function mark(markName: string) {
   if (HAS_PERFORMANCE) {
@@ -28,7 +21,6 @@ export function mark(markName: string) {
  * @param comment
  * @param startMark
  * @param endMark
- * @public
  */
 export function measure(comment: string, startMark: string, endMark: string) {
   // `performance.measure` may fail if the mark could not be found.
@@ -52,7 +44,6 @@ export function measure(comment: string, startMark: string, endMark: string) {
  * @param comment
  * @param startMark
  * @param endMark
- * @public
  */
 export function markEndAndMeasure(
   comment: string,

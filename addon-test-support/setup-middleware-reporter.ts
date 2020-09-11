@@ -33,6 +33,9 @@ export async function middlewareReporter(axeResults: AxeResults) {
   TEST_SUITE_RESULTS.push(buildResult(axeResults));
 }
 
+/**
+ * Sets up the middleware reporter, which reports results when the test suite is done.
+ */
 export function setupMiddlewareReporter() {
   setCustomReporter(middlewareReporter);
 
