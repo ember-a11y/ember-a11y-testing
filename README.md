@@ -54,6 +54,7 @@ The `setupGlobalA11yHooks` function takes two parameters:
 To use, import and invoke the global setup function, passing in your specific invocation strategy:
 
 ```js
+// tests/test-helper.js
 import Application from 'my-app/app';
 import config from 'my-app/config/environment';
 import { setApplication } from '@ember/test-helpers';
