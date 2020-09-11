@@ -60,11 +60,9 @@ import config from 'my-app/config/environment';
 import { setApplication } from '@ember/test-helpers';
 import { start } from 'ember-qunit';
 import { setupGlobalA11yHooks } from 'ember-a11y-testing/test-support';
-import { customInvocationStrategy } from './custom-invocation-strategy';
-
 setApplication(Application.create(config.APP));
 
-setupGlobalA11yHooks(customInvocationStrategy);
+setupGlobalA11yHooks(() => true));
 
 start();
 ```
