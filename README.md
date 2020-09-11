@@ -22,7 +22,7 @@ ember install ember-a11y-testing
 
 ## Usage
 
-Setting up `ember-a11y-testing` in your tests can be done in one of two ways:
+Usage of `ember-a11y-testing` in your tests can be done in one of two ways:
 
 1. A one-time setup in your tests/test-helper.js file using `setupGlobalA11yHooks`
 1. In individual tests using the `a11yAudit` test helper.
