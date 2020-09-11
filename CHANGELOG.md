@@ -1,3 +1,23 @@
+## v4.0.0-beta.1 (2020-09-11)
+
+#### :boom: Breaking Change
+* [#205](https://github.com/ember-a11y/ember-a11y-testing/pull/205) Remove audit components in favor of industry standard tools ([@scalvert](https://github.com/scalvert))
+
+#### :rocket: Enhancement
+* [#212](https://github.com/ember-a11y/ember-a11y-testing/pull/212) Adding ability to post violations via middleware ([@scalvert](https://github.com/scalvert))
+* [#210](https://github.com/ember-a11y/ember-a11y-testing/pull/210) Adds custom reporter capability ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#213](https://github.com/ember-a11y/ember-a11y-testing/pull/213) Update dependency eslint-plugin-ember to v9 ([@renovate[bot]](https://github.com/apps/renovate))
+* [#211](https://github.com/ember-a11y/ember-a11y-testing/pull/211) Update dependency release-it to v14 ([@renovate[bot]](https://github.com/apps/renovate))
+* [#209](https://github.com/ember-a11y/ember-a11y-testing/pull/209) Update dependency ember-cli-typescript to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+* [#206](https://github.com/ember-a11y/ember-a11y-testing/pull/206) Update eslint to v4 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+* [#194](https://github.com/ember-a11y/ember-a11y-testing/pull/194) Update dependency typescript to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v4.0.0-beta.0 (2020-08-31)
 
 #### :boom: Breaking Change
