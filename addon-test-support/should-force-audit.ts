@@ -13,8 +13,11 @@ export function setEnableA11yAudit(enabled: boolean = false) {
 }
 
 /**
- * Evaluates whether or not to run the audit. This functionality is enabled by
+ * Forces running audits. This functionality is enabled by
  * the presence of an `enableA11yAudit` query parameter passed to the test suite.
+ *
+ * If used with `setupGlobalA11yHooks` and the query param enabled, this will override
+ * any `InvocationStrategy` passed to that function and force the audit.
  */
 export function shouldForceAudit() {
   const url = new URL(window.location.href, document.baseURI);

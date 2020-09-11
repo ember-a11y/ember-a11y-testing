@@ -37,9 +37,13 @@ Each of the following sections individually details how to set aXe options for y
 
 ### `setupGlobalA11yHooks` Usage
 
-The `setupGlobalA11yHooks` function is intended to be imported and invoked a single time for your entire test suite.
+The `setupGlobalA11yHooks` function is intended to be imported and invoked a single time in `tests/test-helper.js` for your entire test suite.
 
 ```ts
+export interface InvocationStrategy {
+  (helperName: string, label: string): boolean;
+}
+
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
   audit: (...args: any[]) => PromiseLike<void> = a11yAudit
@@ -48,8 +52,10 @@ export function setupGlobalA11yHooks(
 
 The `setupGlobalA11yHooks` function takes two parameters:
 
-- `shouldAudit`: A [predicate function](https://stackoverflow.com/a/1344021/769) that returns a `boolean` indicating whether or not to perform the audit.
+- `shouldAudit`: An `InvocationStrategy` - a [predicate function](https://stackoverflow.com/a/1344021/769) that takes a `helperName` and a `label`, and returns a `boolean` indicating whether or not to perform the audit.
 - `audit`: The audit function, which performs the `axe-core` audit, defaulting to `a11yAudit`. This allows you to potentially wrap the `a11yAudit` test helper with custom logic.
+
+Using a custom `InvocationStrategy` implementation will allow you to maintain a high level of control over your test invocations. Examples of invocation strategies can be found in [this](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L32) [repository's](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L81) [tests](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L135).
 
 To use, import and invoke the global setup function, passing in your specific invocation strategy:
 
@@ -67,12 +73,11 @@ setupGlobalA11yHooks(() => true));
 start();
 ```
 
-Examples of invocation strategies can be found in [this](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L32) [repository's](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L81) [tests](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L135).
+#### Setting Options using `setRunOptions`
 
-#### Setting Options with `setupGlobalA11yHooks`
+You can provide options to axe-core for your tests using the `setRunOptions` API. This API is helpful if you don't have access to the `a11yAudit` calls directly, such as when using the `setupGlobalA11yHooks`, or if you want to set the same options for all tests in a module.
 
-You can provide options to axe-core for your tests using the `setRunOptions` API. Options can
-be set a few ways:
+Options can be set a few ways:
 
 Globally:
 
@@ -155,17 +160,9 @@ When using `setRunOptions` during a test, the options you set are automatically 
 
 ### `a11yAudit` Usage
 
-`ember-a11y-testing` also provides a test helper to run accessibility audits
-on specific tests within your test suite.
+`ember-a11y-testing` provides a test helper to run accessibility audits on specific tests within your test suite. The `a11yAudit` helper is an async test helper which can be used in a similar fashion to other `@ember/test-helpers` helpers:
 
-_Note:_ any tests run with `ember-a11y-testing` will adjust the testing container
-to occupy the entire screen. This is to simulate the actual application
-environment, as browsers adjust styles at small sizes for accessibility reasons.
-It will reset itself at the conclusion of testing though.
-
-#### Application Tests
-
-For Application tests, the helper is an async test helper which can be used in a similar fashion to other `@ember/test-helpers` helpers:
+In Application tests:
 
 ```javascript
 import { visit } from '@ember/test-helpers';
@@ -181,8 +178,6 @@ module('Some module', function () {
   });
 });
 ```
-
-#### Integration and Unit Tests
 
 The helper is also able to be used Integration/Unit tests like so:
 
@@ -251,11 +246,11 @@ test('Some test case', async function (assert) {
 });
 ```
 
-### Optionally Running audits
+### Force Running audits
 
-`ember-a11y-testing` also allows you to run audits only if `enableA11yAudit`
-is set as a query param on the test page. This is useful if you want to conditionally
-run accessibility audits, such as during nightly build jobs.
+`ember-a11y-testing` allows you to force audits if `enableA11yAudit` is set as a query param
+on the test page. This is useful if you want to conditionally run accessibility audits, such
+as during nightly build jobs.
 
 To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown below.
 
@@ -308,11 +303,11 @@ import Application from 'my-app/app';
 import config from 'my-app/config/environment';
 import { setApplication } from '@ember/test-helpers';
 import { start } from 'ember-qunit';
-import { setupConsoleReporter } from 'ember-a11y-testing/test-support';
+import { setupConsoleLogger } from 'ember-a11y-testing/test-support';
 
 setApplication(Application.create(config.APP));
 
-setupConsoleReporter();
+setupConsoleLogger();
 
 start();
 ```
