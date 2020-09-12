@@ -179,7 +179,7 @@ module('Some module', function () {
 });
 ```
 
-The helper is also able to be used Integration/Unit tests like so:
+The helper is also able to be used in Integration/Unit tests like so:
 
 ```javascript
 import { render } from '@ember/test-helpers';
