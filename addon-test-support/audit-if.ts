@@ -5,7 +5,7 @@ import a11yAudit from './audit';
 import { shouldForceAudit } from './should-force-audit';
 
 /**
- * A wrapper method to run the a11yAudit if desired
+ * A wrapper method to run the a11yAudit conditionally
  *
  * @function a11yAuditIf
  * @deprecated
