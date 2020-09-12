@@ -27,7 +27,7 @@ Usage of `ember-a11y-testing` in your tests can be done in one of two ways:
 1. A one-time setup in your tests/test-helper.js file using `setupGlobalA11yHooks`
 1. In individual tests using the `a11yAudit` test helper.
 
-### aXe Options
+### axe Options
 
 When using the `a11yAudit` helper, you can pass in `axe-core` options.
 These options are documented in the [axe-core API docs](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#options-parameter).
