@@ -24,6 +24,9 @@ To rerun this specific failure, use the following query params: &testId=${QUnit.
   }
 };
 
+/**
+ * Reports the results of the a11yAudit. Set a custom reporter using `setCustomReporter`.
+ */
 export let reportA11yAudit: A11yAuditReporter = DEFAULT_REPORTER;
 
 /**

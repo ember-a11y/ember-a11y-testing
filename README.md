@@ -4,19 +4,14 @@
 [![NPM Version](https://badge.fury.io/js/ember-a11y-testing.svg)](http://badge.fury.io/js/ember-a11y-testing)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-a11y-testing.svg)](https://emberobserver.com/addons/ember-a11y-testing)
 
-Ember A11y Testing is a wrapper around [Deque Labs'](https://github.com/dequelabs)
+`ember-a11y-testing` is a wrapper around [Deque Labs'](https://github.com/dequelabs)
 [axe-core](https://github.com/dequelabs/axe-core) accessibility testing engine.
-It integrates into your testing environment with a simple `a11yAudit()` helper.
-
-If you're using Ember 1.13.0 or above, it also integrates into your development
-workflow by running during a component's `didRender` phase in non-production
-environments. This gives you instant feedback on if your components are
-accessible in any given state.
+It integrates into your testing environment using either a one-time setup, or in
+individual tests using an `a11yAudit()` test helper.
 
 ## Compatibility
 
-- Ember.js v3.0.0 or above
-- Ember CLI v3.0.0 or above
+- Ember.js v3.8.0 or above
 - Node.js v10 or above
 
 ## Installation
@@ -27,172 +22,62 @@ ember install ember-a11y-testing
 
 ## Usage
 
-### aXe Options
+Usage of `ember-a11y-testing` in your tests can be done in one of two ways:
+
+1. A one-time setup in your tests/test-helper.js file using `setupGlobalA11yHooks`
+1. In individual tests using the `a11yAudit` test helper.
+
+### axe Options
 
 When using the `a11yAudit` helper, you can pass in `axe-core` options.
 These options are documented in the [axe-core API docs](https://www.deque.com/axe/axe-for-web/documentation/api-documentation/#options-parameter).
-The rule definitions are documented on [dequeuniversity.com/rules](https://dequeuniversity.com/rules/axe/3.2).
+The rule definitions are documented on [dequeuniversity.com/rules](https://dequeuniversity.com/rules/axe/4.0).
 
-### Testing Usage
+Each of the following sections individually details how to set aXe options for your tests.
 
-Ember A11y Testing also provides a simple helper to run accessibility audits
-on-demand within your test suite.
+### `setupGlobalA11yHooks` Usage
 
-_Note:_ any tests run with Ember A11y Testing will adjust the testing container
-to occupy the entire screen. This is to simulate the actual application
-environment, as browsers adjust styles at small sizes for accessibility reasons.
-It will reset itself at the conclusion of testing though.
+The `setupGlobalA11yHooks` function is intended to be imported and invoked a single time in `tests/test-helper.js` for your entire test suite.
 
-#### Acceptance Tests
-
-For Acceptance tests, the helper is an async test helper so you can use it like
-this:
-
-```javascript
-import a11yAudit from 'ember-a11y-testing/test-support/audit';
-
-// ...elided for brevity
-
-test('Some test case', async function (assert) {
-  await visit('/');
-  await a11yAudit();
-  assert.ok(true, 'no a11y errors found!');
-});
-```
-
-If your app does not allow async/await, you will need to use the the andThen() helper and a regular function (as opposed to `async function`).
-
-```javascript
-import a11yAudit from 'ember-a11y-testing/test-support/audit';
-
-// ...elided for brevity
-
-test('Some test case', function (assert) {
-  visit('/');
-  a11yAudit();
-  andThen(() => assert.ok(true, 'no a11y errors found!'));
-});
-```
-
-The helper can optionally accept a "context" on which to focus the audit as
-either a selector string or an HTML element. You can also provide a secondary
-parameter to specify axe-core options:
-
-```js
-test('Some test case', async function (assert) {
-  let axeOptions = {
-    rules: {
-      'button-name': {
-        enabled: false,
-      },
-    },
-  };
-
-  await visit('/');
-  await a11yAudit(axeOptions);
-  assert.ok(true, 'no a11y errors found!');
-});
-```
-
-Or specify options as a single argument:
-
-```js
-test('Some test case', async function (assert) {
-  let axeOptions = {
-    rules: {
-      'button-name': {
-        enabled: false,
-      },
-    },
-  };
-
-  await visit('/');
-  await a11yAudit('.modal', axeOptions);
-  assert.ok(true, 'no a11y errors found!');
-});
-```
-
-#### Integration and Unit Tests
-
-The helper is also able to be used Integration/Unit tests like so:
-
-```javascript
-import a11yAudit from 'ember-a11y-testing/test-support/audit';
-
-// ...elided for brevity
-
-test('Some test case', function (assert) {
-  this.render(hbs`{{some-component}}`);
-
-  let axeOptions = {
-    rules: {
-      'button-name': {
-        enabled: false,
-      },
-    },
-  };
-  return a11yAudit(this.element, axeOptions).then(() => {
-    assert.ok(true, 'no a11y errors found!');
-  });
-});
-```
-
-As you can see, the usage for all types of tests is pretty much the same. The
-only real difference is Acceptance tests get automatic async handling.
-
-#### Optionally Running a11yAudit
-
-Ember A11y Testing also allows you to run audits only if `enableA11yAudit`
-is set as a query param on the test page. This is useful if you want to conditionally
-run accessibility audits, such as during nightly build jobs.
-
-To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown below.
-
-```javascript
-// `&enableA11yAudit` set in the URL
-import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
-
-test('Some test case', await function(assert) {
-  await visit('/');
-
-  if (shouldForceAudit()) {
-    await a11yAudit();
-  }
-  assert.ok(true, 'no a11y errors found!');
-});
-```
-
-```javascript
-// No `enableA11yAudit` set in the URL
-import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
-
-test('Some test case', await function(assert) {
-  await visit('/');
-
-  if (shouldForceAudit()) {
-    await a11yAudit();  // will not run
-  }
-  // ...
-});
-```
-
-You can also create your own app-level helper, which will mimic the same functionality that was provide
-by `a11yAuditIf`:
-
-```javascript
-export function a11yAuditIf(contextSelector, axeOptions) {
-  if (shouldForceAudit()) {
-    return a11yAudit(contextSelector, axeOptions);
-  }
-
-  return resolve(undefined, 'a11y audit not run');
+```ts
+export interface InvocationStrategy {
+  (helperName: string, label: string): boolean;
 }
+
+export function setupGlobalA11yHooks(
+  shouldAudit: InvocationStrategy,
+  audit: (...args: any[]) => PromiseLike<void> = a11yAudit
+);
 ```
 
-#### Setting Options
+The `setupGlobalA11yHooks` function takes two parameters:
 
-You can provide options to axe-core for your tests using the `setRunOptions` API. Options can
-be set a few ways:
+- `shouldAudit`: An `InvocationStrategy` - a [predicate function](https://stackoverflow.com/a/1344021/769) that takes a `helperName` and a `label`, and returns a `boolean` indicating whether or not to perform the audit.
+- `audit`: The audit function, which performs the `axe-core` audit, defaulting to `a11yAudit`. This allows you to potentially wrap the `a11yAudit` test helper with custom logic.
+
+Using a custom `InvocationStrategy` implementation will allow you to maintain a high level of control over your test invocations. Examples of invocation strategies can be found in [this](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L32) [repository's](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L81) [tests](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L135).
+
+To use, import and invoke the global setup function, passing in your specific invocation strategy:
+
+```js
+// tests/test-helper.js
+import Application from 'my-app/app';
+import config from 'my-app/config/environment';
+import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
+import { setupGlobalA11yHooks } from 'ember-a11y-testing/test-support';
+setApplication(Application.create(config.APP));
+
+setupGlobalA11yHooks(() => true));
+
+start();
+```
+
+#### Setting Options using `setRunOptions`
+
+You can provide options to axe-core for your tests using the `setRunOptions` API. This API is helpful if you don't have access to the `a11yAudit` calls directly, such as when using the `setupGlobalA11yHooks`, or if you want to set the same options for all tests in a module.
+
+Options can be set a few ways:
 
 Globally:
 
@@ -273,6 +158,186 @@ module('some test module', function (hooks) {
 
 When using `setRunOptions` during a test, the options you set are automatically reset when the test completes.
 
+### `a11yAudit` Usage
+
+`ember-a11y-testing` provides a test helper to run accessibility audits on specific tests within your test suite. The `a11yAudit` helper is an async test helper which can be used in a similar fashion to other `@ember/test-helpers` helpers:
+
+In Application tests:
+
+```javascript
+import { visit } from '@ember/test-helpers';
+import { a11yAudit } from 'ember-a11y-testing/test-support';
+
+module('Some module', function () {
+  //...
+
+  test('Some test case', async function (assert) {
+    await visit('/');
+    await a11yAudit();
+    assert.ok(true, 'no a11y errors found!');
+  });
+});
+```
+
+The helper is also able to be used in Integration/Unit tests like so:
+
+```javascript
+import { render } from '@ember/test-helpers';
+import { a11yAudit } from 'ember-a11y-testing/test-support';
+
+// ...elided for brevity
+
+test('Some test case', function (assert) {
+  await render(hbs`{{some-component}}`);
+
+  let axeOptions = {
+    rules: {
+      'button-name': {
+        enabled: false,
+      },
+    },
+  };
+
+  await a11yAudit(this.element, axeOptions)
+
+  assert.ok(true, 'no a11y errors found!');
+});
+```
+
+#### Setting Options with `a11yAudit`
+
+The helper can optionally accept a "context" on which to focus the audit as
+either a selector string or an HTML element. You can also provide a secondary
+parameter to specify axe-core options:
+
+```js
+test('Some test case', async function (assert) {
+  let axeOptions = {
+    rules: {
+      'button-name': {
+        enabled: false,
+      },
+    },
+  };
+
+  await visit('/');
+  await a11yAudit(axeOptions);
+
+  assert.ok(true, 'no a11y errors found!');
+});
+```
+
+Or specify options as a single argument:
+
+```js
+test('Some test case', async function (assert) {
+  let axeOptions = {
+    rules: {
+      'button-name': {
+        enabled: false,
+      },
+    },
+  };
+
+  await visit('/');
+  await a11yAudit('.modal', axeOptions);
+
+  assert.ok(true, 'no a11y errors found!');
+});
+```
+
+### Force Running audits
+
+`ember-a11y-testing` allows you to force audits if `enableA11yAudit` is set as a query param
+on the test page. This is useful if you want to conditionally run accessibility audits, such
+as during nightly build jobs.
+
+To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown below.
+
+```javascript
+// `&enableA11yAudit` set in the URL
+import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
+
+test('Some test case', await function(assert) {
+  await visit('/');
+
+  if (shouldForceAudit()) {
+    await a11yAudit();
+  }
+  assert.ok(true, 'no a11y errors found!');
+});
+```
+
+```javascript
+// No `enableA11yAudit` set in the URL
+import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
+
+test('Some test case', await function(assert) {
+  await visit('/');
+
+  if (shouldForceAudit()) {
+    await a11yAudit();  // will not run
+  }
+  // ...
+});
+```
+
+You can also create your own app-level helper, which will conditionally check whether to run the audits or not:
+
+```javascript
+export function a11yAuditIf(contextSelector, axeOptions) {
+  if (shouldForceAudit()) {
+    return a11yAudit(contextSelector, axeOptions);
+  }
+
+  return resolve(undefined, 'a11y audit not run');
+}
+```
+
+### Logging violations to the console
+
+This addon provides the capability of summarizing all violations found during tests, and outputting those failures to the console once the test suite is completed. To enable this functionality, import `setupConsoleLogger` and invoke in your `tests/test-helper.js` file:
+
+```js
+import Application from 'my-app/app';
+import config from 'my-app/config/environment';
+import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
+import { setupConsoleLogger } from 'ember-a11y-testing/test-support';
+
+setApplication(Application.create(config.APP));
+
+setupConsoleLogger();
+
+start();
+```
+
+Example:
+
+<img src="docs/assets/ember-a11y-testing-console-reporter.png" alt="Console Logger Output Example" width="600" />
+
+### Test Middleware
+
+This addon provides middleware - code that allows the browser to talk to the node process running the tests via testem. This is useful in scenarios such as internal compliance monitoring used to track accessibility grades.
+
+The middleware reporter writes the results containing all violations detected in all tests to a JSON file stored in a directory, `ember-a11y-report`, in your application or addon's root directory.
+
+To use the middleware reporter, import `setupMiddlewareReporter` and invoke in your `tests/test-helper.js` file:
+
+```js
+import Application from 'my-app/app';
+import config from 'my-app/config/environment';
+import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
+import { setupMiddlewareReporter } from 'ember-a11y-testing/test-support';
+
+setApplication(Application.create(config.APP));
+
+setupMiddlewareReporter();
+
+start();
+```
+
 ### Development Usage
 
 While this addon previously included a number of components that would aid in identifying axe violations during development, those have been deprecated in favor of other, industry standard tools such as:
@@ -284,7 +349,7 @@ While this addon previously included a number of components that would aid in id
 
 ## Future Plans
 
-Now that your components and acceptance tests can self-audit, the next step
+Now that your components and application tests can self-audit, the next step
 going forward is to give helpful and meaningful feedback to developers. This
 means easily highlighting areas with violations and giving suggestions on how to
 fix and improve them. Additionally, work will be done to tackle Ember-specific

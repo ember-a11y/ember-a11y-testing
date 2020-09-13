@@ -67,11 +67,11 @@ export function _normalizeRunParams(
 
 /**
  * Runs the axe a11y audit with the given context selector and options.
- * The context defaults to '#ember-testing-container' if not specified.
- * The options default axe-core defaults.
  *
- * @method runA11yAudit
- * @private
+ * @function a11yAudit
+ * @public
+ * @param contextSelector A DOM node specifying the context to run the audit in. Defaults to '#ember-testing-container' if not specified.
+ * @param axeOptions options to provide to the axe audit. Defaults axe-core defaults.
  */
 export default function a11yAudit(
   contextSelector: MaybeElementContext = '#ember-testing-container',

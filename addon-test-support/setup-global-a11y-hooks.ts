@@ -7,6 +7,7 @@ import { shouldForceAudit } from './should-force-audit';
 let _unregisterHooks: HookUnregister[] = [];
 
 /**
+ * Sets up a11yAudit calls using `@ember/test-helpers`' `_registerHook` API.
  *
  * @param shouldAudit Invocation strategy function that determines whether to run the audit helper or not.
  * @param audit Optional audit function used to run the audit. Allows for providing either a11yAudit, a11yAuditIf,

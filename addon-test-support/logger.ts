@@ -72,6 +72,7 @@ function deduplicateViolations(results: AxeResults) {
 
 /**
  * Log the axe result node to the console
+ *
  * @param {NodeResult} node
  * @param {Function} logFn console log function to use (error, warn, log, etc.)
  */
@@ -89,6 +90,7 @@ function logElement(
 
 /**
  * Log the axe result node html to the console
+ *
  * @param {NodeResult} node
  */
 function logHtml(node: NodeResult | RelatedNode): void {
@@ -97,6 +99,7 @@ function logHtml(node: NodeResult | RelatedNode): void {
 
 /**
  * Log the failure message of a node result.
+ *
  * @param {NodeResult} node
  * @param {String} key which check array to log from (any, all, none)
  */
@@ -112,6 +115,7 @@ function logFailureMessage(node: NodeResult, key: AxeCoreNodeResultKey): void {
 
 /**
  * Log as a group the node result and failure message.
+ *
  * @param {NodeResult} node
  * @param {String} key which check array to log from (any, all, none)
  */
@@ -139,12 +143,21 @@ function failureSummary(node: NodeResult, key: AxeCoreNodeResultKey): void {
   }
 }
 
+/**
+ * @public
+ * @param results The axe results.
+ */
 export function storeResults(results: AxeResults) {
   if (results.violations.length > 0) {
     testSuiteResults.push(deduplicateViolations(results));
   }
 }
 
+/**
+ * Prints aggregated axe results to the console.
+ *
+ * @public
+ */
 export function printResults() {
   console.group('%cAxe issues', serious);
   testSuiteResults.forEach((results) => {
