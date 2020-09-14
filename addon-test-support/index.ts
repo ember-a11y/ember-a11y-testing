@@ -10,6 +10,7 @@ export { setCustomReporter } from './reporter';
 export {
   TEST_SUITE_RESULTS as _TEST_SUITE_RESULTS,
   middlewareReporter as _middlewareReporter,
+  pushTestResult as _pushTestResult,
   setupMiddlewareReporter,
 } from './setup-middleware-reporter';
 export { storeResults, printResults } from './logger';

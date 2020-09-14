@@ -1,36 +1,70 @@
 import QUnit from 'qunit';
-import { getContext, getTestMetadata } from '@ember/test-helpers';
-import { AxeResults } from 'axe-core';
+import {
+  currentRouteName,
+  currentURL,
+  getContext,
+  getTestMetadata,
+} from '@ember/test-helpers';
+import { AxeResults, Result } from 'axe-core';
 import { setCustomReporter } from './reporter';
 import { DEBUG } from '@glimmer/env';
 
 interface AxeTestResult {
   moduleName: string;
   testName: string;
-  helperName: string;
+  urls: string[];
+  routes: string[];
+  helpers: string[];
   stack: string;
-  axeResults: AxeResults;
+  violations: Result[];
 }
 
 export const TEST_SUITE_RESULTS: AxeTestResult[] = [];
 
-export function buildResult(axeResults: AxeResults) {
-  let { module, testName } = QUnit.config.current;
-  let testMetaData = getTestMetadata(getContext());
-
-  let stack = (!DEBUG && new Error().stack) || '';
-
-  return {
-    moduleName: module.name,
-    testName,
-    helperName: testMetaData.usedHelpers.pop() || '',
-    stack,
-    axeResults,
-  };
-}
+let currentTestResult: AxeTestResult | undefined = undefined;
+let currentViolationsMap = new Map<string, Result>();
 
 export async function middlewareReporter(axeResults: AxeResults) {
-  TEST_SUITE_RESULTS.push(buildResult(axeResults));
+  if (axeResults.violations.length === 0) {
+    return;
+  }
+
+  if (!currentTestResult) {
+    let { module, testName } = QUnit.config.current;
+    let testMetaData = getTestMetadata(getContext());
+
+    let stack = (!DEBUG && new Error().stack) || '';
+
+    currentTestResult = {
+      moduleName: module.name,
+      testName,
+      urls: [currentURL()],
+      routes: [currentRouteName()],
+      helpers: testMetaData.usedHelpers,
+      stack,
+      violations: [],
+    };
+  }
+
+  axeResults.violations.forEach((violation) => {
+    let rule = currentViolationsMap.get(violation.id);
+
+    if (rule === undefined) {
+      currentViolationsMap.set(violation.id, violation);
+    } else {
+      rule.nodes.push(...violation.nodes);
+    }
+  });
+}
+
+export function pushTestResult() {
+  if (typeof currentTestResult !== 'undefined') {
+    currentTestResult.violations = [...currentViolationsMap.values()];
+    TEST_SUITE_RESULTS.push(currentTestResult);
+
+    currentTestResult = undefined;
+    currentViolationsMap = new Map();
+  }
 }
 
 /**
@@ -38,6 +72,8 @@ export async function middlewareReporter(axeResults: AxeResults) {
  */
 export function setupMiddlewareReporter() {
   setCustomReporter(middlewareReporter);
+
+  QUnit.testDone(pushTestResult);
 
   QUnit.done(async function () {
     let response = await fetch('/report-violations', {
