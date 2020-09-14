@@ -3,7 +3,7 @@
 const bodyParser = require('body-parser').json({ limit: '50mb' });
 const path = require('path');
 const date = require('date-and-time');
-const { ensureDirSync, writeJsonSync } = require('fs-extra');
+const { ensureDirSync, writeJsonSync, emptyDirSync } = require('fs-extra');
 
 function reportViolations(req, res, options) {
   const REPORT_TIMESTAMP = date.format(new Date(), 'YYYY-MM-DD-HH_mm_ss');
@@ -13,6 +13,7 @@ function reportViolations(req, res, options) {
   );
 
   ensureDirSync(outputDir);
+  emptyDirSync(outputDir);
   writeJsonSync(outputPath, req.body);
 
   res.send({
