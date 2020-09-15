@@ -63,6 +63,8 @@ export async function middlewareReporter(axeResults: AxeResults) {
 export function pushTestResult() {
   if (typeof currentTestResult !== 'undefined') {
     currentTestResult.violations = [...currentViolationsMap.values()];
+    currentTestResults.urls = [...currentTestResults.urls.values()]);
+    currentTestResults.routes = [...currentTestResults.routes.values()]);
     TEST_SUITE_RESULTS.push(currentTestResult);
 
     currentTestResult = undefined;
