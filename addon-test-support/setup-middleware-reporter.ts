@@ -38,13 +38,16 @@ export async function middlewareReporter(axeResults: AxeResults) {
     currentTestResult = {
       moduleName: module.name,
       testName,
-      urls: [currentURL()],
-      routes: [currentRouteName()],
+      urls: new Set(),
+      routes: new Set(),
       helpers: testMetaData.usedHelpers,
       stack,
       violations: [],
     };
   }
+
+  currentTestResult.urls.add(currentURL());
+  currentTestResult.routes.add(currentRouteName());
 
   axeResults.violations.forEach((violation) => {
     let rule = currentViolationsMap.get(violation.id);
