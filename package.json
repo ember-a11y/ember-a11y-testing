@@ -36,7 +36,7 @@
     "broccoli-merge-trees": "^4.2.0",
     "date-and-time": "^0.14.1",
     "ember-cli-babel": "^7.21.0",
-    "ember-cli-typescript": "^4.0.0",
+    "ember-cli-typescript": "^3.0.0",
     "ember-cli-version-checker": "^5.1.1",
     "ember-destroyable-polyfill": "^2.0.1",
     "fs-extra": "^9.0.1"
