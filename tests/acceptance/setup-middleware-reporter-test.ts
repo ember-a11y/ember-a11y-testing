@@ -7,6 +7,7 @@ import {
   setupGlobalA11yHooks,
   teardownGlobalA11yHooks,
   _middlewareReporter,
+  _pushTestResult,
   _TEST_SUITE_RESULTS,
 } from 'ember-a11y-testing/test-support';
 
@@ -34,6 +35,8 @@ module('setupMiddlewareReporter', function (hooks) {
 
     await visit('/');
 
-    assert.deepEqual(_TEST_SUITE_RESULTS[0].axeResults.violations.length, 3);
+    _pushTestResult();
+
+    assert.deepEqual(_TEST_SUITE_RESULTS[0].violations.length, 3);
   });
 });
