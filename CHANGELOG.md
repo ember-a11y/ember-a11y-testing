@@ -1,3 +1,20 @@
+## v4.0.0-beta.2 (2020-09-22)
+
+#### :rocket: Enhancement
+* [#217](https://github.com/ember-a11y/ember-a11y-testing/pull/217) Updating result schema to include more specific data ([@scalvert](https://github.com/scalvert))
+
+#### :memo: Documentation
+* [#215](https://github.com/ember-a11y/ember-a11y-testing/pull/215) Updates the README and ensures correct jsdocs are present for all public APIs ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#218](https://github.com/ember-a11y/ember-a11y-testing/pull/218) Downgrading ember-cli-typescript to 3.0.0 for embroider compatability ([@scalvert](https://github.com/scalvert))
+* [#219](https://github.com/ember-a11y/ember-a11y-testing/pull/219) Update ember-qunit to latest beta. ([@rwjblue](https://github.com/rwjblue))
+* [#216](https://github.com/ember-a11y/ember-a11y-testing/pull/216) chore(deps): update dependency node-fetch to v2.6.1 [security] ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
 ## v4.0.0-beta.1 (2020-09-11)
 
 #### :boom: Breaking Change
