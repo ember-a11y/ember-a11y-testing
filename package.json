@@ -44,7 +44,7 @@
   "devDependencies": {
     "@ember/jquery": "^1.1.0",
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "^2.0.0-beta.6",
+    "@ember/test-helpers": "^2.0.0",
     "@glimmer/component": "^1.0.1",
     "@glimmer/tracking": "^1.0.1",
     "@types/ember": "^3.16.0",
