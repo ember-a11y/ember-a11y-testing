@@ -120,5 +120,33 @@
       "release": true,
       "tokenRef": "GITHUB_AUTH"
     }
-  }
+  },
+  "contributors": [
+    "Trent Willis <trentmwillis@gmail.com>",
+    "Andrew A Lee <andlee@linkedin.com>",
+    "Steve Calvert <scalvert@linkedin.com>",
+    "Robert Jackson <github@rwjblue.com>",
+    "BrianSipple <Bsipple57@gmail.com>",
+    "Melanie Sumner <melaniersumner@gmail.com>",
+    "Nathan Hammond <github.com@nathanhammond.com>",
+    "Sean Massa <endangeredmassa@gmail.com>",
+    "Suz Hinton <suz.hinton@gmail.com>",
+    "Robert DeLuca <robertdeluca19@gmail.com>",
+    "Sean Doyle <sean.p.doyle24@gmail.com>",
+    "cibernox <miguel.camba@gmail.com>",
+    "Alicia Sedlock <aliciasedlock@Alicias-MacBook-Pro.local>",
+    "Ondrej Sevcik <ondrej.sev@gmail.com>",
+    "Sergey Astapov <SergeAstapov@gmail.com>",
+    "Tomster <tomster@emberjs.com>",
+    "Marcy Sutton <marcy.sutton@deque.com>",
+    "Steve Zelaznik <steve.zelaznik@iorahealth.com>",
+    "Anthony Trama <aftrama@gmail.com>",
+    "Ken Sin <kensin1129@gmail.com>",
+    "Francesco Novy <francesco@cropster.com>",
+    "willibaur <williambautista@gmail.com>",
+    "Sarbbottam Bandyopadhyay <sarbbottam@gmail.com>",
+    "Eric Kelly <heroiceric@gmail.com>",
+    "Sam Selikoff <sam.selikoff@gmail.com>",
+    "Renato Iwashima <renatoiwa@gmail.com>"
+  ]
 }
