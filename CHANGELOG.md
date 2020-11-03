@@ -1,3 +1,17 @@
+## v4.0.0 (2020-11-03)
+
+#### :memo: Documentation
+* [#225](https://github.com/ember-a11y/ember-a11y-testing/pull/225) Adding contributors to package.json ([@scalvert](https://github.com/scalvert))
+* [#221](https://github.com/ember-a11y/ember-a11y-testing/pull/221) fix **tiny** syntax error in readme code snippet ([@zelaznik](https://github.com/zelaznik))
+
+#### :house: Internal
+* [#227](https://github.com/ember-a11y/ember-a11y-testing/pull/227) Upgrading @ember/test-helpers to 2.0.0 ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 2
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+- Steve Zelaznik ([@zelaznik](https://github.com/zelaznik))
+
+
 ## v4.0.0-beta.2 (2020-09-22)
 
 #### :rocket: Enhancement
