@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const Funnel = require('broccoli-funnel');
 const MergeTrees = require('broccoli-merge-trees');
-const VersionChecker = require('ember-cli-version-checker');
+const validatePeerDependencies = require('validate-peer-dependencies');
 const setupMiddleware = require('./setup-middleware');
 
 // The different types/area for which we have content for.
@@ -13,6 +13,14 @@ const ALLOWED_CONTENT_FOR = ['head-footer', 'test-head-footer'];
 module.exports = {
   name: require('./package').name,
 
+  init() {
+    this._super.init.apply(this, arguments);
+
+    validatePeerDependencies(__dirname, {
+      resolvePeerDependenciesFrom: this.parent.root,
+    });
+  },
+
   /**
    * Includes axe-core in builds that have tests. It includes the un-minified
    * version in case of a need to debug.
@@ -20,15 +28,6 @@ module.exports = {
    */
   included: function (app) {
     this._super.included.apply(this, arguments);
-
-    let checker = VersionChecker.forProject(this.project);
-    let check = checker.check({
-      '@ember/test-helpers': '>= 2.0.0-beta.6',
-    });
-
-    check.assert(
-      `[ember-a11y-testing] Missing required version of @ember/test-helpers`
-    );
 
     if (app.tests) {
       let type = { type: 'test' };
