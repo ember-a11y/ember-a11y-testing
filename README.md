@@ -13,6 +13,16 @@ individual tests using an `a11yAudit()` test helper.
 
 - Ember.js v3.8.0 or above
 - Node.js v10 or above
+- `@ember/test-helpers` v2.0.0 or above
+
+Note: we enforce a peerDependency of `@ember/test-helpers`. If you encounter the following message:
+
+```shell
+ember-a11y-testing has the following unmet peerDependencies:
+  * @ember/test-helpers: `^2.0.0`; it was resolved to `x.x.x`
+```
+
+please update your version of `@ember/test-helpers` in your package.json accordingly.
 
 ## Installation
 
