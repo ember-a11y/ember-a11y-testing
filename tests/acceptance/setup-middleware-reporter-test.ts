@@ -37,6 +37,6 @@ module('setupMiddlewareReporter', function (hooks) {
 
     _pushTestResult();
 
-    assert.deepEqual(_TEST_SUITE_RESULTS[0].violations.length, 3);
+    assert.deepEqual(_TEST_SUITE_RESULTS[0].violations.length, 5);
   });
 });
