@@ -3,8 +3,11 @@
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function (defaults) {
+  const self = defaults.project.findAddonByName('ember-a11y-testing');
+  const autoImport = self.options.autoImport;
   let app = new EmberAddon(defaults, {
     // Add options here
+    autoImport,
   });
 
   /*
@@ -14,5 +17,6 @@ module.exports = function (defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  return app.toTree();
+  const { maybeEmbroider } = require('@embroider/test-setup');
+  return maybeEmbroider(app);
 };
