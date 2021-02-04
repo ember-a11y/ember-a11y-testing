@@ -6,7 +6,6 @@ module.exports = function (defaults) {
   const self = defaults.project.findAddonByName('ember-a11y-testing');
   const autoImport = self.options.autoImport;
   let app = new EmberAddon(defaults, {
-    // Add options here
     autoImport,
   });
 
