@@ -16,17 +16,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10.x
-      - name: install dependencies
-        run: yarn install --frozen-lockfile --non-interactive
-      - name: lint
-        run: yarn lint
-      - name: test
-        run: yarn test:ember
-      - name: test node
-        run: yarn test:node
+      - uses: volta-cli/action@v1
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - run: yarn test:ember
+      - run: yarn test:node
 
   floating-dependencies:
     name: Floating dependencies
@@ -34,13 +28,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10.x
-      - name: install dependencies
-        run: yarn install --no-lockfile --non-interactive
-      - name: test
-        run: yarn test:ember-compatibility
+      - uses: volta-cli/action@v1
+      - run: yarn install --no-lockfile
+      - run: yarn test:ember-compatibility
 
   try-scenarios:
     name: ${{ matrix.ember-try-scenario }}
@@ -67,10 +57,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10.x
-      - name: install dependencies
-        run: yarn install
-      - name: test
-        run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }}
+      - uses: volta-cli/action@v1
+      - run: yarn install --frozen-lockfile
+      - run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }}
+
