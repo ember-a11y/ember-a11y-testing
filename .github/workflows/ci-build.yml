@@ -34,9 +34,8 @@ jobs:
 
   try-scenarios:
     name: ${{ matrix.ember-try-scenario }}
-
+    timeout-minutes: 15
     runs-on: ubuntu-latest
-
     needs: test
 
     strategy:
