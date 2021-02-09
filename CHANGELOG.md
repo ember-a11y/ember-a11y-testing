@@ -1,3 +1,20 @@
+## v4.0.1 (2021-02-09)
+
+#### :bug: Bug Fix
+* [#233](https://github.com/ember-a11y/ember-a11y-testing/pull/233) Fix cannot find module `qunit` under embroider ([@thoov](https://github.com/thoov))
+
+#### :memo: Documentation
+* [#229](https://github.com/ember-a11y/ember-a11y-testing/pull/229) Add info describing required peerDependency ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#234](https://github.com/ember-a11y/ember-a11y-testing/pull/234) Pin ember-qunit to 5.0.0. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 3
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+- Travis Hoover ([@thoov](https://github.com/thoov))
+
+
 ## v4.0.0 (2020-11-03)
 
 #### :memo: Documentation
