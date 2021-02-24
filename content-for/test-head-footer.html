@@ -1,7 +1,7 @@
 <style>
   /* *
    * We need to modify the testing environment a bit to ensure accurate
-   * results. This is because some browser modify styles when elements are
+   * results. This is because some browsers modify styles when elements are
    * smaller than a certain size to help with accessibility
    */
 
@@ -12,19 +12,20 @@
 
   /* We position the testing container to be the entire screen */
   .axe-running #ember-testing-container {
-    position: static !important;
-    background: transparent;
-    bottom: auto;
-    right: auto;
-    width: auto;
-    height: auto;
+    position: fixed!important;
+    width: 100%;
+    height: 100%;
     overflow: auto;
     z-index: 9999;
     border: none;
+    right: 0;
   }
 
   /* Reset the zoom on the actual application so that everything is normal */
   .axe-running #ember-testing-container #ember-testing {
-    zoom: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: scale(1);
   }
 </style>
