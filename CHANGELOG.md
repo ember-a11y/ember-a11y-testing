@@ -1,3 +1,15 @@
+## v4.0.2 (2021-02-25)
+
+#### :bug: Bug Fix
+* [#238](https://github.com/ember-a11y/ember-a11y-testing/pull/238) Fix testing container CSS overrides ([@drewlee](https://github.com/drewlee))
+
+#### :house: Internal
+* [#238](https://github.com/ember-a11y/ember-a11y-testing/pull/238) Unpin ember-qunit ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v4.0.1 (2021-02-09)
 
 #### :bug: Bug Fix
