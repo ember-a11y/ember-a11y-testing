@@ -93,7 +93,7 @@ Globally:
 
 ```javascript
 // tests/test-helper.js
-import { setRunOptions } from 'ember-a11y-testing';
+import { setRunOptions } from 'ember-a11y-testing/test-support';
 
 setRunOptions({
   rules: {
@@ -113,7 +113,7 @@ Test module level:
 
 ```javascript
 import { module, test } from 'qunit';
-import { setRunOptions } from 'ember-a11y-testing';
+import { setRunOptions } from 'ember-a11y-testing/test-support';
 
 module('some test module', function (hooks) {
   hooks.beforeEach(function () {
@@ -139,8 +139,7 @@ Individual test level:
 
 ```javascript
 import { module, test } from 'qunit';
-import { a11yAudit } from 'ember-a11y-testing/test-support';
-import { setRunOptions } from 'ember-a11y-testing';
+import { a11yAudit, setRunOptions } from 'ember-a11y-testing/test-support';
 
 module('some test module', function (hooks) {
   test('some test', function (assert) {
