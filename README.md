@@ -83,6 +83,8 @@ setupGlobalA11yHooks(() => true);
 start();
 ```
 
+:information_source: It's important to note that you must also use the [`enableA11yAudit`](#force-running-audits) query parameter in order to force audits. This setting is require \_in addition to\* any invocation strategy you provide.
+
 #### Setting Options using `setRunOptions`
 
 You can provide options to axe-core for your tests using the `setRunOptions` API. This API is helpful if you don't have access to the `a11yAudit` calls directly, such as when using the `setupGlobalA11yHooks`, or if you want to set the same options for all tests in a module.
