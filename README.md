@@ -83,7 +83,7 @@ setupGlobalA11yHooks(() => true);
 start();
 ```
 
-:information_source: It's important to note that you must also use the [`enableA11yAudit`](#force-running-audits) query parameter in order to force audits. This setting is require \_in addition to\* any invocation strategy you provide.
+:information_source: It's important to note that you must also use the [`enableA11yAudit`](#force-running-audits) query parameter in order to force audits. This setting is required in addition to any invocation strategy you provide.
 
 #### Setting Options using `setRunOptions`
 
