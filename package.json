@@ -162,7 +162,7 @@
     "Renato Iwashima <renatoiwa@gmail.com>"
   ],
   "volta": {
-    "node": "12.21.0",
+    "node": "14.16.1",
     "yarn": "1.22.10"
   }
 }
