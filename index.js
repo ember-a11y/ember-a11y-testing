@@ -2,8 +2,6 @@
 
 const path = require('path');
 const fs = require('fs');
-const Funnel = require('broccoli-funnel');
-const MergeTrees = require('broccoli-merge-trees');
 const VersionChecker = require('ember-cli-version-checker');
 const validatePeerDependencies = require('validate-peer-dependencies');
 const setupMiddleware = require('./setup-middleware');
@@ -25,7 +23,7 @@ module.exports = {
 
     const hasMagicallyProvidedQUnit = versionChecker
       .for('ember-qunit')
-      .lt('5.0.0-beta.1');
+      .lt('5.1.4');
 
     // Ember-qunit < 5 provides an AMD shim for qunit but newer version now use
     // ember-auto-import to include qunit. This means that qunit is no
@@ -41,31 +39,6 @@ module.exports = {
         exclude: ['qunit'],
       };
     }
-  },
-
-  /**
-   * Includes axe-core in builds that have tests. It includes the un-minified
-   * version in case of a need to debug.
-   * @override
-   */
-  included: function (app) {
-    this._super.included.apply(this, arguments);
-
-    if (app.tests) {
-      let type = { type: 'test' };
-      app.import('vendor/axe-core/axe.js', type);
-      app.import('vendor/shims/axe-core.js', type);
-    }
-  },
-
-  treeForVendor: function (tree) {
-    let axePath = path.dirname(require.resolve('axe-core'));
-    let axeTree = new Funnel(axePath, {
-      files: ['axe.js'],
-      destDir: 'axe-core',
-    });
-
-    return new MergeTrees([tree, axeTree]);
   },
 
   /**
