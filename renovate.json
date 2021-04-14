@@ -14,7 +14,6 @@
     },
     {
       "packageNames": [
-        "broccoli-funnel",
         "ember-ajax",
         "ember-cli",
         "ember-cli-babel",
