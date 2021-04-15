@@ -42,7 +42,6 @@
     "validate-peer-dependencies": "^1.1.0"
   },
   "devDependencies": {
-    "@ember/jquery": "^1.1.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.1.0",
     "@embroider/test-setup": "^0.39.0",
