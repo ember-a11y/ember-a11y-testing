@@ -1,8 +1,3 @@
-import Component from '@ember/component';
-import layout from '../templates/components/x-paragraph';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout,
-  tagName: 'p',
-  classNames: ['c-paragraph'],
-});
+export default class XParagraph extends Component {}
