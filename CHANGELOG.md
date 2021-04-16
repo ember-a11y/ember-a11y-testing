@@ -1,3 +1,25 @@
+## v4.0.3 (2021-04-16)
+
+#### :bug: Bug Fix
+* [#251](https://github.com/ember-a11y/ember-a11y-testing/pull/251) Removes unnecessary, legacy build code for inclusion of axe dependencies. ([@MelSumner](https://github.com/MelSumner))
+
+#### :memo: Documentation
+* [#243](https://github.com/ember-a11y/ember-a11y-testing/pull/243) Correct link to axe-core API docs ([@danwenzel](https://github.com/danwenzel))
+* [#240](https://github.com/ember-a11y/ember-a11y-testing/pull/240) Updating README to indicate the need to use query param with global setup helper ([@scalvert](https://github.com/scalvert))
+* [#239](https://github.com/ember-a11y/ember-a11y-testing/pull/239) Correct import path of setRunOptions in README ([@danwenzel](https://github.com/danwenzel))
+
+#### :house: Internal
+* [#244](https://github.com/ember-a11y/ember-a11y-testing/pull/244) chore(deps): update dependency @embroider/test-setup to ^0.39.0 ([@renovate[bot]](https://github.com/apps/renovate))
+* [#247](https://github.com/ember-a11y/ember-a11y-testing/pull/247) Fixes CI build failures for missing module 'levenary' ([@drewlee](https://github.com/drewlee))
+* [#236](https://github.com/ember-a11y/ember-a11y-testing/pull/236) Update Node.js to v12.21.0 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 4
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+- Dan Wenzel ([@danwenzel](https://github.com/danwenzel))
+- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v4.0.2 (2021-02-25)
 
 #### :bug: Bug Fix
