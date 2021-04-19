@@ -1,10 +1,3 @@
-import Component from '@ember/component';
-import layout from '../templates/components/violations-grid-item';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout,
-  tagName: 'li',
-  classNames: ['c-violations-grid-item', 'o-content-box'],
-
-  title: null,
-});
+export default class ViolationsGridItem extends Component {}
