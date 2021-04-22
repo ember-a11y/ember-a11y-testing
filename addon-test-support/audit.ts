@@ -83,15 +83,7 @@ export default function a11yAudit(
 
   document.body.classList.add('axe-running');
 
-  return new Promise((resolve, reject) => {
-    run(context, options, (error, result) => {
-      if (!error) {
-        return resolve(result);
-      } else {
-        return reject(error);
-      }
-    });
-  })
+  return run(context, options)
     .then(reportA11yAudit)
     .finally(() => {
       document.body.classList.remove('axe-running');
