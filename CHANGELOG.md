@@ -1,3 +1,17 @@
+## v4.0.4 (2021-04-22)
+
+#### :house: Internal
+* [#230](https://github.com/ember-a11y/ember-a11y-testing/pull/230) chore(deps): update eslint (major) ([@renovate[bot]](https://github.com/apps/renovate))
+* [#241](https://github.com/ember-a11y/ember-a11y-testing/pull/241) chore(deps): update dependency ember-template-lint to v3 ([@renovate[bot]](https://github.com/apps/renovate))
+* [#255](https://github.com/ember-a11y/ember-a11y-testing/pull/255) Removes deprecated visual audit related components ([@drewlee](https://github.com/drewlee))
+* [#254](https://github.com/ember-a11y/ember-a11y-testing/pull/254) fix(deps): update dependency date-and-time to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+* [#253](https://github.com/ember-a11y/ember-a11y-testing/pull/253) chore(deps): update dependency @types/ember__test-helpers to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+* [#250](https://github.com/ember-a11y/ember-a11y-testing/pull/250) chore(deps): update node.js to v12.22.1 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v4.0.3 (2021-04-16)
 
 #### :bug: Bug Fix
