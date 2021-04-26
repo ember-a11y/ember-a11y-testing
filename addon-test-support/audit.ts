@@ -1,8 +1,8 @@
-import { Promise } from 'rsvp';
 import { run, RunOptions, ElementContext, ContextObject } from 'axe-core';
 import { mark, markEndAndMeasure } from './performance';
 import { getRunOptions } from './run-options';
 import { reportA11yAudit } from './reporter';
+import { waitForPromise } from '@ember/test-waiters';
 
 type MaybeElementContext = ElementContext | RunOptions | undefined;
 
@@ -83,15 +83,7 @@ export default function a11yAudit(
 
   document.body.classList.add('axe-running');
 
-  return new Promise((resolve, reject) => {
-    run(context, options, (error, result) => {
-      if (!error) {
-        return resolve(result);
-      } else {
-        return reject(error);
-      }
-    });
-  })
+  return waitForPromise(run(context, options))
     .then(reportA11yAudit)
     .finally(() => {
       document.body.classList.remove('axe-running');

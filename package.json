@@ -30,6 +30,7 @@
     "postpublish": "ember ts:clean"
   },
   "dependencies": {
+    "@ember/test-waiters": "^2.4.3",
     "axe-core": "^4.1.4",
     "body-parser": "^1.19.0",
     "date-and-time": "^1.0.0",
