@@ -1,3 +1,12 @@
+## v4.0.5 (2021-04-27)
+
+#### :house: Internal
+* [#256](https://github.com/ember-a11y/ember-a11y-testing/pull/256) Moves to using promise-based API for axe invocation ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v4.0.4 (2021-04-22)
 
 #### :house: Internal
