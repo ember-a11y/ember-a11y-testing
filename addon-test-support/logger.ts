@@ -159,41 +159,43 @@ export function storeResults(results: AxeResults) {
  * @public
  */
 export function printResults() {
-  console.group('%cAxe issues', serious);
-  testSuiteResults.forEach((results) => {
-    results.forEach((result) => {
-      let fmt: string;
-      switch (result.impact) {
-        case 'critical':
-          fmt = critical;
-          break;
-        case 'serious':
-          fmt = serious;
-          break;
-        case 'moderate':
-          fmt = moderate;
-          break;
-        case 'minor':
-          fmt = minor;
-          break;
-        default:
-          fmt = minor;
-          break;
-      }
-      console.groupCollapsed(
-        '%c%s: %c%s %s',
-        fmt,
-        result.impact,
-        defaultReset,
-        result.help,
-        result.helpUrl
-      );
-      result.nodes.forEach((node) => {
-        failureSummary(node, 'any');
-        failureSummary(node, 'none');
+  if (testSuiteResults.length) {
+    console.group('%cAxe issues', serious);
+    testSuiteResults.forEach((results) => {
+      results.forEach((result) => {
+        let fmt: string;
+        switch (result.impact) {
+          case 'critical':
+            fmt = critical;
+            break;
+          case 'serious':
+            fmt = serious;
+            break;
+          case 'moderate':
+            fmt = moderate;
+            break;
+          case 'minor':
+            fmt = minor;
+            break;
+          default:
+            fmt = minor;
+            break;
+        }
+        console.groupCollapsed(
+          '%c%s: %c%s %s',
+          fmt,
+          result.impact,
+          defaultReset,
+          result.help,
+          result.helpUrl
+        );
+        result.nodes.forEach((node) => {
+          failureSummary(node, 'any');
+          failureSummary(node, 'none');
+        });
+        console.groupEnd();
       });
-      console.groupEnd();
     });
-  });
-  console.groupEnd();
+    console.groupEnd();
+  }
 }
