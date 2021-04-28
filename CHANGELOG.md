@@ -1,3 +1,12 @@
+## v4.0.6 (2021-04-28)
+
+#### :bug: Bug Fix
+* [#258](https://github.com/ember-a11y/ember-a11y-testing/pull/258) Don't print to the console when there are no issues ([@nlfurniss](https://github.com/nlfurniss))
+
+#### Committers: 1
+- Nathaniel Furniss ([@nlfurniss](https://github.com/nlfurniss))
+
+
 ## v4.0.5 (2021-04-27)
 
 #### :house: Internal
