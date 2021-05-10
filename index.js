@@ -7,7 +7,7 @@ const validatePeerDependencies = require('validate-peer-dependencies');
 const setupMiddleware = require('./setup-middleware');
 
 // The different types/area for which we have content for.
-const ALLOWED_CONTENT_FOR = ['head-footer', 'test-head-footer'];
+const ALLOWED_CONTENT_FOR = ['test-head-footer'];
 
 module.exports = {
   name: require('./package').name,
