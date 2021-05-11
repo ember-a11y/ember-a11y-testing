@@ -1,3 +1,12 @@
+## v4.0.7 (2021-05-11)
+
+#### :bug: Bug Fix
+* [#261](https://github.com/ember-a11y/ember-a11y-testing/pull/261) Removes deprecated `content-for` styles ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v4.0.6 (2021-04-28)
 
 #### :bug: Bug Fix
