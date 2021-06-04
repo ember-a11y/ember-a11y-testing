@@ -1,3 +1,5 @@
+import { ENABLE_A11Y_AUDIT } from './cli-options';
+
 export function setEnableA11yAudit(enabled: boolean = false) {
   const url = new URL(window.location.href, document.baseURI);
 
@@ -22,5 +24,5 @@ export function setEnableA11yAudit(enabled: boolean = false) {
 export function shouldForceAudit() {
   const url = new URL(window.location.href, document.baseURI);
 
-  return url.searchParams.get('enableA11yAudit') !== null;
+  return ENABLE_A11Y_AUDIT || url.searchParams.get('enableA11yAudit') !== null;
 }
