@@ -9,9 +9,20 @@ import { AxeResults, Result } from 'axe-core';
 import { setCustomReporter } from './reporter';
 import { DEBUG } from '@glimmer/env';
 
+export interface TestMetadata {
+  testName?: string;
+  setupTypes: string[];
+  usedHelpers: string[];
+  [key: string]: any;
+
+  readonly isRendering: boolean;
+  readonly isApplication: boolean;
+}
+
 interface AxeTestResult {
   moduleName: string;
   testName: string;
+  testMetaData: TestMetadata;
   urls: string[] | Set<string>;
   routes: string[] | Set<string>;
   helpers: string[];
@@ -25,7 +36,6 @@ let currentTestResult: AxeTestResult | undefined = undefined;
 let currentViolationsMap: Map<string, Result> | undefined = undefined;
 let currentUrls: Set<string> | undefined;
 let currentRouteNames: Set<string> | undefined;
-let currentTestHelpers: Set<string> | undefined;
 
 /**
  * A custom reporter that is invoke once per failed a11yAudit call. This can be called
@@ -39,16 +49,16 @@ export async function middlewareReporter(axeResults: AxeResults) {
     return;
   }
 
-  let testMetaData = getTestMetadata(getContext());
-
   if (!currentTestResult) {
     let { module, testName } = QUnit.config.current;
+    let testMetaData = getTestMetadata(getContext());
 
     let stack = (!DEBUG && new Error().stack) || '';
 
     currentTestResult = {
       moduleName: module.name,
       testName,
+      testMetaData,
       urls: [],
       routes: [],
       helpers: [],
@@ -59,13 +69,8 @@ export async function middlewareReporter(axeResults: AxeResults) {
     currentViolationsMap = new Map();
     currentUrls = new Set();
     currentRouteNames = new Set();
-    currentTestHelpers = new Set();
   }
 
-  currentTestHelpers = new Set([
-    ...currentTestHelpers!.values(),
-    ...testMetaData.usedHelpers,
-  ]);
   currentUrls!.add(currentURL());
   currentRouteNames!.add(currentRouteName());
 
@@ -89,7 +94,7 @@ export function pushTestResult() {
     currentTestResult.violations = [...currentViolationsMap!.values()];
     currentTestResult.urls = [...currentUrls!.values()];
     currentTestResult.routes = [...currentRouteNames!.values()];
-    currentTestResult.helpers = [...currentTestHelpers!.values()];
+    currentTestResult.helpers = currentTestResult.testMetaData.usedHelpers;
 
     TEST_SUITE_RESULTS.push(currentTestResult);
 
@@ -97,7 +102,6 @@ export function pushTestResult() {
     currentViolationsMap = undefined;
     currentUrls = undefined;
     currentRouteNames = undefined;
-    currentTestHelpers = undefined;
   }
 }
 
