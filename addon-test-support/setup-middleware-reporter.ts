@@ -28,7 +28,7 @@ let currentRouteNames: Set<string> | undefined;
 let currentTestHelpers: Set<string> | undefined;
 
 /**
- * A custom reporter that is invoke once per failed a11yAudit call. This can be called
+ * A custom reporter that is invoked once per failed a11yAudit call. This can be called
  * multiple times per test, and the results are accumulated until testDone.
  *
  * @param axeResults The axe results for each a11yAudit.
