@@ -1,3 +1,19 @@
+## v4.0.8 (2021-06-11)
+
+#### :bug: Bug Fix
+* [#268](https://github.com/ember-a11y/ember-a11y-testing/pull/268) Adjusting time of data gathering in middleware reporter ([@scalvert](https://github.com/scalvert))
+* [#264](https://github.com/ember-a11y/ember-a11y-testing/pull/264) Fixes failing CI and crypto error ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#265](https://github.com/ember-a11y/ember-a11y-testing/pull/265) Update .npmignore ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#262](https://github.com/ember-a11y/ember-a11y-testing/pull/262) fix(deps): update dependency validate-peer-dependencies to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+* [#259](https://github.com/ember-a11y/ember-a11y-testing/pull/259) fix(deps): update dependency fs-extra to v10 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v4.0.7 (2021-05-11)
 
 #### :bug: Bug Fix
