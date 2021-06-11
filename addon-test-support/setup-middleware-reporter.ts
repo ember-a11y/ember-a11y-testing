@@ -9,9 +9,20 @@ import { AxeResults, Result } from 'axe-core';
 import { setCustomReporter } from './reporter';
 import { DEBUG } from '@glimmer/env';
 
+export interface TestMetadata {
+  testName?: string;
+  setupTypes: string[];
+  usedHelpers: string[];
+  [key: string]: any;
+
+  readonly isRendering: boolean;
+  readonly isApplication: boolean;
+}
+
 interface AxeTestResult {
   moduleName: string;
   testName: string;
+  testMetaData: TestMetadata;
   urls: string[] | Set<string>;
   routes: string[] | Set<string>;
   helpers: string[];
@@ -23,9 +34,16 @@ export const TEST_SUITE_RESULTS: AxeTestResult[] = [];
 
 let currentTestResult: AxeTestResult | undefined = undefined;
 let currentViolationsMap: Map<string, Result> | undefined = undefined;
-let currentUrls = new Set<string>();
-let currentRouteNames = new Set<string>();
+let currentUrls: Set<string> | undefined;
+let currentRouteNames: Set<string> | undefined;
 
+/**
+ * A custom reporter that is invoked once per failed a11yAudit call. This can be called
+ * multiple times per test, and the results are accumulated until testDone.
+ *
+ * @param axeResults The axe results for each a11yAudit.
+ * @returns Early returns if no violations are found.
+ */
 export async function middlewareReporter(axeResults: AxeResults) {
   if (axeResults.violations.length === 0) {
     return;
@@ -40,18 +58,21 @@ export async function middlewareReporter(axeResults: AxeResults) {
     currentTestResult = {
       moduleName: module.name,
       testName,
+      testMetaData,
       urls: [],
       routes: [],
-      helpers: testMetaData.usedHelpers,
+      helpers: [],
       stack,
       violations: [],
     };
 
     currentViolationsMap = new Map();
+    currentUrls = new Set();
+    currentRouteNames = new Set();
   }
 
-  currentUrls.add(currentURL());
-  currentRouteNames.add(currentRouteName());
+  currentUrls!.add(currentURL());
+  currentRouteNames!.add(currentRouteName());
 
   axeResults.violations.forEach((violation) => {
     let rule = currentViolationsMap!.get(violation.id);
@@ -64,15 +85,23 @@ export async function middlewareReporter(axeResults: AxeResults) {
   });
 }
 
+/**
+ * Invoked once per test. Accumulates the results into a set of results used for
+ * reporting via the middleware reporter.
+ */
 export function pushTestResult() {
   if (typeof currentTestResult !== 'undefined') {
     currentTestResult.violations = [...currentViolationsMap!.values()];
-    currentTestResult.urls = [...currentUrls.values()];
-    currentTestResult.routes = [...currentRouteNames.values()];
+    currentTestResult.urls = [...currentUrls!.values()];
+    currentTestResult.routes = [...currentRouteNames!.values()];
+    currentTestResult.helpers = currentTestResult.testMetaData.usedHelpers;
+
     TEST_SUITE_RESULTS.push(currentTestResult);
 
     currentTestResult = undefined;
     currentViolationsMap = undefined;
+    currentUrls = undefined;
+    currentRouteNames = undefined;
   }
 }
 
