@@ -1174,13 +1174,13 @@
     resolve "^1.8.1"
     semver "^7.3.2"
 
-"@embroider/test-setup@^0.39.0":
-  version "0.39.1"
-  resolved "https://registry.yarnpkg.com/@embroider/test-setup/-/test-setup-0.39.1.tgz#3b87c9a3a029711f43f7ac89952eaaddf30196fd"
-  integrity sha512-EYlsiPiK6FfxeB9Yq9/c/dXwTjo1T5xD6UUfK6rv0PLGP5W1OqYd0Kyf8LGpLKeaRzLD6GfOeb+GXpx9IgPyeg==
+"@embroider/test-setup@^0.42.0":
+  version "0.42.0"
+  resolved "https://registry.yarnpkg.com/@embroider/test-setup/-/test-setup-0.42.0.tgz#c225640c0bcf7ea7aa33485a525e719747575f5d"
+  integrity sha512-Ddtx6xm83fyZNFX3CkCvUUpZwaRYT7sqrNkRPSkdSMLPJ9L7xTIbVkgqHh/xH6XWT5gLi8y2cY7Uww17dn5Rpw==
   dependencies:
-    lodash "^4.17.20"
-    resolve "^1.17.0"
+    lodash "^4.17.21"
+    resolve "^1.20.0"
 
 "@glimmer/component@^1.0.1":
   version "1.0.1"
@@ -9319,7 +9319,7 @@ lodash@4.17.20, lodash@^4.17.12, lodash@^4.17.15, lodash@^4.17.20, lodash@^4.6.1
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
-lodash@^4.17.10, lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.4, lodash@^4.7.0:
+lodash@^4.17.10, lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.7.0:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
