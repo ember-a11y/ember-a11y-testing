@@ -16,7 +16,8 @@ export function setEnableA11yAudit(enabled: boolean = false) {
 
 /**
  * Forces running audits. This functionality is enabled by
- * the presence of an `enableA11yAudit` query parameter passed to the test suite.
+ * the presence of an `enableA11yAudit` query parameter passed to the test suite
+ * or the `ENABLE_A11Y_AUDIT` environmental variable.
  *
  * If used with `setupGlobalA11yHooks` and the query param enabled, this will override
  * any `InvocationStrategy` passed to that function and force the audit.

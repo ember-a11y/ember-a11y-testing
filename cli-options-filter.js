@@ -14,9 +14,9 @@ class CliOptionsFilter extends Filter {
   }
 
   /**
-   * If `ENABLE_A11Y_MIDDLEWARE_REPORTER=true` or `ENABLE_A11Y_AUDIT=true` env vars are set,
-   * overwrite the corresponding values in `test-support/cli-options` during build-time so
-   * they can be referenced in the browser environment.
+   * If `ENABLE_A11Y_MIDDLEWARE_REPORTER=true` or `ENABLE_A11Y_AUDIT=true` environmental
+   * variables are specified, overwrite the corresponding values in `test-support/cli-options`
+   * at build-time to make them accessible in the browser environment.
    * @override
    */
   processString(contents) {
