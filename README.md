@@ -369,7 +369,7 @@ start();
 ```
 
 Note, as a convenience, `useMiddlewareReporter` automatically forces audits, thus explicitly specifying
-the `enableA11yAudit` query param or the `ENABLE_A11Y_AUDIT` environmental variable is unnecessary.
+the `enableA11yAudit` query param or the `ENABLE_A11Y_AUDIT` environment variable is unnecessary.
 
 ### Development Usage
 
