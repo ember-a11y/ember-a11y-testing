@@ -1,3 +1,12 @@
+## v4.1.0 (2021-06-18)
+
+#### :rocket: Enhancement
+* [#267](https://github.com/ember-a11y/ember-a11y-testing/pull/267) Provide conditional usage for 'setupMiddlewareReporter' ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v4.0.8 (2021-06-11)
 
 #### :bug: Bug Fix
