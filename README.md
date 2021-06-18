@@ -349,7 +349,7 @@ setupMiddlewareReporter();
 start();
 ```
 
-A helper function is available to use the middleware reporter conditionally, allowing interoperability between the default reporter and the middleware reporter. Import `useMiddlewareReporter` and apply as a check around the `setupMiddlewareReporter` function in `tests/test-helper.js`. The middleware reporter will now only be invoked when `enableA11yMiddlewareReporter` is set as a query param on the test page or the `ENABLE_A11Y_MIDDLEWARE_REPORTER` environmental variable is provided.
+A helper function is available to use the middleware reporter conditionally, allowing interoperability between the default reporter and the middleware reporter. Import `useMiddlewareReporter` and apply as a check around the `setupMiddlewareReporter` function in `tests/test-helper.js`. The middleware reporter will now only be invoked when `enableA11yMiddlewareReporter` is set as a query param on the test page or the `ENABLE_A11Y_MIDDLEWARE_REPORTER` environment variable is provided.
 
 ```js
 import Application from 'my-app/app';
