@@ -30,6 +30,7 @@ module.exports = {
         'ember-cli-build.js',
         'index.js',
         'setup-middleware.js',
+        'cli-options-filter.js',
         'node-tests/setup-middleware-test.js',
         'testem.js',
         'blueprints/*/index.js',

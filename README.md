@@ -260,7 +260,7 @@ test('Some test case', async function (assert) {
 ### Force Running audits
 
 `ember-a11y-testing` allows you to force audits if `enableA11yAudit` is set as a query param
-on the test page. This is useful if you want to conditionally run accessibility audits, such
+on the test page or the `ENABLE_A11Y_AUDIT` environment variable is provided. This is useful if you want to conditionally run accessibility audits, such
 as during nightly build jobs.
 
 To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown below.
@@ -348,6 +348,28 @@ setupMiddlewareReporter();
 
 start();
 ```
+
+A helper function is available to use the middleware reporter conditionally, allowing interoperability between the default reporter and the middleware reporter. Import `useMiddlewareReporter` and apply as a check around the `setupMiddlewareReporter` function in `tests/test-helper.js`. The middleware reporter will now only be invoked when `enableA11yMiddlewareReporter` is set as a query param on the test page or the `ENABLE_A11Y_MIDDLEWARE_REPORTER` environment variable is provided.
+
+```js
+import Application from 'my-app/app';
+import config from 'my-app/config/environment';
+import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
+import { setupMiddlewareReporter, useMiddlewareReporter } from 'ember-a11y-testing/test-support';
+
+setApplication(Application.create(config.APP));
+
+if (useMiddlewareReporter()) {
+  // Only runs if `enableA11yMiddlewareReporter` is set in URL
+  setupMiddlewareReporter();
+}
+
+start();
+```
+
+Note, as a convenience, `useMiddlewareReporter` automatically forces audits, thus explicitly specifying
+the `enableA11yAudit` query param or the `ENABLE_A11Y_AUDIT` environment variable is unnecessary.
 
 ### Development Usage
 

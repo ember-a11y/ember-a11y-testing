@@ -8,6 +8,7 @@ import {
 import { AxeResults, Result } from 'axe-core';
 import { setCustomReporter } from './reporter';
 import { DEBUG } from '@glimmer/env';
+import { setEnableA11yAudit } from './should-force-audit';
 
 export interface TestMetadata {
   testName?: string;
@@ -110,6 +111,8 @@ export function pushTestResult() {
  */
 export function setupMiddlewareReporter() {
   setCustomReporter(middlewareReporter);
+
+  setEnableA11yAudit(true);
 
   QUnit.testDone(pushTestResult);
 
