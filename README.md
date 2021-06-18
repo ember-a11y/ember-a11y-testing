@@ -260,7 +260,7 @@ test('Some test case', async function (assert) {
 ### Force Running audits
 
 `ember-a11y-testing` allows you to force audits if `enableA11yAudit` is set as a query param
-on the test page or the `ENABLE_A11Y_AUDIT` environmental variable is provided. This is useful if you want to conditionally run accessibility audits, such
+on the test page or the `ENABLE_A11Y_AUDIT` environment variable is provided. This is useful if you want to conditionally run accessibility audits, such
 as during nightly build jobs.
 
 To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown below.
