@@ -1,7 +1,11 @@
 export { default as a11yAudit } from './audit';
 export { default as a11yAuditIf } from './audit-if';
 export { setRunOptions, getRunOptions } from './run-options';
-export { setEnableA11yAudit, shouldForceAudit } from './should-force-audit';
+export {
+  setEnableA11yAudit,
+  shouldForceAudit,
+  calculateUpdatedHref as _calculateUpdatedHref,
+} from './should-force-audit';
 export { useMiddlewareReporter } from './use-middleware-reporter';
 export {
   setupGlobalA11yHooks,

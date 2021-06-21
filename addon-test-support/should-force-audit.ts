@@ -1,7 +1,11 @@
 import { ENABLE_A11Y_AUDIT } from './cli-options';
 
-export function setEnableA11yAudit(enabled: boolean = false) {
-  const url = new URL(window.location.href, document.baseURI);
+export function calculateUpdatedHref(
+  href: string,
+  baseURI: string,
+  enabled: boolean = false
+): string {
+  const url = new URL(href, baseURI);
 
   // set up the enableA11yAudit query param
   if (enabled) {
@@ -10,8 +14,17 @@ export function setEnableA11yAudit(enabled: boolean = false) {
     url.searchParams.delete('enableA11yAudit');
   }
 
+  return url.href.replace(/=(?=&)|=$/g, '');
+}
+
+export function setEnableA11yAudit(enabled: boolean = false) {
+  const href = calculateUpdatedHref(
+    window.location.href,
+    document.baseURI,
+    enabled
+  );
+
   // updates the URL without reloading
-  const href = url.href.replace(/=(?=&)|=$/g, '');
   window.history.replaceState(null, '', href);
 }
 

@@ -5,6 +5,7 @@ import {
   a11yAudit,
   setEnableA11yAudit,
   setRunOptions,
+  _calculateUpdatedHref,
 } from 'ember-a11y-testing/test-support';
 
 const SELECTORS = {
@@ -139,25 +140,25 @@ module('Acceptance | a11y audit', function (hooks) {
   });
 
   test('Setting the `enableA11yAudit` query parameter does not mutate the URL', async function (assert) {
-    assert.expect(1);
+    assert.expect(2);
 
-    setEnableA11yAudit(false);
-    await visit('/');
+    const baseUrl = 'https://www.example.com';
+    const url = `${baseUrl}/some/path?foo=123&bar&baz`;
 
-    const url = window.location.href;
-    const separator = url.includes('?') ? '&' : '?';
-    const search = 'foo&bar';
-    const href = `${url}${separator}${search}`;
-    window.history.replaceState(null, '', href);
-    setEnableA11yAudit(true);
-
-    const expectedUrl = `${href}&enableA11yAudit`;
+    let href = _calculateUpdatedHref(url, baseUrl, true);
+    let expectedHref = `${url}&enableA11yAudit`;
     assert.equal(
-      window.location.href,
-      expectedUrl,
-      'Updated URL matches the expected URL'
+      href,
+      expectedHref,
+      'Updated URL matches the expected URL when `enableA11yAudit` is added'
     );
 
-    window.history.replaceState(null, '', url);
+    href = _calculateUpdatedHref(expectedHref, baseUrl, false);
+    expectedHref = url;
+    assert.equal(
+      href,
+      expectedHref,
+      'Updated URL matches the expected URL when `enableA11yAudit` is removed'
+    );
   });
 });
