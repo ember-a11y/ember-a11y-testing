@@ -11,7 +11,8 @@ export function setEnableA11yAudit(enabled: boolean = false) {
   }
 
   // updates the URL without reloading
-  window.history.replaceState(null, '', url.href);
+  const href = url.href.replace(/=(?=&)|=$/g, '');
+  window.history.replaceState(null, '', href);
 }
 
 /**

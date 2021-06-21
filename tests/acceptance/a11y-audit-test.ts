@@ -137,4 +137,27 @@ module('Acceptance | a11y audit', function (hooks) {
 
     assert.ok(true, 'the image-alt rule should be ignored');
   });
+
+  test('Setting the `enableA11yAudit` query parameter does not mutate the URL', async function (assert) {
+    assert.expect(1);
+
+    setEnableA11yAudit(false);
+    await visit('/');
+
+    const url = window.location.href;
+    const separator = url.includes('?') ? '&' : '?';
+    const search = 'foo&bar';
+    const href = `${url}${separator}${search}`;
+    window.history.replaceState(null, '', href);
+    setEnableA11yAudit(true);
+
+    const expectedUrl = `${href}&enableA11yAudit`;
+    assert.equal(
+      window.location.href,
+      expectedUrl,
+      'Updated URL matches the expected URL'
+    );
+
+    window.history.replaceState(null, '', url);
+  });
 });
