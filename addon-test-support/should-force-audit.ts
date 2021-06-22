@@ -1,4 +1,6 @@
-import { ENABLE_A11Y_AUDIT } from './cli-options';
+import { ENABLE_A11Y_AUDIT as ENABLE_A11Y_AUDIT_ENV } from './cli-options';
+
+const ENABLE_A11Y_AUDIT = 'enableA11yAudit';
 
 export function calculateUpdatedHref(
   href: string,
@@ -7,14 +9,29 @@ export function calculateUpdatedHref(
 ): string {
   const url = new URL(href, baseURI);
 
-  // set up the enableA11yAudit query param
-  if (enabled) {
-    url.searchParams.set('enableA11yAudit', '');
-  } else {
-    url.searchParams.delete('enableA11yAudit');
+  // Find all query params with no '='
+  let keyOnlyParams = url.href.match(/[?&][^=&]+(?=&|$)/g) || [];
+
+  // Remove leading '?' and '&'
+  keyOnlyParams = keyOnlyParams.map((param) => param.slice(1));
+
+  // Include `enableA11yAudit` for normalization
+  if (enabled && !keyOnlyParams.includes(ENABLE_A11Y_AUDIT)) {
+    keyOnlyParams.push(ENABLE_A11Y_AUDIT);
   }
 
-  return url.href.replace(/=(?=&)|=$/g, '');
+  // Construct regexp pattern of params to normalize
+  const normalizePattern = keyOnlyParams.map((param) => `${param}=`).join('|');
+  const normalizeRegExp = new RegExp(normalizePattern, 'g');
+
+  // Set up the `enableA11yAudit` query param
+  if (enabled) {
+    url.searchParams.set(ENABLE_A11Y_AUDIT, '');
+  } else {
+    url.searchParams.delete(ENABLE_A11Y_AUDIT);
+  }
+
+  return url.href.replace(normalizeRegExp, (param) => param.replace('=', ''));
 }
 
 export function setEnableA11yAudit(enabled: boolean = false) {
@@ -24,7 +41,7 @@ export function setEnableA11yAudit(enabled: boolean = false) {
     enabled
   );
 
-  // updates the URL without reloading
+  // Update the URL without reloading
   window.history.replaceState(null, '', href);
 }
 
@@ -39,5 +56,7 @@ export function setEnableA11yAudit(enabled: boolean = false) {
 export function shouldForceAudit() {
   const url = new URL(window.location.href, document.baseURI);
 
-  return ENABLE_A11Y_AUDIT || url.searchParams.get('enableA11yAudit') !== null;
+  return (
+    ENABLE_A11Y_AUDIT_ENV || url.searchParams.get('enableA11yAudit') !== null
+  );
 }

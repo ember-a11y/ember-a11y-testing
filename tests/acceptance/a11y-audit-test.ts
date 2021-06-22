@@ -5,7 +5,6 @@ import {
   a11yAudit,
   setEnableA11yAudit,
   setRunOptions,
-  _calculateUpdatedHref,
 } from 'ember-a11y-testing/test-support';
 
 const SELECTORS = {
@@ -137,28 +136,5 @@ module('Acceptance | a11y audit', function (hooks) {
     await a11yAudit();
 
     assert.ok(true, 'the image-alt rule should be ignored');
-  });
-
-  test('Setting the `enableA11yAudit` query parameter does not mutate the URL', async function (assert) {
-    assert.expect(2);
-
-    const baseUrl = 'https://www.example.com';
-    const url = `${baseUrl}/some/path?foo=123&bar&baz`;
-
-    let href = _calculateUpdatedHref(url, baseUrl, true);
-    let expectedHref = `${url}&enableA11yAudit`;
-    assert.equal(
-      href,
-      expectedHref,
-      'Updated URL matches the expected URL when `enableA11yAudit` is added'
-    );
-
-    href = _calculateUpdatedHref(expectedHref, baseUrl, false);
-    expectedHref = url;
-    assert.equal(
-      href,
-      expectedHref,
-      'Updated URL matches the expected URL when `enableA11yAudit` is removed'
-    );
   });
 });
