@@ -1,8 +1,8 @@
-import { ENABLE_A11Y_AUDIT as ENABLE_A11Y_AUDIT_ENV } from './cli-options';
+import { ENABLE_A11Y_AUDIT } from './cli-options';
 
-const ENABLE_A11Y_AUDIT = 'enableA11yAudit';
+const A11Y_AUDIT_PARAM = 'enableA11yAudit';
 
-export function calculateUpdatedHref(
+export function _calculateUpdatedHref(
   href: string,
   baseURI: string,
   enabled: boolean = false
@@ -12,23 +12,22 @@ export function calculateUpdatedHref(
 
   // Set up the `enableA11yAudit` query param
   if (enabled) {
-    url.searchParams.set(ENABLE_A11Y_AUDIT, '');
+    url.searchParams.set(A11Y_AUDIT_PARAM, '');
   } else {
-    url.searchParams.delete(ENABLE_A11Y_AUDIT);
+    url.searchParams.delete(A11Y_AUDIT_PARAM);
   }
 
   // Match all key-only params with '='
   return url.href.replace(/([^?&]+)=(?=&|$)/g, (match, sub) => {
     // Only normalize `enableA11yAudit` or params that didn't initially include '='
-    if (sub === ENABLE_A11Y_AUDIT || !initialHref.includes(match)) {
-      return sub;
-    }
-    return match;
+    return sub === A11Y_AUDIT_PARAM || !initialHref.includes(match)
+      ? sub
+      : match;
   });
 }
 
 export function setEnableA11yAudit(enabled: boolean = false) {
-  const href = calculateUpdatedHref(
+  const href = _calculateUpdatedHref(
     window.location.href,
     document.baseURI,
     enabled
@@ -49,7 +48,5 @@ export function setEnableA11yAudit(enabled: boolean = false) {
 export function shouldForceAudit() {
   const url = new URL(window.location.href, document.baseURI);
 
-  return (
-    ENABLE_A11Y_AUDIT_ENV || url.searchParams.get('enableA11yAudit') !== null
-  );
+  return ENABLE_A11Y_AUDIT || url.searchParams.get('enableA11yAudit') !== null;
 }

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { _calculateUpdatedHref } from 'ember-a11y-testing/test-support';
+import { _calculateUpdatedHref } from 'ember-a11y-testing/test-support/should-force-audit';
 
 module('Query parameter normalization', function (hooks) {
   setupTest(hooks);
