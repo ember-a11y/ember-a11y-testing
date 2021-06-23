@@ -69,12 +69,6 @@ module('Query parameter normalization', function (hooks) {
       expected: '/some/path?foo&bar=',
     },
     {
-      label: 'Enable, param normalization not required',
-      input: '/some/path?foo=123&bar=456',
-      enabled: true,
-      expected: '/some/path?foo=123&bar=456&enableA11yAudit',
-    },
-    {
       label: 'Not found, disabling is noop',
       input: '/some/path?foo=123&bar&baz=',
       enabled: false,

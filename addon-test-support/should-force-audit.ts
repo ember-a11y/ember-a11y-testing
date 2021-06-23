@@ -8,21 +8,7 @@ export function calculateUpdatedHref(
   enabled: boolean = false
 ): string {
   const url = new URL(href, baseURI);
-
-  // Find all query params with no '='
-  let keyOnlyParams = url.href.match(/[?&][^=&]+(?=&|$)/g) || [];
-
-  // Remove leading '?' and '&'
-  keyOnlyParams = keyOnlyParams.map((param) => param.slice(1));
-
-  // Include `enableA11yAudit` for normalization
-  if (enabled && !keyOnlyParams.includes(ENABLE_A11Y_AUDIT)) {
-    keyOnlyParams.push(ENABLE_A11Y_AUDIT);
-  }
-
-  // Construct regexp pattern of params to normalize
-  const normalizePattern = keyOnlyParams.map((param) => `${param}=`).join('|');
-  const normalizeRegExp = new RegExp(normalizePattern, 'g');
+  const initialHref = url.href;
 
   // Set up the `enableA11yAudit` query param
   if (enabled) {
@@ -31,7 +17,14 @@ export function calculateUpdatedHref(
     url.searchParams.delete(ENABLE_A11Y_AUDIT);
   }
 
-  return url.href.replace(normalizeRegExp, (param) => param.replace('=', ''));
+  // Match all key-only params with '='
+  return url.href.replace(/([^?&]+)=(?=&|$)/g, (match, sub) => {
+    // Only normalize `enableA11yAudit` or params that didn't initially include '='
+    if (sub === ENABLE_A11Y_AUDIT || !initialHref.includes(match)) {
+      return sub;
+    }
+    return match;
+  });
 }
 
 export function setEnableA11yAudit(enabled: boolean = false) {
