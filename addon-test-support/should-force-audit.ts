@@ -1,17 +1,38 @@
 import { ENABLE_A11Y_AUDIT } from './cli-options';
 
-export function setEnableA11yAudit(enabled: boolean = false) {
-  const url = new URL(window.location.href, document.baseURI);
+export function _calculateUpdatedHref(
+  href: string,
+  baseURI: string,
+  enabled: boolean = false
+): string {
+  const url = new URL(href, baseURI);
+  const initialHref = url.href;
 
-  // set up the enableA11yAudit query param
+  // Set up the `enableA11yAudit` query param
   if (enabled) {
     url.searchParams.set('enableA11yAudit', '');
   } else {
     url.searchParams.delete('enableA11yAudit');
   }
 
-  // updates the URL without reloading
-  window.history.replaceState(null, '', url.href);
+  // Match all key-only params with '='
+  return url.href.replace(/([^?&]+)=(?=&|$)/g, (match, sub) => {
+    // Only normalize `enableA11yAudit` or params that didn't initially include '='
+    return sub === 'enableA11yAudit' || !initialHref.includes(match)
+      ? sub
+      : match;
+  });
+}
+
+export function setEnableA11yAudit(enabled: boolean = false) {
+  const href = _calculateUpdatedHref(
+    window.location.href,
+    document.baseURI,
+    enabled
+  );
+
+  // Update the URL without reloading
+  window.history.replaceState(null, '', href);
 }
 
 /**
