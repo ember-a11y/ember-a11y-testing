@@ -1,7 +1,5 @@
 import { ENABLE_A11Y_AUDIT } from './cli-options';
 
-const A11Y_AUDIT_PARAM = 'enableA11yAudit';
-
 export function _calculateUpdatedHref(
   href: string,
   baseURI: string,
@@ -12,15 +10,15 @@ export function _calculateUpdatedHref(
 
   // Set up the `enableA11yAudit` query param
   if (enabled) {
-    url.searchParams.set(A11Y_AUDIT_PARAM, '');
+    url.searchParams.set('enableA11yAudit', '');
   } else {
-    url.searchParams.delete(A11Y_AUDIT_PARAM);
+    url.searchParams.delete('enableA11yAudit');
   }
 
   // Match all key-only params with '='
   return url.href.replace(/([^?&]+)=(?=&|$)/g, (match, sub) => {
     // Only normalize `enableA11yAudit` or params that didn't initially include '='
-    return sub === A11Y_AUDIT_PARAM || !initialHref.includes(match)
+    return sub === 'enableA11yAudit' || !initialHref.includes(match)
       ? sub
       : match;
   });
