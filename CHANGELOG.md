@@ -1,3 +1,12 @@
+## v4.1.1 (2021-06-24)
+
+#### :bug: Bug Fix
+* [#270](https://github.com/ember-a11y/ember-a11y-testing/pull/270) Fixes URL mutation when setting the `enableA11yAudit` query parameter ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v4.1.0 (2021-06-18)
 
 #### :rocket: Enhancement
