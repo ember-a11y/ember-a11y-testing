@@ -1,3 +1,15 @@
+## v4.1.2 (2021-07-01)
+
+#### :bug: Bug Fix
+* [#272](https://github.com/ember-a11y/ember-a11y-testing/pull/272) Fixes issue when violations count is reported to be 0 ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#271](https://github.com/ember-a11y/ember-a11y-testing/pull/271) Migrates to native dependabot ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v4.1.1 (2021-06-24)
 
 #### :bug: Bug Fix
