@@ -7,14 +7,9 @@ import type { Result } from 'axe-core';
  * @param {string | string[]} markup (optional) string of HTML relevant to the violation
  */
 export default function formatViolation(
-  violation: Partial<Result> | undefined,
-  markup?: string | string[]
+  violation: Partial<Result>,
+  markup: string[]
 ) {
-  if (!violation) {
-    throw new Error(
-      'formatViolation called without required parameter: violation'
-    );
-  }
   if (!violation.impact || !violation.help || !violation.helpUrl) {
     throw new Error(
       'formatViolation called with improper structure of parameter: violation. Required properties: impact, help, helpUrl.'
@@ -22,19 +17,15 @@ export default function formatViolation(
   }
 
   let count = 1;
+  let formattedMarkup = '';
 
-  if (markup) {
-    if (Array.isArray(markup)) {
-      count = markup.length;
-      markup = markup.join('\n');
-    }
-    markup = ` Offending nodes are: \n${markup}`;
-  } else {
-    markup = '';
+  if (markup.length) {
+    count = markup.length;
+    formattedMarkup = ` Offending nodes are: \n${markup.join('\n')}`;
   }
 
   let plural = count === 1 ? '' : 's';
   let violationCount = `Violated ${count} time${plural}.`;
 
-  return `[${violation.impact}]: ${violation.help} \n${violationCount}${markup}\n${violation.helpUrl}`;
+  return `[${violation.impact}]: ${violation.help} \n${violationCount}${formattedMarkup}\n${violation.helpUrl}`;
 }

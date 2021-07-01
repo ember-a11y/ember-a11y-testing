@@ -22,7 +22,7 @@ module('Unit | Utils | formatViolation', function () {
       ],
     };
 
-    let message = formatViolation(violation, violation.nodes[0].html);
+    let message = formatViolation(violation, [violation.nodes[0].html]);
     let expected = `[critical]: it should be better \nViolated 1 time. Offending nodes are: \n<input type="text">\nhttp://example.com`;
     assert.equal(message, expected);
   });
@@ -38,7 +38,7 @@ module('Unit | Utils | formatViolation', function () {
       nodes: [],
     };
 
-    let message = formatViolation(violation);
+    let message = formatViolation(violation, []);
     let expected = `[critical]: it should be better \nViolated 1 time.\nhttp://example.com`;
     assert.equal(message, expected);
   });
@@ -64,15 +64,7 @@ module('Unit | Utils | formatViolation', function () {
     let expected = /formatViolation called with improper structure of parameter: violation. Required properties: impact, help, helpUrl./;
 
     assert.throws(function () {
-      formatViolation(violation, violation.nodes[0].html);
-    }, expected);
-  });
-
-  test('validates violation parameter exists', function (assert) {
-    let expected = /formatViolation called without required parameter: violation/;
-
-    assert.throws(function () {
-      formatViolation(undefined);
+      formatViolation(violation, [violation.nodes[0].html]);
     }, expected);
   });
 });
