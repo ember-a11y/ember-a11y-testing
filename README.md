@@ -39,7 +39,7 @@ Usage of `ember-a11y-testing` in your tests can be done in one of two ways:
 
 ### axe Options
 
-When using the `a11yAudit` helper, you can pass in `axe-core` options.
+When using the `a11yAudit` helper, you can pass in `axe-core` options that are passed to `axe.run`.
 These options are documented in the [axe-core API docs](https://www.deque.com/axe/core-documentation/api-documentation/#user-content-options-parameter).
 The rule definitions are documented on [dequeuniversity.com/rules](https://dequeuniversity.com/rules/axe/4.0).
 
