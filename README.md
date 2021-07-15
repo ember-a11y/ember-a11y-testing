@@ -101,13 +101,6 @@ setRunOptions({
   rules: {
     region: { enabled: true },
   },
-  checks: {
-    'color-contrast': {
-      options: {
-        noScroll: true,
-      },
-    },
-  },
 });
 ```
 
@@ -122,13 +115,6 @@ module('some test module', function (hooks) {
     setRunOptions({
       rules: {
         region: { enabled: true },
-      },
-      checks: {
-        'color-contrast': {
-          options: {
-            noScroll: true,
-          },
-        },
       },
     });
   });
@@ -148,13 +134,6 @@ module('some test module', function (hooks) {
     setRunOptions({
       rules: {
         region: { enabled: true },
-      },
-      checks: {
-        'color-contrast': {
-          options: {
-            noScroll: true,
-          },
-        },
       },
     });
 
