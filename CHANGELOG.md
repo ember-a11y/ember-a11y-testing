@@ -1,3 +1,16 @@
+## v4.1.3 (2021-07-21)
+
+#### :bug: Bug Fix
+* [#286](https://github.com/ember-a11y/ember-a11y-testing/pull/286) Prevent deletion of a11y audit reports ([@drewlee](https://github.com/drewlee))
+
+#### :memo: Documentation
+* [#285](https://github.com/ember-a11y/ember-a11y-testing/pull/285) Documentation: Clarify that options are for axe.run, remove invalid `checks` property ([@Aierie](https://github.com/Aierie))
+
+#### Committers: 2
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+- [@Aierie](https://github.com/Aierie)
+
+
 ## v4.1.2 (2021-07-01)
 
 #### :bug: Bug Fix
