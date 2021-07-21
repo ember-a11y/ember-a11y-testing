@@ -312,6 +312,8 @@ This addon provides middleware - code that allows the browser to talk to the nod
 
 The middleware reporter writes the results containing all violations detected in all tests to a JSON file stored in a directory, `ember-a11y-report`, in your application or addon's root directory.
 
+:warning: **Audit report files get generated in an additive manner, typically resulting in the `a11y-audit-report` directory growing in size as subsequent test suites are run. Environments with specific space size restrictions will require an explicit strategy to manage the deletion of older reports, as this addon no longer does so.**
+
 To use the middleware reporter, import `setupMiddlewareReporter` and invoke in your `tests/test-helper.js` file:
 
 ```js

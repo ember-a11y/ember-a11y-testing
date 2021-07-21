@@ -3,7 +3,7 @@
 const bodyParser = require('body-parser').json({ limit: '50mb' });
 const path = require('path');
 const date = require('date-and-time');
-const { ensureDirSync, writeJsonSync, emptyDirSync } = require('fs-extra');
+const { ensureDirSync, writeJsonSync } = require('fs-extra');
 
 let outputDir;
 
@@ -29,7 +29,6 @@ function setupMiddleware(app, options) {
   outputDir = path.join(options.root, 'ember-a11y-report');
 
   ensureDirSync(outputDir);
-  emptyDirSync(outputDir);
 
   app.post(
     '/report-violations',
