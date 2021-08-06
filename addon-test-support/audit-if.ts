@@ -23,6 +23,10 @@ export default function a11yAuditIf(
     {
       id: 'ember-a11y-testing-deprecated-a11y-audit-if',
       until: '5.0.0',
+      for: 'ember-a11y-testing',
+      since: {
+        enabled: '4.0.0',
+      },
     }
   );
 
