@@ -4,7 +4,9 @@ const fs = require('fs');
 const tmp = require('tmp');
 const express = require('express');
 const readJSONSync = require('fs-extra').readJSONSync;
-const setupMiddleware = require('../setup-middleware');
+const {
+  setupMiddleware,
+} = require('@scalvert/ember-setup-middleware-reporter');
 const violationsFixture = require('./fixtures/violations');
 
 function createTmpDir() {
@@ -32,7 +34,12 @@ QUnit.module('setupMiddleware', function (hooks) {
     tmpDir = createTmpDir();
     app = express();
 
-    setupMiddleware(app, { root: tmpDir });
+    setupMiddleware(app, {
+      root: tmpDir,
+      name: 'ember-a11y-testing',
+      urlPath: 'report-violations',
+      reportDir: 'ember-a11y-report',
+    });
 
     server = app.listen(3000);
   });

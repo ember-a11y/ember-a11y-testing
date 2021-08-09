@@ -4,7 +4,9 @@ const path = require('path');
 const fs = require('fs');
 const VersionChecker = require('ember-cli-version-checker');
 const validatePeerDependencies = require('validate-peer-dependencies');
-const setupMiddleware = require('./setup-middleware');
+const {
+  setupMiddlewareHooks,
+} = require('@scalvert/ember-setup-middleware-reporter');
 const CliOptionsFilter = require('./cli-options-filter');
 
 // The different types/area for which we have content for.
@@ -64,18 +66,6 @@ module.exports = {
     }
   },
 
-  serverMiddleware(startOptions) {
-    setupMiddleware(startOptions.app, {
-      root: this.project.root,
-    });
-  },
-
-  testemMiddleware(app) {
-    setupMiddleware(app, {
-      root: this.project.root,
-    });
-  },
-
   /**
    * Allow the option to enable a11y audit and middelware reporter using environmental
    * variables. If set, environmental variable values are exposed to the browser
@@ -86,4 +76,10 @@ module.exports = {
     const processedTree = new CliOptionsFilter(tree);
     return this._super.treeForAddonTestSupport.call(this, processedTree);
   },
+
+  ...setupMiddlewareHooks({
+    name: 'ember-a11y-testing',
+    urlPath: 'report-violations',
+    reportDir: 'ember-a11y-report',
+  }),
 };
