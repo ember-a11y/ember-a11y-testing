@@ -30,7 +30,7 @@
     "postpublish": "ember ts:clean"
   },
   "dependencies": {
-    "@ember/test-waiters": "^2.4.3",
+    "@ember/test-waiters": "^2.4.3 || ^3.0.0",
     "@scalvert/ember-setup-middleware-reporter": "^0.1.1",
     "axe-core": "^4.1.4",
     "body-parser": "^1.19.0",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "^2.1.0",
+    "@ember/test-helpers": "^2.4.1",
     "@embroider/test-setup": "^0.39.0",
     "@glimmer/component": "^1.0.1",
     "@glimmer/tracking": "^1.0.1",
