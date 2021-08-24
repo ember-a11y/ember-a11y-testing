@@ -1,3 +1,15 @@
+## v4.2.0 (2021-08-24)
+
+#### :bug: Bug Fix
+* [#289](https://github.com/ember-a11y/ember-a11y-testing/pull/289) Fixes deprecate call to include for and since props ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#288](https://github.com/ember-a11y/ember-a11y-testing/pull/288) Convert to using external middleware reporter package ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v4.1.2 (2021-07-01)
 
 #### :bug: Bug Fix
