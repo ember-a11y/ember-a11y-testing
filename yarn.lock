@@ -1265,9 +1265,9 @@
     simple-html-tokenizer "^0.5.10"
 
 "@glimmer/tracking@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@glimmer/tracking/-/tracking-1.0.1.tgz#77d8b16e9e0be2cc8e4a00b77259fdc208802840"
-  integrity sha512-Jt8rn4/6S6CObILaotYUT0lFWNPq1xJubXdU/9p6zxWtMrBXYJalVvI5hFYrCh/hG8Z/aLoERGnb2YRWtBSyzw==
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@glimmer/tracking/-/tracking-1.0.4.tgz#f1bc1412fe5e2236d0f8d502994a8f88af1bbb21"
+  integrity sha512-F+oT8I55ba2puSGIzInmVrv/8QA2PcK1VD+GWgFMhF6WC97D+uZX7BFg+a3s/2N4FVBq5KHE+QxZzgazM151Yw==
   dependencies:
     "@glimmer/env" "^0.1.7"
     "@glimmer/validator" "^0.44.0"
