@@ -21,6 +21,7 @@
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
+    "lint:ts": "tsc --noEmit",
     "start": "ember serve",
     "test": "npm-run-all lint:* test:*",
     "test:node": "qunit node-tests",
