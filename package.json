@@ -133,6 +133,9 @@
       "tokenRef": "GITHUB_AUTH"
     }
   },
+  "resolutions": {
+    "socket.io": "^4.3.1"
+  },
   "contributors": [
     "Trent Willis <trentmwillis@gmail.com>",
     "Andrew A Lee <andlee@linkedin.com>",

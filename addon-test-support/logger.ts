@@ -106,9 +106,11 @@ function logHtml(node: NodeResult | RelatedNode): void {
 function logFailureMessage(node: NodeResult, key: AxeCoreNodeResultKey): void {
   // this exists on axe but we don't export it as part of the typescript
   // namespace, so just let me use it as I need
-  const message: string = ((axeCore as unknown) as AxeWithAudit)._audit.data.failureSummaries[
-    key
-  ].failureMessage(node[key].map((check) => check.message || ''));
+  const message: string = (
+    axeCore as unknown as AxeWithAudit
+  )._audit.data.failureSummaries[key].failureMessage(
+    node[key].map((check) => check.message || '')
+  );
 
   console.error(message);
 }
