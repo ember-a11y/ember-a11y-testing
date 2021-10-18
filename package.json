@@ -12,6 +12,34 @@
   "repository": "https://github.com/ember-a11y/ember-a11y-testing",
   "license": "MIT",
   "author": "Trent Willis <trentmwillis@gmail.com>",
+  "contributors": [
+    "Trent Willis <trentmwillis@gmail.com>",
+    "Andrew A Lee <andlee@linkedin.com>",
+    "Steve Calvert <scalvert@linkedin.com>",
+    "Robert Jackson <github@rwjblue.com>",
+    "BrianSipple <Bsipple57@gmail.com>",
+    "Melanie Sumner <melaniersumner@gmail.com>",
+    "Nathan Hammond <github.com@nathanhammond.com>",
+    "Sean Massa <endangeredmassa@gmail.com>",
+    "Suz Hinton <suz.hinton@gmail.com>",
+    "Robert DeLuca <robertdeluca19@gmail.com>",
+    "Sean Doyle <sean.p.doyle24@gmail.com>",
+    "cibernox <miguel.camba@gmail.com>",
+    "Alicia Sedlock <aliciasedlock@Alicias-MacBook-Pro.local>",
+    "Ondrej Sevcik <ondrej.sev@gmail.com>",
+    "Sergey Astapov <SergeAstapov@gmail.com>",
+    "Tomster <tomster@emberjs.com>",
+    "Marcy Sutton <marcy.sutton@deque.com>",
+    "Steve Zelaznik <steve.zelaznik@iorahealth.com>",
+    "Anthony Trama <aftrama@gmail.com>",
+    "Ken Sin <kensin1129@gmail.com>",
+    "Francesco Novy <francesco@cropster.com>",
+    "willibaur <williambautista@gmail.com>",
+    "Sarbbottam Bandyopadhyay <sarbbottam@gmail.com>",
+    "Eric Kelly <heroiceric@gmail.com>",
+    "Sam Selikoff <sam.selikoff@gmail.com>",
+    "Renato Iwashima <renatoiwa@gmail.com>"
+  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -29,6 +57,9 @@
     "test:ember-compatibility": "ember try:each",
     "prepublishOnly": "ember ts:precompile",
     "postpublish": "ember ts:clean"
+  },
+  "resolutions": {
+    "socket.io": "^4.3.1"
   },
   "dependencies": {
     "@ember/test-waiters": "^2.4.3 || ^3.0.0",
@@ -114,6 +145,9 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
+  "ember": {
+    "edition": "octane"
+  },
   "ember-addon": {
     "demoURL": "http://ember-a11y.github.io/ember-a11y-testing",
     "configPath": "tests/dummy/config"
@@ -133,37 +167,6 @@
       "tokenRef": "GITHUB_AUTH"
     }
   },
-  "resolutions": {
-    "socket.io": "^4.3.1"
-  },
-  "contributors": [
-    "Trent Willis <trentmwillis@gmail.com>",
-    "Andrew A Lee <andlee@linkedin.com>",
-    "Steve Calvert <scalvert@linkedin.com>",
-    "Robert Jackson <github@rwjblue.com>",
-    "BrianSipple <Bsipple57@gmail.com>",
-    "Melanie Sumner <melaniersumner@gmail.com>",
-    "Nathan Hammond <github.com@nathanhammond.com>",
-    "Sean Massa <endangeredmassa@gmail.com>",
-    "Suz Hinton <suz.hinton@gmail.com>",
-    "Robert DeLuca <robertdeluca19@gmail.com>",
-    "Sean Doyle <sean.p.doyle24@gmail.com>",
-    "cibernox <miguel.camba@gmail.com>",
-    "Alicia Sedlock <aliciasedlock@Alicias-MacBook-Pro.local>",
-    "Ondrej Sevcik <ondrej.sev@gmail.com>",
-    "Sergey Astapov <SergeAstapov@gmail.com>",
-    "Tomster <tomster@emberjs.com>",
-    "Marcy Sutton <marcy.sutton@deque.com>",
-    "Steve Zelaznik <steve.zelaznik@iorahealth.com>",
-    "Anthony Trama <aftrama@gmail.com>",
-    "Ken Sin <kensin1129@gmail.com>",
-    "Francesco Novy <francesco@cropster.com>",
-    "willibaur <williambautista@gmail.com>",
-    "Sarbbottam Bandyopadhyay <sarbbottam@gmail.com>",
-    "Eric Kelly <heroiceric@gmail.com>",
-    "Sam Selikoff <sam.selikoff@gmail.com>",
-    "Renato Iwashima <renatoiwa@gmail.com>"
-  ],
   "volta": {
     "node": "12.22.1",
     "yarn": "1.22.10"
