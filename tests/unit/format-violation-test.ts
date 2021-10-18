@@ -61,7 +61,8 @@ module('Unit | Utils | formatViolation', function () {
       ],
     };
 
-    let expected = /formatViolation called with improper structure of parameter: violation. Required properties: impact, help, helpUrl./;
+    let expected =
+      /formatViolation called with improper structure of parameter: violation. Required properties: impact, help, helpUrl./;
 
     assert.throws(function () {
       formatViolation(violation, [violation.nodes[0].html]);

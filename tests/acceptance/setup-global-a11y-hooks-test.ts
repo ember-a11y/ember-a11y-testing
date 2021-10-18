@@ -50,23 +50,24 @@ module('setupGlobalA11yHooks with invokeAll', function (hooks) {
   });
 
   getRange(TEST_INVOCATIONS_COUNT).forEach((num) => {
-    test(getTestName(num, TEST_INVOCATIONS_COUNT, 'invokeAll'), async function (
-      assert
-    ) {
-      assert.expect(0);
+    test(
+      getTestName(num, TEST_INVOCATIONS_COUNT, 'invokeAll'),
+      async function (assert) {
+        assert.expect(0);
 
-      await visit('/');
+        await visit('/');
 
-      numInvoked++;
+        numInvoked++;
 
-      if (numInvoked === TEST_INVOCATIONS_COUNT) {
-        assert.expect(1);
-        assert.equal(
-          actualAuditInvocationsCount,
-          EXPECTED_AUDIT_INVOCATIONS_COUNT
-        );
+        if (numInvoked === TEST_INVOCATIONS_COUNT) {
+          assert.expect(1);
+          assert.equal(
+            actualAuditInvocationsCount,
+            EXPECTED_AUDIT_INVOCATIONS_COUNT
+          );
+        }
       }
-    });
+    );
   });
 });
 

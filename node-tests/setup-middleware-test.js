@@ -48,19 +48,20 @@ QUnit.module('setupMiddleware', function (hooks) {
     server.close();
   });
 
-  QUnit.test('can respond to requests to report violations', async function (
-    assert
-  ) {
-    let data = [buildResult(violationsFixture)];
+  QUnit.test(
+    'can respond to requests to report violations',
+    async function (assert) {
+      let data = [buildResult(violationsFixture)];
 
-    let json = await fetch('http://localhost:3000/report-violations', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }).then((res) => res.json());
+      let json = await fetch('http://localhost:3000/report-violations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
 
-    assert.deepEqual(readJSONSync(json.outputPath), data);
-  });
+      assert.deepEqual(readJSONSync(json.outputPath), data);
+    }
+  );
 });
