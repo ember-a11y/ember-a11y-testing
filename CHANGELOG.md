@@ -1,3 +1,18 @@
+
+## v4.2.1 (2021-10-18)
+
+#### :bug: Bug Fix
+* [#298](https://github.com/ember-a11y/ember-a11y-testing/pull/298) Fixes duplicate identifier issue by ignoring type checking of .d.ts files in node_modules ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#309](https://github.com/ember-a11y/ember-a11y-testing/pull/309) Fixes SASS deprecation related to division ([@scalvert](https://github.com/scalvert))
+* [#308](https://github.com/ember-a11y/ember-a11y-testing/pull/308) Adding octane edition to package.json ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 2
+- Francesco Novy ([@mydea](https://github.com/mydea))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v4.2.0 (2021-08-24)
 
 #### :bug: Bug Fix
