@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 $height__radio-selector-track-container: 4rem;
 $height__radio-selector-track-circle: $height__radio-selector-track-container *
   0.5;
@@ -105,7 +107,9 @@ $animation-duration__circle-toggle: 0.37s;
 .c-radio-track__item-pointer {
   position: absolute;
   color: $color__label--checked;
-  margin-top: calc(-1 * (#{$height__radio-selector-track-circle / 2} + 1.5em));
+  margin-top: calc(
+    -1 * (#{math.div($height--radio-selector-track-circle, 2)} + 1.5em)
+  );
 }
 
 .c-radio-track__item-pointer::after {
@@ -124,7 +128,7 @@ $animation-duration__circle-toggle: 0.37s;
   position: absolute;
   top: 0;
   left: 50%;
-  margin-left: -1 * ($height__radio-selector-track-circle / 2);
+  margin-left: -1 * (math.div($height--radio-selector-track-circle, 2));
   width: $height__radio-selector-track-circle;
   height: $height__radio-selector-track-circle;
   border-radius: 50%;
