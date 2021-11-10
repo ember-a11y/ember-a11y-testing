@@ -292,12 +292,12 @@ To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown 
 import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
 
 test('Some test case', await function(assert) {
-    await visit('/');
+  await visit('/');
 
-    if (shouldForceAudit()) {
-      await a11yAudit();
-    }
-    assert.ok(true, 'no a11y errors found!');
+  if (shouldForceAudit()) {
+    await a11yAudit();
+  }
+  assert.ok(true, 'no a11y errors found!');
 });
 ```
 
@@ -306,12 +306,12 @@ test('Some test case', await function(assert) {
 import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
 
 test('Some test case', await function(assert) {
-    await visit('/');
+  await visit('/');
 
-    if (shouldForceAudit()) {
+  if (shouldForceAudit()) {
     await a11yAudit();  // will not run
-    }
-    // ...
+  }
+  // ...
 });
 ```
 
