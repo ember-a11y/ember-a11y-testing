@@ -6,7 +6,7 @@ export { useMiddlewareReporter } from './use-middleware-reporter';
 export {
   setupGlobalA11yHooks,
   teardownGlobalA11yHooks,
-  defaultA11yHelperNames,
+  DEFAULT_A11Y_TEST_HELPER_NAMES,
 } from './setup-global-a11y-hooks';
 export { setCustomReporter } from './reporter';
 export {

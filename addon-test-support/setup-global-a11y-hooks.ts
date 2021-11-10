@@ -26,7 +26,7 @@ type HelperName =
 
 let _unregisterHooks: HookUnregister[] = [];
 
-export const defaultA11yHelperNames: HelperName[] = [
+export const DEFAULT_A11Y_TEST_HELPER_NAMES: HelperName[] = [
   'visit',
   'click',
   'doubleClick',
@@ -43,7 +43,7 @@ export const defaultA11yHelperNames: HelperName[] = [
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
   audit: (...args: any[]) => PromiseLike<void> = a11yAudit,
-  options: GlobalA11yHookOptions = { helpers: defaultA11yHelperNames }
+  options: GlobalA11yHookOptions = { helpers: DEFAULT_A11Y_TEST_HELPER_NAMES }
 ) {
   options.helpers.forEach((helperName) => {
     let hook = _registerHook(helperName, 'end', async () => {

@@ -1,6 +1,6 @@
 import { click, render } from '@ember/test-helpers';
 import {
-  defaultA11yHelperNames,
+  DEFAULT_A11Y_TEST_HELPER_NAMES,
   setEnableA11yAudit,
   setupGlobalA11yHooks,
   teardownGlobalA11yHooks,
@@ -27,7 +27,7 @@ module(
 
     hooks.before(function () {
       setupGlobalA11yHooks(invokeAll, a11yAuditFake, {
-        helpers: [...defaultA11yHelperNames, 'render'],
+        helpers: [...DEFAULT_A11Y_TEST_HELPER_NAMES, 'render'],
       });
       setEnableA11yAudit(true);
     });
