@@ -1,5 +1,5 @@
 import { _registerHook, HookUnregister } from '@ember/test-helpers';
-import { InvocationStrategy } from './types';
+import { InvocationStrategy, AuditFunction } from './types';
 import { getRunOptions } from './run-options';
 import a11yAudit from './audit';
 import { shouldForceAudit } from './should-force-audit';
@@ -40,12 +40,36 @@ export const DEFAULT_A11Y_TEST_HELPER_NAMES: HelperName[] = [
  * @param audit Optional audit function used to run the audit. Allows for providing either a11yAudit, a11yAuditIf,
  *              or custom audit implementation.
  */
+export function setupGlobalA11yHooks(shouldAudit: InvocationStrategy): void;
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
-  audit: (...args: any[]) => PromiseLike<void> = a11yAudit,
-  options: GlobalA11yHookOptions = { helpers: DEFAULT_A11Y_TEST_HELPER_NAMES }
-) {
-  options.helpers.forEach((helperName) => {
+  audit: AuditFunction
+): void;
+export function setupGlobalA11yHooks(
+  shouldAudit: InvocationStrategy,
+  options: GlobalA11yHookOptions
+): void;
+export function setupGlobalA11yHooks(
+  shouldAudit: InvocationStrategy,
+  audit: AuditFunction,
+  options: GlobalA11yHookOptions
+): void;
+export function setupGlobalA11yHooks(
+  shouldAudit: InvocationStrategy,
+  auditOrOptions?: AuditFunction | GlobalA11yHookOptions,
+  options?: GlobalA11yHookOptions
+): void {
+  let audit: AuditFunction = a11yAudit;
+
+  if (typeof auditOrOptions === 'function') {
+    audit = auditOrOptions;
+  } else {
+    options = auditOrOptions;
+  }
+
+  let helpers = options?.helpers || DEFAULT_A11Y_TEST_HELPER_NAMES;
+
+  helpers.forEach((helperName) => {
     let hook = _registerHook(helperName, 'end', async () => {
       if (shouldForceAudit() && shouldAudit(helperName, 'end')) {
         await audit(getRunOptions());

@@ -91,8 +91,8 @@ export function setupGlobalA11yHooks(
 The `setupGlobalA11yHooks` function takes three parameters:
 
 - `shouldAudit`: An `InvocationStrategy` - a [predicate function](https://stackoverflow.com/a/1344021/769) that takes a `helperName` and a `label`, and returns a `boolean` indicating whether or not to perform the audit.
-- `audit`: The audit function, which performs the `axe-core` audit, defaulting to `a11yAudit`. This allows you to potentially wrap the `a11yAudit` test helper with custom logic.
-- `options`: Setup options, which allow you to specify after which test helpers to run the audit.
+- `audit` (optional): The audit function, which performs the `axe-core` audit, defaulting to `a11yAudit`. This allows you to potentially wrap the `a11yAudit` test helper with custom logic.
+- `options` (optional): Setup options, which allow you to specify after which test helpers to run the audit.
 
 Using a custom `InvocationStrategy` implementation will allow you to maintain a high level of control over your test invocations. Examples of invocation strategies can be found in [this](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L32) [repository's](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L81) [tests](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L135).
 
@@ -119,11 +119,10 @@ By default, audits will be run on `visit`, `click`, `doubleClick`, and `tap`. To
 ```js
 import {
   setupGlobalA11yHooks,
-  a11yAudit,
   DEFAULT_A11Y_TEST_HELPER_NAMES,
 } from 'ember-a11y-testing/test-support';
 
-setupGlobalA11yHooks(() => true, a11yAudit, {
+setupGlobalA11yHooks(() => true, {
   helpers: [...DEFAULT_A11Y_TEST_HELPER_NAMES, 'render', 'tab'],
 });
 ```
@@ -231,7 +230,7 @@ test('Some test case', function (assert) {
     },
   };
 
-  await a11yAudit(this.element, axeOptions)
+  await a11yAudit(this.element, axeOptions);
 
   assert.ok(true, 'no a11y errors found!');
 });
@@ -291,28 +290,34 @@ To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown 
 // `&enableA11yAudit` set in the URL
 import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
 
-test('Some test case', await function(assert) {
-  await visit('/');
+test(
+  'Some test case',
+  await function (assert) {
+    await visit('/');
 
-  if (shouldForceAudit()) {
-    await a11yAudit();
+    if (shouldForceAudit()) {
+      await a11yAudit();
+    }
+    assert.ok(true, 'no a11y errors found!');
   }
-  assert.ok(true, 'no a11y errors found!');
-});
+);
 ```
 
 ```javascript
 // No `enableA11yAudit` set in the URL
 import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
 
-test('Some test case', await function(assert) {
-  await visit('/');
+test(
+  'Some test case',
+  await function (assert) {
+    await visit('/');
 
-  if (shouldForceAudit()) {
-    await a11yAudit();  // will not run
+    if (shouldForceAudit()) {
+      await a11yAudit(); // will not run
+    }
+    // ...
   }
-  // ...
-});
+);
 ```
 
 You can also create your own app-level helper, which will conditionally check whether to run the audits or not:
@@ -380,7 +385,10 @@ import Application from 'my-app/app';
 import config from 'my-app/config/environment';
 import { setApplication } from '@ember/test-helpers';
 import { start } from 'ember-qunit';
-import { setupMiddlewareReporter, useMiddlewareReporter } from 'ember-a11y-testing/test-support';
+import {
+  setupMiddlewareReporter,
+  useMiddlewareReporter,
+} from 'ember-a11y-testing/test-support';
 
 setApplication(Application.create(config.APP));
 
