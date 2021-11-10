@@ -74,10 +74,12 @@ type HelperName =
   | 'typeIn'
   | 'visit';
 
+export const defaultA11yHelperNames = ['visit', 'click', 'doubleClick', 'tap'];
+
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
   audit: (...args: any[]) => PromiseLike<void> = a11yAudit,
-  options: GlobalA11yHookOptions
+  options: GlobalA11yHookOptions = { helpers: defaultA11yHelperNames }
 );
 ```
 
