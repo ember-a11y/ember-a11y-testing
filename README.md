@@ -112,12 +112,12 @@ By default, audits will be run on `visit`, `click`, `doubleClick`, and `tap`. To
 ```js
 import {
   setupGlobalA11yHooks,
-  defaultHelpers,
   a11yAudit,
+  defaultA11yHelperNames,
 } from 'ember-a11y-testing/test-support';
 
 setupGlobalA11yHooks(() => true, a11yAudit, {
-  helpers: [...defaultHelpers, 'render', 'tab'],
+  helpers: [...defaultA11yHelperNames, 'render', 'tab'],
 });
 ```
 

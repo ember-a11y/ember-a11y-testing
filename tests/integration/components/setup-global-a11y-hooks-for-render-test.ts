@@ -1,12 +1,14 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
+import { click, render } from '@ember/test-helpers';
 import {
+  defaultA11yHelperNames,
+  setEnableA11yAudit,
   setupGlobalA11yHooks,
   teardownGlobalA11yHooks,
-  setEnableA11yAudit,
 } from 'ember-a11y-testing/test-support';
-import { render, click } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+
 import hbs from 'htmlbars-inline-precompile';
+import { setupRenderingTest } from 'ember-qunit';
 
 module(
   'Integration | Component | setup-global-a11y-hooks-test',
@@ -24,7 +26,9 @@ module(
     }
 
     hooks.before(function () {
-      setupGlobalA11yHooks(invokeAll, a11yAuditFake);
+      setupGlobalA11yHooks(invokeAll, a11yAuditFake, {
+        helpers: [...defaultA11yHelperNames, 'render'],
+      });
       setEnableA11yAudit(true);
     });
 
@@ -33,19 +37,20 @@ module(
       setEnableA11yAudit();
     });
 
+    hooks.beforeEach(function () {
+      actualAuditInvocationsCount = 0;
+    });
+
     test('it audits on render', async function (assert) {
       await render(hbs`
         <button type="button">Hello!</button>
       `);
       await click('button');
 
-      // We expect three invocations because setupRenderingTest performs an
-      // initial render. This is OK, because that initial render is empty and
-      // therefore should not contain any a11y violations.
       assert.equal(
         actualAuditInvocationsCount,
-        3,
-        'a11yAudit was automatically called three times'
+        2,
+        'a11yAudit was automatically called twice'
       );
     });
   }
