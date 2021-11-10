@@ -1,10 +1,39 @@
-import { _registerHook, HookUnregister } from '@ember/test-helpers';
+import { HookUnregister, _registerHook } from '@ember/test-helpers';
+
 import { InvocationStrategy } from './types';
-import { getRunOptions } from './run-options';
 import a11yAudit from './audit';
+import { getRunOptions } from './run-options';
 import { shouldForceAudit } from './should-force-audit';
 
+export interface GlobalA11yHookOptions {
+  helpers: HelperName[];
+}
+
+type HelperName =
+  | 'blur'
+  | 'click'
+  | 'doubleClick'
+  | 'fillIn'
+  | 'focus'
+  | 'render'
+  | 'scrollTo'
+  | 'select'
+  | 'tab'
+  | 'tap'
+  | 'triggerEvent'
+  | 'triggerKeyEvent'
+  | 'typeIn'
+  | 'visit';
+
 let _unregisterHooks: HookUnregister[] = [];
+
+export const defaultA11yHooks: HelperName[] = [
+  'visit',
+  'click',
+  'doubleClick',
+  'tap',
+  'render',
+];
 
 /**
  * Sets up a11yAudit calls using `@ember/test-helpers`' `_registerHook` API.
@@ -15,9 +44,10 @@ let _unregisterHooks: HookUnregister[] = [];
  */
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
-  audit: (...args: any[]) => PromiseLike<void> = a11yAudit
+  audit: (...args: any[]) => PromiseLike<void> = a11yAudit,
+  options: GlobalA11yHookOptions = { helpers: defaultA11yHooks }
 ) {
-  ['visit', 'click', 'doubleClick', 'tap', 'render'].forEach((helperName) => {
+  options.helpers.forEach((helperName) => {
     let hook = _registerHook(helperName, 'end', async () => {
       if (shouldForceAudit() && shouldAudit(helperName, 'end')) {
         await audit(getRunOptions());
