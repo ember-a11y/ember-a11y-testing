@@ -1,8 +1,8 @@
-import { HookUnregister, _registerHook } from '@ember/test-helpers';
+import { _registerHook, HookUnregister } from '@ember/test-helpers';
 
 import { InvocationStrategy } from './types';
-import a11yAudit from './audit';
 import { getRunOptions } from './run-options';
+import a11yAudit from './audit';
 import { shouldForceAudit } from './should-force-audit';
 
 export interface GlobalA11yHookOptions {
