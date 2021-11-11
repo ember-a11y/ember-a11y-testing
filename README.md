@@ -114,7 +114,7 @@ start();
 
 :warning: It's important to note that you must also use the [`enableA11yAudit`](#force-running-audits) query parameter in order to force audits. This setting is required in addition to any invocation strategy you provide.
 
-By default, audits will be run on `visit`, `click`, `doubleClick`, and `tap`. To add additional helpers to hook into, specify them in the options argument:
+By default, audits will be run on `visit`, `click`, `doubleClick`, and `tap`. To add additional helpers to hook into, specify them by name in the `options.helpers` argument. Note that this option specifies the *complete* set of helpers to hook into; to include the defaults you must import them and splat them into the array as shown below.
 
 ```js
 import {
