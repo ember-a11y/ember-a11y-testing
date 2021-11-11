@@ -1,5 +1,4 @@
 import QUnit, { module, test } from 'qunit';
-import { resolve } from 'rsvp';
 import {
   setupGlobalA11yHooks,
   teardownGlobalA11yHooks,
@@ -33,10 +32,8 @@ module('setupGlobalA11yHooks with invokeAll', function (hooks) {
     return true;
   }
 
-  function a11yAuditFake() {
+  async function a11yAuditFake() {
     actualAuditInvocationsCount += 1;
-
-    return resolve(undefined);
   }
 
   hooks.before(function () {
@@ -89,9 +86,8 @@ module('setupGlobalA11yHooks with invokeEveryN', function (hooks) {
     };
   }
 
-  function a11yAuditFake() {
+  async function a11yAuditFake() {
     actualAuditInvocationsCount += 1;
-    return resolve(undefined);
   }
 
   hooks.before(function () {
@@ -142,9 +138,8 @@ module('setupGlobalA11yHooks with invokeWithExclusions', function (hooks) {
     return !EXCLUDED_TESTS.includes(QUnit.config.current.testName);
   }
 
-  function a11yAuditFake() {
+  async function a11yAuditFake() {
     actualTestsRun.push(QUnit.config.current.testName);
-    return resolve(undefined);
   }
 
   hooks.before(function () {

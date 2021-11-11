@@ -7,3 +7,7 @@ export interface InvocationStrategy {
 export interface A11yAuditReporter {
   (axeResults: AxeResults): Promise<void>;
 }
+
+export interface AuditFunction {
+  (...args: any[]): PromiseLike<void>;
+}

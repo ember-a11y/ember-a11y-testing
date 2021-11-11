@@ -54,16 +54,45 @@ export interface InvocationStrategy {
   (helperName: string, label: string): boolean;
 }
 
+export interface GlobalA11yHookOptions {
+  helpers: HelperName[];
+}
+
+type HelperName =
+  | 'blur'
+  | 'click'
+  | 'doubleClick'
+  | 'fillIn'
+  | 'focus'
+  | 'render'
+  | 'scrollTo'
+  | 'select'
+  | 'tab'
+  | 'tap'
+  | 'triggerEvent'
+  | 'triggerKeyEvent'
+  | 'typeIn'
+  | 'visit';
+
+export const DEFAULT_A11Y_TEST_HELPER_NAMES = [
+  'visit',
+  'click',
+  'doubleClick',
+  'tap',
+];
+
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
-  audit: (...args: any[]) => PromiseLike<void> = a11yAudit
+  audit: (...args: any[]) => PromiseLike<void> = a11yAudit,
+  options: GlobalA11yHookOptions = { helpers: DEFAULT_A11Y_TEST_HELPER_NAMES }
 );
 ```
 
-The `setupGlobalA11yHooks` function takes two parameters:
+The `setupGlobalA11yHooks` function takes three parameters:
 
 - `shouldAudit`: An `InvocationStrategy` - a [predicate function](https://stackoverflow.com/a/1344021/769) that takes a `helperName` and a `label`, and returns a `boolean` indicating whether or not to perform the audit.
-- `audit`: The audit function, which performs the `axe-core` audit, defaulting to `a11yAudit`. This allows you to potentially wrap the `a11yAudit` test helper with custom logic.
+- `audit` (optional): The audit function, which performs the `axe-core` audit, defaulting to `a11yAudit`. This allows you to potentially wrap the `a11yAudit` test helper with custom logic.
+- `options` (optional): Setup options, which allow you to specify after which test helpers to run the audit.
 
 Using a custom `InvocationStrategy` implementation will allow you to maintain a high level of control over your test invocations. Examples of invocation strategies can be found in [this](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L32) [repository's](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L81) [tests](https://github.com/ember-a11y/ember-a11y-testing/blob/50ef5f8fff4aa91d7a85b9feee5b1ce9bf380df9/tests/acceptance/setup-global-a11y-hooks-test.ts#L135).
 
@@ -84,6 +113,19 @@ start();
 ```
 
 :warning: It's important to note that you must also use the [`enableA11yAudit`](#force-running-audits) query parameter in order to force audits. This setting is required in addition to any invocation strategy you provide.
+
+By default, audits will be run on `visit`, `click`, `doubleClick`, and `tap`. To add additional helpers to hook into, specify them by name in the `options.helpers` argument. Note that this option specifies the *complete* set of helpers to hook into; to include the defaults you must import them and splat them into the array as shown below.
+
+```js
+import {
+  setupGlobalA11yHooks,
+  DEFAULT_A11Y_TEST_HELPER_NAMES,
+} from 'ember-a11y-testing/test-support';
+
+setupGlobalA11yHooks(() => true, {
+  helpers: [...DEFAULT_A11Y_TEST_HELPER_NAMES, 'render', 'tab'],
+});
+```
 
 #### Setting Options using `setRunOptions`
 
