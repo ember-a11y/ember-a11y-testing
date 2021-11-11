@@ -1,4 +1,20 @@
 
+
+## v4.3.0 (2021-11-11)
+
+#### :rocket: Enhancement
+* [#318](https://github.com/ember-a11y/ember-a11y-testing/pull/318) Bump axe-core 4.3.5 ([@snewcomer](https://github.com/snewcomer))
+* [#319](https://github.com/ember-a11y/ember-a11y-testing/pull/319) Make helpers configurable in `setupGlobalA11yHooks` mode ([@jgwhite](https://github.com/jgwhite))
+
+#### :house: Internal
+* [#322](https://github.com/ember-a11y/ember-a11y-testing/pull/322) Adds get-port to ensure we have an available port ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 3
+- Jamie White ([@jgwhite](https://github.com/jgwhite))
+- Scott Newcomer ([@snewcomer](https://github.com/snewcomer))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v4.2.1 (2021-10-18)
 
 #### :bug: Bug Fix
