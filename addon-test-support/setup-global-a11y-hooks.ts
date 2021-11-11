@@ -60,15 +60,14 @@ export function setupGlobalA11yHooks(
   options?: GlobalA11yHookOptions
 ): void {
   let audit: AuditFunction = a11yAudit;
-  let opts: GlobalA11yHookOptions = {};
 
   if (typeof auditOrOptions === 'function') {
     audit = auditOrOptions;
   } else {
-    opts = auditOrOptions;
+    options = auditOrOptions;
   }
 
-  let helpers = opts.helpers || DEFAULT_A11Y_TEST_HELPER_NAMES;
+  let helpers = options?.helpers ?? DEFAULT_A11Y_TEST_HELPER_NAMES;
 
   helpers.forEach((helperName) => {
     let hook = _registerHook(helperName, 'end', async () => {
