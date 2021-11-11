@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const tmp = require('tmp');
 const express = require('express');
+const getPort = require('get-port');
 const readJSONSync = require('fs-extra').readJSONSync;
 const {
   setupMiddleware,
@@ -29,8 +30,9 @@ QUnit.module('setupMiddleware', function (hooks) {
   let tmpDir;
   let app;
   let server;
+  let port;
 
-  hooks.beforeEach(function () {
+  hooks.beforeEach(async function () {
     tmpDir = createTmpDir();
     app = express();
 
@@ -41,7 +43,8 @@ QUnit.module('setupMiddleware', function (hooks) {
       reportDir: 'ember-a11y-report',
     });
 
-    server = app.listen(3000);
+    port = await getPort({ port: 3000 });
+    server = app.listen(port);
   });
 
   hooks.afterEach(function () {
@@ -53,7 +56,7 @@ QUnit.module('setupMiddleware', function (hooks) {
     async function (assert) {
       let data = [buildResult(violationsFixture)];
 
-      let json = await fetch('http://localhost:3000/report-violations', {
+      let json = await fetch(`http://localhost:${port}/report-violations`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
