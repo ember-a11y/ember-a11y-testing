@@ -68,7 +68,7 @@
     "body-parser": "^1.19.0",
     "broccoli-persistent-filter": "^3.1.2",
     "date-and-time": "^1.0.0",
-    "ember-auto-import": "^1.11.2",
+    "ember-auto-import": "^2.2.4",
     "ember-cli-babel": "^7.26.3",
     "ember-cli-typescript": "^4.2.1",
     "ember-cli-version-checker": "^5.1.2",
@@ -129,7 +129,8 @@
     "release-it-lerna-changelog": "^3.0.0",
     "sass": "^1.26.10",
     "tmp": "^0.2.1",
-    "typescript": "^4.0.0"
+    "typescript": "^4.0.0",
+    "webpack": "^5.64.1"
   },
   "peerDependencies": {
     "@ember/test-helpers": "^2.0.0",
