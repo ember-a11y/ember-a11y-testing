@@ -10,10 +10,13 @@
 /.editorconfig
 /.ember-cli
 /.env*
+/.eslintcache
 /.eslintignore
 /.eslintrc.js
 /.git/
+/.github/
 /.gitignore
+/.prettierignore
 /.prettierrc
 /.template-lintrc.js
 /.travis.yml
@@ -24,13 +27,12 @@
 /ember-cli-build.js
 /testem.js
 /tests/
-/node-tests/
-/renovate.json
-/yarn.lock
 /yarn-error.log
+/yarn.lock
 .gitkeep
 
 # ember-try
 /.node_modules.ember-try/
 /bower.json.ember-try
 /package.json.ember-try
+/yarn.lock.ember-try
