@@ -18,4 +18,4 @@ export {
 export { storeResults, printResults } from './logger';
 export { setupConsoleLogger } from './setup-console-logger';
 
-export { InvocationStrategy, A11yAuditReporter } from './types';
+export type { InvocationStrategy, A11yAuditReporter } from './types';
