@@ -37,7 +37,7 @@ export const DEFAULT_A11Y_TEST_HELPER_NAMES: HelperName[] = [
  * Sets up a11yAudit calls using `@ember/test-helpers`' `_registerHook` API.
  *
  * @param shouldAudit Invocation strategy function that determines whether to run the audit helper or not.
- * @param audit Optional audit function used to run the audit. Allows for providing either a11yAudit, a11yAuditIf,
+ * @param audit Optional audit function used to run the audit. Allows for providing either a11yAudit
  *              or custom audit implementation.
  */
 export function setupGlobalA11yHooks(shouldAudit: InvocationStrategy): void;
