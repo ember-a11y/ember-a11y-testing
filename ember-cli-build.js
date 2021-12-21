@@ -5,6 +5,7 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 module.exports = function (defaults) {
   const self = defaults.project.findAddonByName('ember-a11y-testing');
   const autoImport = self.options.autoImport;
+
   let app = new EmberAddon(defaults, {
     autoImport,
   });
@@ -25,5 +26,10 @@ module.exports = function (defaults) {
         },
       },
     },
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
   });
 };
