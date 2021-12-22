@@ -61,6 +61,9 @@
     "prepublishOnly": "ember ts:precompile",
     "postpublish": "ember ts:clean"
   },
+  "resolutions": {
+    "fuse.js": "6.4.6"
+  },
   "dependencies": {
     "@ember/test-waiters": "^2.4.3 || ^3.0.0",
     "@scalvert/ember-setup-middleware-reporter": "^0.1.1",
