@@ -58,7 +58,8 @@ module('setupGlobalA11yHooks with invokeAll', function (hooks) {
 
         if (numInvoked === TEST_INVOCATIONS_COUNT) {
           assert.expect(1);
-          assert.equal(
+          // eslint-disable-next-line qunit/no-conditional-assertions
+          assert.strictEqual(
             actualAuditInvocationsCount,
             EXPECTED_AUDIT_INVOCATIONS_COUNT
           );
@@ -112,7 +113,8 @@ module('setupGlobalA11yHooks with invokeEveryN', function (hooks) {
 
         if (numInvoked === TEST_INVOCATIONS_COUNT) {
           assert.expect(1);
-          assert.equal(
+          // eslint-disable-next-line qunit/no-conditional-assertions
+          assert.strictEqual(
             actualAuditInvocationsCount,
             EXPECTED_AUDIT_INVOCATIONS_COUNT
           );
@@ -164,6 +166,7 @@ module('setupGlobalA11yHooks with invokeWithExclusions', function (hooks) {
 
         if (numInvoked === TEST_INVOCATIONS_COUNT) {
           assert.expect(1);
+          // eslint-disable-next-line qunit/no-conditional-assertions
           assert.deepEqual(actualTestsRun, [
             'IGNORE: test used to validate setupGlobalA11yHooks (1)',
             'IGNORE: test used to validate setupGlobalA11yHooks (3)',
