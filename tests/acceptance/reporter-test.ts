@@ -15,7 +15,7 @@ module('reporter', function (hooks) {
     assert.expect(1);
 
     setCustomReporter(async (axeResult: AxeResults) => {
-      assert.equal(axeResult.violations.length, 5);
+      assert.strictEqual(axeResult.violations.length, 5);
     });
 
     await visit('/');

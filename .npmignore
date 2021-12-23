@@ -42,3 +42,5 @@
 
 # custom
 config/ember-try-typescript.js
+/docs/
+/RELEASE.md

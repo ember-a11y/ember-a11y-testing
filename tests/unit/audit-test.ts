@@ -10,7 +10,7 @@ module('audit', function () {
     test('_normalizeRunParams returns defaults when no params provided', function (assert) {
       let [context, options] = _normalizeRunParams();
 
-      assert.equal(context, '#ember-testing-container');
+      assert.strictEqual(context, '#ember-testing-container');
       assert.deepEqual(options, {});
     });
 
@@ -18,7 +18,7 @@ module('audit', function () {
       let ctx = '#my-container';
       let [context, options] = _normalizeRunParams(ctx);
 
-      assert.equal(context, '#my-container');
+      assert.strictEqual(context, '#my-container');
       assert.deepEqual(options, {});
     });
 
@@ -26,7 +26,7 @@ module('audit', function () {
       let ctx = document;
       let [context, options] = _normalizeRunParams(ctx);
 
-      assert.equal(context, document);
+      assert.strictEqual(context, document);
       assert.deepEqual(options, {});
     });
 
@@ -34,7 +34,7 @@ module('audit', function () {
       let ctx = { include: ['me'] };
       let [context, options] = _normalizeRunParams(ctx);
 
-      assert.equal(context, ctx);
+      assert.strictEqual(context, ctx);
       assert.deepEqual(options, {});
     });
 
@@ -42,7 +42,7 @@ module('audit', function () {
       let opts = {};
       let [context, options] = _normalizeRunParams(opts);
 
-      assert.equal(context, '#ember-testing-container');
+      assert.strictEqual(context, '#ember-testing-container');
       assert.deepEqual(options, opts);
     });
 
@@ -51,7 +51,7 @@ module('audit', function () {
       let opts = {};
       let [context, options] = _normalizeRunParams(ctx, opts);
 
-      assert.equal(context, ctx);
+      assert.strictEqual(context, ctx);
       assert.deepEqual(options, opts);
     });
   });
@@ -68,7 +68,7 @@ module('audit', function () {
 
       let [context, options] = _normalizeRunParams();
 
-      assert.equal(context, '#ember-testing-container');
+      assert.strictEqual(context, '#ember-testing-container');
       assert.ok(Object.keys(options).length > 0);
     });
 
@@ -84,7 +84,7 @@ module('audit', function () {
       let ctx = '#my-container';
       let [context, options] = _normalizeRunParams(ctx);
 
-      assert.equal(context, '#my-container');
+      assert.strictEqual(context, '#my-container');
       assert.ok(Object.keys(options).length > 0);
     });
   });
