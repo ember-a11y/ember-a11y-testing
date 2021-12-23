@@ -24,7 +24,7 @@ module('Unit | Utils | formatViolation', function () {
 
     let message = formatViolation(violation, [violation.nodes[0].html]);
     let expected = `[critical]: it should be better \nViolated 1 time. Offending nodes are: \n<input type="text">\nhttp://example.com`;
-    assert.equal(message, expected);
+    assert.strictEqual(message, expected);
   });
 
   test('formats a well-formed violation', function (assert) {
@@ -40,7 +40,7 @@ module('Unit | Utils | formatViolation', function () {
 
     let message = formatViolation(violation, []);
     let expected = `[critical]: it should be better \nViolated 1 time.\nhttp://example.com`;
-    assert.equal(message, expected);
+    assert.strictEqual(message, expected);
   });
 
   test('validates violation parameter structure', function (assert) {

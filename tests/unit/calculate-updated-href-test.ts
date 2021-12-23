@@ -82,7 +82,7 @@ module('Query parameter normalization', function (hooks) {
       const expectedHref = `${baseUrl}${expected}`;
       const href = _calculateUpdatedHref(url, baseUrl, enabled);
 
-      assert.equal(
+      assert.strictEqual(
         href,
         expectedHref,
         `_calculateUpdatedHref( ${url}, ${baseUrl}, ${enabled} ) -> ${href}`

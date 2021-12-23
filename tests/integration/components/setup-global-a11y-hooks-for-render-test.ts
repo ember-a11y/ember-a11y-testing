@@ -47,7 +47,7 @@ module(
       `);
       await click('button');
 
-      assert.equal(
+      assert.strictEqual(
         actualAuditInvocationsCount,
         2,
         'a11yAudit was automatically called twice'
