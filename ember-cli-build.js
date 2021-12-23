@@ -5,6 +5,7 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 module.exports = function (defaults) {
   const self = defaults.project.findAddonByName('ember-a11y-testing');
   const autoImport = self.options.autoImport;
+
   let app = new EmberAddon(defaults, {
     autoImport,
   });
@@ -18,12 +19,10 @@ module.exports = function (defaults) {
 
   const { maybeEmbroider } = require('@embroider/test-setup');
   return maybeEmbroider(app, {
-    packagerOptions: {
-      webpackConfig: {
-        node: {
-          crypto: 'empty',
-        },
+    skipBabel: [
+      {
+        package: 'qunit',
       },
-    },
+    ],
   });
 };

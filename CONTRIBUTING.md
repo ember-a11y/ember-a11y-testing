@@ -2,15 +2,14 @@
 
 ## Installation
 
-- `git clone <repository-url>`
+- `git clone https://github.com/ember-a11y/ember-a11y-testing.git`
 - `cd ember-a11y-testing`
 - `yarn install`
 
 ## Linting
 
-- `yarn lint:hbs`
-- `yarn lint:js`
-- `yarn lint:js --fix`
+* `yarn lint`
+* `yarn lint:fix`
 
 ## Running tests
 
