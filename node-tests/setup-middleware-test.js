@@ -1,9 +1,7 @@
 const QUnit = require('qunit');
-const fetch = require('node-fetch');
 const fs = require('fs');
 const tmp = require('tmp');
 const express = require('express');
-const getPort = require('get-port');
 const readJSONSync = require('fs-extra').readJSONSync;
 const {
   setupMiddleware,
@@ -42,6 +40,8 @@ QUnit.module('setupMiddleware', function (hooks) {
       urlPath: 'report-violations',
       reportDir: 'ember-a11y-report',
     });
+    // eslint-disable-next-line node/no-unsupported-features/es-syntax
+    let { default: getPort } = await import('get-port');
 
     port = await getPort({ port: 3000 });
     server = app.listen(port);
@@ -55,6 +55,8 @@ QUnit.module('setupMiddleware', function (hooks) {
     'can respond to requests to report violations',
     async function (assert) {
       let data = [buildResult(violationsFixture)];
+      // eslint-disable-next-line node/no-unsupported-features/es-syntax
+      let { default: fetch } = await import('node-fetch');
 
       let json = await fetch(`http://localhost:${port}/report-violations`, {
         method: 'POST',
