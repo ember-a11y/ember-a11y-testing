@@ -1,5 +1,28 @@
 
 
+
+## v5.0.0 (2021-12-28)
+
+#### :boom: Breaking Change
+* [#341](https://github.com/ember-a11y/ember-a11y-testing/pull/341) Update addon blueprint with ember-cli-update to 4.0.1 ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#325](https://github.com/ember-a11y/ember-a11y-testing/pull/325) Bump ember-auto-import to 2.2.4 and introduce webpack ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#327](https://github.com/ember-a11y/ember-a11y-testing/pull/327) Delete deprecated a11yAuditIf test helper ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#326](https://github.com/ember-a11y/ember-a11y-testing/pull/326) Drop Node.js 10 support ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :bug: Bug Fix
+* [#331](https://github.com/ember-a11y/ember-a11y-testing/pull/331) Properly re-export types ([@mydea](https://github.com/mydea))
+
+#### :house: Internal
+* [#344](https://github.com/ember-a11y/ember-a11y-testing/pull/344) Add typechecking compat scenarios to CI ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#342](https://github.com/ember-a11y/ember-a11y-testing/pull/342) Introduce `eslint-plugin-qunit` per latest addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#345](https://github.com/ember-a11y/ember-a11y-testing/pull/345) Add `docs` folder and `RELEASE.md` file to npmignore ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#328](https://github.com/ember-a11y/ember-a11y-testing/pull/328) Update npmignore file ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- Francesco Novy ([@mydea](https://github.com/mydea))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+
 ## v4.3.0 (2021-11-11)
 
 #### :rocket: Enhancement
