@@ -68,7 +68,7 @@
     "body-parser": "^1.19.1",
     "broccoli-persistent-filter": "^3.1.2",
     "ember-auto-import": "^2.2.4",
-    "ember-cli-babel": "^7.26.8",
+    "ember-cli-babel": "^7.26.11",
     "ember-cli-typescript": "^4.2.1",
     "ember-cli-version-checker": "^5.1.2",
     "ember-destroyable-polyfill": "^2.0.1",
@@ -83,7 +83,7 @@
     "@glimmer/tracking": "^1.0.4",
     "@types/ember": "^3.16.0",
     "@types/ember-qunit": "^3.4.15",
-    "@types/ember__test-helpers": "^2.6.0",
+    "@types/ember__test-helpers": "2.6.0",
     "@types/qunit": "^2.11.3",
     "@types/rsvp": "^4.0.3",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
@@ -169,7 +169,7 @@
     }
   },
   "volta": {
-    "node": "12.22.1",
-    "yarn": "1.22.10"
+    "node": "14.20.0",
+    "yarn": "1.22.19"
   }
 }
