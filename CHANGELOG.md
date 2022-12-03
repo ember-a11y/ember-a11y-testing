@@ -1,5 +1,15 @@
 
 
+
+## v4.4.0 (2022-12-03)
+
+#### :rocket: Enhancement
+* [#468](https://github.com/ember-a11y/ember-a11y-testing/pull/468) Bump axe-core from 4.3.5 to 4.5.2 ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v4.3.0 (2021-11-11)
 
 #### :rocket: Enhancement
