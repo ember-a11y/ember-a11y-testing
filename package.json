@@ -64,7 +64,7 @@
   "dependencies": {
     "@ember/test-waiters": "^2.4.3 || ^3.0.0",
     "@scalvert/ember-setup-middleware-reporter": "^0.1.1",
-    "axe-core": "^4.3.5",
+    "axe-core": "^4.5.2",
     "body-parser": "^1.19.1",
     "broccoli-persistent-filter": "^3.1.2",
     "ember-auto-import": "^2.2.4",
