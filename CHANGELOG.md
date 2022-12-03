@@ -1,6 +1,19 @@
 
 
 
+
+## v5.1.0 (2022-12-03)
+
+#### :rocket: Enhancement
+* [#466](https://github.com/ember-a11y/ember-a11y-testing/pull/466) Bump axe-core from 4.3.5 to 4.5.2 ([@drewlee](https://github.com/drewlee))
+
+#### :bug: Bug Fix
+* [#460](https://github.com/ember-a11y/ember-a11y-testing/pull/460) Fixes CI failures ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v5.0.0 (2021-12-28)
 
 #### :boom: Breaking Change
