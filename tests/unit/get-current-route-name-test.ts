@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { _getCurrentRouteName } from 'ember-a11y-testing/test-support/setup-middleware-reporter';
 
-module('Unit | Utils | getCurrentRouteName', function (hooks) {
+module('Unit | Utils | _getCurrentRouteName', function (hooks) {
   setupTest(hooks);
 
   test('gets the route name for the current test', function (assert) {
