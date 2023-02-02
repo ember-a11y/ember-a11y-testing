@@ -1,6 +1,15 @@
 
 
 
+## v4.5.0 (2023-02-02)
+
+#### :bug: Bug Fix
+* [#494](https://github.com/ember-a11y/ember-a11y-testing/pull/494) Fixes currentRouteName middleware reporter test failures (v4) ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v4.4.0 (2022-12-03)
 
 #### :rocket: Enhancement
