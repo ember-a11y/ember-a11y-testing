@@ -39,6 +39,30 @@ let currentUrls: Set<string> | undefined;
 let currentRouteNames: Set<string> | undefined;
 
 /**
+ * Utility to retrieve the route name corresponding to the current test. Absorbs the emitted
+ * assertion error if route name is `null`, resulting in an empty string return value.
+ *
+ * @param getFn Function to use to derive the route name.
+ * @returns Route name or empty string.
+ */
+export function _getCurrentRouteName(getFn = currentRouteName): string {
+  let routeName = '';
+
+  try {
+    routeName = getFn();
+  } catch (error: unknown) {
+    if (
+      error instanceof Error &&
+      !/currentRouteName (\w|\s)+ string/.test(error.message)
+    ) {
+      throw error;
+    }
+  }
+
+  return routeName;
+}
+
+/**
  * A custom reporter that is invoked once per failed a11yAudit call. This can be called
  * multiple times per test, and the results are accumulated until testDone.
  *
