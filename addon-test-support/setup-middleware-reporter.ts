@@ -76,7 +76,8 @@ export async function middlewareReporter(axeResults: AxeResults) {
 
   if (!currentTestResult) {
     let { module, testName } = QUnit.config.current;
-    let testMetaData = getTestMetadata(getContext());
+    const context = getContext() ?? {};
+    let testMetaData = getTestMetadata(context);
 
     let stack = (!DEBUG && new Error().stack) || '';
 

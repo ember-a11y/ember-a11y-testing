@@ -1,4 +1,4 @@
-import { _registerHook, HookUnregister } from '@ember/test-helpers';
+import { _registerHook } from '@ember/test-helpers';
 import { InvocationStrategy, AuditFunction } from './types';
 import { getRunOptions } from './run-options';
 import a11yAudit from './audit';
@@ -24,7 +24,9 @@ type HelperName =
   | 'typeIn'
   | 'visit';
 
-let _unregisterHooks: HookUnregister[] = [];
+let _unregisterHooks: {
+  unregister: () => void;
+}[] = [];
 
 export const DEFAULT_A11Y_TEST_HELPER_NAMES: HelperName[] = [
   'visit',
