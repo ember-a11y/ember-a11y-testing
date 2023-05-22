@@ -76,7 +76,12 @@ export async function middlewareReporter(axeResults: AxeResults) {
 
   if (!currentTestResult) {
     let { module, testName } = QUnit.config.current;
-    const context = getContext() ?? {};
+    const context = getContext();
+    if (!context) {
+      throw new Error(
+        'You tried to run ember-a11y-testing without calling one of the `setupTest` helpers from `@ember/test-helpers`. Please make sure yoru test setup calls `setupTest()`, `setupRenderingTest()`, or `setupApplicationTest()`!'
+      );
+    }
     let testMetaData = getTestMetadata(context);
 
     let stack = (!DEBUG && new Error().stack) || '';
