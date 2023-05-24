@@ -28,7 +28,7 @@ interface HookUnregister {
   unregister: () => void;
 }
 
-let _unregisterHooks: HookUnregister[];
+let _unregisterHooks: HookUnregister[] = [];
 
 export const DEFAULT_A11Y_TEST_HELPER_NAMES: HelperName[] = [
   'visit',
