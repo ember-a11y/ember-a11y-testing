@@ -2,6 +2,16 @@
 
 
 
+
+## v5.2.1 (2023-05-25)
+
+#### :bug: Bug Fix
+* [#503](https://github.com/ember-a11y/ember-a11y-testing/pull/503) Fix type issues with v5.2.0 ([@robostheimer](https://github.com/robostheimer))
+
+#### Committers: 1
+- Rob Ostheimer ([@robostheimer](https://github.com/robostheimer))
+
+
 ## v5.2.0 (2023-02-02)
 
 #### :bug: Bug Fix
