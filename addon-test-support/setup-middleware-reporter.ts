@@ -79,7 +79,7 @@ export async function middlewareReporter(axeResults: AxeResults) {
     const context = getContext();
     if (!context) {
       throw new Error(
-        'You tried to run ember-a11y-testing without calling one of the `setupTest` helpers from `@ember/test-helpers`. Please make sure yoru test setup calls `setupTest()`, `setupRenderingTest()`, or `setupApplicationTest()`!'
+        'You tried to run ember-a11y-testing without calling one of the `setupTest` helpers from `@ember/test-helpers`. Please make sure your test setup calls `setupTest()`, `setupRenderingTest()`, or `setupApplicationTest()`!'
       );
     }
     let testMetaData = getTestMetadata(context);
