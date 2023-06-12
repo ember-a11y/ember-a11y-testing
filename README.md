@@ -11,7 +11,7 @@ individual tests using an `a11yAudit()` test helper.
 
 ## Compatibility
 
-- Ember.js v3.8.0 or above
+- Ember.js v4.0.0 or above
 - Ember CLI v3.8 or above
 - Node.js v16 or above
 - `@ember/test-helpers` v3.0.0 or above
