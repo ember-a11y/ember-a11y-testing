@@ -11,7 +11,9 @@ module.exports = async function () {
         name: 'ember-lts-3.8',
         npm: {
           devDependencies: {
+            '@ember/test-helpers': '~2.9.3',
             'ember-source': '~3.8.0',
+            'ember-qunit': '~6.2.0',
           },
         },
       },
@@ -19,7 +21,9 @@ module.exports = async function () {
         name: 'ember-lts-3.12',
         npm: {
           devDependencies: {
+            '@ember/test-helpers': '~2.9.3',
             'ember-source': '~3.12.0',
+            'ember-qunit': '~6.2.0',
           },
         },
       },
@@ -27,7 +31,9 @@ module.exports = async function () {
         name: 'ember-lts-3.16',
         npm: {
           devDependencies: {
+            '@ember/test-helpers': '~2.9.3',
             'ember-source': '~3.16.0',
+            'ember-qunit': '~6.2.0',
           },
         },
       },
@@ -35,7 +41,9 @@ module.exports = async function () {
         name: 'ember-lts-3.20',
         npm: {
           devDependencies: {
+            '@ember/test-helpers': '~2.9.3',
             'ember-source': '~3.20.0',
+            'ember-qunit': '~6.2.0',
           },
         },
       },
@@ -43,7 +51,9 @@ module.exports = async function () {
         name: 'ember-lts-3.24',
         npm: {
           devDependencies: {
+            '@ember/test-helpers': '~2.9.3',
             'ember-source': '~3.24.0',
+            'ember-qunit': '~6.2.0',
           },
         },
       },
@@ -51,7 +61,9 @@ module.exports = async function () {
         name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
+            '@ember/test-helpers': '~2.9.3',
             'ember-source': '~3.28.0',
+            'ember-qunit': '~6.2.0',
           },
         },
       },
@@ -89,6 +101,8 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@ember/jquery': '^1.1.0',
+            '@ember/test-helpers': '~2.9.3',
+            'ember-qunit': '~6.2.0',
             'ember-source': '~3.28.0',
           },
         },
@@ -104,6 +118,8 @@ module.exports = async function () {
         },
         npm: {
           devDependencies: {
+            '@ember/test-helpers': '~2.9.3',
+            'ember-qunit': '~6.2.0',
             'ember-source': '~3.28.0',
           },
           ember: {
