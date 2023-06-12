@@ -14,7 +14,7 @@ individual tests using an `a11yAudit()` test helper.
 - Ember.js v4.0.0 or above
 - Ember CLI v3.8 or above
 - Node.js v16 or above
-- `@ember/test-helpers` v3.0.0 or above
+- `@ember/test-helpers` v3.0.3 or above
 
 Note: we enforce a peerDependency of `@ember/test-helpers`. If you encounter the following message:
 
