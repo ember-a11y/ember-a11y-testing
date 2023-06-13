@@ -11,10 +11,10 @@ individual tests using an `a11yAudit()` test helper.
 
 ## Compatibility
 
-* Ember.js v3.8.0 or above
-* Ember CLI v3.8 or above
-* Node.js v12 or above
-* `@ember/test-helpers` v2.0.0 or above
+- Ember.js v4.0.0 or above
+- Ember CLI v3.8 or above
+- Node.js v16 or above
+- `@ember/test-helpers` v3.0.3 or above
 
 Note: we enforce a peerDependency of `@ember/test-helpers`. If you encounter the following message:
 
@@ -24,6 +24,8 @@ ember-a11y-testing has the following unmet peerDependencies:
 ```
 
 please update your version of `@ember/test-helpers` in your package.json accordingly.
+
+Note: Users who are using Node <= 14 in their apps should use `ember-a11y-testing@^5.2.1`.
 
 ## Installation
 
@@ -115,7 +117,7 @@ start();
 
 :warning: It's important to note that you must also use the [`enableA11yAudit`](#force-running-audits) query parameter in order to force audits. This setting is required in addition to any invocation strategy you provide.
 
-By default, audits will be run on `visit`, `click`, `doubleClick`, and `tap`. To add additional helpers to hook into, specify them by name in the `options.helpers` argument. Note that this option specifies the *complete* set of helpers to hook into; to include the defaults you must import them and splat them into the array as shown below.
+By default, audits will be run on `visit`, `click`, `doubleClick`, and `tap`. To add additional helpers to hook into, specify them by name in the `options.helpers` argument. Note that this option specifies the _complete_ set of helpers to hook into; to include the defaults you must import them and splat them into the array as shown below.
 
 ```js
 import {
@@ -231,7 +233,7 @@ test('Some test case', function (assert) {
     },
   };
 
-  await a11yAudit(this.element, axeOptions)
+  await a11yAudit(this.element, axeOptions);
 
   assert.ok(true, 'no a11y errors found!');
 });
@@ -291,28 +293,34 @@ To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown 
 // `&enableA11yAudit` set in the URL
 import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
 
-test('Some test case', await function(assert) {
-  await visit('/');
+test(
+  'Some test case',
+  await function (assert) {
+    await visit('/');
 
-  if (shouldForceAudit()) {
-    await a11yAudit();
+    if (shouldForceAudit()) {
+      await a11yAudit();
+    }
+    assert.ok(true, 'no a11y errors found!');
   }
-  assert.ok(true, 'no a11y errors found!');
-});
+);
 ```
 
 ```javascript
 // No `enableA11yAudit` set in the URL
 import { a11yAudit, shouldForceAudit } from 'ember-a11y-testing/test-support';
 
-test('Some test case', await function(assert) {
-  await visit('/');
+test(
+  'Some test case',
+  await function (assert) {
+    await visit('/');
 
-  if (shouldForceAudit()) {
-    await a11yAudit();  // will not run
+    if (shouldForceAudit()) {
+      await a11yAudit(); // will not run
+    }
+    // ...
   }
-  // ...
-});
+);
 ```
 
 You can also create your own app-level helper, which will conditionally check whether to run the audits or not:
@@ -380,7 +388,10 @@ import Application from 'my-app/app';
 import config from 'my-app/config/environment';
 import { setApplication } from '@ember/test-helpers';
 import { start } from 'ember-qunit';
-import { setupMiddlewareReporter, useMiddlewareReporter } from 'ember-a11y-testing/test-support';
+import {
+  setupMiddlewareReporter,
+  useMiddlewareReporter,
+} from 'ember-a11y-testing/test-support';
 
 setApplication(Application.create(config.APP));
 
