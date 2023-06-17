@@ -28,4 +28,13 @@
     height: 100%;
     transform: scale(1);
   }
+
+  /*
+   * Setting duration to zero so that the elements will get transitioned/animated immediately
+   * so that the gradual transition/animation will not violate any of the WCAG guidelines
+   */
+  .axe-running * {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
 </style>
