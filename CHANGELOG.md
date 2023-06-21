@@ -4,6 +4,25 @@
 
 
 
+
+## v6.0.0 (2023-06-21)
+
+#### :boom: Breaking Change
+* [#509](https://github.com/ember-a11y/ember-a11y-testing/pull/509) Upgrade @ember/test-helpers to 3.x ([@fivetanley](https://github.com/fivetanley))
+
+#### :bug: Bug Fix
+* [#507](https://github.com/ember-a11y/ember-a11y-testing/pull/507) Update setup-middleware-reporter.ts ([@deanmarano](https://github.com/deanmarano))
+* [#503](https://github.com/ember-a11y/ember-a11y-testing/pull/503) Fix type issues with v5.2.0 ([@robostheimer](https://github.com/robostheimer))
+
+#### :house: Internal
+* [#508](https://github.com/ember-a11y/ember-a11y-testing/pull/508) fix ember-try for >= 5.x releases ([@fivetanley](https://github.com/fivetanley))
+
+#### Committers: 3
+- Dean Marano ([@deanmarano](https://github.com/deanmarano))
+- Rob Ostheimer ([@robostheimer](https://github.com/robostheimer))
+- Stanley Stuart ([@fivetanley](https://github.com/fivetanley))
+
+
 ## v6.0.0-0 (2023-06-13)
 
 #### :boom: Breaking Change
