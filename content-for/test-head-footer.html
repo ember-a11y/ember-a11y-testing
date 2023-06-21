@@ -30,11 +30,11 @@
   }
 
   /*
-   * Setting duration to zero so that the elements will get transitioned/animated immediately
-   * so that the gradual transition/animation will not violate any of the WCAG guidelines
+   * Disabling animation and transition so that the elements are not evaluated
+   * while the transition/animation is in progress.
    */
   .axe-running * {
-    transition-duration: 0s !important;
-    animation-duration: 0s !important;
+    animation: none !important;
+    transition: none !important;
   }
 </style>
