@@ -5,6 +5,16 @@
 
 
 
+
+## v6.1.0 (2023-06-21)
+
+#### :rocket: Enhancement
+* [#511](https://github.com/ember-a11y/ember-a11y-testing/pull/511) Disabling transitions and animations while running axe tests ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+
+#### Committers: 1
+- Santhosh Venkata Rama Siva Thanakala Gani ([@tgvrssanthosh](https://github.com/tgvrssanthosh))
+
+
 ## v6.0.0 (2023-06-21)
 
 #### :boom: Breaking Change
