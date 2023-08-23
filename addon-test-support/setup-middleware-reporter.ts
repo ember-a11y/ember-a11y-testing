@@ -74,9 +74,10 @@ export async function middlewareReporter(axeResults: AxeResults) {
     return;
   }
 
+  const context = getContext();
+
   if (!currentTestResult) {
     let { module, testName } = QUnit.config.current;
-    const context = getContext();
     if (!context) {
       throw new Error(
         'You tried to run ember-a11y-testing without calling one of the `setupTest` helpers from `@ember/test-helpers`. Please make sure your test setup calls `setupTest()`, `setupRenderingTest()`, or `setupApplicationTest()`!'
@@ -102,8 +103,10 @@ export async function middlewareReporter(axeResults: AxeResults) {
     currentRouteNames = new Set();
   }
 
-  currentUrls!.add(currentURL());
-  currentRouteNames!.add(_getCurrentRouteName());
+  if (context) {
+    currentUrls!.add(currentURL());
+    currentRouteNames!.add(_getCurrentRouteName());
+  }
 
   axeResults.violations.forEach((violation) => {
     let rule = currentViolationsMap!.get(violation.id);
