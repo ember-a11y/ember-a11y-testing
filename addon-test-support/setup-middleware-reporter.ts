@@ -74,9 +74,11 @@ export async function middlewareReporter(axeResults: AxeResults) {
     return;
   }
 
+  const context = getContext();
+
   if (!currentTestResult) {
     let { module, testName } = QUnit.config.current;
-    let testMetaData = getTestMetadata(getContext());
+    let testMetaData = getTestMetadata(context);
 
     let stack = (!DEBUG && new Error().stack) || '';
 
@@ -96,8 +98,10 @@ export async function middlewareReporter(axeResults: AxeResults) {
     currentRouteNames = new Set();
   }
 
-  currentUrls!.add(currentURL());
-  currentRouteNames!.add(currentRouteName());
+  if (context) {
+    currentUrls!.add(currentURL());
+    currentRouteNames!.add(_getCurrentRouteName());
+  }
 
   axeResults.violations.forEach((violation) => {
     let rule = currentViolationsMap!.get(violation.id);
