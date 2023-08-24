@@ -1,6 +1,6 @@
 {
   "name": "ember-a11y-testing",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "The future of accessibility testing in Ember",
   "keywords": [
     "ember-addon",

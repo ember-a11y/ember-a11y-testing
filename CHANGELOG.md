@@ -6,6 +6,16 @@
 
 
 
+
+## v6.1.1 (2023-08-24)
+
+#### :bug: Bug Fix
+* [#514](https://github.com/ember-a11y/ember-a11y-testing/pull/514) Ensures context for current URL & route middleware reporting ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 1
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+
+
 ## v6.1.0 (2023-06-21)
 
 #### :rocket: Enhancement
