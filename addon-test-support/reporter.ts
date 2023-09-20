@@ -4,7 +4,7 @@ import formatViolation from './format-violation';
 import { A11yAuditReporter } from './types';
 import { storeResults } from './logger';
 
-const DEFAULT_REPORTER = async (results: AxeResults) => {
+export const DEFAULT_REPORTER = async (results: AxeResults) => {
   let violations = results.violations;
 
   storeResults(results);
