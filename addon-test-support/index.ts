@@ -7,7 +7,10 @@ export {
   teardownGlobalA11yHooks,
   DEFAULT_A11Y_TEST_HELPER_NAMES,
 } from './setup-global-a11y-hooks';
-export { setCustomReporter } from './reporter';
+export {
+  setCustomReporter,
+  DEFAULT_REPORTER as _DEFAULT_REPORTER,
+} from './reporter';
 export {
   TEST_SUITE_RESULTS as _TEST_SUITE_RESULTS,
   middlewareReporter as _middlewareReporter,
