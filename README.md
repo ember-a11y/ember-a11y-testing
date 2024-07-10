@@ -329,7 +329,7 @@ export function a11yAuditIf(contextSelector, axeOptions) {
 
 #### QUnit and Testem integration
 
-You can setup a new configuration checkbox in QUnit and Testem by using the `setupQUnitA11yAudit`
+You can setup a new configuration checkbox in QUnit and Testem by using the `setupQUnitA11yAudit`.
 When the checkbox is checked, it will set `enableA11yAudit` as a query param.
 
 To use, import and invoke the setup function, passing in your QUnit instance:
