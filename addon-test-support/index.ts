@@ -19,5 +19,6 @@ export {
 } from './setup-middleware-reporter';
 export { storeResults, printResults } from './logger';
 export { setupConsoleLogger } from './setup-console-logger';
+export { setupQUnitA11yAuditToggle } from './setup-qunit';
 
 export type { InvocationStrategy, A11yAuditReporter } from './types';

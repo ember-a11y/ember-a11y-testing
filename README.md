@@ -335,6 +335,29 @@ export function a11yAuditIf(contextSelector, axeOptions) {
 }
 ```
 
+#### QUnit and Testem integration
+
+You can setup a new configuration checkbox in QUnit and Testem by using the `setupQUnitA11yAuditToggle`.
+When the checkbox is checked, it will set `enableA11yAudit` as a query param.
+
+To use, import and invoke the setup function, passing in your QUnit instance:
+
+```js
+// tests/test-helper.js
+import Application from 'my-app/app';
+import config from 'my-app/config/environment';
+import * as QUnit from 'qunit';
+import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
+import { setupGlobalA11yHooks, setupQUnitA11yAuditToggle } from 'ember-a11y-testing/test-support';
+setApplication(Application.create(config.APP));
+
+setupGlobalA11yHooks(() => true);
+setupQUnitA11yAuditToggle(QUnit);
+
+start();
+```
+
 ### Logging violations to the console
 
 This addon provides the capability of summarizing all violations found during tests, and outputting those failures to the console once the test suite is completed. To enable this functionality, import `setupConsoleLogger` and invoke in your `tests/test-helper.js` file:
