@@ -7,6 +7,21 @@
 
 
 
+
+## v7.0.0 (2024-08-27)
+
+#### :rocket: Enhancement
+* [#448](https://github.com/ember-a11y/ember-a11y-testing/pull/448) feat: add qunit config ([@GreatWizard](https://github.com/GreatWizard))
+
+#### :house: Internal
+* [#516](https://github.com/ember-a11y/ember-a11y-testing/pull/516) Updates Andrew Lee's contributor email ([@drewlee](https://github.com/drewlee))
+
+#### Committers: 4
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+- David Baker ([@acorncom](https://github.com/acorncom))
+- Guillaume Gérard ([@GreatWizard](https://github.com/GreatWizard))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
 ## v6.1.1 (2023-08-24)
 
 #### :bug: Bug Fix
