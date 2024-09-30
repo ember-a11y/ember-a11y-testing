@@ -5156,17 +5156,12 @@ ember-qunit@^7.0.0:
     silent-error "^1.1.1"
     validate-peer-dependencies "^2.2.0"
 
-ember-resolver@^8.0.3:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-8.1.0.tgz#8ada162746fde3e6ea6a703bbb9910fbe62ab1e5"
-  integrity sha512-MGD7X2ztZVswGqs1mLgzhZJRhG7XiF6Mg4DgC7xJFWRYQQUHyGJpGdNWY9nXyrYnRIsCrQoL1do41zpxbrB/cg==
+ember-resolver@^13.0.2:
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-13.0.2.tgz#c50269b35b0faef6b95d959e45768fab0536149c"
+  integrity sha512-9G8CVjjI4Q6vx2+FYg8YeLu+/fP4eBL/1+qp5bzwtXQ7G3xkg0YRpcufIdsBjf5K2SUStU83qhNH2O6aanf3nw==
   dependencies:
-    babel-plugin-debug-macros "^0.3.4"
-    broccoli-funnel "^3.0.8"
-    broccoli-merge-trees "^4.2.0"
-    ember-cli-babel "^7.26.6"
-    ember-cli-version-checker "^5.1.2"
-    resolve "^1.20.0"
+    ember-cli-babel "^7.26.11"
 
 ember-rfc176-data@^0.3.15, ember-rfc176-data@^0.3.17:
   version "0.3.18"
