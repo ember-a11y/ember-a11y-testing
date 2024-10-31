@@ -139,6 +139,16 @@ export function pushTestResult() {
   }
 }
 
+type TestemCallback = (config: any, data: any, callback: () => void) => void;
+
+declare global {
+  interface Window {
+    Testem?: {
+      afterTests: (callback: TestemCallback) => void;
+    };
+  }
+}
+
 /**
  * Sets up the middleware reporter, which reports results when the test suite is done.
  */
@@ -149,15 +159,28 @@ export function setupMiddlewareReporter() {
 
   QUnit.testDone(pushTestResult);
 
-  QUnit.done(async function () {
-    let response = await fetch('/report-violations', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(TEST_SUITE_RESULTS),
+  if (window.Testem) {
+    window.Testem.afterTests(async function (_config, _data, callback) {
+      try {
+        await sendViolationsToServer();
+      } finally {
+        callback();
+      }
     });
+  } else {
+    QUnit.done(async function () {
+      await sendViolationsToServer();
+    });
+  }
+}
 
-    return response.json();
+async function sendViolationsToServer() {
+  let response = await fetch('/report-violations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(TEST_SUITE_RESULTS),
   });
+  return response.json();
 }
