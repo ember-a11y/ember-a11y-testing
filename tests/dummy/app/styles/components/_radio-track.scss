@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use '../variables/_variables' as *;
+@use '../variables/variables' as *;
 
 $height__radio-selector-track-container: 4rem;
 $height__radio-selector-track-circle: $height__radio-selector-track-container *
