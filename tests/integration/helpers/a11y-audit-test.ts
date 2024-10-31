@@ -21,15 +21,13 @@ module('Integration | Helper | a11yAudit', function (hooks) {
   });
 
   test('a11yAudit runs successfully with element context', async function (this: Context, assert) {
-    await render(hbs`<AxeComponent/>`);
+    await render(hbs`<div></div>`);
     await a11yAudit(this.element);
     assert.ok(true, "a11yAudit ran and didn't find any issues");
   });
 
   test('a11yAudit catches violations successfully', async function (this: Context, assert) {
-    await render(
-      hbs`<AxeComponent><button type="button"></button></AxeComponent>`
-    );
+    await render(hbs`<div><button type="button"></button></div>`);
 
     await assert.rejects(
       <Promise<any>>a11yAudit(this.element),
@@ -39,9 +37,7 @@ module('Integration | Helper | a11yAudit', function (hooks) {
   });
 
   test('a11yAudit can use custom axe options', async function (this: Context, assert) {
-    await render(
-      hbs`<AxeComponent><button type="button"></button></AxeComponent>`
-    );
+    await render(hbs`<div><button type="button"></button></div>`);
 
     await a11yAudit(this.element, {
       rules: {
@@ -55,9 +51,7 @@ module('Integration | Helper | a11yAudit', function (hooks) {
   });
 
   test('a11yAudit can use custom axe options as single argument', async function (assert) {
-    await render(
-      hbs`<AxeComponent><button type="button"></button></AxeComponent>`
-    );
+    await render(hbs`<div><button type="button"></button></div>`);
 
     await a11yAudit({
       rules: {
