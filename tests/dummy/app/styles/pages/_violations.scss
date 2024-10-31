@@ -1,3 +1,5 @@
+@use '../variables/_variables' as *;
+
 $width__grid-item: 24rem;
 $height__grid-item: $width__grid-item * 0.55;
 $margin__grid-item--vertical: 0.5em;

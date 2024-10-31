@@ -1,3 +1,5 @@
+@use '../variables/_variables' as *;
+
 .c-violations-grid-item {
   box-shadow: $box-shadow__card;
 

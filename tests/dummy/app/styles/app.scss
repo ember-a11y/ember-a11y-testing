@@ -1,10 +1,10 @@
-@import 'variables/variables';
+@use 'variables/_variables' as *;
 
-@import 'components/components';
-@import 'object-patterns/object-patterns';
-@import 'pages/pages';
-@import 'typography/typography';
-@import 'utilities/utilities';
+@use 'components/components';
+@use 'object-patterns/object-patterns';
+@use 'pages/pages';
+@use 'typography/typography';
+@use 'utilities/utilities';
 
 html {
   font-size: 100%;
@@ -33,9 +33,6 @@ ul {
   overflow-y: auto;
   background-color: $theme-color__offWhite;
   z-index: 1;
-
-  .application__header {
-  }
 
   .application__main-content {
     min-width: $min-width__main-content;
