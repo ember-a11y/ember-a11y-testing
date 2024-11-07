@@ -58,12 +58,7 @@ export function _normalizeRunParams(
     options = runOptions;
   }
 
-  let globalRunOptions = getRunOptions() || {};
-  if (typeof options === 'object') {
-    options = { ...options, ...globalRunOptions };
-  } else {
-    options = globalRunOptions;
-  }
+  options = { ...(options || {}), ...(getRunOptions() || {}) };
 
   return [context, options];
 }
