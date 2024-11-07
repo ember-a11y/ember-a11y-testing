@@ -45,7 +45,7 @@ export function _isContext(potential: MaybeElementContext) {
  */
 export function _normalizeRunParams(
   elementContext?: MaybeElementContext,
-  runOptions?: RunOptions | undefined
+  runOptions?: RunOptions | undefined,
 ): [ElementContext, RunOptions] {
   let context: ElementContext;
   let options: RunOptions | undefined;
@@ -75,7 +75,7 @@ export function _normalizeRunParams(
  */
 export default function a11yAudit(
   contextSelector: MaybeElementContext = '#ember-testing-container',
-  axeOptions?: RunOptions | undefined
+  axeOptions?: RunOptions | undefined,
 ): PromiseLike<void> {
   mark('a11y_audit_start');
 

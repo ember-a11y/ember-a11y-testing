@@ -43,21 +43,21 @@ export const DEFAULT_A11Y_TEST_HELPER_NAMES: HelperName[] = [
 export function setupGlobalA11yHooks(shouldAudit: InvocationStrategy): void;
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
-  audit: AuditFunction
+  audit: AuditFunction,
 ): void;
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
-  options: GlobalA11yHookOptions
+  options: GlobalA11yHookOptions,
 ): void;
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
   audit: AuditFunction,
-  options: GlobalA11yHookOptions
+  options: GlobalA11yHookOptions,
 ): void;
 export function setupGlobalA11yHooks(
   shouldAudit: InvocationStrategy,
   auditOrOptions?: AuditFunction | GlobalA11yHookOptions,
-  options?: GlobalA11yHookOptions
+  options?: GlobalA11yHookOptions,
 ): void {
   let audit: AuditFunction = a11yAudit;
 

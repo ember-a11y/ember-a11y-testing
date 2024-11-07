@@ -28,19 +28,19 @@ module('Integration | Helper | a11yAudit', function (hooks) {
 
   test('a11yAudit catches violations successfully', async function (this: Context, assert) {
     await render(
-      hbs`<AxeComponent><button type="button"></button></AxeComponent>`
+      hbs`<AxeComponent><button type="button"></button></AxeComponent>`,
     );
 
     await assert.rejects(
       <Promise<any>>a11yAudit(this.element),
       /The page should have no accessibility violations. Violations:/,
-      'error message is correct'
+      'error message is correct',
     );
   });
 
   test('a11yAudit can use custom axe options', async function (this: Context, assert) {
     await render(
-      hbs`<AxeComponent><button type="button"></button></AxeComponent>`
+      hbs`<AxeComponent><button type="button"></button></AxeComponent>`,
     );
 
     await a11yAudit(this.element, {
@@ -56,7 +56,7 @@ module('Integration | Helper | a11yAudit', function (hooks) {
 
   test('a11yAudit can use custom axe options as single argument', async function (assert) {
     await render(
-      hbs`<AxeComponent><button type="button"></button></AxeComponent>`
+      hbs`<AxeComponent><button type="button"></button></AxeComponent>`,
     );
 
     await a11yAudit({

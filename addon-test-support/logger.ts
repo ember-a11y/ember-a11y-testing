@@ -78,7 +78,7 @@ function deduplicateViolations(results: AxeResults) {
  */
 function logElement(
   node: NodeResult | RelatedNode,
-  logFn: (...args: any[]) => void
+  logFn: (...args: any[]) => void,
 ): void {
   const el = document.querySelector(node.target.toString());
   if (!el) {
@@ -109,7 +109,7 @@ function logFailureMessage(node: NodeResult, key: AxeCoreNodeResultKey): void {
   const message: string = (
     axeCore as unknown as AxeWithAudit
   )._audit.data.failureSummaries[key].failureMessage(
-    node[key].map((check) => check.message || '')
+    node[key].map((check) => check.message || ''),
   );
 
   console.error(message);
@@ -189,7 +189,7 @@ export function printResults() {
           result.impact,
           defaultReset,
           result.help,
-          result.helpUrl
+          result.helpUrl,
         );
         result.nodes.forEach((node) => {
           failureSummary(node, 'any');

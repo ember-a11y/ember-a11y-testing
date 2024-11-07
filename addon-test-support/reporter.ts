@@ -19,7 +19,7 @@ export const DEFAULT_REPORTER = async (results: AxeResults) => {
     let allViolationMessages = allViolations.join('\n');
     throw new Error(
       `The page should have no accessibility violations. Violations:\n${allViolationMessages}
-To rerun this specific failure, use the following query params: &testId=${QUnit.config.current.testId}&enableA11yAudit=true`
+To rerun this specific failure, use the following query params: &testId=${QUnit.config.current.testId}&enableA11yAudit=true`,
     );
   }
 };
@@ -37,7 +37,7 @@ export let reportA11yAudit: A11yAuditReporter = DEFAULT_REPORTER;
  * @param customReporter {A11yAuditReporter} The reporter to use in a11yAudit
  */
 export function setCustomReporter(
-  customReporter: A11yAuditReporter = DEFAULT_REPORTER
+  customReporter: A11yAuditReporter = DEFAULT_REPORTER,
 ) {
   reportA11yAudit = customReporter;
 }
