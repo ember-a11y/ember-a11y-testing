@@ -8,11 +8,11 @@ import type { Result } from 'axe-core';
  */
 export default function formatViolation(
   violation: Partial<Result>,
-  markup: string[]
+  markup: string[],
 ) {
   if (!violation.impact || !violation.help || !violation.helpUrl) {
     throw new Error(
-      'formatViolation called with improper structure of parameter: violation. Required properties: impact, help, helpUrl.'
+      'formatViolation called with improper structure of parameter: violation. Required properties: impact, help, helpUrl.',
     );
   }
 

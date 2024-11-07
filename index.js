@@ -61,7 +61,7 @@ module.exports = {
       ~ALLOWED_CONTENT_FOR.indexOf(type)
     ) {
       return fs.readFileSync(
-        path.join(__dirname, 'content-for', type + '.html')
+        path.join(__dirname, 'content-for', type + '.html'),
       );
     }
   },

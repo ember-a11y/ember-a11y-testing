@@ -61,10 +61,10 @@ module('setupGlobalA11yHooks with invokeAll', function (hooks) {
           // eslint-disable-next-line qunit/no-conditional-assertions
           assert.strictEqual(
             actualAuditInvocationsCount,
-            EXPECTED_AUDIT_INVOCATIONS_COUNT
+            EXPECTED_AUDIT_INVOCATIONS_COUNT,
           );
         }
-      }
+      },
     );
   });
 });
@@ -116,10 +116,10 @@ module('setupGlobalA11yHooks with invokeEveryN', function (hooks) {
           // eslint-disable-next-line qunit/no-conditional-assertions
           assert.strictEqual(
             actualAuditInvocationsCount,
-            EXPECTED_AUDIT_INVOCATIONS_COUNT
+            EXPECTED_AUDIT_INVOCATIONS_COUNT,
           );
         }
-      }
+      },
     );
   });
 });
@@ -174,7 +174,7 @@ module('setupGlobalA11yHooks with invokeWithExclusions', function (hooks) {
             'IGNORE: test used to validate setupGlobalA11yHooks (5)',
           ]);
         }
-      }
+      },
     );
   });
 });

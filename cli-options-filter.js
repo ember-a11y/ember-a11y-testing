@@ -23,14 +23,14 @@ class CliOptionsFilter extends Filter {
     if (enableMiddlewareReporter) {
       contents = contents.replace(
         /(ENABLE_A11Y_MIDDLEWARE_REPORTER = )false/,
-        replacementToken
+        replacementToken,
       );
     }
 
     if (enableA11yAudit) {
       contents = contents.replace(
         /(ENABLE_A11Y_AUDIT = )false/,
-        replacementToken
+        replacementToken,
       );
     }
 

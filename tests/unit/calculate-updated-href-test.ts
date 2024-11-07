@@ -85,7 +85,7 @@ module('Query parameter normalization', function (hooks) {
       assert.strictEqual(
         href,
         expectedHref,
-        `_calculateUpdatedHref( ${url}, ${baseUrl}, ${enabled} ) -> ${href}`
+        `_calculateUpdatedHref( ${url}, ${baseUrl}, ${enabled} ) -> ${href}`,
       );
     });
   });

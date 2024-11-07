@@ -30,6 +30,6 @@ declare module '@ember/debug' {
        * An optional url to the transition guide on the emberjs.com website.
        */
       url?: string | undefined;
-    }
+    },
   ): void;
 }

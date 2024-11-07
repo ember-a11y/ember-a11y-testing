@@ -33,7 +33,7 @@ export function measure(comment: string, startMark: string, endMark: string) {
     // eslint-disable-next-line no-console
     console.warn(
       'performance.measure could not be executed because of ',
-      e.message
+      e.message,
     );
   }
 }
@@ -48,7 +48,7 @@ export function measure(comment: string, startMark: string, endMark: string) {
 export function markEndAndMeasure(
   comment: string,
   startMark: string,
-  endMark: string
+  endMark: string,
 ) {
   if (HAS_PERFORMANCE) {
     mark(endMark);

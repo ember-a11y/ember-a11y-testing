@@ -50,8 +50,8 @@ module(
       assert.strictEqual(
         actualAuditInvocationsCount,
         2,
-        'a11yAudit was automatically called twice'
+        'a11yAudit was automatically called twice',
       );
     });
-  }
+  },
 );

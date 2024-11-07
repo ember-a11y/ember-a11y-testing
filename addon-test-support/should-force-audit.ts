@@ -3,7 +3,7 @@ import { ENABLE_A11Y_AUDIT } from './cli-options';
 export function _calculateUpdatedHref(
   href: string,
   baseURI: string,
-  enabled: boolean = false
+  enabled: boolean = false,
 ): string {
   const url = new URL(href, baseURI);
   const initialHref = url.href;
@@ -28,7 +28,7 @@ export function setEnableA11yAudit(enabled: boolean = false) {
   const href = _calculateUpdatedHref(
     window.location.href,
     document.baseURI,
-    enabled
+    enabled,
   );
 
   // Update the URL without reloading

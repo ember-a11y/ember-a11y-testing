@@ -31,7 +31,7 @@ module('Acceptance | a11y audit', function (hooks) {
     await assert.rejects(
       <Promise<any>>a11yAudit(),
       /The page should have no accessibility violations. Violations:/,
-      'error message is correct'
+      'error message is correct',
     );
   });
 
@@ -46,7 +46,7 @@ module('Acceptance | a11y audit', function (hooks) {
     await assert.rejects(
       <Promise<any>>a11yAudit(SELECTORS.failingComponent),
       /The page should have no accessibility violations. Violations:/,
-      'error message is correct'
+      'error message is correct',
     );
   });
 

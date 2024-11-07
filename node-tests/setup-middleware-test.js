@@ -67,6 +67,6 @@ QUnit.module('setupMiddleware', function (hooks) {
       }).then((res) => res.json());
 
       assert.deepEqual(readJSONSync(json.outputPath), data);
-    }
+    },
   );
 });
