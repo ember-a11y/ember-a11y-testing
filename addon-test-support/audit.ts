@@ -58,7 +58,7 @@ export function _normalizeRunParams(
     options = runOptions;
   }
 
-  options = { ...(options || {}), ...(getRunOptions() || {}) };
+  options = { ...options, ...getRunOptions() };
 
   return [context, options];
 }
