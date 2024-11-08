@@ -138,19 +138,23 @@ module('Acceptance | a11y audit', function (hooks) {
     assert.ok(true, 'the image-alt rule should be ignored');
   });
 
-  test('a11yAudit does not override default config', async function (assert) {
-    await visit('/ignored-image-alt');
+  test('a11yAudit does not override default config when passing additional rules', async function (assert) {
+    await visit('/ignored-image-alt-and-button-name');
 
     setRunOptions({
       rules: {
         // Disabled to test whether the config is
         // properly loaded in test environment
-        'image-alt': { enabled: false },
+        'button-name': { enabled: false },
       },
     });
 
     // Pass unrelated rules at runtime, should not override setRunOptions
-    await a11yAudit({ rules: { 'color-contrast': { enabled: false } } });
+    await a11yAudit({
+      rules: {
+        'image-alt': { enabled: false },
+      },
+    });
 
     assert.ok(true, 'the image-alt rule should be ignored');
   });

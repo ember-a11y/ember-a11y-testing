@@ -9,4 +9,5 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('violations', { path: '/' });
   this.route('ignored-image-alt');
+  this.route('ignored-image-alt-and-button-name');
 });
