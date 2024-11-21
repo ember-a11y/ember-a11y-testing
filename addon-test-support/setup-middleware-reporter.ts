@@ -5,7 +5,7 @@ import {
   getContext,
   getTestMetadata,
 } from '@ember/test-helpers';
-import { AxeResults, Result } from 'axe-core';
+import type { AxeResults, Result } from 'axe-core';
 import { setCustomReporter } from './reporter';
 import { DEBUG } from '@glimmer/env';
 import { setEnableA11yAudit } from './should-force-audit';
