@@ -1,4 +1,5 @@
-import { run, RunOptions, ElementContext, ContextObject } from 'axe-core';
+import type { RunOptions, ElementContext, ContextObject } from 'axe-core';
+import { run } from 'axe-core';
 import { mark, markEndAndMeasure } from './performance';
 import { getRunOptions } from './run-options';
 import { reportA11yAudit } from './reporter';

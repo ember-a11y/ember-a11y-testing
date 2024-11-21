@@ -29,10 +29,11 @@ export function measure(comment: string, startMark: string, endMark: string) {
     if (HAS_PERFORMANCE) {
       performance.measure(comment, startMark, endMark);
     }
-  } catch (e) {
+  } catch (e: unknown) {
     // eslint-disable-next-line no-console
     console.warn(
       'performance.measure could not be executed because of ',
+      // @ts-ignore
       e.message,
     );
   }

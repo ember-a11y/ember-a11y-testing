@@ -1,4 +1,4 @@
-import { RunOptions } from 'axe-core';
+import type { RunOptions } from 'axe-core';
 import { getContext } from '@ember/test-helpers';
 import { registerDestructor } from '@ember/destroyable';
 
