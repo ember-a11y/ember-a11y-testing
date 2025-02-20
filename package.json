@@ -130,7 +130,7 @@
     "webpack": "^5.65.0"
   },
   "peerDependencies": {
-    "@ember/test-helpers": "^3.0.3 || ^4.0.2",
+    "@ember/test-helpers": "^3.0.3 || ^4.0.2 || ^5.0.0",
     "qunit": ">= 2"
   },
   "peerDependenciesMeta": {
