@@ -10,12 +10,39 @@
 
 ## v7.1.0 (2025-02-20)
 
+### :house: Internal
+
+- expand test-helpers peer range (PR #580)
+- tighten type imports (PR #573)
+- removed unused `body-parser` dependency (PR #572) 
+- removed `ember-destroyable-polyfill` (no longer needed) (PR #571) 
+- enable embroider tests in CI (PR #568) 
+- move component templates into `app/components` to resolve `ember-beta` errors (PR #567) 
+- update prettier (PR #565)
+- fix typescript context for integration tests (PR #559)
+
+### Committers: 5
+- Chris Manson (@mansona) 
+- David Baker (@acorncom)
+- Stanley Stuart (@fivetanley)
+- Dean Marano (@deanmarano)
+- Alex (@void-mAlex)
+
 
 ## v7.0.2 (2024-10-31)
+
+### :bug: Bug Fix
+
+* fix typescript context for integration tests (7b9cfc9)
+* use Testem.afterTests instead of QUnit.done (8c7c604)
+
+### Committers: 1
+- Stanley Stuart ([@fivetanley](https://github.com/fivetanley))
 
 
 ## v7.0.1 (2024-09-26)
 
+Patch release to update packages per security policy.
 
 ## v7.0.0 (2024-08-27)
 
