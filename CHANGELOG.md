@@ -10,6 +10,13 @@
 
 ## v7.1.1 (2025-04-09)
 
+### :house: Internal
+
+- Expand @ember/test-waiters dependency range to allow v4 (PR #583)
+
+### Committers: 1
+
+- Sergey Astapov (@SergeAstapov)
 
 ## v7.1.0 (2025-02-20)
 
@@ -25,6 +32,7 @@
 - fix typescript context for integration tests (PR #559)
 
 ### Committers: 5
+
 - Chris Manson (@mansona) 
 - David Baker (@acorncom)
 - Stanley Stuart (@fivetanley)
