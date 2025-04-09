@@ -1,7 +1,5 @@
-$width__grid-item: 24rem;
-$height__grid-item: $width__grid-item * 0.55;
-$margin__grid-item--vertical: 0.5em;
-$margin__grid-item--horizontal: 0.75em;
+@use '../variables/variables' as *;
+
 
 .p-violations__header,
 .p-violations__noise-selectors,
