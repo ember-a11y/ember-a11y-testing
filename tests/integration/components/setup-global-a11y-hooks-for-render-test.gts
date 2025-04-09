@@ -1,13 +1,6 @@
 import { click, render } from '@ember/test-helpers';
-import {
-  DEFAULT_A11Y_TEST_HELPER_NAMES,
-  setEnableA11yAudit,
-  setupGlobalA11yHooks,
-  teardownGlobalA11yHooks,
-} from 'ember-a11y-testing/test-support';
+import { DEFAULT_A11Y_TEST_HELPER_NAMES, setEnableA11yAudit, setupGlobalA11yHooks, teardownGlobalA11yHooks } from 'ember-a11y-testing/test-support';
 import { module, test } from 'qunit';
-
-import { hbs } from 'ember-cli-htmlbars';
 import { setupRenderingTest } from 'ember-qunit';
 
 module(
@@ -42,9 +35,9 @@ module(
     });
 
     test('it audits on render', async function (assert) {
-      await render(hbs`
+      await render(<template>
         <button type="button">Hello!</button>
-      `);
+      </template>);
       await click('button');
 
       assert.strictEqual(
