@@ -4,12 +4,12 @@
 
 - `git clone https://github.com/ember-a11y/ember-a11y-testing.git`
 - `cd ember-a11y-testing`
-- `yarn install`
+- `pnpm install`
 
 ## Linting
 
-* `yarn lint`
-* `yarn lint:fix`
+* `pnpm lint`
+* `pnpm lint:fix`
 
 ## Running tests
 

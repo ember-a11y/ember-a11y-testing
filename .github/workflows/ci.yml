@@ -19,31 +19,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Node
-        uses: volta-cli/action@v1
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
       - name: Run Ember Tests
-        run: yarn test:ember
+        run: pnpm test:ember
       - name: Run Node Tests
-        run: yarn test:node
+        run: pnpm test:node
 
   floating:
     name: 'Floating Dependencies'
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
       - name: Install Dependencies
-        run: yarn install --no-lockfile
+        run: pnpm install --no-lockfile
       - name: Run Tests
-        run: yarn test:ember
+        run: pnpm test:ember
       - name: Run Node Tests
-        run: yarn test:node
+        run: pnpm test:node
 
   try-scenarios:
     name: ${{ matrix.try-scenario }}
@@ -64,11 +71,14 @@ jobs:
           - embroider-optimized
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Node
-        uses: volta-cli/action@v1
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
       - name: Run Tests
         run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
 
@@ -88,10 +98,13 @@ jobs:
           - typescript-next
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Node
-        uses: volta-cli/action@v1
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: pnpm
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
       - name: Type checking
         run: ./node_modules/.bin/ember try:one --config-path="./config/ember-try-typescript.js" ${{ matrix.typescript-scenario }}
