@@ -11,6 +11,9 @@ importers:
       '@ember/test-waiters':
         specifier: ^2.4.3 || ^3.0.0 || ^4.0.0
         version: 4.1.0
+      '@glimmer/env':
+        specifier: ^0.1.7
+        version: 0.1.7
       '@scalvert/ember-setup-middleware-reporter':
         specifier: ^0.1.1
         version: 0.1.1
@@ -57,9 +60,6 @@ importers:
       '@glimmer/component':
         specifier: ^1.0.4
         version: 1.1.2(@babel/core@7.26.10)
-      '@glimmer/env':
-        specifier: ^0.1.7
-        version: 0.1.7
       '@glimmer/tracking':
         specifier: ^1.0.4
         version: 1.1.2
