@@ -123,8 +123,7 @@
     "prettier": "^3.3.3",
     "qunit": "^2.17.2",
     "qunit-dom": "^2.0.0",
-    "release-it": "^14.10.0",
-    "release-it-lerna-changelog": "^5.0.0",
+    "release-plan": "^0.16.0",
     "sass": "^1.26.10",
     "tmp": "^0.2.1",
     "typescript": "^5.5.4",
@@ -139,6 +138,7 @@
       "optional": true
     }
   },
+  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971",
   "engines": {
     "node": "16.* || >= 18"
   },
@@ -151,21 +151,5 @@
   "ember-addon": {
     "demoURL": "http://ember-a11y.github.io/ember-a11y-testing",
     "configPath": "tests/dummy/config"
-  },
-  "release-it": {
-    "plugins": {
-      "release-it-lerna-changelog": {
-        "infile": "CHANGELOG.md",
-        "launchEditor": true
-      }
-    },
-    "git": {
-      "tagName": "v${version}"
-    },
-    "github": {
-      "release": true,
-      "tokenRef": "GITHUB_AUTH"
-    }
-  },
-  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
+  }
 }
