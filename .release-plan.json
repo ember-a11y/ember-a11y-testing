@@ -1,0 +1,22 @@
+{
+  "solution": {
+    "ember-a11y-testing": {
+      "impact": "patch",
+      "oldVersion": "7.1.1",
+      "newVersion": "7.1.2",
+      "tagName": "latest",
+      "constraints": [
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :memo: Documentation"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
+        }
+      ],
+      "pkgJSONPath": "./package.json"
+    }
+  },
+  "description": "## Release (2025-04-09)\n\n* ember-a11y-testing 7.1.2 (patch)\n\n#### :memo: Documentation\n* `ember-a11y-testing`\n  * [#594](https://github.com/ember-a11y/ember-a11y-testing/pull/594) [documentation] update changelog for v7.1.1 ([@MelSumner](https://github.com/MelSumner))\n\n#### :house: Internal\n* `ember-a11y-testing`\n  * [#600](https://github.com/ember-a11y/ember-a11y-testing/pull/600) [internal] adding 4.4 try scenario back in ([@MelSumner](https://github.com/MelSumner))\n  * [#596](https://github.com/ember-a11y/ember-a11y-testing/pull/596) [internal] tidy up ([@MelSumner](https://github.com/MelSumner))\n  * [#598](https://github.com/ember-a11y/ember-a11y-testing/pull/598) [internal] set up release-plan ([@mansona](https://github.com/mansona))\n  * [#597](https://github.com/ember-a11y/ember-a11y-testing/pull/597) [internal] move from yarn to pnpm ([@mansona](https://github.com/mansona))\n\n#### Committers: 2\n- Chris Manson ([@mansona](https://github.com/mansona))\n- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))\n"
+}

@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2025-04-09)
+
+* ember-a11y-testing 7.1.2 (patch)
+
+#### :memo: Documentation
+* `ember-a11y-testing`
+  * [#594](https://github.com/ember-a11y/ember-a11y-testing/pull/594) [documentation] update changelog for v7.1.1 ([@MelSumner](https://github.com/MelSumner))
+
+#### :house: Internal
+* `ember-a11y-testing`
+  * [#600](https://github.com/ember-a11y/ember-a11y-testing/pull/600) [internal] adding 4.4 try scenario back in ([@MelSumner](https://github.com/MelSumner))
+  * [#596](https://github.com/ember-a11y/ember-a11y-testing/pull/596) [internal] tidy up ([@MelSumner](https://github.com/MelSumner))
+  * [#598](https://github.com/ember-a11y/ember-a11y-testing/pull/598) [internal] set up release-plan ([@mansona](https://github.com/mansona))
+  * [#597](https://github.com/ember-a11y/ember-a11y-testing/pull/597) [internal] move from yarn to pnpm ([@mansona](https://github.com/mansona))
+
+#### Committers: 2
+- Chris Manson ([@mansona](https://github.com/mansona))
+- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))
+
 ## v7.1.1 (2025-04-09)
 
 ### :house: Internal
