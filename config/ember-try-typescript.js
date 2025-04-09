@@ -1,5 +1,5 @@
 module.exports = {
-  useYarn: true,
+  usePnpm: true,
   command: 'tsc --noEmit',
   scenarios: [
     {

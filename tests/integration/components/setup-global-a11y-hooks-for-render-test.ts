@@ -7,7 +7,7 @@ import {
 } from 'ember-a11y-testing/test-support';
 import { module, test } from 'qunit';
 
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import { setupRenderingTest } from 'ember-qunit';
 
 module(
