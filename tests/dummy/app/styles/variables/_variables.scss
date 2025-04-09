@@ -41,3 +41,9 @@ $padding__content-box--lg: 1.5em 2.1em;
 
 /* This could be a breakpoint in, you know, a real app 😜 */
 $min-width__main-content: 40rem;
+
+
+$width__grid-item: 24rem;
+$height__grid-item: $width__grid-item * 0.55;
+$margin__grid-item--vertical: 0.5em;
+$margin__grid-item--horizontal: 0.75em;
