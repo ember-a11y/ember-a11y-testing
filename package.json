@@ -116,7 +116,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-qunit": "^7.2.0",
-    "express": "^4.17.2",
+    "express": "^5.1.0",
     "get-port": "^6.0.0",
     "loader.js": "^4.7.0",
     "node-fetch": "^3.1.0",
