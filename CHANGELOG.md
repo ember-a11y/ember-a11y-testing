@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-04-10)
+
+* ember-a11y-testing 7.1.3 (patch)
+
+#### :house: Internal
+* `ember-a11y-testing`
+  * [#601](https://github.com/ember-a11y/ember-a11y-testing/pull/601) convert render tests tests to gts ([@mansona](https://github.com/mansona))
+
+#### Committers: 1
+- Chris Manson ([@mansona](https://github.com/mansona))
+
 ## Release (2025-04-09)
 
 * ember-a11y-testing 7.1.2 (patch)
