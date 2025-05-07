@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2025-05-07)
+
+* ember-a11y-testing 7.1.3 (patch)
+
+#### :house: Internal
+* `ember-a11y-testing`
+  * [#603](https://github.com/ember-a11y/ember-a11y-testing/pull/603) refactor(styles): move global styles to dedicated globals.scss file ([@lem0n4id](https://github.com/lem0n4id))
+  * [#601](https://github.com/ember-a11y/ember-a11y-testing/pull/601) convert render tests tests to gts ([@mansona](https://github.com/mansona))
+
+#### Committers: 2
+- Chris Manson ([@mansona](https://github.com/mansona))
+- Lenin Kennedy ([@lem0n4id](https://github.com/lem0n4id))
+
 ## Release (2025-04-09)
 
 * ember-a11y-testing 7.1.2 (patch)
