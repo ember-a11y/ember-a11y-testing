@@ -151,8 +151,8 @@ importers:
         specifier: ^7.32.0
         version: 7.32.0
       eslint-config-prettier:
-        specifier: ^9.1.0
-        version: 9.1.0(eslint@7.32.0)
+        specifier: ^10.1.3
+        version: 10.1.3(eslint@7.32.0)
       eslint-plugin-ember:
         specifier: ^10.5.8
         version: 10.6.1(eslint@7.32.0)
@@ -161,7 +161,7 @@ importers:
         version: 11.1.0(eslint@7.32.0)
       eslint-plugin-prettier:
         specifier: ^5.2.1
-        version: 5.2.6(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@7.32.0))(eslint@7.32.0)(prettier@3.5.3)
+        version: 5.2.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.3(eslint@7.32.0))(eslint@7.32.0)(prettier@3.5.3)
       eslint-plugin-qunit:
         specifier: ^7.2.0
         version: 7.3.4(eslint@7.32.0)
@@ -3043,8 +3043,8 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
-  eslint-config-prettier@9.1.0:
-    resolution: {integrity: sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==}
+  eslint-config-prettier@10.1.3:
+    resolution: {integrity: sha512-vDo4d9yQE+cS2tdIT4J02H/16veRvkHgiLDRpej+WL67oCfbOb97itZXn8wMPJ/GsiEBVjrjs//AVNw2Cp1EcA==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -4732,6 +4732,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -10453,7 +10454,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-prettier@9.1.0(eslint@7.32.0):
+  eslint-config-prettier@10.1.3(eslint@7.32.0):
     dependencies:
       eslint: 7.32.0
 
@@ -10487,7 +10488,7 @@ snapshots:
       resolve: 1.22.10
       semver: 6.3.1
 
-  eslint-plugin-prettier@5.2.6(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@7.32.0))(eslint@7.32.0)(prettier@3.5.3):
+  eslint-plugin-prettier@5.2.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.3(eslint@7.32.0))(eslint@7.32.0)(prettier@3.5.3):
     dependencies:
       eslint: 7.32.0
       prettier: 3.5.3
@@ -10495,7 +10496,7 @@ snapshots:
       synckit: 0.11.3
     optionalDependencies:
       '@types/eslint': 9.6.1
-      eslint-config-prettier: 9.1.0(eslint@7.32.0)
+      eslint-config-prettier: 10.1.3(eslint@7.32.0)
 
   eslint-plugin-qunit@7.3.4(eslint@7.32.0):
     dependencies:
