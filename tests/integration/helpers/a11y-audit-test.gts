@@ -1,9 +1,19 @@
 import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
+import { setupRenderingTest } from '#tests/helpers';
 import { render } from '@ember/test-helpers';
+import { a11yAudit, setEnableA11yAudit } from '#src/test-support';
+
 import type { TestContext } from '@ember/test-helpers';
-import { a11yAudit, setEnableA11yAudit } from 'ember-a11y-testing/test-support';
-import AxeComponent from "dummy/components/axe-component";
+import type { TOC } from '@ember/component/template-only';
+
+const AxeComponent = <template>
+  <div>{{yield}}</div>
+</template> satisfies TOC<{
+  Element: HTMLDivElement;
+  Blocks: {
+    default: [];
+  };
+}>;
 
 interface Context extends TestContext {
   element: Element;
@@ -28,11 +38,13 @@ module('Integration | Helper | a11yAudit', function (hooks) {
 
   test('a11yAudit catches violations successfully', async function (this: Context, assert) {
     await render(
-      <template><AxeComponent><button type="button"></button></AxeComponent></template>,
+      <template>
+        <AxeComponent><button type="button"></button></AxeComponent>
+      </template>,
     );
 
     await assert.rejects(
-      <Promise<any>>a11yAudit(this.element),
+      a11yAudit(this.element) as Promise<void>,
       /The page should have no accessibility violations. Violations:/,
       'error message is correct',
     );
@@ -40,7 +52,9 @@ module('Integration | Helper | a11yAudit', function (hooks) {
 
   test('a11yAudit can use custom axe options', async function (this: Context, assert) {
     await render(
-      <template><AxeComponent><button type="button"></button></AxeComponent></template>,
+      <template>
+        <AxeComponent><button type="button"></button></AxeComponent>
+      </template>,
     );
 
     await a11yAudit(this.element, {
@@ -56,7 +70,9 @@ module('Integration | Helper | a11yAudit', function (hooks) {
 
   test('a11yAudit can use custom axe options as single argument', async function (assert) {
     await render(
-      <template><AxeComponent><button type="button"></button></AxeComponent></template>,
+      <template>
+        <AxeComponent><button type="button"></button></AxeComponent>
+      </template>,
     );
 
     await a11yAudit({

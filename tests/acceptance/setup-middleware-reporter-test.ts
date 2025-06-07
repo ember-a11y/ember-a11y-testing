@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { setupApplicationTest } from 'ember-qunit';
+import { setupApplicationTest } from '#tests/helpers';
 import { visit } from '@ember/test-helpers';
 import {
   setCustomReporter,
@@ -9,7 +9,7 @@ import {
   _middlewareReporter,
   _pushTestResult,
   _TEST_SUITE_RESULTS,
-} from 'ember-a11y-testing/test-support';
+} from '#src/test-support';
 
 module('setupMiddlewareReporter', function (hooks) {
   setupApplicationTest(hooks);
@@ -37,6 +37,6 @@ module('setupMiddlewareReporter', function (hooks) {
 
     _pushTestResult();
 
-    assert.deepEqual(_TEST_SUITE_RESULTS[0].violations.length, 5);
+    assert.deepEqual(_TEST_SUITE_RESULTS[0]?.violations.length, 5);
   });
 });

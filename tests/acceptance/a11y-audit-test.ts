@@ -1,11 +1,11 @@
 import { module, test } from 'qunit';
 import { visit } from '@ember/test-helpers';
-import { setupApplicationTest } from 'ember-qunit';
+import { setupApplicationTest } from '#tests/helpers';
 import {
   a11yAudit,
   setEnableA11yAudit,
   setRunOptions,
-} from 'ember-a11y-testing/test-support';
+} from '#src/test-support';
 
 const SELECTORS = {
   passingComponent: '[data-test-selector="violations-page__passing-component"]',
@@ -29,7 +29,7 @@ module('Acceptance | a11y audit', function (hooks) {
     await visit('/');
 
     await assert.rejects(
-      <Promise<any>>a11yAudit(),
+      a11yAudit() as Promise<void>,
       /The page should have no accessibility violations. Violations:/,
       'error message is correct',
     );
@@ -44,7 +44,7 @@ module('Acceptance | a11y audit', function (hooks) {
     assert.ok(true, 'a11yAudit should not have discovered any issues');
 
     await assert.rejects(
-      <Promise<any>>a11yAudit(SELECTORS.failingComponent),
+      a11yAudit(SELECTORS.failingComponent) as Promise<void>,
       /The page should have no accessibility violations. Violations:/,
       'error message is correct',
     );

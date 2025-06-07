@@ -1,0 +1,36 @@
+/*
+ * Styles applied during axe audits to ensure accurate results.
+ *
+ * These styles are only active while axe is running (via the .axe-running class
+ * on <body>), so they have no effect outside of a11y audits.
+ */
+
+/* Hide the QUnit UI so it doesn't affect axe results */
+.axe-running #qunit {
+  display: none;
+}
+
+/* Position the testing container to fill the viewport */
+.axe-running #ember-testing-container {
+  position: fixed !important;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 9999;
+  border: none;
+  right: 0;
+}
+
+/* Reset the zoom on the application under test */
+.axe-running #ember-testing-container #ember-testing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+}
+
+/* Disable visual effects so elements aren't evaluated mid-animation */
+.axe-running * {
+  animation: none !important;
+  transition: none !important;
+}

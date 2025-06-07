@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
-import { setupTest } from 'ember-qunit';
-import { _getCurrentRouteName } from 'ember-a11y-testing/test-support/setup-middleware-reporter';
+import { setupTest } from '#tests/helpers';
+import { _getCurrentRouteName } from '#src/test-support/setup-middleware-reporter';
 
 module('Unit | Utils | _getCurrentRouteName', function (hooks) {
   setupTest(hooks);

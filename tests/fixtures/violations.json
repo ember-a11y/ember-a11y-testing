@@ -88,9 +88,7 @@
               "none": [],
               "impact": "critical",
               "html": "<button data-test-selector=\"empty-button\" id=\"violations__empty-button\" class=\"c-button ember-view\">\n</button>",
-              "target": [
-                "#violations__empty-button"
-              ],
+              "target": ["#violations__empty-button"],
               "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\"\n  Element has no title attribute or the title attribute is empty"
             }
           ]
@@ -158,9 +156,7 @@
               "none": [],
               "impact": "critical",
               "html": "<img src=\"assets/img/empire-state-building-moonlight.png\" id=\"violations__img-without-alt\" class=\"u-fill c-img ember-view\">",
-              "target": [
-                "#violations__img-without-alt"
-              ],
+              "target": ["#violations__img-without-alt"],
               "failureSummary": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute or the title attribute is empty\n  Element's default semantics were not overridden with role=\"presentation\"\n  Element's default semantics were not overridden with role=\"none\""
             }
           ]
@@ -222,9 +218,7 @@
               "none": [],
               "impact": "critical",
               "html": "<input class=\"c-text-input__input\" id=\"violations__labeless-input\" type=\"text\">",
-              "target": [
-                "#violations__labeless-input"
-              ],
+              "target": ["#violations__labeless-input"],
               "failureSummary": "Fix any of the following:\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Form element does not have an implicit (wrapped) <label>\n  Form element does not have an explicit <label>\n  Element has no title attribute or the title attribute is empty"
             }
           ]
@@ -234,11 +228,7 @@
         {
           "id": "aria-allowed-attr",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag412"],
           "description": "Ensures ARIA attributes are allowed for an element's role",
           "help": "Elements must only use allowed ARIA attributes",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-allowed-attr?application=axeAPI",
@@ -265,9 +255,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-0\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"0\">",
-              "target": [
-                "#noise-level-0"
-              ]
+              "target": ["#noise-level-0"]
             },
             {
               "any": [
@@ -291,9 +279,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"true\" name=\"noise-level\" id=\"noise-level-1\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"1\">",
-              "target": [
-                "#noise-level-1"
-              ]
+              "target": ["#noise-level-1"]
             },
             {
               "any": [
@@ -317,9 +303,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-2\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"2\">",
-              "target": [
-                "#noise-level-2"
-              ]
+              "target": ["#noise-level-2"]
             },
             {
               "any": [
@@ -343,9 +327,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-3\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"3\">",
-              "target": [
-                "#noise-level-3"
-              ]
+              "target": ["#noise-level-3"]
             },
             {
               "any": [
@@ -369,9 +351,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--strawberries\" class=\"ember-view\" type=\"radio\" value=\"Strawberries\">",
-              "target": [
-                "#violations__radio-group-items--strawberries"
-              ]
+              "target": ["#violations__radio-group-items--strawberries"]
             },
             {
               "any": [
@@ -395,9 +375,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--blueberries\" class=\"ember-view\" type=\"radio\" value=\"Blueberries\">",
-              "target": [
-                "#violations__radio-group-items--blueberries"
-              ]
+              "target": ["#violations__radio-group-items--blueberries"]
             },
             {
               "any": [
@@ -421,20 +399,14 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--raspberries\" class=\"ember-view\" type=\"radio\" value=\"Raspberries\">",
-              "target": [
-                "#violations__radio-group-items--raspberries"
-              ]
+              "target": ["#violations__radio-group-items--raspberries"]
             }
           ]
         },
         {
           "id": "aria-valid-attr-value",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag412"],
           "description": "Ensures all ARIA attributes have valid values",
           "help": "ARIA attributes must conform to valid values",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-valid-attr-value?application=axeAPI",
@@ -460,9 +432,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-0\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"0\">",
-              "target": [
-                "#noise-level-0"
-              ]
+              "target": ["#noise-level-0"]
             },
             {
               "any": [],
@@ -485,9 +455,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"true\" name=\"noise-level\" id=\"noise-level-1\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"1\">",
-              "target": [
-                "#noise-level-1"
-              ]
+              "target": ["#noise-level-1"]
             },
             {
               "any": [],
@@ -510,9 +478,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-2\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"2\">",
-              "target": [
-                "#noise-level-2"
-              ]
+              "target": ["#noise-level-2"]
             },
             {
               "any": [],
@@ -535,9 +501,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-3\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"3\">",
-              "target": [
-                "#noise-level-3"
-              ]
+              "target": ["#noise-level-3"]
             },
             {
               "any": [],
@@ -560,9 +524,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--strawberries\" class=\"ember-view\" type=\"radio\" value=\"Strawberries\">",
-              "target": [
-                "#violations__radio-group-items--strawberries"
-              ]
+              "target": ["#violations__radio-group-items--strawberries"]
             },
             {
               "any": [],
@@ -585,9 +547,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--blueberries\" class=\"ember-view\" type=\"radio\" value=\"Blueberries\">",
-              "target": [
-                "#violations__radio-group-items--blueberries"
-              ]
+              "target": ["#violations__radio-group-items--blueberries"]
             },
             {
               "any": [],
@@ -610,20 +570,14 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--raspberries\" class=\"ember-view\" type=\"radio\" value=\"Raspberries\">",
-              "target": [
-                "#violations__radio-group-items--raspberries"
-              ]
+              "target": ["#violations__radio-group-items--raspberries"]
             }
           ]
         },
         {
           "id": "aria-valid-attr",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag412"],
           "description": "Ensures attributes that begin with aria- are valid ARIA attributes",
           "help": "ARIA attributes must conform to valid names",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-valid-attr?application=axeAPI",
@@ -642,9 +596,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-0\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"0\">",
-              "target": [
-                "#noise-level-0"
-              ]
+              "target": ["#noise-level-0"]
             },
             {
               "any": [
@@ -660,9 +612,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"true\" name=\"noise-level\" id=\"noise-level-1\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"1\">",
-              "target": [
-                "#noise-level-1"
-              ]
+              "target": ["#noise-level-1"]
             },
             {
               "any": [
@@ -678,9 +628,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-2\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"2\">",
-              "target": [
-                "#noise-level-2"
-              ]
+              "target": ["#noise-level-2"]
             },
             {
               "any": [
@@ -696,9 +644,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-3\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"3\">",
-              "target": [
-                "#noise-level-3"
-              ]
+              "target": ["#noise-level-3"]
             },
             {
               "any": [
@@ -714,9 +660,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--strawberries\" class=\"ember-view\" type=\"radio\" value=\"Strawberries\">",
-              "target": [
-                "#violations__radio-group-items--strawberries"
-              ]
+              "target": ["#violations__radio-group-items--strawberries"]
             },
             {
               "any": [
@@ -732,9 +676,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--blueberries\" class=\"ember-view\" type=\"radio\" value=\"Blueberries\">",
-              "target": [
-                "#violations__radio-group-items--blueberries"
-              ]
+              "target": ["#violations__radio-group-items--blueberries"]
             },
             {
               "any": [
@@ -750,19 +692,14 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--raspberries\" class=\"ember-view\" type=\"radio\" value=\"Raspberries\">",
-              "target": [
-                "#violations__radio-group-items--raspberries"
-              ]
+              "target": ["#violations__radio-group-items--raspberries"]
             }
           ]
         },
         {
           "id": "avoid-inline-spacing",
           "impact": null,
-          "tags": [
-            "wcag21aa",
-            "wcag1412"
-          ],
+          "tags": ["wcag21aa", "wcag1412"],
           "description": "Ensure that text spacing set through style attributes can be adjusted with custom stylesheets",
           "help": "Inline text spacing must be adjustable with custom stylesheets",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/avoid-inline-spacing?application=axeAPI",
@@ -781,9 +718,7 @@
               "none": [],
               "impact": null,
               "html": "<div id=\"ember-testing-container\" style=\"visibility: visible; position: relative;\">",
-              "target": [
-                "#ember-testing-container"
-              ]
+              "target": ["#ember-testing-container"]
             }
           ]
         },
@@ -815,20 +750,14 @@
               ],
               "impact": null,
               "html": "<blink>like this one!</blink>",
-              "target": [
-                "blink"
-              ]
+              "target": ["blink"]
             }
           ]
         },
         {
           "id": "color-contrast",
           "impact": null,
-          "tags": [
-            "cat.color",
-            "wcag2aa",
-            "wcag143"
-          ],
+          "tags": ["cat.color", "wcag2aa", "wcag143"],
           "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
           "help": "Elements must have sufficient color contrast",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/color-contrast?application=axeAPI",
@@ -847,20 +776,14 @@
               "none": [],
               "impact": null,
               "html": "<input class=\"c-text-input__input\" id=\"violations__labeless-input\" type=\"text\">",
-              "target": [
-                "#violations__labeless-input"
-              ]
+              "target": ["#violations__labeless-input"]
             }
           ]
         },
         {
           "id": "duplicate-id-active",
           "impact": null,
-          "tags": [
-            "cat.parsing",
-            "wcag2a",
-            "wcag411"
-          ],
+          "tags": ["cat.parsing", "wcag2a", "wcag411"],
           "description": "Ensures every id attribute value of active elements is unique",
           "help": "IDs of active elements must be unique",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/duplicate-id-active?application=axeAPI",
@@ -879,9 +802,7 @@
               "none": [],
               "impact": null,
               "html": "<button data-test-selector=\"empty-button\" id=\"violations__empty-button\" class=\"c-button ember-view\">\n</button>",
-              "target": [
-                "#violations__empty-button"
-              ]
+              "target": ["#violations__empty-button"]
             },
             {
               "any": [
@@ -897,20 +818,14 @@
               "none": [],
               "impact": null,
               "html": "<input class=\"c-text-input__input\" id=\"violations__labeless-input\" type=\"text\">",
-              "target": [
-                "#violations__labeless-input"
-              ]
+              "target": ["#violations__labeless-input"]
             }
           ]
         },
         {
           "id": "duplicate-id-aria",
           "impact": null,
-          "tags": [
-            "cat.parsing",
-            "wcag2a",
-            "wcag411"
-          ],
+          "tags": ["cat.parsing", "wcag2a", "wcag411"],
           "description": "Ensures every id attribute value used in ARIA and in labels is unique",
           "help": "IDs used in ARIA and labels must be unique",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/duplicate-id-aria?application=axeAPI",
@@ -929,9 +844,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-0\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"0\">",
-              "target": [
-                "#noise-level-0"
-              ]
+              "target": ["#noise-level-0"]
             },
             {
               "any": [
@@ -947,9 +860,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"true\" name=\"noise-level\" id=\"noise-level-1\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"1\">",
-              "target": [
-                "#noise-level-1"
-              ]
+              "target": ["#noise-level-1"]
             },
             {
               "any": [
@@ -965,9 +876,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-2\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"2\">",
-              "target": [
-                "#noise-level-2"
-              ]
+              "target": ["#noise-level-2"]
             },
             {
               "any": [
@@ -983,9 +892,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-3\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"3\">",
-              "target": [
-                "#noise-level-3"
-              ]
+              "target": ["#noise-level-3"]
             },
             {
               "any": [
@@ -1001,9 +908,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--strawberries\" class=\"ember-view\" type=\"radio\" value=\"Strawberries\">",
-              "target": [
-                "#violations__radio-group-items--strawberries"
-              ]
+              "target": ["#violations__radio-group-items--strawberries"]
             },
             {
               "any": [
@@ -1019,9 +924,7 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--blueberries\" class=\"ember-view\" type=\"radio\" value=\"Blueberries\">",
-              "target": [
-                "#violations__radio-group-items--blueberries"
-              ]
+              "target": ["#violations__radio-group-items--blueberries"]
             },
             {
               "any": [
@@ -1037,20 +940,14 @@
               "none": [],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--raspberries\" class=\"ember-view\" type=\"radio\" value=\"Raspberries\">",
-              "target": [
-                "#violations__radio-group-items--raspberries"
-              ]
+              "target": ["#violations__radio-group-items--raspberries"]
             }
           ]
         },
         {
           "id": "duplicate-id",
           "impact": null,
-          "tags": [
-            "cat.parsing",
-            "wcag2a",
-            "wcag411"
-          ],
+          "tags": ["cat.parsing", "wcag2a", "wcag411"],
           "description": "Ensures every id attribute value is unique",
           "help": "id attribute value must be unique",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/duplicate-id?application=axeAPI",
@@ -1069,9 +966,7 @@
               "none": [],
               "impact": null,
               "html": "<div id=\"ember-testing-container\" style=\"visibility: visible; position: relative;\">",
-              "target": [
-                "#ember-testing-container"
-              ]
+              "target": ["#ember-testing-container"]
             },
             {
               "any": [
@@ -1087,9 +982,7 @@
               "none": [],
               "impact": null,
               "html": "<div id=\"ember-testing\" class=\"ember-application\">",
-              "target": [
-                "#ember-testing"
-              ]
+              "target": ["#ember-testing"]
             },
             {
               "any": [
@@ -1105,9 +998,7 @@
               "none": [],
               "impact": null,
               "html": "<h2 data-test-selector=\"violations-page__passing-component\" id=\"ember130\" class=\"ember-view\">Violations\n</h2>",
-              "target": [
-                "#ember130"
-              ]
+              "target": ["#ember130"]
             },
             {
               "any": [
@@ -1123,9 +1014,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember131\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember131"
-              ]
+              "target": ["#ember131"]
             },
             {
               "any": [
@@ -1141,9 +1030,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember134\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember134"
-              ]
+              "target": ["#ember134"]
             },
             {
               "any": [
@@ -1159,9 +1046,7 @@
               "none": [],
               "impact": null,
               "html": "<div data-test-selector=\"labeless-text-input\" id=\"ember137\" class=\"c-text-input ember-view\"><input class=\"c-text-input__input\" id=\"violations__labeless-input\" type=\"text\">\n</div>",
-              "target": [
-                "#ember137"
-              ]
+              "target": ["#ember137"]
             },
             {
               "any": [
@@ -1177,9 +1062,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember138\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember138"
-              ]
+              "target": ["#ember138"]
             },
             {
               "any": [
@@ -1195,9 +1078,7 @@
               "none": [],
               "impact": null,
               "html": "<p data-test-selector=\"poor-text-contrast\" id=\"violations__low-contrast-text\" class=\"p-violations__grid-item-content--low-contrast-text c-paragraph ember-view\">\n          Swoooosh\n      \n</p>",
-              "target": [
-                "#violations__low-contrast-text"
-              ]
+              "target": ["#violations__low-contrast-text"]
             },
             {
               "any": [
@@ -1213,9 +1094,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember141\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember141"
-              ]
+              "target": ["#ember141"]
             },
             {
               "any": [
@@ -1231,9 +1110,7 @@
               "none": [],
               "impact": null,
               "html": "<p data-test-selector=\"paragraph-with-blink-tag\" id=\"violations__non-standard-html\" class=\"c-paragraph ember-view\">\n        Friends don't let friends use <code>&lt;blink&gt; tags</code>, <blink>like this one!</blink>\n      \n</p>",
-              "target": [
-                "#violations__non-standard-html"
-              ]
+              "target": ["#violations__non-standard-html"]
             },
             {
               "any": [
@@ -1249,9 +1126,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember142\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember142"
-              ]
+              "target": ["#ember142"]
             },
             {
               "any": [
@@ -1267,9 +1142,7 @@
               "none": [],
               "impact": null,
               "html": "<img src=\"assets/img/empire-state-building-moonlight.png\" id=\"violations__img-without-alt\" class=\"u-fill c-img ember-view\">",
-              "target": [
-                "#violations__img-without-alt"
-              ]
+              "target": ["#violations__img-without-alt"]
             },
             {
               "any": [
@@ -1285,19 +1158,14 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember145\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember145"
-              ]
+              "target": ["#ember145"]
             }
           ]
         },
         {
           "id": "empty-heading",
           "impact": null,
-          "tags": [
-            "cat.name-role-value",
-            "best-practice"
-          ],
+          "tags": ["cat.name-role-value", "best-practice"],
           "description": "Ensures headings have discernible text",
           "help": "Headings must not be empty",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/empty-heading?application=axeAPI",
@@ -1316,9 +1184,7 @@
               "none": [],
               "impact": null,
               "html": "<h1 class=\"u-align-center\">Ember A11y Testing</h1>",
-              "target": [
-                ".application__header > h1"
-              ]
+              "target": [".application__header > h1"]
             },
             {
               "any": [
@@ -1334,9 +1200,7 @@
               "none": [],
               "impact": null,
               "html": "<h2 data-test-selector=\"violations-page__passing-component\" id=\"ember130\" class=\"ember-view\">Violations\n</h2>",
-              "target": [
-                "#ember130"
-              ]
+              "target": ["#ember130"]
             },
             {
               "any": [
@@ -1352,9 +1216,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Button without title</h3>",
-              "target": [
-                "#ember131 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember131 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1370,9 +1232,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Input without label</h3>",
-              "target": [
-                "#ember134 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember134 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1388,9 +1248,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Poorly Contrasting Text Color</h3>",
-              "target": [
-                "#ember138 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember138 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1406,9 +1264,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Non-standard HTML elements</h3>",
-              "target": [
-                "#ember141 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember141 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1424,9 +1280,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">&lt;img&gt; Tags without `alt` attributes</h3>",
-              "target": [
-                "#ember142 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember142 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1442,20 +1296,14 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Ungrouped radio inputs with a shared name</h3>",
-              "target": [
-                "#ember145 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember145 > .c-violations-grid-item__header > h3"]
             }
           ]
         },
         {
           "id": "form-field-multiple-labels",
           "impact": null,
-          "tags": [
-            "cat.forms",
-            "wcag2a",
-            "wcag332"
-          ],
+          "tags": ["cat.forms", "wcag2a", "wcag332"],
           "description": "Ensures form field does not have multiple label elements",
           "help": "Form field should not have multiple label elements",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/form-field-multiple-labels?application=axeAPI",
@@ -1470,9 +1318,7 @@
                   "relatedNodes": [
                     {
                       "html": "<label for=\"noise-level-0\" class=\"c-radio-track__radio-item\">",
-                      "target": [
-                        "label[for=\"noise-level-0\"]"
-                      ]
+                      "target": ["label[for=\"noise-level-0\"]"]
                     }
                   ],
                   "impact": "moderate",
@@ -1481,9 +1327,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-0\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"0\">",
-              "target": [
-                "#noise-level-0"
-              ]
+              "target": ["#noise-level-0"]
             },
             {
               "any": [],
@@ -1495,9 +1339,7 @@
                   "relatedNodes": [
                     {
                       "html": "<label for=\"noise-level-1\" class=\"c-radio-track__radio-item\">",
-                      "target": [
-                        "label[for=\"noise-level-1\"]"
-                      ]
+                      "target": ["label[for=\"noise-level-1\"]"]
                     }
                   ],
                   "impact": "moderate",
@@ -1506,9 +1348,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"true\" name=\"noise-level\" id=\"noise-level-1\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"1\">",
-              "target": [
-                "#noise-level-1"
-              ]
+              "target": ["#noise-level-1"]
             },
             {
               "any": [],
@@ -1520,9 +1360,7 @@
                   "relatedNodes": [
                     {
                       "html": "<label for=\"noise-level-2\" class=\"c-radio-track__radio-item\">",
-                      "target": [
-                        "label[for=\"noise-level-2\"]"
-                      ]
+                      "target": ["label[for=\"noise-level-2\"]"]
                     }
                   ],
                   "impact": "moderate",
@@ -1531,9 +1369,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-2\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"2\">",
-              "target": [
-                "#noise-level-2"
-              ]
+              "target": ["#noise-level-2"]
             },
             {
               "any": [],
@@ -1545,9 +1381,7 @@
                   "relatedNodes": [
                     {
                       "html": "<label for=\"noise-level-3\" class=\"c-radio-track__radio-item\">",
-                      "target": [
-                        "label[for=\"noise-level-3\"]"
-                      ]
+                      "target": ["label[for=\"noise-level-3\"]"]
                     }
                   ],
                   "impact": "moderate",
@@ -1556,9 +1390,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-3\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"3\">",
-              "target": [
-                "#noise-level-3"
-              ]
+              "target": ["#noise-level-3"]
             },
             {
               "any": [],
@@ -1574,9 +1406,7 @@
               ],
               "impact": null,
               "html": "<input class=\"c-text-input__input\" id=\"violations__labeless-input\" type=\"text\">",
-              "target": [
-                "#violations__labeless-input"
-              ]
+              "target": ["#violations__labeless-input"]
             },
             {
               "any": [],
@@ -1599,9 +1429,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--strawberries\" class=\"ember-view\" type=\"radio\" value=\"Strawberries\">",
-              "target": [
-                "#violations__radio-group-items--strawberries"
-              ]
+              "target": ["#violations__radio-group-items--strawberries"]
             },
             {
               "any": [],
@@ -1624,9 +1452,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--blueberries\" class=\"ember-view\" type=\"radio\" value=\"Blueberries\">",
-              "target": [
-                "#violations__radio-group-items--blueberries"
-              ]
+              "target": ["#violations__radio-group-items--blueberries"]
             },
             {
               "any": [],
@@ -1649,19 +1475,14 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--raspberries\" class=\"ember-view\" type=\"radio\" value=\"Raspberries\">",
-              "target": [
-                "#violations__radio-group-items--raspberries"
-              ]
+              "target": ["#violations__radio-group-items--raspberries"]
             }
           ]
         },
         {
           "id": "heading-order",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the order of headings is semantically correct",
           "help": "Heading levels should only increase by one",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/heading-order?application=axeAPI",
@@ -1680,9 +1501,7 @@
               "none": [],
               "impact": null,
               "html": "<h1 class=\"u-align-center\">Ember A11y Testing</h1>",
-              "target": [
-                ".application__header > h1"
-              ]
+              "target": [".application__header > h1"]
             },
             {
               "any": [
@@ -1698,9 +1517,7 @@
               "none": [],
               "impact": null,
               "html": "<h2 data-test-selector=\"violations-page__passing-component\" id=\"ember130\" class=\"ember-view\">Violations\n</h2>",
-              "target": [
-                "#ember130"
-              ]
+              "target": ["#ember130"]
             },
             {
               "any": [
@@ -1716,9 +1533,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Button without title</h3>",
-              "target": [
-                "#ember131 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember131 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1734,9 +1549,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Input without label</h3>",
-              "target": [
-                "#ember134 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember134 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1752,9 +1565,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Poorly Contrasting Text Color</h3>",
-              "target": [
-                "#ember138 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember138 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1770,9 +1581,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Non-standard HTML elements</h3>",
-              "target": [
-                "#ember141 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember141 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1788,9 +1597,7 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">&lt;img&gt; Tags without `alt` attributes</h3>",
-              "target": [
-                "#ember142 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember142 > .c-violations-grid-item__header > h3"]
             },
             {
               "any": [
@@ -1806,20 +1613,14 @@
               "none": [],
               "impact": null,
               "html": "<h3 class=\"c-violations-grid-item__title u-align-center\">Ungrouped radio inputs with a shared name</h3>",
-              "target": [
-                "#ember145 > .c-violations-grid-item__header > h3"
-              ]
+              "target": ["#ember145 > .c-violations-grid-item__header > h3"]
             }
           ]
         },
         {
           "id": "identical-links-same-purpose",
           "impact": null,
-          "tags": [
-            "wcag2aaa",
-            "wcag249",
-            "best-practice"
-          ],
+          "tags": ["wcag2aaa", "wcag249", "best-practice"],
           "description": "Ensure that links with the same accessible name serve a similar purpose",
           "help": "Links with the same name have a similar purpose",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/identical-links-same-purpose?application=axeAPI",
@@ -1844,9 +1645,7 @@
                   "relatedNodes": [
                     {
                       "html": "<a href=\"https://ember-a11y.github.io/a11y-demo-app/\">Ember A11y's best-practices demo app</a>",
-                      "target": [
-                        "footer > a"
-                      ]
+                      "target": ["footer > a"]
                     }
                   ],
                   "impact": "minor",
@@ -1856,19 +1655,14 @@
               "none": [],
               "impact": null,
               "html": "<a href=\"https://ember-a11y.github.io/a11y-demo-app/\">Ember A11y's best-practices demo app</a>",
-              "target": [
-                "footer > a"
-              ]
+              "target": ["footer > a"]
             }
           ]
         },
         {
           "id": "image-redundant-alt",
           "impact": null,
-          "tags": [
-            "cat.text-alternatives",
-            "best-practice"
-          ],
+          "tags": ["cat.text-alternatives", "best-practice"],
           "description": "Ensure image alternative is not repeated as text",
           "help": "Alternative text of images should not be repeated as text",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/image-redundant-alt?application=axeAPI",
@@ -1887,19 +1681,14 @@
               ],
               "impact": null,
               "html": "<img src=\"assets/img/empire-state-building-moonlight.png\" id=\"violations__img-without-alt\" class=\"u-fill c-img ember-view\">",
-              "target": [
-                "#violations__img-without-alt"
-              ]
+              "target": ["#violations__img-without-alt"]
             }
           ]
         },
         {
           "id": "label-title-only",
           "impact": null,
-          "tags": [
-            "cat.forms",
-            "best-practice"
-          ],
+          "tags": ["cat.forms", "best-practice"],
           "description": "Ensures that every form element is not solely labeled using the title or aria-describedby attributes",
           "help": "Form elements should have a visible label",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/label-title-only?application=axeAPI",
@@ -1918,9 +1707,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-0\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"0\">",
-              "target": [
-                "#noise-level-0"
-              ]
+              "target": ["#noise-level-0"]
             },
             {
               "any": [],
@@ -1936,9 +1723,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"true\" name=\"noise-level\" id=\"noise-level-1\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"1\">",
-              "target": [
-                "#noise-level-1"
-              ]
+              "target": ["#noise-level-1"]
             },
             {
               "any": [],
@@ -1954,9 +1739,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-2\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"2\">",
-              "target": [
-                "#noise-level-2"
-              ]
+              "target": ["#noise-level-2"]
             },
             {
               "any": [],
@@ -1972,9 +1755,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-3\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"3\">",
-              "target": [
-                "#noise-level-3"
-              ]
+              "target": ["#noise-level-3"]
             },
             {
               "any": [],
@@ -1990,9 +1771,7 @@
               ],
               "impact": null,
               "html": "<input class=\"c-text-input__input\" id=\"violations__labeless-input\" type=\"text\">",
-              "target": [
-                "#violations__labeless-input"
-              ]
+              "target": ["#violations__labeless-input"]
             },
             {
               "any": [],
@@ -2008,9 +1787,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--strawberries\" class=\"ember-view\" type=\"radio\" value=\"Strawberries\">",
-              "target": [
-                "#violations__radio-group-items--strawberries"
-              ]
+              "target": ["#violations__radio-group-items--strawberries"]
             },
             {
               "any": [],
@@ -2026,9 +1803,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--blueberries\" class=\"ember-view\" type=\"radio\" value=\"Blueberries\">",
-              "target": [
-                "#violations__radio-group-items--blueberries"
-              ]
+              "target": ["#violations__radio-group-items--blueberries"]
             },
             {
               "any": [],
@@ -2044,9 +1819,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--raspberries\" class=\"ember-view\" type=\"radio\" value=\"Raspberries\">",
-              "target": [
-                "#violations__radio-group-items--raspberries"
-              ]
+              "target": ["#violations__radio-group-items--raspberries"]
             }
           ]
         },
@@ -2094,9 +1867,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-0\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"0\">",
-              "target": [
-                "#noise-level-0"
-              ]
+              "target": ["#noise-level-0"]
             },
             {
               "any": [
@@ -2127,9 +1898,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"true\" name=\"noise-level\" id=\"noise-level-1\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"1\">",
-              "target": [
-                "#noise-level-1"
-              ]
+              "target": ["#noise-level-1"]
             },
             {
               "any": [
@@ -2160,9 +1929,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-2\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"2\">",
-              "target": [
-                "#noise-level-2"
-              ]
+              "target": ["#noise-level-2"]
             },
             {
               "any": [
@@ -2193,9 +1960,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"noise-level\" id=\"noise-level-3\" class=\"c-radio-track__item-input ember-view\" type=\"radio\" value=\"3\">",
-              "target": [
-                "#noise-level-3"
-              ]
+              "target": ["#noise-level-3"]
             },
             {
               "any": [
@@ -2226,9 +1991,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--strawberries\" class=\"ember-view\" type=\"radio\" value=\"Strawberries\">",
-              "target": [
-                "#violations__radio-group-items--strawberries"
-              ]
+              "target": ["#violations__radio-group-items--strawberries"]
             },
             {
               "any": [
@@ -2259,9 +2022,7 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--blueberries\" class=\"ember-view\" type=\"radio\" value=\"Blueberries\">",
-              "target": [
-                "#violations__radio-group-items--blueberries"
-              ]
+              "target": ["#violations__radio-group-items--blueberries"]
             },
             {
               "any": [
@@ -2292,19 +2053,14 @@
               ],
               "impact": null,
               "html": "<input aria-checked=\"false\" name=\"fruits\" id=\"violations__radio-group-items--raspberries\" class=\"ember-view\" type=\"radio\" value=\"Raspberries\">",
-              "target": [
-                "#violations__radio-group-items--raspberries"
-              ]
+              "target": ["#violations__radio-group-items--raspberries"]
             }
           ]
         },
         {
           "id": "landmark-banner-is-top-level",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the banner landmark is at top level",
           "help": "Banner landmark must not be contained in another landmark",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-banner-is-top-level?application=axeAPI",
@@ -2325,19 +2081,14 @@
               "none": [],
               "impact": null,
               "html": "<header class=\"application__header\">\n    <h1 class=\"u-align-center\">Ember A11y Testing</h1>\n  </header>",
-              "target": [
-                ".application__header"
-              ]
+              "target": [".application__header"]
             }
           ]
         },
         {
           "id": "landmark-main-is-top-level",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the main landmark is at top level",
           "help": "Main landmark must not be contained in another landmark",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-main-is-top-level?application=axeAPI",
@@ -2358,19 +2109,14 @@
               "none": [],
               "impact": null,
               "html": "<main class=\"application__main-content u-relative u-fill-width o-content-box--lg\">",
-              "target": [
-                "main"
-              ]
+              "target": ["main"]
             }
           ]
         },
         {
           "id": "landmark-no-duplicate-banner",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the document has at most one banner landmark",
           "help": "Document must not have more than one banner landmark",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-no-duplicate-banner?application=axeAPI",
@@ -2389,19 +2135,14 @@
               "none": [],
               "impact": null,
               "html": "<header class=\"application__header\">\n    <h1 class=\"u-align-center\">Ember A11y Testing</h1>\n  </header>",
-              "target": [
-                ".application__header"
-              ]
+              "target": [".application__header"]
             }
           ]
         },
         {
           "id": "landmark-no-duplicate-contentinfo",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the document has at most one contentinfo landmark",
           "help": "Document must not have more than one contentinfo landmark",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-no-duplicate-contentinfo?application=axeAPI",
@@ -2420,19 +2161,14 @@
               "none": [],
               "impact": null,
               "html": "<footer class=\"p-violations__footer\">\n  For more on <strong>accessible</strong> user interface patterns, check out\n    <a href=\"https://ember-a11y.github.io/a11y-demo-app/\">Ember A11y's best-practices demo app</a>.\n</footer>",
-              "target": [
-                "footer"
-              ]
+              "target": ["footer"]
             }
           ]
         },
         {
           "id": "landmark-no-duplicate-main",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the document has at most one main landmark",
           "help": "Document must not have more than one main landmark",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-no-duplicate-main?application=axeAPI",
@@ -2451,19 +2187,14 @@
               "none": [],
               "impact": null,
               "html": "<main class=\"application__main-content u-relative u-fill-width o-content-box--lg\">",
-              "target": [
-                "main"
-              ]
+              "target": ["main"]
             }
           ]
         },
         {
           "id": "landmark-unique",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "help": "Ensures landmarks are unique",
           "description": "Landmarks must have a unique role or role/label/title (i.e. accessible name) combination",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-unique?application=axeAPI",
@@ -2485,9 +2216,7 @@
               "none": [],
               "impact": null,
               "html": "<header class=\"application__header\">\n    <h1 class=\"u-align-center\">Ember A11y Testing</h1>\n  </header>",
-              "target": [
-                ".application__header"
-              ]
+              "target": [".application__header"]
             },
             {
               "any": [
@@ -2506,9 +2235,7 @@
               "none": [],
               "impact": null,
               "html": "<main class=\"application__main-content u-relative u-fill-width o-content-box--lg\">",
-              "target": [
-                "main"
-              ]
+              "target": ["main"]
             }
           ]
         },
@@ -2549,20 +2276,14 @@
               ],
               "impact": null,
               "html": "<a href=\"https://ember-a11y.github.io/a11y-demo-app/\">Ember A11y's best-practices demo app</a>",
-              "target": [
-                "footer > a"
-              ]
+              "target": ["footer > a"]
             }
           ]
         },
         {
           "id": "list",
           "impact": null,
-          "tags": [
-            "cat.structure",
-            "wcag2a",
-            "wcag131"
-          ],
+          "tags": ["cat.structure", "wcag2a", "wcag131"],
           "description": "Ensures that lists are structured correctly",
           "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/list?application=axeAPI",
@@ -2581,20 +2302,14 @@
               ],
               "impact": null,
               "html": "<ul class=\"p-violations__grid u-fill-width u-relative\">",
-              "target": [
-                ".p-violations__grid"
-              ]
+              "target": [".p-violations__grid"]
             }
           ]
         },
         {
           "id": "listitem",
           "impact": null,
-          "tags": [
-            "cat.structure",
-            "wcag2a",
-            "wcag131"
-          ],
+          "tags": ["cat.structure", "wcag2a", "wcag131"],
           "description": "Ensures <li> elements are used semantically",
           "help": "<li> elements must be contained in a <ul> or <ol>",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/listitem?application=axeAPI",
@@ -2613,9 +2328,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember131\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember131"
-              ]
+              "target": ["#ember131"]
             },
             {
               "any": [
@@ -2631,9 +2344,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember134\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember134"
-              ]
+              "target": ["#ember134"]
             },
             {
               "any": [
@@ -2649,9 +2360,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember138\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember138"
-              ]
+              "target": ["#ember138"]
             },
             {
               "any": [
@@ -2667,9 +2376,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember141\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember141"
-              ]
+              "target": ["#ember141"]
             },
             {
               "any": [
@@ -2685,9 +2392,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember142\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember142"
-              ]
+              "target": ["#ember142"]
             },
             {
               "any": [
@@ -2703,9 +2408,7 @@
               "none": [],
               "impact": null,
               "html": "<li id=\"ember145\" class=\"p-violations__grid-item c-violations-grid-item o-content-box ember-view\">",
-              "target": [
-                "#ember145"
-              ]
+              "target": ["#ember145"]
             }
           ]
         }
@@ -2715,10 +2418,7 @@
         {
           "id": "accesskeys",
           "impact": null,
-          "tags": [
-            "best-practice",
-            "cat.keyboard"
-          ],
+          "tags": ["best-practice", "cat.keyboard"],
           "description": "Ensures every accesskey attribute value is unique",
           "help": "accesskey attribute value must be unique",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/accesskeys?application=axeAPI",
@@ -2744,10 +2444,7 @@
         {
           "id": "aria-allowed-role",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "best-practice"
-          ],
+          "tags": ["cat.aria", "best-practice"],
           "description": "Ensures role attribute has an appropriate value for the element",
           "help": "ARIA role must be appropriate for the element",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-allowed-role?application=axeAPI",
@@ -2756,11 +2453,7 @@
         {
           "id": "aria-hidden-body",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag412"],
           "description": "Ensures aria-hidden='true' is not present on the document body.",
           "help": "aria-hidden='true' must not be present on the document body",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-hidden-body?application=axeAPI",
@@ -2769,12 +2462,7 @@
         {
           "id": "aria-hidden-focus",
           "impact": null,
-          "tags": [
-            "cat.name-role-value",
-            "wcag2a",
-            "wcag412",
-            "wcag131"
-          ],
+          "tags": ["cat.name-role-value", "wcag2a", "wcag412", "wcag131"],
           "description": "Ensures aria-hidden elements do not contain focusable elements",
           "help": "ARIA hidden element must not contain focusable elements",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-hidden-focus?application=axeAPI",
@@ -2783,10 +2471,7 @@
         {
           "id": "aria-input-field-name",
           "impact": null,
-          "tags": [
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["wcag2a", "wcag412"],
           "description": "Ensures every ARIA input field has an accessible name",
           "help": "ARIA input fields must have an accessible name",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-input-field-name?application=axeAPI",
@@ -2795,11 +2480,7 @@
         {
           "id": "aria-required-attr",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag412"],
           "description": "Ensures elements with ARIA roles have all required ARIA attributes",
           "help": "Required ARIA attributes must be provided",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-required-attr?application=axeAPI",
@@ -2808,11 +2489,7 @@
         {
           "id": "aria-required-children",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag131"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag131"],
           "description": "Ensures elements with an ARIA role that require child roles contain them",
           "help": "Certain ARIA roles must contain particular children",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-required-children?application=axeAPI",
@@ -2821,11 +2498,7 @@
         {
           "id": "aria-required-parent",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag131"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag131"],
           "description": "Ensures elements with an ARIA role that require parent roles are contained by them",
           "help": "Certain ARIA roles must be contained by particular parents",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-required-parent?application=axeAPI",
@@ -2834,11 +2507,7 @@
         {
           "id": "aria-roledescription",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag412"],
           "description": "Ensure aria-roledescription is only used on elements with an implicit or explicit role",
           "help": "Use aria-roledescription on elements with a semantic role",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-roledescription?application=axeAPI",
@@ -2847,11 +2516,7 @@
         {
           "id": "aria-roles",
           "impact": null,
-          "tags": [
-            "cat.aria",
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["cat.aria", "wcag2a", "wcag412"],
           "description": "Ensures all elements with a role attribute use a valid value",
           "help": "ARIA roles used must conform to valid values",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-roles?application=axeAPI",
@@ -2860,10 +2525,7 @@
         {
           "id": "aria-toggle-field-name",
           "impact": null,
-          "tags": [
-            "wcag2a",
-            "wcag412"
-          ],
+          "tags": ["wcag2a", "wcag412"],
           "description": "Ensures every ARIA toggle field has an accessible name",
           "help": "ARIA toggle fields have an accessible name",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/aria-toggle-field-name?application=axeAPI",
@@ -2872,11 +2534,7 @@
         {
           "id": "autocomplete-valid",
           "impact": null,
-          "tags": [
-            "cat.forms",
-            "wcag21aa",
-            "wcag135"
-          ],
+          "tags": ["cat.forms", "wcag21aa", "wcag135"],
           "description": "Ensure the autocomplete attribute is correct and suitable for the form field",
           "help": "autocomplete attribute must be used correctly",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/autocomplete-valid?application=axeAPI",
@@ -2885,11 +2543,7 @@
         {
           "id": "definition-list",
           "impact": null,
-          "tags": [
-            "cat.structure",
-            "wcag2a",
-            "wcag131"
-          ],
+          "tags": ["cat.structure", "wcag2a", "wcag131"],
           "description": "Ensures <dl> elements are structured correctly",
           "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/definition-list?application=axeAPI",
@@ -2898,11 +2552,7 @@
         {
           "id": "dlitem",
           "impact": null,
-          "tags": [
-            "cat.structure",
-            "wcag2a",
-            "wcag131"
-          ],
+          "tags": ["cat.structure", "wcag2a", "wcag131"],
           "description": "Ensures <dt> and <dd> elements are contained by a <dl>",
           "help": "<dt> and <dd> elements must be contained by a <dl>",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/dlitem?application=axeAPI",
@@ -2911,12 +2561,7 @@
         {
           "id": "document-title",
           "impact": null,
-          "tags": [
-            "cat.text-alternatives",
-            "wcag2a",
-            "wcag242",
-            "ACT"
-          ],
+          "tags": ["cat.text-alternatives", "wcag2a", "wcag242", "ACT"],
           "description": "Ensures each HTML document contains a non-empty <title> element",
           "help": "Documents must have <title> element to aid in navigation",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/document-title?application=axeAPI",
@@ -2925,11 +2570,7 @@
         {
           "id": "frame-tested",
           "impact": null,
-          "tags": [
-            "cat.structure",
-            "review-item",
-            "best-practice"
-          ],
+          "tags": ["cat.structure", "review-item", "best-practice"],
           "description": "Ensures <iframe> and <frame> elements contain the axe-core script",
           "help": "Frames must be tested with axe-core",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/frame-tested?application=axeAPI",
@@ -2938,10 +2579,7 @@
         {
           "id": "frame-title-unique",
           "impact": null,
-          "tags": [
-            "cat.text-alternatives",
-            "best-practice"
-          ],
+          "tags": ["cat.text-alternatives", "best-practice"],
           "description": "Ensures <iframe> and <frame> elements contain a unique title attribute",
           "help": "Frames must have a unique title attribute",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/frame-title-unique?application=axeAPI",
@@ -2966,12 +2604,7 @@
         {
           "id": "html-has-lang",
           "impact": null,
-          "tags": [
-            "cat.language",
-            "wcag2a",
-            "wcag311",
-            "ACT"
-          ],
+          "tags": ["cat.language", "wcag2a", "wcag311", "ACT"],
           "description": "Ensures every HTML document has a lang attribute",
           "help": "<html> element must have a lang attribute",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/html-has-lang?application=axeAPI",
@@ -2980,12 +2613,7 @@
         {
           "id": "html-lang-valid",
           "impact": null,
-          "tags": [
-            "cat.language",
-            "wcag2a",
-            "wcag311",
-            "ACT"
-          ],
+          "tags": ["cat.language", "wcag2a", "wcag311", "ACT"],
           "description": "Ensures the lang attribute of the <html> element has a valid value",
           "help": "<html> element must have a valid value for the lang attribute",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/html-lang-valid?application=axeAPI",
@@ -2994,12 +2622,7 @@
         {
           "id": "html-xml-lang-mismatch",
           "impact": null,
-          "tags": [
-            "cat.language",
-            "wcag2a",
-            "wcag311",
-            "ACT"
-          ],
+          "tags": ["cat.language", "wcag2a", "wcag311", "ACT"],
           "description": "Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page",
           "help": "HTML elements with lang and xml:lang must have the same base language",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/html-xml-lang-mismatch?application=axeAPI",
@@ -3039,10 +2662,7 @@
         {
           "id": "landmark-complementary-is-top-level",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the complementary landmark or aside is at top level",
           "help": "Aside must not be contained in another landmark",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-complementary-is-top-level?application=axeAPI",
@@ -3051,10 +2671,7 @@
         {
           "id": "landmark-contentinfo-is-top-level",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the contentinfo landmark is at top level",
           "help": "Contentinfo landmark must not be contained in another landmark",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-contentinfo-is-top-level?application=axeAPI",
@@ -3063,10 +2680,7 @@
         {
           "id": "landmark-one-main",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensures the document has a main landmark",
           "help": "Document must have one main landmark",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/landmark-one-main?application=axeAPI",
@@ -3075,11 +2689,7 @@
         {
           "id": "marquee",
           "impact": null,
-          "tags": [
-            "cat.parsing",
-            "wcag2a",
-            "wcag222"
-          ],
+          "tags": ["cat.parsing", "wcag2a", "wcag222"],
           "description": "Ensures <marquee> elements are not used",
           "help": "<marquee> elements are deprecated and must not be used",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/marquee?application=axeAPI",
@@ -3104,10 +2714,7 @@
         {
           "id": "meta-viewport-large",
           "impact": null,
-          "tags": [
-            "cat.sensory-and-visual-cues",
-            "best-practice"
-          ],
+          "tags": ["cat.sensory-and-visual-cues", "best-practice"],
           "description": "Ensures <meta name=\"viewport\"> can scale a significant amount",
           "help": "Users should be able to zoom and scale the text up to 500%",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/meta-viewport-large?application=axeAPI",
@@ -3116,10 +2723,7 @@
         {
           "id": "meta-viewport",
           "impact": null,
-          "tags": [
-            "cat.sensory-and-visual-cues",
-            "best-practice"
-          ],
+          "tags": ["cat.sensory-and-visual-cues", "best-practice"],
           "description": "Ensures <meta name=\"viewport\"> does not disable text scaling and zooming",
           "help": "Zooming and scaling must not be disabled",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/meta-viewport?application=axeAPI",
@@ -3143,10 +2747,7 @@
         {
           "id": "page-has-heading-one",
           "impact": null,
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ],
+          "tags": ["cat.semantics", "best-practice"],
           "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
           "help": "Page must contain a level-one heading",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/page-has-heading-one?application=axeAPI",
@@ -3155,10 +2756,7 @@
         {
           "id": "region",
           "impact": null,
-          "tags": [
-            "cat.keyboard",
-            "best-practice"
-          ],
+          "tags": ["cat.keyboard", "best-practice"],
           "description": "Ensures all page content is contained by landmarks",
           "help": "All page content must be contained by landmarks",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/region?application=axeAPI",
@@ -3182,10 +2780,7 @@
         {
           "id": "scope-attr-valid",
           "impact": null,
-          "tags": [
-            "cat.tables",
-            "best-practice"
-          ],
+          "tags": ["cat.tables", "best-practice"],
           "description": "Ensures the scope attribute is used correctly on tables",
           "help": "scope attribute should be used correctly",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/scope-attr-valid?application=axeAPI",
@@ -3194,10 +2789,7 @@
         {
           "id": "scrollable-region-focusable",
           "impact": null,
-          "tags": [
-            "wcag2a",
-            "wcag211"
-          ],
+          "tags": ["wcag2a", "wcag211"],
           "description": "Elements that have scrollable content should be accessible by keyboard",
           "help": "Ensure that scrollable region has keyboard access",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/scrollable-region-focusable?application=axeAPI",
@@ -3221,10 +2813,7 @@
         {
           "id": "skip-link",
           "impact": null,
-          "tags": [
-            "cat.keyboard",
-            "best-practice"
-          ],
+          "tags": ["cat.keyboard", "best-practice"],
           "description": "Ensure all skip links have a focusable target",
           "help": "The skip-link target should exist and be focusable",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/skip-link?application=axeAPI",
@@ -3248,10 +2837,7 @@
         {
           "id": "tabindex",
           "impact": null,
-          "tags": [
-            "cat.keyboard",
-            "best-practice"
-          ],
+          "tags": ["cat.keyboard", "best-practice"],
           "description": "Ensures tabindex attribute values are not greater than 0",
           "help": "Elements should not have tabindex greater than zero",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/tabindex?application=axeAPI",
@@ -3260,10 +2846,7 @@
         {
           "id": "table-duplicate-name",
           "impact": null,
-          "tags": [
-            "cat.tables",
-            "best-practice"
-          ],
+          "tags": ["cat.tables", "best-practice"],
           "description": "Ensure that tables do not have the same summary and caption",
           "help": "The <caption> element should not contain the same text as the summary attribute",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/table-duplicate-name?application=axeAPI",
@@ -3302,11 +2885,7 @@
         {
           "id": "valid-lang",
           "impact": null,
-          "tags": [
-            "cat.language",
-            "wcag2aa",
-            "wcag312"
-          ],
+          "tags": ["cat.language", "wcag2aa", "wcag312"],
           "description": "Ensures lang attributes have valid values",
           "help": "lang attribute must have a valid value",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.0/valid-lang?application=axeAPI",
