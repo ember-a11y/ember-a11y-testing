@@ -70,7 +70,7 @@
     "ember-auto-import": "^2.2.4",
     "ember-cli-babel": "^8.2.0",
     "ember-cli-htmlbars": "^6.3.0",
-    "ember-cli-typescript": "^4.2.1",
+    "ember-cli-typescript": "^5.3.0",
     "ember-cli-version-checker": "^5.1.2",
     "fs-extra": "^11.2.0",
     "validate-peer-dependencies": "^2.0.0"
