@@ -91,7 +91,7 @@
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
-    "ember-cli": "^4.0.1",
+    "ember-cli": "^6.7.0",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-github-pages": "^0.2.2",
     "ember-cli-inject-live-reload": "^2.1.0",
