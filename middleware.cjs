@@ -19,18 +19,14 @@ const fs = require('node:fs');
  *
  * @example
  * // testem.js
- * const { setupMiddleware } = require('ember-a11y-testing/middleware');
+ * const { a11yMiddleware } = require('ember-a11y-testing/middleware');
  *
  * module.exports = {
  *   // …other config
- *   middleware: [
- *     function (app) {
- *       setupMiddleware(app);
- *     },
- *   ],
+ *   middleware: [a11yMiddleware],
  * };
  */
-function setupMiddleware(app, options = {}) {
+function a11yMiddleware(app, options = {}) {
   const {
     root = process.cwd(),
     reportDir = 'ember-a11y-report',
@@ -66,4 +62,4 @@ function setupMiddleware(app, options = {}) {
   });
 }
 
-module.exports = { setupMiddleware };
+module.exports = { a11yMiddleware };

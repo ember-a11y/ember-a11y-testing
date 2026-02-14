@@ -95,26 +95,30 @@ In 8.0.0, there are no `serverMiddleware`/`testemMiddleware` hooks. **You must s
 Configure the built-in middleware in your Testem config (`testem.js`):
 
 ```js
-const { setupMiddleware } = require('ember-a11y-testing/middleware');
+const { a11yMiddleware } = require('ember-a11y-testing/middleware');
 
 module.exports = {
   // ... other testem config
-  middleware: [
-    function (app) {
-      setupMiddleware(app);
-    },
-  ],
+  middleware: [a11yMiddleware],
 };
 ```
 
-The middleware accepts an optional options object:
+The middleware accepts an optional options object if you need to customise paths:
 
 ```js
-setupMiddleware(app, {
-  root: __dirname,              // defaults to process.cwd()
-  reportDir: 'ember-a11y-report', // defaults to 'ember-a11y-report'
-  urlPath: '/report-violations',  // defaults to '/report-violations'
-});
+const { a11yMiddleware } = require('ember-a11y-testing/middleware');
+
+module.exports = {
+  middleware: [
+    function (app) {
+      a11yMiddleware(app, {
+        root: __dirname,              // defaults to process.cwd()
+        reportDir: 'ember-a11y-report', // defaults to 'ember-a11y-report'
+        urlPath: '/report-violations',  // defaults to '/report-violations'
+      });
+    },
+  ],
+};
 ```
 
 Your browser-side code (`setupMiddlewareReporter()` in `tests/test-helper.js`) remains unchanged.

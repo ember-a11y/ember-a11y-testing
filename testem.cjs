@@ -1,5 +1,7 @@
 'use strict';
 
+const { a11yMiddleware } = require('./middleware.cjs');
+
 if (typeof module !== 'undefined') {
   module.exports = {
     test_page: 'tests/index.html?hidepassed',
@@ -22,5 +24,6 @@ if (typeof module !== 'undefined') {
         ].filter(Boolean),
       },
     },
+    middleware: [a11yMiddleware],
   };
 }

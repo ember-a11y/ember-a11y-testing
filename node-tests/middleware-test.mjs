@@ -3,11 +3,17 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import { fileURLToPath } from 'node:url';
 import { Readable } from 'node:stream';
 import { createRequire } from 'node:module';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
-const { setupMiddleware } = require('../middleware.cjs');
+const { a11yMiddleware } = require('../middleware.cjs');
+
+const VIOLATIONS_FIXTURE = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, 'fixtures/violations.json'), 'utf8'),
+);
 
 /**
  * Creates a minimal Express-like app shim that records registered POST routes.
@@ -63,25 +69,25 @@ describe('middleware', () => {
 
   it('registers a POST route at /report-violations by default', () => {
     const app = createApp();
-    setupMiddleware(app, { root: tmpDir });
+    a11yMiddleware(app, { root: tmpDir });
     assert.ok(app._routes.has('/report-violations'));
   });
 
   it('registers a POST route at a custom urlPath', () => {
     const app = createApp();
-    setupMiddleware(app, { root: tmpDir, urlPath: '/custom-path' });
+    a11yMiddleware(app, { root: tmpDir, urlPath: '/custom-path' });
     assert.ok(app._routes.has('/custom-path'));
   });
 
   it('normalizes urlPath without leading slash', () => {
     const app = createApp();
-    setupMiddleware(app, { root: tmpDir, urlPath: 'no-slash' });
+    a11yMiddleware(app, { root: tmpDir, urlPath: 'no-slash' });
     assert.ok(app._routes.has('/no-slash'));
   });
 
   it('writes violations to a JSON file and responds with 200', async () => {
     const app = createApp();
-    setupMiddleware(app, { root: tmpDir });
+    a11yMiddleware(app, { root: tmpDir });
 
     const testData = [
       {
@@ -105,7 +111,7 @@ describe('middleware', () => {
 
   it('uses a custom reportDir', async () => {
     const app = createApp();
-    setupMiddleware(app, { root: tmpDir, reportDir: 'custom-reports' });
+    a11yMiddleware(app, { root: tmpDir, reportDir: 'custom-reports' });
 
     const handler = app._routes.get('/report-violations');
     const res = await simulatePost(handler, [{ test: true }]);
@@ -117,7 +123,7 @@ describe('middleware', () => {
   it('creates the report directory if it does not exist', async () => {
     const reportDir = 'nested/deep/reports';
     const app = createApp();
-    setupMiddleware(app, { root: tmpDir, reportDir });
+    a11yMiddleware(app, { root: tmpDir, reportDir });
 
     const handler = app._routes.get('/report-violations');
     await simulatePost(handler, []);
@@ -130,7 +136,7 @@ describe('middleware', () => {
 
   it('responds with 500 on invalid JSON', async () => {
     const app = createApp();
-    setupMiddleware(app, { root: tmpDir });
+    a11yMiddleware(app, { root: tmpDir });
 
     const handler = app._routes.get('/report-violations');
     const res = await simulatePost(handler, 'not-valid-json{{{');
@@ -142,7 +148,23 @@ describe('middleware', () => {
 
   it('uses default options when none are provided', () => {
     const app = createApp();
-    setupMiddleware(app);
+    a11yMiddleware(app);
     assert.ok(app._routes.has('/report-violations'));
+  });
+
+  it('persists a realistic violations fixture faithfully', async () => {
+    const app = createApp();
+    a11yMiddleware(app, { root: tmpDir });
+
+    const handler = app._routes.get('/report-violations');
+    const res = await simulatePost(handler, VIOLATIONS_FIXTURE);
+
+    assert.equal(res.statusCode, 200);
+
+    const result = JSON.parse(res.body);
+    const written = JSON.parse(fs.readFileSync(result.outputPath, 'utf8'));
+
+    assert.equal(written.length, VIOLATIONS_FIXTURE.length);
+    assert.deepEqual(written, VIOLATIONS_FIXTURE);
   });
 });

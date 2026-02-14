@@ -416,15 +416,11 @@ This addon provides browser-side helpers for reporting violations via middleware
 Add the middleware to your `testem.js`:
 
 ```js
-const { setupMiddleware } = require('ember-a11y-testing/middleware');
+const { a11yMiddleware } = require('ember-a11y-testing/middleware');
 
 module.exports = {
   // …other config
-  middleware: [
-    function (app) {
-      setupMiddleware(app);
-    },
-  ],
+  middleware: [a11yMiddleware],
 };
 ```
 
