@@ -188,6 +188,36 @@ module('some test module', function (hooks) {
 
 When using `setRunOptions` during a test, the options you set are automatically reset when the test completes.
 
+#### Configuring axe-core using `setConfigureOptions`
+
+You can pass options to [`axe.configure()`](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#api-name-axeconfigure) using the `setConfigureOptions` API. This allows you to define custom rules, checks, branding, locales, and more.
+
+```javascript
+import { setConfigureOptions } from 'ember-a11y-testing/test-support';
+
+setConfigureOptions({
+  rules: [
+    {
+      id: 'my-custom-rule',
+      selector: '.my-component',
+      enabled: true,
+      any: ['my-custom-check'],
+    },
+  ],
+});
+```
+
+You can also use it to set axiom locale:
+
+```javascript
+import { setConfigureOptions } from 'ember-a11y-testing/test-support';
+import esLocale from 'axe-core/locales/es.json';
+
+setConfigureOptions({ locale: esLocale });
+```
+
+Like `setRunOptions`, calling `setConfigureOptions` during a test automatically resets the configuration when the test completes.
+
 ### `a11yAudit` Usage
 
 `ember-a11y-testing` provides a test helper to run accessibility audits on specific tests within your test suite. The `a11yAudit` helper is an async test helper which can be used in a similar fashion to other `@ember/test-helpers` helpers:

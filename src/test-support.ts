@@ -1,6 +1,10 @@
 export { default as a11yAudit } from './test-support/audit.ts';
 export { setRunOptions, getRunOptions } from './test-support/run-options.ts';
 export {
+  setConfigureOptions,
+  getConfigureOptions,
+} from './test-support/configure-options.ts';
+export {
   setEnableA11yAudit,
   shouldForceAudit,
 } from './test-support/should-force-audit.ts';

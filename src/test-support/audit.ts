@@ -1,7 +1,8 @@
-import { run } from 'axe-core';
+import { configure, reset, run } from 'axe-core';
 import { waitForPromise } from '@ember/test-waiters';
 import { mark, markEndAndMeasure } from './performance.ts';
 import { getRunOptions } from './run-options.ts';
+import { getConfigureOptions } from './configure-options.ts';
 import { reportA11yAudit } from './reporter.ts';
 import '../a11y-audit.css';
 
@@ -84,11 +85,19 @@ export default function a11yAudit(
 
   const [context, options] = _normalizeRunParams(contextSelector, axeOptions);
 
+  const configureOptions = getConfigureOptions();
+  if (configureOptions) {
+    configure(configureOptions);
+  }
+
   document.body.classList.add('axe-running');
 
   return waitForPromise(run(context, options))
     .then(reportA11yAudit)
     .finally(() => {
+      if (configureOptions) {
+        reset();
+      }
       document.body.classList.remove('axe-running');
       markEndAndMeasure('a11y_audit', 'a11y_audit_start', 'a11y_audit_end');
     });
