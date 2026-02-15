@@ -45,19 +45,7 @@ ENABLE_A11Y_AUDIT=true ember test
 
 **8.0.0 — choose one:**
 
-- **Query parameter** (recommended): Add `?enableA11yAudit` to your test URL:
-  ```
-  http://localhost:7357/?enableA11yAudit
-  ```
-  When using Testem, add it to your `testem.js`:
-  ```js
-  module.exports = {
-    test_page: 'tests/index.html?hidepassed&enableA11yAudit',
-    // ...
-  };
-  ```
-
-- **Programmatic**: Call `setEnableA11yAudit(true)` in your test helper or test setup:
+- **Programmatic** (recommended): Call `setEnableA11yAudit(true)` in your test helper or test setup. This works regardless of how the test page is loaded:
   ```js
   import { setEnableA11yAudit } from 'ember-a11y-testing/test-support';
 
@@ -65,6 +53,18 @@ ENABLE_A11Y_AUDIT=true ember test
   ```
 
 - **QUnit toggle**: Use `setupQUnitA11yAuditToggle(QUnit)` to add a checkbox in the QUnit UI that sets the query parameter.
+
+- **Query parameter**: Add `?enableA11yAudit` to your test URL:
+  ```
+  http://localhost:7357/?enableA11yAudit
+  ```
+  When using Testem, you can add it to the `test_page` in your `testem.js`, but note this only affects Testem-launched runs and won't apply when navigating to `/tests` directly:
+  ```js
+  module.exports = {
+    test_page: 'tests/index.html?hidepassed&enableA11yAudit',
+    // ...
+  };
+  ```
 
 ### 2. `ENABLE_A11Y_MIDDLEWARE_REPORTER` environment variable no longer works
 
