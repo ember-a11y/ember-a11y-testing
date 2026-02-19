@@ -1,42 +1,27 @@
+/**
+ * This tsconfig is not used for publishing.
+ * It's only for the local editing experience
+ * (and linting)
+ */
 {
-  "compilerOptions": {
-    "target": "es2018",
-    "allowJs": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "skipLibCheck": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noEmitOnError": false,
-    "noEmit": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "baseUrl": ".",
-    "module": "es6",
-    "experimentalDecorators": true,
-    "paths": {
-      "dummy/tests/*": ["tests/*"],
-      "dummy/*": ["tests/dummy/app/*", "app/*"],
-      "ember-a11y-testing": ["addon"],
-      "ember-a11y-testing/*": ["addon/*"],
-      "ember-a11y-testing/test-support": ["addon-test-support"],
-      "ember-a11y-testing/test-support/*": ["addon-test-support/*"],
-      "*": ["types/*"]
-    }
-  },
+  "extends": "@ember/app-tsconfig",
   "include": [
-    "app/**/*",
-    "addon/**/*",
+    "src/**/*",
     "tests/**/*",
-    "types/**/*",
-    "test-support/**/*",
-    "addon-test-support/**/*"
-  ]
+    "unpublished-development-types/**/*",
+    "demo-app/**/*"
+  ],
+  "compilerOptions": {
+    "rootDir": ".",
+    "paths": {
+      "#src/*": ["./src/*"],
+      "#tests/*": ["./tests/*"]
+    },
+    "types": [
+      "ember-source/types",
+      "vite/client",
+      "@embroider/core/virtual",
+      "@glint/ember-tsc/types"
+    ]
+  }
 }

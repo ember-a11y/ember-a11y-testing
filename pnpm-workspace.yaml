@@ -1,0 +1,6 @@
+autoInstallPeers: false
+
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+
+resolvePeersFromWorkspaceRoot: false

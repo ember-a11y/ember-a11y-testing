@@ -12,26 +12,21 @@ individual tests using an `a11yAudit()` test helper.
 ## Compatibility
 
 - Ember.js v4.0.0 or above
-- Ember CLI v3.8 or above
-- Node.js v16 or above
+- Embroider or ember-auto-import v2
+- Node.js v18 or above
 - `@ember/test-helpers` v3.0.3 or above
-
-Note: we enforce a peerDependency of `@ember/test-helpers`. If you encounter the following message:
-
-```shell
-ember-a11y-testing has the following unmet peerDependencies:
-  * @ember/test-helpers: `^2.0.0`; it was resolved to `x.x.x`
-```
-
-please update your version of `@ember/test-helpers` in your package.json accordingly.
-
-Note: Users who are using Node <= 14 in their apps should use `ember-a11y-testing@^5.2.1`.
 
 ## Installation
 
 ```bash
-ember install ember-a11y-testing
+npm install --save-dev ember-a11y-testing
+# or
+pnpm add -D ember-a11y-testing
+# or
+yarn add -D ember-a11y-testing
 ```
+
+> **Upgrading from 7.x?** See the [Upgrade Guide](UPGRADE.md) for breaking changes and migration steps.
 
 ## Usage
 
@@ -193,6 +188,36 @@ module('some test module', function (hooks) {
 
 When using `setRunOptions` during a test, the options you set are automatically reset when the test completes.
 
+#### Configuring axe-core using `setConfigureOptions`
+
+You can pass options to [`axe.configure()`](https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#api-name-axeconfigure) using the `setConfigureOptions` API. This allows you to define custom rules, checks, branding, locales, and more.
+
+```javascript
+import { setConfigureOptions } from 'ember-a11y-testing/test-support';
+
+setConfigureOptions({
+  rules: [
+    {
+      id: 'my-custom-rule',
+      selector: '.my-component',
+      enabled: true,
+      any: ['my-custom-check'],
+    },
+  ],
+});
+```
+
+You can also use it to set axiom locale:
+
+```javascript
+import { setConfigureOptions } from 'ember-a11y-testing/test-support';
+import esLocale from 'axe-core/locales/es.json';
+
+setConfigureOptions({ locale: esLocale });
+```
+
+Like `setRunOptions`, calling `setConfigureOptions` during a test automatically resets the configuration when the test completes.
+
 ### `a11yAudit` Usage
 
 `ember-a11y-testing` provides a test helper to run accessibility audits on specific tests within your test suite. The `a11yAudit` helper is an async test helper which can be used in a similar fashion to other `@ember/test-helpers` helpers:
@@ -284,8 +309,12 @@ test('Some test case', async function (assert) {
 ### Force Running audits
 
 `ember-a11y-testing` allows you to force audits if `enableA11yAudit` is set as a query param
-on the test page or the `ENABLE_A11Y_AUDIT` environment variable is provided. This is useful if you want to conditionally run accessibility audits, such
+on the test page. This is useful if you want to conditionally run accessibility audits, such
 as during nightly build jobs.
+
+You can also enable audits programmatically using `setEnableA11yAudit(true)`.
+
+> **Note:** The `ENABLE_A11Y_AUDIT` environment variable is no longer supported. In v2 addons there is no build-time code rewriting. Use the `?enableA11yAudit` query parameter or call `setEnableA11yAudit(true)` instead.
 
 To do so, import and use `shouldForceAudit` from `ember-a11y-testing`, as shown below.
 
@@ -382,9 +411,28 @@ Example:
 
 ### Test Middleware
 
-This addon provides middleware - code that allows the browser to talk to the node process running the tests via testem. This is useful in scenarios such as internal compliance monitoring used to track accessibility grades.
+This addon provides browser-side helpers for reporting violations via middleware. The server-side middleware is also included and must be configured in your Testem config.
 
-The middleware reporter writes the results containing all violations detected in all tests to a JSON file stored in a directory, `ember-a11y-report`, in your application or addon's root directory.
+Add the middleware to your `testem.js`:
+
+```js
+const { a11yMiddleware } = require('ember-a11y-testing/middleware');
+
+module.exports = {
+  // …other config
+  middleware: [a11yMiddleware],
+};
+```
+
+Options (all optional):
+
+| Option | Default | Description |
+|---|---|---|
+| `root` | `process.cwd()` | Root directory for report output |
+| `reportDir` | `'ember-a11y-report'` | Directory name for reports (relative to root) |
+| `urlPath` | `'/report-violations'` | URL path the middleware listens on |
+
+The middleware reporter writes the results containing all violations detected in all tests to a JSON file stored in the report directory.
 
 :warning: **Audit report files get generated in an additive manner, typically resulting in the `a11y-audit-report` directory growing in size as subsequent test suites are run. Environments with specific space size restrictions will require an explicit strategy to manage the deletion of older reports, as this addon no longer does so.**
 
@@ -404,7 +452,9 @@ setupMiddlewareReporter();
 start();
 ```
 
-A helper function is available to use the middleware reporter conditionally, allowing interoperability between the default reporter and the middleware reporter. Import `useMiddlewareReporter` and apply as a check around the `setupMiddlewareReporter` function in `tests/test-helper.js`. The middleware reporter will now only be invoked when `enableA11yMiddlewareReporter` is set as a query param on the test page or the `ENABLE_A11Y_MIDDLEWARE_REPORTER` environment variable is provided.
+A helper function is available to use the middleware reporter conditionally, allowing interoperability between the default reporter and the middleware reporter. Import `useMiddlewareReporter` and apply as a check around the `setupMiddlewareReporter` function in `tests/test-helper.js`. The middleware reporter will now only be invoked when `enableA11yMiddlewareReporter` is set as a query param on the test page.
+
+> **Note:** The `ENABLE_A11Y_MIDDLEWARE_REPORTER` environment variable is no longer supported. Use the `?enableA11yMiddlewareReporter` query parameter instead.
 
 ```js
 import Application from 'my-app/app';
@@ -427,7 +477,7 @@ start();
 ```
 
 Note, as a convenience, `useMiddlewareReporter` automatically forces audits, thus explicitly specifying
-the `enableA11yAudit` query param or the `ENABLE_A11Y_AUDIT` environment variable is unnecessary.
+the `enableA11yAudit` query param is unnecessary.
 
 ### Development Usage
 
