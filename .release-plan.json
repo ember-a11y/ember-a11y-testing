@@ -1,11 +1,15 @@
 {
   "solution": {
     "ember-a11y-testing": {
-      "impact": "patch",
-      "oldVersion": "7.1.2",
-      "newVersion": "7.1.3",
+      "impact": "major",
+      "oldVersion": "7.1.3",
+      "newVersion": "8.0.0",
       "tagName": "latest",
       "constraints": [
+        {
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
+        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :house: Internal"
@@ -14,5 +18,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-05-07)\n\n* ember-a11y-testing 7.1.3 (patch)\n\n#### :house: Internal\n* `ember-a11y-testing`\n  * [#603](https://github.com/ember-a11y/ember-a11y-testing/pull/603) refactor(styles): move global styles to dedicated globals.scss file ([@lem0n4id](https://github.com/lem0n4id))\n  * [#601](https://github.com/ember-a11y/ember-a11y-testing/pull/601) convert render tests tests to gts ([@mansona](https://github.com/mansona))\n\n#### Committers: 2\n- Chris Manson ([@mansona](https://github.com/mansona))\n- Lenin Kennedy ([@lem0n4id](https://github.com/lem0n4id))\n"
+  "description": "## Release (2026-02-19)\n\n* ember-a11y-testing 8.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-a11y-testing`\n  * [#606](https://github.com/ember-a11y/ember-a11y-testing/pull/606) [breaking] feat: init v2 ([@aklkv](https://github.com/aklkv))\n\n#### :house: Internal\n* `ember-a11y-testing`\n  * [#624](https://github.com/ember-a11y/ember-a11y-testing/pull/624) Fix release-plan release ([@mansona](https://github.com/mansona))\n\n#### Committers: 2\n- Alexey Kulakov ([@aklkv](https://github.com/aklkv))\n- Chris Manson ([@mansona](https://github.com/mansona))\n"
 }

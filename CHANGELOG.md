@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-02-19)
+
+* ember-a11y-testing 8.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-a11y-testing`
+  * [#606](https://github.com/ember-a11y/ember-a11y-testing/pull/606) [breaking] feat: init v2 ([@aklkv](https://github.com/aklkv))
+
+#### :house: Internal
+* `ember-a11y-testing`
+  * [#624](https://github.com/ember-a11y/ember-a11y-testing/pull/624) Fix release-plan release ([@mansona](https://github.com/mansona))
+
+#### Committers: 2
+- Alexey Kulakov ([@aklkv](https://github.com/aklkv))
+- Chris Manson ([@mansona](https://github.com/mansona))
+
 ## Release (2025-05-07)
 
 * ember-a11y-testing 7.1.3 (patch)
