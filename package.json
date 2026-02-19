@@ -38,7 +38,8 @@
     "Sarbbottam Bandyopadhyay <sarbbottam@gmail.com>",
     "Eric Kelly <heroiceric@gmail.com>",
     "Sam Selikoff <sam.selikoff@gmail.com>",
-    "Renato Iwashima <renatoiwa@gmail.com>"
+    "Renato Iwashima <renatoiwa@gmail.com>",
+    "Chris Manson <chris@manson.ie>"
   ],
   "imports": {
     "#src/*": "./src/*",
