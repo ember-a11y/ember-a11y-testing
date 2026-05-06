@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-05-06)
+
+* ember-a11y-testing 8.0.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-a11y-testing`
+  * [#656](https://github.com/ember-a11y/ember-a11y-testing/pull/656) fixed lockfile issue ([@MelSumner](https://github.com/MelSumner))
+
+#### Committers: 1
+- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))
+
 ## Release (2026-02-19)
 
 * ember-a11y-testing 8.0.0 (major)
