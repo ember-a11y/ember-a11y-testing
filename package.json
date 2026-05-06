@@ -107,7 +107,7 @@
     "@glint/ember-tsc": "^1.1.1",
     "@glint/template": "^1.7.4",
     "@glint/tsserver-plugin": "^2.1.0",
-    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-babel": "^7.0.0",
     "@types/node": "^25.2.3",
     "@types/qunit": "^2.19.13",
     "axe-core": "^4.11.1",
