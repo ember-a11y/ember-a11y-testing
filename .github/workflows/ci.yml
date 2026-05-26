@@ -46,7 +46,7 @@ jobs:
           node-version-file: 'package.json'
           cache: pnpm
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Run Tests
         run: pnpm test
       - name: Run Node Tests
@@ -70,7 +70,7 @@ jobs:
           node-version-file: 'package.json'
           cache: pnpm
       - name: Install Dependencies
-        run: pnpm install --no-lockfile
+        run: pnpm install
       - name: Run Tests
         run: pnpm test
 
@@ -95,7 +95,7 @@ jobs:
            pnpm dlx @embroider/try apply ${{ matrix.name }}
 
       - name: Install Dependencies
-        run: pnpm install --no-lockfile
+        run: pnpm install
       - name: Run Tests
         run: |
           pnpm test
