@@ -2,17 +2,17 @@
   "solution": {
     "ember-a11y-testing": {
       "impact": "patch",
-      "oldVersion": "8.0.0",
-      "newVersion": "8.0.1",
+      "oldVersion": "8.0.1",
+      "newVersion": "8.0.2",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-05-06)\n\n* ember-a11y-testing 8.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-a11y-testing`\n  * [#656](https://github.com/ember-a11y/ember-a11y-testing/pull/656) fixed lockfile issue ([@MelSumner](https://github.com/MelSumner))\n\n#### Committers: 1\n- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))\n"
+  "description": "## Release (2026-07-30)\n\n* ember-a11y-testing 8.0.2 (patch)\n\n#### :house: Internal\n* `ember-a11y-testing`\n  * [#659](https://github.com/ember-a11y/ember-a11y-testing/pull/659) Update pnpm install commands in CI workflow ([@MelSumner](https://github.com/MelSumner))\n\n#### Committers: 1\n- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))\n"
 }
