@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-07-30)
+
+* ember-a11y-testing 8.0.2 (patch)
+
+#### :house: Internal
+* `ember-a11y-testing`
+  * [#659](https://github.com/ember-a11y/ember-a11y-testing/pull/659) Update pnpm install commands in CI workflow ([@MelSumner](https://github.com/MelSumner))
+
+#### Committers: 1
+- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))
+
 ## Release (2026-05-06)
 
 * ember-a11y-testing 8.0.1 (patch)
