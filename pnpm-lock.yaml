@@ -59,7 +59,7 @@ importers:
         version: 9.39.3
       '@glimmer/component':
         specifier: ^2.0.0
-        version: 2.0.0
+        version: 2.1.1
       '@glint/ember-tsc':
         specifier: ^1.1.1
         version: 1.5.0(typescript@5.9.3)
@@ -98,7 +98,7 @@ importers:
         version: 1.0.3
       ember-source:
         specifier: ^6.10.1
-        version: 6.11.0(@glimmer/component@2.0.0)(rsvp@4.8.5)
+        version: 6.11.0(@glimmer/component@2.1.1)(rsvp@4.8.5)
       ember-strict-application-resolver:
         specifier: ^0.1.1
         version: 0.1.1(@babel/core@7.29.0)
@@ -934,8 +934,8 @@ packages:
     resolution: {integrity: sha512-t9eyLZIFsiwAib8Zyfu67yBep5Vn2bd5DScIE2hharPE/OKKI7cpQYi6BzQhSGYEBVU82ITd/2TLvJ1K8eIahA==}
     engines: {node: '>= 18.0.0'}
 
-  '@glimmer/component@2.0.0':
-    resolution: {integrity: sha512-eATSzBOUm0MZ9+YfJx7Y5p3gbwnaeMzLSSsCDn1ihDtUOIm5YYEV0ee0G7tXt/uKxowt8tXYn/EMbI9OlRF0CA==}
+  '@glimmer/component@2.1.1':
+    resolution: {integrity: sha512-zFZFaMbWy+9WOcDg/kCgrkGgqkLT39EE4FgyFD0MIkQO5coQsrRZyLsiBu1tbchyM+8hT8jAv+EQVUd8u+MdSQ==}
     engines: {node: '>= 18'}
 
   '@glimmer/destroyable@0.94.8':
@@ -6742,7 +6742,7 @@ snapshots:
       '@glimmer/util': 0.94.8
       '@glimmer/wire-format': 0.94.8
 
-  '@glimmer/component@2.0.0':
+  '@glimmer/component@2.1.1':
     dependencies:
       '@embroider/addon-shim': 1.10.2
       '@glimmer/env': 0.1.7
@@ -8490,13 +8490,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-source@6.11.0(@glimmer/component@2.0.0)(rsvp@4.8.5):
+  ember-source@6.11.0(@glimmer/component@2.1.1)(rsvp@4.8.5):
     dependencies:
       '@babel/core': 7.29.0
       '@ember/edition-utils': 1.2.0
       '@embroider/addon-shim': 1.10.2
       '@glimmer/compiler': 0.94.11
-      '@glimmer/component': 2.0.0
+      '@glimmer/component': 2.1.1
       '@glimmer/destroyable': 0.94.8
       '@glimmer/global-context': 0.93.4
       '@glimmer/interfaces': 0.94.6
